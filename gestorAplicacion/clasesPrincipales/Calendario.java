@@ -9,4 +9,13 @@ public class Calendario {
 		this.eventos = eventos;
 		this.objetivos = objetivos;
 	}
+	public void setObjetivos (LocalDateTime[] objetivos) {
+		this.objetivos = objetivos;}
+	public void setEventos (Tarea[] eventos) {
+		this.eventos = eventos;}
+
+	public LocalDateTime[] getObjetivos() {
+		return objetivos;}
+	public Tarea[] getEventos() {
+		return eventos;}
 }

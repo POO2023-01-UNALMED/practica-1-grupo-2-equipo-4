@@ -8,4 +8,15 @@ public class Equipo {
 		this.proyectoAsignado = proyectoAsignado;
 		
 	}
+	public void setMiembrosEquipo (Usuario[] miembrosEquipo) {
+		this.miembrosEquipo = miembrosEquipo;}
+	public void setProyectoAsignado (Proyecto proyectoAsignado) {
+		this.proyectoAsignado = proyectoAsignado;}
+	
+	public Usuario[] getMiembrosEquipo() {
+		return miembrosEquipo;}
+	public Proyecto getProyectoAsignado() {
+		return proyectoAsignado;}
+	
+	
 }

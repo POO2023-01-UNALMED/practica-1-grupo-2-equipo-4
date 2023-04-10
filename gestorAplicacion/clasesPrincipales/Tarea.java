@@ -24,5 +24,35 @@ public class Tarea {
 		numTareas++;
 		
 	}
+	public void setEstado (TipoEstado estado) {
+		this.estado = estado;}
+	public void setFechaInicio (LocalDateTime fechaInicio) {
+		this.fechaInicio = fechaInicio;}
+	public void setNombreTarea (String nombreTarea) {
+		this.nombreTarea = nombreTarea;}
+	public void setFechaEntrega (LocalDateTime fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;}
+	public void setDuracion (LocalTime duracion) {
+		this.duracion = duracion;}
+	public void setPrioridad (TipoPrioridad prioridad) {
+		this.prioridad = prioridad;}
+	public void setDescripcionTarea (String descripcionTarea) {
+		this.descripcionTarea = descripcionTarea;}
+	
+	public TipoEstado getEstado() {
+		return estado;}
+	public LocalDateTime getFechaInicio() {
+		return fechaInicio;}
+	public String getNombreTarea() {
+		return nombreTarea;}
+	public LocalDateTime getFechaEntrega() {
+		return fechaEntrega;}
+	public LocalTime getDuracion() {
+		return duracion;}
+	public TipoPrioridad getPrioridad() {
+		return prioridad;}
+	public String getDescripcionTarea() {
+		return descripcionTarea;}
+	
 	
 }
