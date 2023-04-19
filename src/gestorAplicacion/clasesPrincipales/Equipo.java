@@ -1,4 +1,5 @@
-package clasesPrincipales;
+package gestorAplicacion.clasesPrincipales;
+import gestorAplicacion.clasesHerencia.*;
 
 public class Equipo {
 	Usuario[] miembrosEquipo;
