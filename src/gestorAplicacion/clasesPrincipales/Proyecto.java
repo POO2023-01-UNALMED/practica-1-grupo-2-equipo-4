@@ -1,4 +1,5 @@
-package clasesPrincipales;
+package gestorAplicacion.clasesPrincipales;
+import gestorAplicacion.clasesHerencia.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
