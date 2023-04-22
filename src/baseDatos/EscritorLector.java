@@ -13,12 +13,12 @@ public class EscritorLector {
 	static File archivo = new File("");
 	
 	public static void main(String[] args) {
-		Person p1 = new Person("Juan");
-		Person p2 = new Person("Rodri");
+		Cliente p1 = new Cliente("Juan");
+		Cliente p2 = new Cliente("Rodri");
 		
 		try {
 			FileOutputStream f = new FileOutputStream(new File(archivo.getAbsolutePath()+
-			"\\src\\baseDatos\\temp\\Personas.txt"));
+			"\\src\\baseDatos\\temp\\Clientes.txt"));
 
 			ObjectOutputStream o = new ObjectOutputStream(f);
 			
@@ -31,13 +31,13 @@ public class EscritorLector {
 			f.close();
 			
 			FileInputStream fi = new FileInputStream(new File(archivo.getAbsolutePath()+
-					"\\src\\baseDatos\\temp\\Personas.txt"));
+					"\\src\\baseDatos\\temp\\Clientes.txt"));
 			
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			
 			// LEER OBJETOS
-			Person pr1 = (Person) oi.readObject();
-			Person pr2 = (Person) oi.readObject();
+			Cliente pr1 = (Cliente) oi.readObject();
+			Cliente pr2 = (Cliente) oi.readObject();
 			
 			System.out.println(pr1.toString());
 			System.out.println(pr2.toString());
