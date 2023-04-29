@@ -1,5 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
 
+public enum ObjetivoCliente {
 
-public class Gimnasio {	
 }

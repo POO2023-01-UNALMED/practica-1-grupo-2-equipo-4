@@ -13,8 +13,8 @@ public class EscritorLector {
 	static File archivo = new File("");
 	
 	public static void main(String[] args) {
-		Cliente p1 = new Cliente("Juan");
-		Cliente p2 = new Cliente("Rodri");
+		Cliente p1 = new Cliente();
+		Cliente p2 = new Cliente();
 		
 		try {
 			FileOutputStream f = new FileOutputStream(new File(archivo.getAbsolutePath()+

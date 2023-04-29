@@ -1,5 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
 
+public enum Dieta {
 
-public class Gimnasio {	
 }
