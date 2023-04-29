@@ -1,4 +1,7 @@
 package gestorAplicacion.clasesPrincipales;
+import gestorAplicacion.clasesEnum.Dieta;
+import gestorAplicacion.clasesEnum.NivelCliente;
+import gestorAplicacion.clasesEnum.ObjetivoCliente;
 import gestorAplicacion.clasesHerencia.Persona;
 import java.io.Serializable;
 import java.util.ArrayList;

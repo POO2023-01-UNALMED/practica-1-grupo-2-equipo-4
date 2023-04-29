@@ -1,4 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
+import gestorAplicacion.clasesEnum.NivelCliente;
 import gestorAplicacion.clasesHerencia.Persona;
 import java.io.Serializable;
 import java.util.HashMap;
