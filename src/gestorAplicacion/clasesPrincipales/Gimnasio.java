@@ -1,5 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
 
-public class Gimnasio {
 
+public class Gimnasio {	
 }
