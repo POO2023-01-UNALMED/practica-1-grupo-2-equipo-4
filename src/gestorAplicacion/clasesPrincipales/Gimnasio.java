@@ -1,5 +1,6 @@
 package gestorAplicacion.clasesPrincipales;
 
+
 import java.io.Serializable;
 
 public class Gimnasio implements Serializable {
