@@ -2,10 +2,10 @@ package gestorAplicacion.clasesPrincipales;
 
 public class Alimento {
     private String nombre;
-    private double calorias;
-    private double proteinas;
-    private double carbohidratos;
-    private double grasas;
+    public double calorias;
+    public double proteinas;
+    public double carbohidratos;
+    public double grasas;
 
     // Constructor
     public Alimento(String nombre, double calorias, double proteinas, double carbohidratos, double grasas) {
