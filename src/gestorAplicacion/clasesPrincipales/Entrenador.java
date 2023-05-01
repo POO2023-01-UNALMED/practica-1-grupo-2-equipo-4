@@ -1,5 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
-import gestorAplicacion.clasesEnum.NivelCliente;
+import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.Persona;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -10,13 +10,13 @@ public class Entrenador extends Persona implements Serializable {
 	private String formacion;
 	private Cliente cliente;
 	private NivelCliente nivelEntrenador;
-	private HashMap<String, String> disponibilidad;
+	private HashMap<DiaSemana, String> disponibilidad; // String es MAÑANA / TARDE
 	
 	public static ArrayList<Entrenador> listaEntrenadores;
 	
 	public Entrenador(String nombre, Gimnasio gimnasio, int identificacion, 
 						String formacion, Cliente cliente, NivelCliente nivelEntrenador, 
-						HashMap<String, String> disponibilidad) {
+						HashMap<DiaSemana, String> disponibilidad) {
 		super(nombre, gimnasio, identificacion);
 		this.setFormacion(formacion);
 		this.setCliente(cliente);
@@ -53,11 +53,11 @@ public class Entrenador extends Persona implements Serializable {
 		this.nivelEntrenador = nivelEntrenador;
 	}
 
-	public HashMap<String, String> getDisponibilidad() {
+	public HashMap<DiaSemana, String> getDisponibilidad() {
 		return disponibilidad;
 	}
 
-	public void setDisponibilidad(HashMap<String, String> disponibilidad) {
+	public void setDisponibilidad(HashMap<DiaSemana, String> disponibilidad) {
 		this.disponibilidad = disponibilidad;
 	}
 

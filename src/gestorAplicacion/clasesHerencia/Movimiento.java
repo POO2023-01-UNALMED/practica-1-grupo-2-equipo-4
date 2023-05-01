@@ -1,5 +1,5 @@
 package gestorAplicacion.clasesHerencia;
-
+import gestorAplicacion.clasesPrincipales.*;
 import java.io.Serializable;
 
 public class Movimiento implements Serializable {
@@ -10,7 +10,7 @@ public class Movimiento implements Serializable {
 	protected Maquina maquina;
 	protected boolean completado;
 	
-	public static filtrarMovimientosPorTipo {
+	public static void filtrarMovimientosPorTipo() {
 
 	}
 	

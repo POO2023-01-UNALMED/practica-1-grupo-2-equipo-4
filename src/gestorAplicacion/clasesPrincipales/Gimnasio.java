@@ -1,6 +1,7 @@
 package gestorAplicacion.clasesPrincipales;
-
-
+import gestorAplicacion.clasesEnum.*;
+import java.util.HashMap;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Gimnasio implements Serializable {
@@ -8,15 +9,12 @@ public class Gimnasio implements Serializable {
 	private String nombre;
 	private String ciudad;
 	private String sede;
-	private HashMap<String, String> horario = new HashMap<String, String>();
-	private Maquina[] listaMaquinas;
-	private Entrenador[] listaEntrenadores;
-	private Cliente[] listaClientes;
-	private ArrayList<Gimnasio> listaGimnasios = new ArrayList<Gimnasio>();
 	
-	public static sedesDisponibles {
-		
-	}
+	private HashMap<DiaSemana, String> horario = new HashMap<DiaSemana, String>(); // String es horaInicio-horaFin en formato Militar.
+	private ArrayList<Maquina> listaMaquinas;
+	private ArrayList<Entrenador> listaEntrenadores;
+	private ArrayList<Cliente> listaClientes;
+	private ArrayList<Gimnasio> listaGimnasios = new ArrayList<Gimnasio>();
 	
 	public void setNombre(String nombre) {
 	    this.nombre = nombre;
@@ -42,35 +40,35 @@ public class Gimnasio implements Serializable {
 	    return this.sede;
 	  }
 
-	public void setHorario(HashMap<String, String> horario) {
+	public void setHorario(HashMap<DiaSemana, String> horario) {
 	    this.horario = horario;
 	  }
 	
-	public String getHorario() {
+	public HashMap<DiaSemana, String> getHorario() {
 	    return this.horario;
 	  }  
 
-	public void setListaMaquinas(Maquina[] listaMaquinas) {
+	public void setListaMaquinas(ArrayList<Maquina> listaMaquinas) {
 	    this.listaMaquinas = listaMaquinas;
 	  }
 	
-	public String getListaMaquinas() {
+	public ArrayList<Maquina> getListaMaquinas() {
 	    return this.listaMaquinas;
 	  }  
 
-	public void setListaEntrenadores(Entrenador[] listaEntrenadores) {
+	public void setListaEntrenadores(ArrayList<Entrenador> listaEntrenadores) {
 	    this.listaEntrenadores = listaEntrenadores;
 	  }
 	
-	public String getListaEntrenadores() {
+	public ArrayList<Entrenador> getListaEntrenadores() {
 	    return this.listaEntrenadores;
 	  }	
 
-	public void setListaClientes(Cliente[] listaClientes) {
+	public void setListaClientes(ArrayList<Cliente> listaClientes) {
 	    this.listaClientes = listaClientes;
 	  }
 	
-	public String getListaClientes() {
+	public ArrayList<Cliente> getListaClientes() {
 	    return this.listaClientes;
 	  }	  
 
@@ -78,7 +76,15 @@ public class Gimnasio implements Serializable {
 	    this.listaGimnasios = listaGimnasios;
 	  }
 	
-	public String getListaGimnasios() {
+	public ArrayList<Gimnasio> getListaGimnasios() {
 	    return this.listaGimnasios;
 	  }	    
+	
+	public String toString() {
+		return this.nombre + this.ciudad + " sede " + this.sede;
+	}
+	
+	public static void sedesDisponibles() {
+		
+	}
 }

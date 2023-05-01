@@ -1,7 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
-import gestorAplicacion.clasesEnum.Dieta;
-import gestorAplicacion.clasesEnum.NivelCliente;
-import gestorAplicacion.clasesEnum.ObjetivoCliente;
+import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.Persona;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ public class Cliente extends Persona implements Serializable {
 	private String sexo;
 	private int edad;
 	private Entrenador entrenador;
-	private Dieta preferenciaAlimenticia;
+	private PreferenciaAlimenticia preferenciaAlimenticia;
 	private NivelCliente nivelCliente;
 	private ObjetivoCliente objetivoCliente;
 	public PlanAlimentacion planAlimentacion;
@@ -23,7 +21,7 @@ public class Cliente extends Persona implements Serializable {
 	public static ArrayList<Cliente> listaClientes;
 	
 	public Cliente(String nombre, Gimnasio gimnasio, int identificacion,
-			double altura, double peso, String sexo, int edad, Entrenador entrenador, Dieta preferenciaAlimenticia,
+			double altura, double peso, String sexo, int edad, Entrenador entrenador, PreferenciaAlimenticia preferenciaAlimenticia,
 			NivelCliente nivelCliente, ObjetivoCliente objetivoCliente) {
 		super(nombre, gimnasio, identificacion);
 		this.setAltura(altura);
@@ -80,11 +78,11 @@ public class Cliente extends Persona implements Serializable {
 		this.entrenador = entrenador;
 	}
 
-	public Dieta getPreferenciaAlimenticia() {
+	public PreferenciaAlimenticia getPreferenciaAlimenticia() {
 		return preferenciaAlimenticia;
 	}
 
-	public void setPreferenciaAlimenticia(Dieta preferenciaAlimenticia) {
+	public void setPreferenciaAlimenticia(PreferenciaAlimenticia preferenciaAlimenticia) {
 		this.preferenciaAlimenticia = preferenciaAlimenticia;
 	}
 
@@ -108,8 +106,8 @@ public class Cliente extends Persona implements Serializable {
 	+ "Gimnasio: " + this.gimnasio.toString()
 	+ "Nivel: " + this.getNivelCliente()
 	+ "Entrenador: " + this.getEntrenador().getNombre()
-	+ "Plan Alimentacion: " + this.planAlimentacion
-	+ "Plan Ejercicio: " + this.planEjercicio;}
+	+ "Plan Alimentacion: " + this.planAlimentacion.getNombrePlan()
+	+ "Plan Ejercicio: " + this.planEjercicio.getNombre();}
 	
 	public static void asignarCliente() {}
 	

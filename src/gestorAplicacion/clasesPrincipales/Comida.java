@@ -1,4 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
+import gestorAplicacion.clasesEnum.*;
 
 public class Comida {
     private String nombre;

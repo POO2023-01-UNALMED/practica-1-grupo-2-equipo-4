@@ -1,8 +1,10 @@
 package gestorAplicacion.clasesPrincipales;
+import gestorAplicacion.clasesEnum.*;
+import gestorAplicacion.clasesHerencia.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlanAlimentacion extends Plan {
+public class PlanAlimentacion implements Plan {
     public String nombrePlan;
     private final int numComidas;
     private Comida[] comidasFiltradas;
@@ -43,7 +45,8 @@ public class PlanAlimentacion extends Plan {
         this.planSemanal = planSemanal;
     }
 
-    public void generarPlanAlimentacionPorObjetivo() {
-        //  logica
+    public Plan crearPLanSemanal() {
+        PlanAlimentacion p = new PlanAlimentacion("", 3);
+    	return p;
     }
 }
