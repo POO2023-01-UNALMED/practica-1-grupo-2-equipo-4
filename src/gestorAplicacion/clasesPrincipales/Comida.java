@@ -13,10 +13,10 @@ public class Comida implements Serializable {
     public double grasas;
     public TipoComida tipo;
     private PreferenciaAlimenticia preferenciaAlimenticia;
-    public Cliente objetivoCliente;
+    public ObjetivoCliente objetivoCliente;
 
     // Constructor, getters y setters
-    public Comida(String nombre, ArrayList<Alimento> listaAlimentos, TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, Cliente objetivoCliente) {
+    public Comida(String nombre, ArrayList<Alimento> listaAlimentos, TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, ObjetivoCliente objetivoCliente) {
         this.nombre = nombre;
         this.listaAlimentos = listaAlimentos;
         this.tipo = tipo;
@@ -88,11 +88,11 @@ public class Comida implements Serializable {
         this.preferenciaAlimenticia = preferenciaAlimenticia;
     }
 
-    public Cliente getObjetivoCliente() {
+    public ObjetivoCliente getObjetivoCliente() {
         return objetivoCliente;
     }
 
-    public void setObjetivoCliente(Cliente objetivoCliente) {
+    public void setObjetivoCliente(ObjetivoCliente objetivoCliente) {
         this.objetivoCliente = objetivoCliente;
     }
 

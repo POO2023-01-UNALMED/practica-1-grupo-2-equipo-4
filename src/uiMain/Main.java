@@ -95,7 +95,7 @@ public class Main {
 		do {
 			println("\n\nMENU PRINCIPAL");
 			println("1. Reservar Gimnasio");
-			println("2. Funcionalidad 2");
+			println("2. Recomendación de Plan de Alimentación Semanal");
 			println("3. Funcionalidad 3");
 			println("4. Funcionalidad 4");
 			println("5. Funcionalidad 5");
@@ -109,7 +109,7 @@ public class Main {
 					reservarGimnasio();
 					break;
 				case 2:
-					f2();
+					recomendarPlanAlimentacion();
 					break;
 				case 3:
 					f3();
@@ -284,7 +284,7 @@ public class Main {
 							Entrenador entrenadorElegido = entrenadoresDisponibles.get(opcionEntrenador-1);
 							print("Entrenador seleccionado: " + entrenadorElegido.getNombre());
 							
-							miCliente.asignarEntrenador(entrenadorElegido);
+							miCliente.asignarEntrenador(entrenadorElegido); // TERCER MÉTODO
 						}
 					}		
 				}
@@ -292,8 +292,26 @@ public class Main {
 		}
 	}
 	
-	static void f2() {
-		System.out.println("*Logica funcionalidad 2*");
+	static void recomendarPlanAlimentacion() { //Se va a recomendar un plan de alimentacion
+		print("Ingrese su identificación: ");
+		int ident = readInt();
+		Cliente miCliente = null;
+		
+		for (Cliente c : clientes) {
+			if (c.getIdentificacion() == ident) {
+				miCliente = c;
+				break;
+			}
+		}
+		
+		if (miCliente == null) {
+			println("Identificación incorrecta");
+			System.exit(0);
+		}
+		
+		
+		
+		
 	}
 	
 	static void f3() {
