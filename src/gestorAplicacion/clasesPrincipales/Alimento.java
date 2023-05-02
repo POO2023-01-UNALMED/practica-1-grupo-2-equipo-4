@@ -1,7 +1,9 @@
 package gestorAplicacion.clasesPrincipales;
+import java.io.Serializable;
 
-public class Alimento {
-    private String nombre;
+public class Alimento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private String nombre;
     public double calorias;
     public double proteinas;
     public double carbohidratos;

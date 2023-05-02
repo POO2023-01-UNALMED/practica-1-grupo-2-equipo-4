@@ -1,5 +1,5 @@
 package gestorAplicacion.clasesPrincipales;
-
+import gestorAplicacion.clasesHerencia.*;
 import java.io.Serializable;
 
 public class Maquina implements Serializable {
@@ -8,8 +8,14 @@ public class Maquina implements Serializable {
 	private Gimnasio gimnasio;
 	private Movimiento movimientoRealizado;
 	
+	public Maquina(String nombre, Gimnasio gimnasio) {
+		this.nombre = nombre;
+        this.gimnasio = gimnasio;
+        
+        this.gimnasio.agregarMaquina(this);
+    }
 	
-	public static disponibilidad {
+	public static void disponibilidad() {
 		
 	}
 	

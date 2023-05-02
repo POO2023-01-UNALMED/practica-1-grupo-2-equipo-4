@@ -20,6 +20,10 @@ public abstract class Persona {
 		this.nombre = nombre;
 	}
 	
+	public int getIdentificacion() {
+		return this.identificacion;
+	}
+	
 	public Persona() {this(null, null, 0);}
 	
 	@Override
