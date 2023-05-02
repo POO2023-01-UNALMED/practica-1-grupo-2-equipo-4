@@ -8,6 +8,13 @@ public class Maquina implements Serializable {
 	private Gimnasio gimnasio;
 	private Movimiento movimientoRealizado;
 	
+	public Maquina(String nombre, Gimnasio gimnasio) {
+		this.nombre = nombre;
+        this.gimnasio = gimnasio;
+        
+        this.gimnasio.agregarMaquina(this);
+    }
+	
 	public static void disponibilidad() {
 		
 	}

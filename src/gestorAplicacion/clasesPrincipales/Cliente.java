@@ -18,12 +18,13 @@ public class Cliente extends Persona implements Serializable {
 	public PlanAlimentacion planAlimentacion;
 	public PlanEjercicio planEjercicio;
 	
-	public static ArrayList<Cliente> listaClientes;
+	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
 	public Cliente(String nombre, Gimnasio gimnasio, int identificacion,
 			double altura, double peso, String sexo, int edad, Entrenador entrenador, PreferenciaAlimenticia preferenciaAlimenticia,
 			NivelCliente nivelCliente, ObjetivoCliente objetivoCliente) {
 		super(nombre, gimnasio, identificacion);
+		
 		this.setAltura(altura);
 		this.setPeso(peso);
 		this.setSexo(sexo);
@@ -33,6 +34,7 @@ public class Cliente extends Persona implements Serializable {
 		this.setNivelCliente(nivelCliente);
 		this.setObjetivoCliente(objetivoCliente);
 		
+		this.gimnasio.agregarCliente(this);
 		listaClientes.add(this);
 	}
 	
@@ -109,7 +111,12 @@ public class Cliente extends Persona implements Serializable {
 	+ "Plan Alimentacion: " + this.planAlimentacion.getNombrePlan()
 	+ "Plan Ejercicio: " + this.planEjercicio.getNombre();}
 	
-	public static void asignarCliente() {}
+	public void asignarEntrenador(Entrenador entrenador) {
+		this.entrenador = entrenador;
+		entrenador.setCliente(this);
+		
+		this.entrenador.setDisponibilidad("NO DISPONIBLE");
+	}
 	
 	public static void generarPlanAlimentacion() {}
 }

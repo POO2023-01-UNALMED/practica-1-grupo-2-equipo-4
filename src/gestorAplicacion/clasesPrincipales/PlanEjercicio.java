@@ -1,11 +1,13 @@
 package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import java.util.HashMap;
+import java.io.Serializable;
 
 import gestorAplicacion.clasesHerencia.Plan;
 
-public class PlanEjercicio implements Plan{
-    private String nombre;
+public class PlanEjercicio implements Plan, Serializable {
+    private static final long serialVersionUID = 1L;
+	private String nombre;
     private HashMap<DiaSemana, Rutina> planSemanalEjercio = new HashMap<DiaSemana, Rutina>();
 
     public PlanEjercicio(String nombre, HashMap<DiaSemana, Rutina> planSemanalEjercio){

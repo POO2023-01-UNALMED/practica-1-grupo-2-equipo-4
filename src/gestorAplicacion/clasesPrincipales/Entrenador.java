@@ -2,7 +2,6 @@ package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.Persona;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Entrenador extends Persona implements Serializable {
@@ -10,19 +9,21 @@ public class Entrenador extends Persona implements Serializable {
 	private String formacion;
 	private Cliente cliente;
 	private NivelCliente nivelEntrenador;
-	private HashMap<DiaSemana, String> disponibilidad; // String es MAÑANA / TARDE
+	private String disponibilidad; // MAÑANA/TARDE/NO DISPONIBLE
 	
-	public static ArrayList<Entrenador> listaEntrenadores;
+	public static ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
 	
 	public Entrenador(String nombre, Gimnasio gimnasio, int identificacion, 
 						String formacion, Cliente cliente, NivelCliente nivelEntrenador, 
-						HashMap<DiaSemana, String> disponibilidad) {
+						String disponibilidad) {
 		super(nombre, gimnasio, identificacion);
+		
 		this.setFormacion(formacion);
 		this.setCliente(cliente);
 		this.setNivelEntrenador(nivelEntrenador);
 		this.setDisponibilidad(disponibilidad);
 		
+		this.gimnasio.agregarEntrenador(this);
 		listaEntrenadores.add(this);
 	}
 	
@@ -53,11 +54,11 @@ public class Entrenador extends Persona implements Serializable {
 		this.nivelEntrenador = nivelEntrenador;
 	}
 
-	public HashMap<DiaSemana, String> getDisponibilidad() {
+	public String getDisponibilidad() {
 		return disponibilidad;
 	}
 
-	public void setDisponibilidad(HashMap<DiaSemana, String> disponibilidad) {
+	public void setDisponibilidad(String disponibilidad) {
 		this.disponibilidad = disponibilidad;
 	}
 
@@ -67,5 +68,14 @@ public class Entrenador extends Persona implements Serializable {
 			+ "Cliente: " + this.getCliente().getNombre()
 			+ "Disponibilidad: " + this.getDisponibilidad();}
 	
-	public static void entrenadoresDisponibles() {};
+	public Entrenador entrenadoresDisponibles(String horarioAsistencia, String intensidad) {
+		Entrenador entrenadorDisponible = null;
+		
+		if (this.nivelEntrenador.name().equals(intensidad)) { // Filtro por intensidad y Nivel.
+			if (this.disponibilidad.equals(horarioAsistencia)) {
+				entrenadorDisponible = this;
+			}
+		}
+		return entrenadorDisponible;
+	}
 }

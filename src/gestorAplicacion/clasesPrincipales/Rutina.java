@@ -5,22 +5,29 @@ import java.util.ArrayList;
 
 public class Rutina implements Serializable{
     private static final long serialVersionUID = 1L;
-	String name;
+	private String nombre;
 
-    public Rutina(String name) {this.name = name;}
+    public Rutina(String nombre) {this.setNombre(nombre);}
 
     private ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
     private TipoEjercicio tipoEjercicio;
     private final int NUMEJERCIOS = 7; // abierto a discusión
 
-    public Rutina(ArrayList<Ejercicio> ejercicios, TipoEjercicio tipoEjercicio){
-        this.ejercicios = ejercicios;
+    public Rutina(String nombre, ArrayList<Ejercicio> ejercicios, TipoEjercicio tipoEjercicio){
+        this.nombre = nombre;
+    	this.ejercicios = ejercicios;
         this.tipoEjercicio = tipoEjercicio;
     }
 
+    public String getNombre() {
+		return nombre;
+	}
 
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    //Metodos get y set
+	//Metodos get y set
     public void setEjercicios (ArrayList<Ejercicio> ejercicios) {
         this.ejercicios = ejercicios;}
     public void setTipoEjercicio (TipoEjercicio tipoEjercicio) {

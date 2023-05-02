@@ -3,9 +3,11 @@ import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 
-public class PlanAlimentacion implements Plan {
-    public String nombrePlan;
+public class PlanAlimentacion implements Plan, Serializable {
+	private static final long serialVersionUID = 1L;
+	public String nombrePlan;
     private final int numComidas;
     private Comida[] comidasFiltradas;
     private Map<DiaSemana, Comida[]> planSemanal;

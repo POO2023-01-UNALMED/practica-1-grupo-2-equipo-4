@@ -1,8 +1,10 @@
 package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
+import java.io.Serializable;
 
-public class Comida {
-    private String nombre;
+public class Comida implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private String nombre;
     public Alimento[] listaAlimentos;
     public double calorias;
     public double proteinas;

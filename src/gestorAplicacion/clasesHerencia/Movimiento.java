@@ -1,5 +1,6 @@
 package gestorAplicacion.clasesHerencia;
 import gestorAplicacion.clasesPrincipales.*;
+import gestorAplicacion.clasesEnum.*;
 import java.io.Serializable;
 
 public class Movimiento implements Serializable {
@@ -7,8 +8,20 @@ public class Movimiento implements Serializable {
 	protected String nombre;
 	protected String descripcion;
 	protected String musculoPrincipal;
+	protected TipoEjercicio tipoEjercicio;
 	protected Maquina maquina;
 	protected boolean completado;
+	
+	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.musculoPrincipal = musculoPrincipal;
+        this.tipoEjercicio = tipoEjercicio;
+        this.completado = false;
+        this.maquina = maquina;
+        
+        this.maquina.setMovimientoRealizado(this);
+    }
 	
 	public static void filtrarMovimientosPorTipo() {
 
@@ -41,7 +54,9 @@ public class Movimiento implements Serializable {
 	public Maquina getMaquina() {
 	    return maquina;
 	}
-
+	
+	public TipoEjercicio getTipoEjercicio() {return this.tipoEjercicio;}
+	
 	public void setCompletado(boolean completado) {
 	    this.completado = completado;
 	}
