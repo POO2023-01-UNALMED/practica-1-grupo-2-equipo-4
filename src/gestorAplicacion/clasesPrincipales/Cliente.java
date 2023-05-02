@@ -4,7 +4,6 @@ import gestorAplicacion.clasesHerencia.Persona;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 public class Cliente extends Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private double altura;
