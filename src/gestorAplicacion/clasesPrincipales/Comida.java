@@ -1,11 +1,12 @@
 package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Comida implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nombre;
-    public Alimento[] listaAlimentos;
+    public ArrayList<Alimento> listaAlimentos = new ArrayList<>();
     public double calorias;
     public double proteinas;
     public double carbohidratos;
@@ -15,7 +16,7 @@ public class Comida implements Serializable {
     public Cliente objetivoCliente;
 
     // Constructor, getters y setters
-    public Comida(String nombre, Alimento[] listaAlimentos, TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, Cliente objetivoCliente) {
+    public Comida(String nombre, ArrayList<Alimento> listaAlimentos, TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, Cliente objetivoCliente) {
         this.nombre = nombre;
         this.listaAlimentos = listaAlimentos;
         this.tipo = tipo;
@@ -31,11 +32,11 @@ public class Comida implements Serializable {
         this.nombre = nombre;
     }
 
-    public Alimento[] getListaAlimentos() {
+    public ArrayList<Alimento> getListaAlimentos() {
         return listaAlimentos;
     }
 
-    public void setListaAlimentos(Alimento[] listaAlimentos) {
+    public void setListaAlimentos(ArrayList<Alimento> listaAlimentos) {
         this.listaAlimentos = listaAlimentos;
     }
 

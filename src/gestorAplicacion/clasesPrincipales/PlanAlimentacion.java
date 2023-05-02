@@ -2,20 +2,20 @@ package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.*;
 import java.util.HashMap;
-import java.util.Map;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class PlanAlimentacion implements Plan, Serializable {
 	private static final long serialVersionUID = 1L;
 	public String nombrePlan;
     private final int numComidas;
-    private Comida[] comidasFiltradas;
-    private Map<DiaSemana, Comida[]> planSemanal;
+    private ArrayList<Comida> comidasFiltradas;
+    private HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<DiaSemana, ArrayList<Comida>>();
 
     public PlanAlimentacion(String nombrePlan, int numComidas) {
         this.nombrePlan = nombrePlan;
         this.numComidas = numComidas;
-        this.comidasFiltradas = new Comida[numComidas];
+        this.comidasFiltradas = new ArrayList<Comida>(); // Tiene 3 comidas únicamente
         this.planSemanal = new HashMap<>();
     }
 
@@ -31,19 +31,19 @@ public class PlanAlimentacion implements Plan, Serializable {
         return numComidas;
     }
 
-    public Comida[] getComidasFiltradas() {
+    public ArrayList<Comida> getComidasFiltradas() {
         return comidasFiltradas;
     }
 
-    public void setComidasFiltradas(Comida[] comidasFiltradas) {
+    public void setComidasFiltradas(ArrayList<Comida> comidasFiltradas) {
         this.comidasFiltradas = comidasFiltradas;
     }
 
-    public Map<DiaSemana, Comida[]> getPlanSemanal() {
+    public HashMap<DiaSemana, ArrayList<Comida>> getPlanSemanal() {
         return planSemanal;
     }
 
-    public void setPlanSemanal(Map<DiaSemana, Comida[]> planSemanal) {
+    public void setPlanSemanal(HashMap<DiaSemana, ArrayList<Comida>> planSemanal) {
         this.planSemanal = planSemanal;
     }
 
