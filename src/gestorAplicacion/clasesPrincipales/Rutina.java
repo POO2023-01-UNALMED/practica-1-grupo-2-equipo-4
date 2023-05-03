@@ -34,7 +34,6 @@ public class Rutina implements Serializable{
 
         ArrayList<Movimiento> movCalentamiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.CALENTAMIENTO);
         ArrayList<Movimiento> movEstiramiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.ESTIRAMIENTO);
-
         ejercicios.add(Ejercicio.generarEjercicio(movCalentamiento.get(random.nextInt(movCalentamiento.size())), objetivo ));
         
         for (int i = 0; i < movimientosDisponibles.size(); i++){
@@ -47,6 +46,14 @@ public class Rutina implements Serializable{
         ejercicios.add(Ejercicio.generarEjercicio(movEstiramiento.get(random.nextInt(movEstiramiento.size())), objetivo ));
         
         return new Rutina(ejercicios, tipoEjercicio);
+    }
+
+    public String toString(){
+        String toString = getTipoEjercicio() + "\n";
+        for (Ejercicio ejercicio : getEjercicios()){
+            toString = toString + ejercicio.getNombre() +" : " + ejercicio.getMaquina().getNombre() + " --> " + ejercicio.getRepeticiones() + "X" + ejercicio.getSeries() + "\n";
+        }
+        return toString;
     }
 	
 

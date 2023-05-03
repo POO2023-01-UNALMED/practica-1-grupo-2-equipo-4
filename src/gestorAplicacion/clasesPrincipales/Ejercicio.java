@@ -13,6 +13,11 @@ public class Ejercicio extends Movimiento implements Serializable {
 		this.setRepeticiones(repeticiones);
 		this.setSeries(series);
 	}
+	public Ejercicio(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, int repeticiones, int series, NivelCliente dificultad) {
+		super(nombre, descripcion, musculoPrincipal, tipoEjercicio, maquina, dificultad);
+		this.setRepeticiones(repeticiones);
+		this.setSeries(series);
+	}
 
 	public int getRepeticiones() {
 		return repeticiones;

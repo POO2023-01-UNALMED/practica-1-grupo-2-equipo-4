@@ -1,6 +1,8 @@
 package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.Persona;
+import gestorAplicacion.clasesHerencia.Plan;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ public class Cliente extends Persona implements Serializable {
 	private NivelCliente nivelCliente;
 	private ObjetivoCliente objetivoCliente;
 	public PlanAlimentacion planAlimentacion;
-	public PlanEjercicio planEjercicio;
+	public Plan planEjercicio;
 	
 	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
@@ -40,6 +42,15 @@ public class Cliente extends Persona implements Serializable {
 	
 	public Cliente() {this(null, null, 0, 0, 0, null, 0, null, null, null, null);}
 
+	public void setPlanEjercicio (Plan planEjercicio) {
+		this.planEjercicio = planEjercicio;
+	}
+	
+	public Plan getPlanEjercicio() {
+		return planEjercicio;
+	}
+	
+	
 	public double getAltura() {
 		return altura;
 	}
@@ -108,8 +119,8 @@ public class Cliente extends Persona implements Serializable {
 	+ "Gimnasio: " + this.gimnasio.toString()
 	+ "Nivel: " + this.getNivelCliente()
 	+ "Entrenador: " + this.getEntrenador().getNombre()
-	+ "Plan Alimentacion: " + this.planAlimentacion.getNombrePlan()
-	+ "Plan Ejercicio: " + this.planEjercicio.getNombre();}
+	+ "Plan Alimentacion: " + this.planAlimentacion.getNombrePlan();
+	}
 	
 	public void asignarEntrenador(Entrenador entrenador) {
 		this.entrenador = entrenador;
@@ -121,7 +132,8 @@ public class Cliente extends Persona implements Serializable {
 	public static void generarPlanAlimentacion() {}
 
 	public String generarPlanEjercicio(){
-		PlanEjercicio plan = new PlanEjercicio();			
+		Plan plan = new PlanEjercicio();	
+		setPlanEjercicio(plan.crearPLanSemanal(getObjetivoCliente(), getNivelCliente()));
 		return plan.crearPLanSemanal(getObjetivoCliente(), getNivelCliente()).toString();
 
 

@@ -28,6 +28,19 @@ public class Movimiento implements Serializable {
 
 		listaMovimientos.add(this);
     }
+	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.musculoPrincipal = musculoPrincipal;
+        this.tipoEjercicio = tipoEjercicio;
+        this.completado = false;
+        this.maquina = maquina;
+		this.dificultad = dificultad;
+        
+        this.maquina.setMovimientoRealizado(this);
+
+		listaMovimientos.add(this);
+    }
 	
 	public static ArrayList<Movimiento> filtrarMovimientosPorTipo(TipoEjercicio tipoEjercicio) {
 		ArrayList<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
