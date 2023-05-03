@@ -119,4 +119,11 @@ public class Cliente extends Persona implements Serializable {
 	}
 	
 	public static void generarPlanAlimentacion() {}
+
+	public String generarPlanEjercicio(){
+		PlanEjercicio plan = new PlanEjercicio();			
+		return plan.crearPLanSemanal(getObjetivoCliente(), getNivelCliente()).toString();
+
+
+	}
 }
