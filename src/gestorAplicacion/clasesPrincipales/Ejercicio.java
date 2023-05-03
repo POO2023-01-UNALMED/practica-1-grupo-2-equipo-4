@@ -30,5 +30,26 @@ public class Ejercicio extends Movimiento implements Serializable {
 		this.series = series;
 	}
 	
-	public static void generarEjercicio() {}
+	public static Ejercicio generarEjercicio(Movimiento movimiento, ObjetivoCliente objetivo) {
+		int repeticiones = 0;
+		switch(objetivo){
+			case AUMENTAR:
+				repeticiones = 8;
+				break;
+			case DEFINIR:
+				repeticiones = 14;
+				break;
+			case BAJARPESO:
+				repeticiones = 9;
+				break;
+			case MANTENER:
+				repeticiones = 11;
+				break;
+			case ACONDICIONAR:
+				repeticiones = 7;
+				break;
+			
+		}
+		return new Ejercicio(movimiento.getNombre(), movimiento.getDescripcion(), movimiento.getMusculoPrincipal(), movimiento.getTipoEjercicio(), movimiento.getMaquina(), repeticiones, 4);
+	}
 }
