@@ -52,47 +52,27 @@ public class PlanAlimentacion implements Plan, Serializable {
     	return p;
     }
     
-    public ArrayList<Comida> filtrarComidaObjetivo(Cliente cliente) {
-    	// Voy a filtrar comidas recomendadas
-    	ArrayList<Comida> todasComidasPlan = new ArrayList<>();
-    	ArrayList<Comida> comidasRecomendadas = new ArrayList<>();
-    	
-    	for (ArrayList<Comida> comidasDia : this.getPlanSemanal().values()) {
-    		todasComidasPlan.addAll(comidasDia);
-    	}
-    	
-    	// Ahora quiero filtrar segun el objetivo del cliente
-    	if (cliente.getObjetivoCliente().equals(ObjetivoCliente.ACONDICIONAR)) { // Dieta Balanceada
-    		comidasRecomendadas = todasComidasPlan;
-    	}
-    	
-    	else if (cliente.getObjetivoCliente().equals(ObjetivoCliente.AUMENTAR)) { // +Proteina +Calorias
-    		ArrayList<Comida> topCincoComidas = new ArrayList<>();
-    		// Sacar las 5 comidas con mas Proteina
-    		
-    		// https://www.youtube.com/watch?v=Q93JsQ8vcwY vamos a utilizar .stream() minuto 7:13
-    		
-    		todasComidasPlan.sort
-    		
-    		
-    	}
-    	
-    	else if (cliente.getObjetivoCliente().equals(ObjetivoCliente.BAJARPESO)) { //+Proteina -Calorias
-    		
-    		// Sortear todasComidasPlan por masProteicos()
-    		
-    	}
-    	
-    	else if (cliente.getObjetivoCliente().equals(ObjetivoCliente.DEFINIR)) { //+Proteina -Calorias
-    		
-    		// Sortear todasComidasPlan por masProteicos()
-    		
-    	}
-    	
-    	else if (cliente.getObjetivoCliente().equals(ObjetivoCliente.MANTENER)) { // Dieta Balanceada
-    		comidasRecomendadas = todasComidasPlan;
-    	}
-    	
-    	return comidasRecomendadas;
+    public PlanAlimentacion filtrarPorAlergenos(ArrayList<Alergeno> alergias) {
+    	for (ArrayList<Comida> comidasDia : planSemanal.values()) { // Para las comidas de cada día
+            for (Comida comida : comidasDia) { // Para cada comida
+            	
+                ArrayList<Alimento> alimentosAlergenos = new ArrayList<>(); // Crear lista para almacenar los alimentos a eliminar
+                
+                for (Alimento alimento : comida.listaAlimentos) { // Para cada alimento en la comida
+                    if (alergias.contains(alimento.getAlergeno())) { // Agregar alimentos que dan alergia
+                        alimentosAlergenos.add(alimento);
+                    }
+                }
+                
+                comida.listaAlimentos.removeAll(alimentosAlergenos); // Eliminar todos los que dan alergia en esa comida
+                
+                comida.listaAlimentos.add(new Alimento("Proteina", 100, 24, 3, 0, null));
+                // Se agrega un nuevo alimento con proteína para complementar esa comida.
+            }
+        }
+        return this;
     }
+    
+    // toString() bonito
+    
 }

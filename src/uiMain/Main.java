@@ -24,15 +24,10 @@ public class Main {
 	static {
 		// ¿Cómo cargamos los objetos del EscritorLector?
 		
-		
-		
-		
-		
-        // Orden de creación: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio
+        // Orden de creación: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio.
 		Gimnasio g1 = new Gimnasio("Golds", "Med", "Robledo", true); // abierto
 		Gimnasio g2 = new Gimnasio("Golds2", "Med", "Poblado", true); // abierto
 		Gimnasio g3 = new Gimnasio("g3", "Med", "Calasanz", true); // abierto
-		
 		
 		Entrenador e1 = new Entrenador("Entrenador1", g1, 1001, "Doctor", null, NivelCliente.PRINCIPIANTE, "MAÑANA"); // disponible
 		Entrenador e2 = new Entrenador("Entrenador2", g1, 1002, "PosDoctor", null, NivelCliente.INTERMEDIO, "TARDE");
@@ -79,8 +74,7 @@ public class Main {
 		Rutina rut3 = new Rutina("r3", r3, TipoEjercicio.CARDIO);
 		Rutina rut4 = new Rutina("r4", r4, TipoEjercicio.PIERNA);
 		
-		Cliente c1 = new Cliente("Platz", null, 777, 180, 68, "H", 
-				18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c1 = new Cliente("Platz", g1, 777, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
 	
 		
 		gimnasios.add(g1); gimnasios.add(g2); gimnasios.add(g3);
@@ -321,30 +315,121 @@ public class Main {
 			println("Por favor agende una cita con nuestro nutricionista.");
 		}
 		
-		else { // Utilizo los clientes similares para mostrar planes adecuados.
+		else { // Utilizo los clientes similares para guardar Planes que podrían servir.
 			ArrayList<PlanAlimentacion> planesAdecuados = new ArrayList<>();
 			
 			for (Cliente c : clientesSimilares) {planesAdecuados.add(c.planAlimentacion);}
 			
-			println("Planes Alimenticios que podrían interesarle: ");
-			for (int i = 1; i <= planesAdecuados.size(); i++) {
-				println(i +": " + planesAdecuados.get(i-1).getNombrePlan());
+			// Le pido al cliente sus alergias.
+			ArrayList<Alergeno> alergias = new ArrayList<>();
+			
+			print("Es alergico al HUEVO (SI / NO): ");
+			String opcionHuevo = readString().toUpperCase();
+			
+			if (opcionHuevo.equals("SI")) {
+			    alergias.add(Alergeno.HUEVO);
+			} else if (!opcionHuevo.equals("NO")) { // SI ES "NO" CONTINUA EL PROGRAMA
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
 			}
-			print("Ingrese el numero del plan que le gustaría seguir: ");
-			byte opcPlan = readByte();
 			
-			if (opcPlan <= 0 || opcPlan > planesAdecuados.size()) {
-				println("Opción incorrecta");
+			print("Es alergico a los MARISCOS (SI / NO): ");
+			String opcionMariscos = readString().toUpperCase();
+			
+			if (opcionMariscos.equals("SI")) {
+			    alergias.add(Alergeno.MARISCO);
+			} else if (!opcionMariscos.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
 			}
 			
-			else { // El cliente escoge un plan que le interesa
-				PlanAlimentacion planEscogido = planesAdecuados.get(opcPlan-1);
-				print("Plan Referente: " + planEscogido.getNombrePlan() + " del cliente " + clientesSimilares.get(opcPlan-1).getNombre());
+			print("Es intolerante a la LACTOSA (SI / NO): ");
+			String opcionLactosa = readString().toUpperCase();
 			
-				// Ahora quiero que mi plan se ajuste al objetivo de mi cliente.
+			if (opcionLactosa.equals("SI")) {
+			    alergias.add(Alergeno.LACTOSA);
+			} else if (!opcionLactosa.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			print("Es alergico al GLUTEN (SI / NO): ");
+			String opcionGluten = readString().toUpperCase();
+			
+			if (opcionGluten.equals("SI")) {
+			    alergias.add(Alergeno.GLUTEN);
+			} else if (!opcionGluten.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			print("Es alergico a los FRUTOS SECOS (SI / NO): ");
+			String opcionFrutosSecos = readString().toUpperCase();
+			
+			if (opcionFrutosSecos.equals("SI")) {
+			    alergias.add(Alergeno.FRUTOSECO);
+			} else if (!opcionFrutosSecos.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			if (alergias.isEmpty()) { // Muestro todos los planes y le pido al usuario que escoja uno.
+				println("Planes Disponibles: ");
+				for (int i=1; i<=planesAdecuados.size(); i++) {
+					println(i + ". "+ planesAdecuados.get(i-1).nombrePlan);
+				}
+				print("Seleccione el plan deseado: ");
+				byte opcionPlan = readByte();
 				
-				ArrayList<Comida> comidasAdecuadas = planEscogido.filtrarComidaObjetivo(miCliente);
+				if (opcionPlan <= 0 || opcionPlan > planesAdecuados.size()) 
+					println("Opción incorrecta");
+				
+				else { // Se pide seleccione uno de los adecuados.
+					PlanAlimentacion planElegido = planesAdecuados.get(opcionPlan-1);
+					print("Entrenador seleccionado: " + planElegido.nombrePlan);
+					
+					miCliente.asignarPlan(planElegido);
+				}
+			}
 			
+			else { // filtrar según los alergenos de las comidas. Reemplazar alergenos con proteina.
+				ArrayList<PlanAlimentacion> planesModificados = new ArrayList<>();
+				for (PlanAlimentacion p : planesAdecuados) {
+					if (p != null) {
+						p.filtrarPorAlergenos(alergias); // SEGUNDO METODO EN PLANALIMENTACION
+						planesModificados.add(p);
+					}
+				}
+				
+				if (planesModificados.size() == 0) {
+					print("Para recibir mejores recomendaciones de planes según sus alergias por favor pida una cita con Nutricionista");
+				}
+				
+				else {
+					println("Planes Disponibles: ");
+					for (int i=1; i<=planesModificados.size(); i++) {
+						println(i + ". "+ planesModificados.get(i-1).nombrePlan);
+					}
+					print("Seleccione el plan deseado: ");
+					byte opcionPlan = readByte();
+					
+					if (opcionPlan <= 0 || opcionPlan > planesModificados.size()) 
+						println("Opción incorrecta");
+					
+					else { // Se pide seleccione uno de los adecuados.
+						PlanAlimentacion planElegido = planesModificados.get(opcionPlan-1);
+						print("Entrenador seleccionado: " + planElegido.nombrePlan);
+						
+						if (miCliente.asignarPlan(planElegido) == null) {
+							println("le recomendamos el nuevo plan: ");
+							planElegido.toString();
+						}
+						else {
+							println("En su histórico se muestra el plan anterior: ");
+							miCliente.asignarPlan(planElegido).toString(); // Hacer un toString() bacano.
+							
+							println("Le recomendamos seguir este plan y en en transcurso de "
+									+ "una semana ir cambiando los alimentos para llegar a este nuevo plan: ");
+							
+							planElegido.toString();
+						}
+					}
+				}
 			}
 		}
 	}

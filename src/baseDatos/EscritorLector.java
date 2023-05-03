@@ -1,4 +1,5 @@
 package baseDatos;
+import gestorAplicacion.clasesEnum.Alergeno;
 import gestorAplicacion.clasesPrincipales.*;
 
 import java.io.File;
@@ -13,7 +14,7 @@ public class EscritorLector {
 	static File archivo = new File("");
 	
 	public static void main(String[] args) {
-		Alimento papa = new Alimento("Papa", 100, 3, 80, 1); // Nombre, Calorias, Proteina, Carbos, Grasa
+		Alimento papa = new Alimento("Papa", 100, 3, 80, 1, Alergeno.FRUTOSECO); // Nombre, Calorias, Proteina, Carbos, Grasa
 		
 		try {
 			FileOutputStream f = new FileOutputStream(new File(archivo.getAbsolutePath()+

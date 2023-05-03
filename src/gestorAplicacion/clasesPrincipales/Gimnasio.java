@@ -149,7 +149,8 @@ public class Gimnasio implements Serializable {
 		
 		for (Cliente c : this.listaClientes) {
 			if (c.getSexo().equalsIgnoreCase(cliente.getSexo()) 
-			&& c.getPreferenciaAlimenticia().name().equalsIgnoreCase(cliente.getPreferenciaAlimenticia().name())) {
+			&& c.getPreferenciaAlimenticia().name().equalsIgnoreCase(cliente.getPreferenciaAlimenticia().name())
+			&& c.getObjetivoCliente().equals(cliente.getObjetivoCliente())) {
 
 				// Revisar restricciones de Peso, Altura y Edad
 				// Peso dentro de +-5kg

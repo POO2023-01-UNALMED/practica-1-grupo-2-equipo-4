@@ -1,6 +1,8 @@
 package gestorAplicacion.clasesPrincipales;
 import java.io.Serializable;
 
+import gestorAplicacion.clasesEnum.Alergeno;
+
 public class Alimento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nombre;
@@ -8,14 +10,16 @@ public class Alimento implements Serializable {
     public double proteinas;
     public double carbohidratos;
     public double grasas;
+    private final Alergeno alergeno;
 
     // Constructor
-    public Alimento(String nombre, double calorias, double proteinas, double carbohidratos, double grasas) {
+    public Alimento(String nombre, double calorias, double proteinas, double carbohidratos, double grasas, Alergeno alergeno) {
         this.nombre = nombre;
         this.calorias = calorias;
         this.proteinas = proteinas;
         this.carbohidratos = carbohidratos;
         this.grasas = grasas;
+        this.alergeno = alergeno;
     }
 
     // Getters y setters
@@ -58,4 +62,8 @@ public class Alimento implements Serializable {
     public void setGrasas(double grasas) {
         this.grasas = grasas;
     }
+
+	public Alergeno getAlergeno() {
+		return alergeno;
+	}
 }
