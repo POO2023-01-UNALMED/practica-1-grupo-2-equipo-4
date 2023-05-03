@@ -23,6 +23,11 @@ public class Main {
 	
 	static {
 		// ¿Cómo cargamos los objetos del EscritorLector?
+		
+		
+		
+		
+		
         // Orden de creación: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio
 		Gimnasio g1 = new Gimnasio("Golds", "Med", "Robledo", true); // abierto
 		Gimnasio g2 = new Gimnasio("Golds2", "Med", "Poblado", true); // abierto
@@ -74,7 +79,7 @@ public class Main {
 		Rutina rut3 = new Rutina("r3", r3, TipoEjercicio.CARDIO);
 		Rutina rut4 = new Rutina("r4", r4, TipoEjercicio.PIERNA);
 		
-		Cliente c1 = new Cliente("Platz", g1, 0001, 180, 68, "H", 
+		Cliente c1 = new Cliente("Platz", null, 777, 180, 68, "H", 
 				18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
 	
 		
@@ -309,9 +314,39 @@ public class Main {
 			System.exit(0);
 		}
 		
+		// Hago la extracción de clientes similares a mi cliente actual. (PRIMER METODO EN GIMNASIO)
+		ArrayList<Cliente> clientesSimilares = miCliente.getGimnasio().clientesSimilares(miCliente);
 		
+		if (clientesSimilares.size() == 0) {
+			println("Por favor agende una cita con nuestro nutricionista.");
+		}
 		
-		
+		else { // Utilizo los clientes similares para mostrar planes adecuados.
+			ArrayList<PlanAlimentacion> planesAdecuados = new ArrayList<>();
+			
+			for (Cliente c : clientesSimilares) {planesAdecuados.add(c.planAlimentacion);}
+			
+			println("Planes Alimenticios que podrían interesarle: ");
+			for (int i = 1; i <= planesAdecuados.size(); i++) {
+				println(i +": " + planesAdecuados.get(i-1).getNombrePlan());
+			}
+			print("Ingrese el numero del plan que le gustaría seguir: ");
+			byte opcPlan = readByte();
+			
+			if (opcPlan <= 0 || opcPlan > planesAdecuados.size()) {
+				println("Opción incorrecta");
+			}
+			
+			else { // El cliente escoge un plan que le interesa
+				PlanAlimentacion planEscogido = planesAdecuados.get(opcPlan-1);
+				print("Plan Referente: " + planEscogido.getNombrePlan() + " del cliente " + clientesSimilares.get(opcPlan-1).getNombre());
+			
+				// Ahora quiero que mi plan se ajuste al objetivo de mi cliente.
+				
+				ArrayList<Comida> comidasAdecuadas = planEscogido.filtrarComidaObjetivo(miCliente);
+			
+			}
+		}
 	}
 	
 	static void f3() {

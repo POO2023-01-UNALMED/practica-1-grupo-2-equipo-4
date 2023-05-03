@@ -96,8 +96,12 @@ public class Comida implements Serializable {
         this.objetivoCliente = objetivoCliente;
     }
 
-    public void calcularCalorias() {
-        // logica
+    public double calcularCalorias() {
+    	double caloriasTotales = 0;
+    	
+    	
+    	
+        return caloriasTotales;
     }
 
     public void calcularMacronutrientes() {

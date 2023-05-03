@@ -13,8 +13,7 @@ public class EscritorLector {
 	static File archivo = new File("");
 	
 	public static void main(String[] args) {
-		Cliente p1 = new Cliente();
-		Cliente p2 = new Cliente();
+		Alimento papa = new Alimento("Papa", 100, 3, 80, 1); // Nombre, Calorias, Proteina, Carbos, Grasa
 		
 		try {
 			FileOutputStream f = new FileOutputStream(new File(archivo.getAbsolutePath()+
@@ -23,8 +22,7 @@ public class EscritorLector {
 			ObjectOutputStream o = new ObjectOutputStream(f);
 			
 			// ESCRIBIR OBJETOS AL ARCHIVO
-			o.writeObject(p1);
-			o.writeObject(p2);
+			o.writeObject(papa);
 			
 			// CERRAR CONEXIONES ABIERTAS
 			o.close();
@@ -36,11 +34,9 @@ public class EscritorLector {
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			
 			// LEER OBJETOS
-			Cliente pr1 = (Cliente) oi.readObject();
-			Cliente pr2 = (Cliente) oi.readObject();
+			Alimento papa1 = (Alimento) oi.readObject();
 			
-			System.out.println(pr1.toString());
-			System.out.println(pr2.toString());
+			System.out.println(papa1.toString());
 			
 			// CERRAR CONEXIONES ABIERTAS
 			oi.close();
