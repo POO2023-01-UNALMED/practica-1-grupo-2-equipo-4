@@ -1,10 +1,12 @@
 package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.Movimiento;
-import java.util.Random;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class Rutina implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -35,9 +37,11 @@ public class Rutina implements Serializable{
         ArrayList<Movimiento> movCalentamiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.CALENTAMIENTO);
         ArrayList<Movimiento> movEstiramiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.ESTIRAMIENTO);
         ejercicios.add(Ejercicio.generarEjercicio(movCalentamiento.get(random.nextInt(movCalentamiento.size())), objetivo ));
-        
+
+        Collections.shuffle(movimientosDisponibles);
+
         for (int i = 0; i < movimientosDisponibles.size(); i++){
-            if (i>5){
+            if (i==6){
                 break;
             }else {
                 ejercicios.add(Ejercicio.generarEjercicio(movimientosDisponibles.get(i), objetivo));
@@ -51,7 +55,7 @@ public class Rutina implements Serializable{
     public String toString(){
         String toString = getTipoEjercicio() + "\n";
         for (Ejercicio ejercicio : getEjercicios()){
-            toString = toString + ejercicio.getNombre() +" : " + ejercicio.getMaquina().getNombre() + " --> " + ejercicio.getRepeticiones() + "X" + ejercicio.getSeries() + "\n";
+            toString = toString + ejercicio.getNombre() +" = " + ejercicio.getMaquina().getNombre() + " --> " + ejercicio.getRepeticiones() + "X" + ejercicio.getSeries() + "\n";
         }
         return toString;
     }

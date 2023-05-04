@@ -16,6 +16,28 @@ public class Movimiento implements Serializable {
 	protected boolean completado;
 	public static ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>(); 
 	
+	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad, boolean ejercicio) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.musculoPrincipal = musculoPrincipal;
+        this.tipoEjercicio = tipoEjercicio;
+        this.completado = false;
+        this.maquina = maquina;
+        this.dificultad = dificultad;
+
+        this.maquina.setMovimientoRealizado(this);
+
+		if (ejercicio == true){
+			listaMovimientos.add(this);
+		}	
+    }
+
+	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad) {
+        this(nombre, descripcion, musculoPrincipal, tipoEjercicio, maquina, dificultad,true);
+        
+        this.maquina.setMovimientoRealizado(this);
+    }
+
 	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -28,22 +50,12 @@ public class Movimiento implements Serializable {
 
 		listaMovimientos.add(this);
     }
-	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.musculoPrincipal = musculoPrincipal;
-        this.tipoEjercicio = tipoEjercicio;
-        this.completado = false;
-        this.maquina = maquina;
-		this.dificultad = dificultad;
-        
-        this.maquina.setMovimientoRealizado(this);
-
-		listaMovimientos.add(this);
-    }
+	
 	
 	public static ArrayList<Movimiento> filtrarMovimientosPorTipo(TipoEjercicio tipoEjercicio) {
+		
 		ArrayList<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
+		
 		for (Movimiento movimiento : listaMovimientos){
 			if (movimiento.getTipoEjercicio() == tipoEjercicio) {
 				movimientosFiltrados.add(movimiento);
@@ -54,7 +66,9 @@ public class Movimiento implements Serializable {
 
 	public static ArrayList<Movimiento> filtrarMovimientosPorDificultad(ArrayList<Movimiento> movimientosPorTipo, NivelCliente dificultad){
 		ArrayList<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
-		for (Movimiento movimiento : listaMovimientos){
+	
+		for (Movimiento movimiento : movimientosPorTipo){
+			
 			if (movimiento.getDificultad() == dificultad) {
 				movimientosFiltrados.add(movimiento);
 			}

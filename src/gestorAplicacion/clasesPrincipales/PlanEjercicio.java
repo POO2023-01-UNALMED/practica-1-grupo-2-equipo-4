@@ -37,12 +37,12 @@ public class PlanEjercicio implements Plan, Serializable {
             TipoEjercicio temp = array[randomIndexToSwap];
 			array[randomIndexToSwap] = array[i];
 			array[i] = temp;
-        }
+        }    
         int index = 0;
         for (DiaSemana dia: DiaSemana.values()){
             planSemanalEjercio.put(dia, Rutina.generarRutina(array[index], objetivo, dificultad));
+            index++;
         }
-        
         return new PlanEjercicio(planSemanalEjercio);
     }
 

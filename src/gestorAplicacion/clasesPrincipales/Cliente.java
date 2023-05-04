@@ -134,7 +134,7 @@ public class Cliente extends Persona implements Serializable {
 	public String generarPlanEjercicio(){
 		Plan plan = new PlanEjercicio();	
 		setPlanEjercicio(plan.crearPLanSemanal(getObjetivoCliente(), getNivelCliente()));
-		return plan.crearPLanSemanal(getObjetivoCliente(), getNivelCliente()).toString();
+		return getPlanEjercicio().toString();
 
 
 	}
