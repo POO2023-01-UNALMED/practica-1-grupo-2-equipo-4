@@ -73,6 +73,38 @@ public class PlanAlimentacion implements Plan, Serializable {
         return this;
     }
     
-    // toString() bonito
+    public String toString() {
+        String planFormateado = "";
+        ArrayList<DiaSemana> dias = new ArrayList<>();
+
+        for (DiaSemana dia : DiaSemana.values()) {
+            ArrayList<Comida> comidas = planSemanal.get(dia);
+
+            if (!comidas.isEmpty() && !dias.contains(dia)) {
+                planFormateado += dia + ":\n";
+                dias.add(dia);
+
+                for (Comida comida : comidas) {
+                    planFormateado += "\t" + comida.getNombre() + ": ";
+
+                    ArrayList<Alimento> alimentos = comida.getListaAlimentos();
+                    for (int i = 0; i < alimentos.size(); i++) {
+                        Alimento alimento = alimentos.get(i);
+                        planFormateado += alimento.getNombre();
+
+                        if (i < alimentos.size() - 1) {
+                            planFormateado += ", ";
+                        }
+                    }
+
+                    planFormateado += "\n";
+                }
+
+                planFormateado += "\n";
+            }
+        }
+
+        return planFormateado;
+    }
     
 }

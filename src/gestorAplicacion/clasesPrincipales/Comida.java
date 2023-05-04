@@ -15,7 +15,7 @@ public class Comida implements Serializable {
     private PreferenciaAlimenticia preferenciaAlimenticia;
     public ObjetivoCliente objetivoCliente;
     
-    public static ArrayList<Comida> listaComidas;
+    public static ArrayList<Comida> listaComidas = new ArrayList<Comida>();
 
     // Constructor, getters y setters
     public Comida(String nombre, ArrayList<Alimento> listaAlimentos, TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, ObjetivoCliente objetivoCliente) {
