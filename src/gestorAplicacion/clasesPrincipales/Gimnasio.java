@@ -141,4 +141,31 @@ public class Gimnasio implements Serializable {
 		}
 		return sedesDisponibles;
 	}
+	
+	public ArrayList<Cliente> clientesSimilares(Cliente cliente) {
+		ArrayList<Cliente> clientesSimilares = new ArrayList<>(); // Clientes similares en el gimansio
+		
+		// Tengo que revisar igualdad de Sexo y preferenciaAlimenticia.
+		
+		for (Cliente c : this.listaClientes) {
+			if (!c.equals(cliente)) {
+				if (c.getSexo().equalsIgnoreCase(cliente.getSexo()) 
+				&& c.getPreferenciaAlimenticia().name().equalsIgnoreCase(cliente.getPreferenciaAlimenticia().name())
+				&& c.getObjetivoCliente().equals(cliente.getObjetivoCliente())) {
+	
+					// Revisar restricciones de Peso, Altura y Edad
+					// Peso dentro de +-5kg
+					// Edad dentro de +-2 años
+					// Altura dentro de +-3cm
+					
+					if ((c.getPeso() - 2 < cliente.getPeso() && cliente.getPeso() < c.getPeso() + 2)
+						&& (c.getEdad() - 2 < cliente.getEdad() && cliente.getEdad() < c.getEdad() + 2) 
+						&& (c.getAltura() - 3 < cliente.getAltura() && cliente.getAltura() < c.getAltura() + 3)	) {
+						clientesSimilares.add(c);
+					}
+				}
+			}
+		}
+		return clientesSimilares;
+	}
 }

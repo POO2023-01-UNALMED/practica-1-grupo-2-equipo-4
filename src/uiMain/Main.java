@@ -3,7 +3,9 @@ import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.*;
 import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.HashMap;
 //import baseDatos.EscritorLector;
 
 public class Main {
@@ -23,69 +25,106 @@ public class Main {
 	
 	static {
 		// ¿Cómo cargamos los objetos del EscritorLector?
-        // Orden de creación: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio
+		// Discutir con Jacobo
+        // Orden de creación F1: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio.
+		// Orden de creación F2: Gimnasio, Entrenador, Cliente, Alimento, Comida, PlanAlimentacion.
+		
 		Gimnasio g1 = new Gimnasio("Golds", "Med", "Robledo", true); // abierto
-		Gimnasio g2 = new Gimnasio("Golds2", "Med", "Poblado", true); // abierto
-		Gimnasio g3 = new Gimnasio("g3", "Med", "Calasanz", true); // abierto
 		
+		gimnasios.add(g1);
+		// Clientes Similares. Sexo, PreferenciaAlim, Objetivo. Rangos Altura, peso, Edad
 		
-		Entrenador e1 = new Entrenador("Entrenador1", g1, 1001, "Doctor", null, NivelCliente.PRINCIPIANTE, "MAÑANA"); // disponible
-		Entrenador e2 = new Entrenador("Entrenador2", g1, 1002, "PosDoctor", null, NivelCliente.INTERMEDIO, "TARDE");
+		Cliente c1 = new Cliente("Platz", g1, 777, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c2 = new Cliente("Arnold", g1, 778, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c3 = new Cliente("Max", g1, 779, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c4 = new Cliente("Tren", g1, 780, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c5 = new Cliente("Jeff", g1, 781, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
 		
-		Entrenador e21 = new Entrenador("Entrenador3", g2, 2001, "Bachi", null, NivelCliente.INTERMEDIO, "MAÑANA");
-		Entrenador e22 = new Entrenador("Entrenador4", g2, 2002, "Bachi", null, NivelCliente.PRINCIPIANTE, "TARDE");
-	 
-		g3.agregarEntrenador(e1);
+		clientes.add(c1); clientes.add(c2); clientes.add(c3); clientes.add(c4); clientes.add(c5);
 		
-		Maquina m1 = new Maquina("Barra", g1);
-		Maquina m2 = new Maquina("Pared", g1);
-		Maquina m3 = new Maquina("Libre", g1);
-		Maquina m4 = new Maquina("Libre", g1);
+		Alimento alimento1 = new Alimento("Manzana", 50, 0.5, 13, 0.4, null);
+		Alimento alimento2 = new Alimento("Lechuga", 5, 0.5, 1, 0.1, null);
+		Alimento alimento3 = new Alimento("Pollo", 150, 25, 0, 5, null);
+		Alimento alimento4 = new Alimento("Arroz", 200, 4, 45, 1, null);
+		Alimento alimento5 = new Alimento("Pescado", 120, 20, 0, 3, null);
+		Alimento alimento6 = new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null);
+		Alimento alimento7 = new Alimento("Ternera", 250, 26, 0, 17, null);
+		Alimento alimento8 = new Alimento("Camarones", 10, 1, 1, 1, Alergeno.MARISCO);
+		
+		Comida comida4 = new Comida("Comida 4", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+		Comida comida5 = new Comida("Comida 5", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+		
+		// Creación de las listas de alimentos
+		ArrayList<Alimento> listaAlimentos1 = new ArrayList<>();
+		ArrayList<Alimento> listaAlimentos2 = new ArrayList<>();
+		ArrayList<Alimento> listaAlimentos3 = new ArrayList<>();
 
-		Maquina m21 = new Maquina("Libre", g2);
-		Maquina m22 = new Maquina("Libre", g2);
-		Maquina m23 = new Maquina("Libre", g2);
-		Maquina m24 = new Maquina("Libre", g2);
+		// Agregar los alimentos a las listas correspondientes
+		listaAlimentos1.add(alimento1);
+		listaAlimentos1.add(alimento2);
+		listaAlimentos1.add(alimento3);
+
+		listaAlimentos2.add(alimento4);
+		listaAlimentos2.add(alimento5);
+		listaAlimentos2.add(alimento6);
+
+		listaAlimentos3.add(alimento7);
 		
-		g3.agregarMaquina(m23); g3.agregarMaquina(m24); // La mismas maquinas para hacer pierna que en g2
+		for (Cliente c : clientes) { // Para cada cliente creo un plan
+		    PlanAlimentacion pc1 = new PlanAlimentacion("Plan Cliente " + c.getNombre(), 3);
+
+		    // Creación del plan semanal
+		    HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<>();
+		    
+		    if (c.getNombre().equals("Max") || c.getNombre().equals("Tren")) {
+		    	ArrayList<Comida> comidasDia = planSemanal.get(DiaSemana.LUNES); // Obtén las comidas del día LUNES
+		    	if (comidasDia != null) {
+		            comidasDia.add(comida4); // Agrega la nueva comida con alérgeno MARISCO
+		            comidasDia.add(comida5); // Agrega otra comida con alérgeno MARISCO
+		        }
+		    } 
+		    
+		    for (DiaSemana dia : DiaSemana.values()) {
+		        ArrayList<Comida> comidasDia = new ArrayList<>();
+
+		        // Lógica para crear comidas diferentes según el día de la semana
+		        // Aquí puedes implementar tu propia lógica o crear nuevas instancias de Comida según corresponda
+
+		        if (dia == DiaSemana.LUNES || dia == DiaSemana.MIERCOLES || dia == DiaSemana.VIERNES) {
+		            Comida comida1 = new Comida("Comida 1", new ArrayList<>(Arrays.asList(
+		                new Alimento("Manzana", 50, 0.5, 13, 0.4, null),
+		                new Alimento("Lechuga", 5, 0.5, 1, 0.1, null),
+		                new Alimento("Pollo", 150, 25, 0, 5, null)
+		            )), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+
+		            comidasDia.add(comida1);
+		        } else if (dia == DiaSemana.MARTES || dia == DiaSemana.JUEVES) {
+		            Comida comida2 = new Comida("Comida 2", new ArrayList<>(Arrays.asList(
+		                new Alimento("Arroz", 200, 4, 45, 1, null),
+		                new Alimento("Pescado", 120, 20, 0, 3, null),
+		                new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null)
+		            )), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+
+		            comidasDia.add(comida2);
+		        } else if (dia == DiaSemana.SABADO || dia == DiaSemana.DOMINGO) {
+		            Comida comida3 = new Comida("Comida 3", new ArrayList<>(Arrays.asList(
+		                new Alimento("Ternera", 250, 26, 0, 17, null)
+		            )), TipoComida.Cena, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+
+		            comidasDia.add(comida3);
+		        }
+
+		        // Agregar el ArrayList comidasDia al HashMap planSemanal con el día como clave
+		        planSemanal.put(dia, comidasDia);
+		    }
+
+		    pc1.setPlanSemanal(planSemanal);
+		    c.planAlimentacion = pc1;
+		}
 		
-		Ejercicio eje1 = new Ejercicio("Barra", "", "", TipoEjercicio.EMPUJAR, m1, 1, 1);
-		Ejercicio eje2 = new Ejercicio("Pullup", "", "", TipoEjercicio.HALAR, m2, 1, 1);
-		Ejercicio eje3 = new Ejercicio("Pulldown", "", "", TipoEjercicio.EMPUJAR, m3, 1, 1);
-		Ejercicio eje4 = new Ejercicio("Remo", "", "", TipoEjercicio.HALAR, m4, 1, 1);
+		// Hacer algunas comidas alérgicas.
 		
-		Ejercicio eje21 = new Ejercicio("Correr", "", "", TipoEjercicio.CARDIO, m21, 1, 1);
-		Ejercicio eje22 = new Ejercicio("Caminar", "", "", TipoEjercicio.CARDIO, m22, 1, 1);
-		Ejercicio eje23 = new Ejercicio("Sentadilla", "", "", TipoEjercicio.PIERNA, m23, 1, 1);
-		Ejercicio eje24 = new Ejercicio("Extension Pierna", "", "", TipoEjercicio.PIERNA, m24, 1, 1);
 		
-		ArrayList<Ejercicio> r1 = new ArrayList<Ejercicio>();
-		ArrayList<Ejercicio> r2 = new ArrayList<Ejercicio>();
-		ArrayList<Ejercicio> r3 = new ArrayList<Ejercicio>();
-		ArrayList<Ejercicio> r4 = new ArrayList<Ejercicio>();
-		
-		r1.add(eje1); r1.add(eje3); // Empujar
-		r2.add(eje2); r2.add(eje4); // Jalar
-		r3.add(eje21); r3.add(eje22); // Cardio
-		r4.add(eje23); r4.add(eje24); // Pierna
-		
-		Rutina rut1 = new Rutina("r1", r1, TipoEjercicio.EMPUJAR); // Creo las rutinas
-		Rutina rut2 = new Rutina("r2", r2, TipoEjercicio.HALAR);
-		Rutina rut3 = new Rutina("r3", r3, TipoEjercicio.CARDIO);
-		Rutina rut4 = new Rutina("r4", r4, TipoEjercicio.PIERNA);
-		
-		Cliente c1 = new Cliente("Platz", g1, 0001, 180, 68, "H", 
-				18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-	
-		
-		gimnasios.add(g1); gimnasios.add(g2); gimnasios.add(g3);
-		entrenadores.add(e1); entrenadores.add(e2); entrenadores.add(e21); entrenadores.add(e22);
-		maquinas.add(m1); maquinas.add(m2); maquinas.add(m3); maquinas.add(m4);
-		maquinas.add(m21); maquinas.add(m22); maquinas.add(m23); maquinas.add(m24);
-		ejercicios.add(eje1); ejercicios.add(eje2); ejercicios.add(eje3); ejercicios.add(eje4);
-		ejercicios.add(eje21); ejercicios.add(eje22); ejercicios.add(eje23); ejercicios.add(eje24);
-		rutinas.add(rut1); rutinas.add(rut2); rutinas.add(rut3); rutinas.add(rut4); 
-		clientes.add(c1);
 	}
 	
 	public static void main(String[] args) {
@@ -309,9 +348,133 @@ public class Main {
 			System.exit(0);
 		}
 		
+		// Hago la extracción de clientes similares a mi cliente actual. (PRIMER METODO EN GIMNASIO)
+		ArrayList<Cliente> clientesSimilares = miCliente.getGimnasio().clientesSimilares(miCliente);
 		
+		if (clientesSimilares.size() == 0) {
+			println("Por favor agende una cita con nuestro nutricionista.");
+		}
 		
-		
+		else { // Utilizo los clientes similares para guardar Planes que podrían servir.
+			ArrayList<PlanAlimentacion> planesAdecuados = new ArrayList<>();
+			
+			for (Cliente c : clientesSimilares) {planesAdecuados.add(c.planAlimentacion);}
+			
+			// Le pido al cliente sus alergias.
+			ArrayList<Alergeno> alergias = new ArrayList<>();
+			
+			print("Es alergico al HUEVO (SI / NO): ");
+			String opcionHuevo = readString().toUpperCase();
+			
+			if (opcionHuevo.equals("SI")) {
+			    alergias.add(Alergeno.HUEVO);
+			} else if (!opcionHuevo.equals("NO")) { // SI ES "NO" CONTINUA EL PROGRAMA
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			print("Es alergico a los MARISCOS (SI / NO): ");
+			String opcionMariscos = readString().toUpperCase();
+			
+			if (opcionMariscos.equals("SI")) {
+			    alergias.add(Alergeno.MARISCO);
+			} else if (!opcionMariscos.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			print("Es intolerante a la LACTOSA (SI / NO): ");
+			String opcionLactosa = readString().toUpperCase();
+			
+			if (opcionLactosa.equals("SI")) {
+			    alergias.add(Alergeno.LACTOSA);
+			} else if (!opcionLactosa.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			print("Es alergico al GLUTEN (SI / NO): ");
+			String opcionGluten = readString().toUpperCase();
+			
+			if (opcionGluten.equals("SI")) {
+			    alergias.add(Alergeno.GLUTEN);
+			} else if (!opcionGluten.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			print("Es alergico a los FRUTOS SECOS (SI / NO): ");
+			String opcionFrutosSecos = readString().toUpperCase();
+			
+			if (opcionFrutosSecos.equals("SI")) {
+			    alergias.add(Alergeno.FRUTOSECO);
+			} else if (!opcionFrutosSecos.equals("NO")) {
+			    println("No alérgico. Se ingresó una opción distinta de SI.");
+			}
+			
+			if (alergias.isEmpty()) { // Muestro todos los planes y le pido al usuario que escoja uno.
+				println("Planes Disponibles: ");
+				for (int i=1; i<=planesAdecuados.size(); i++) {
+					println(i + ". "+ planesAdecuados.get(i-1).nombrePlan);
+				}
+				print("Seleccione el plan deseado: ");
+				byte opcionPlan = readByte();
+				
+				if (opcionPlan <= 0 || opcionPlan > planesAdecuados.size()) 
+					println("Opción incorrecta");
+				
+				else { // Se pide seleccione uno de los adecuados.
+					PlanAlimentacion planElegido = planesAdecuados.get(opcionPlan-1);
+					println("Plan Alimenticio Personalizado: ");
+					
+					miCliente.asignarPlan(planElegido);
+					
+					print(planElegido.toString());
+				}
+			}
+			
+			else { // filtrar según los alergenos de las comidas. Reemplazar alergenos con proteina.
+				ArrayList<PlanAlimentacion> planesModificados = new ArrayList<>();
+				for (PlanAlimentacion p : planesAdecuados) {
+					if (p != null) {
+						p.filtrarPorAlergenos(alergias); // SEGUNDO METODO EN PLANALIMENTACION
+						planesModificados.add(p);
+					}
+				}
+				
+				if (planesModificados.size() == 0) { // Esto si no quedan planes.
+					print("Para recibir mejores recomendaciones de planes según sus alergias por favor pida una cita con Nutricionista");
+				}
+				
+				else {
+					println("Planes Disponibles: ");
+					for (int i=1; i<=planesModificados.size(); i++) {
+						println(i + ". "+ planesModificados.get(i-1).nombrePlan);
+					}
+					print("Seleccione el plan deseado: ");
+					byte opcionPlan = readByte();
+					
+					if (opcionPlan <= 0 || opcionPlan > planesModificados.size()) 
+						println("Opción incorrecta");
+					
+					else { // Se pide seleccione uno de los adecuados.
+						PlanAlimentacion planElegido = planesModificados.get(opcionPlan-1);
+						print("Plan Alimenticio seleccionado: " + planElegido.nombrePlan);
+						
+						if (miCliente.asignarPlan(planElegido) == null) { // Si no tiene histórico de planes alimenticios
+							println("le recomendamos el nuevo plan: ");
+							println(planElegido.toString());
+						}
+						else { // Muestro el plan que tiene, y le doy una recomendación para hacer la transición de planes.
+							println("En su histórico se muestra el plan anterior: ");
+							
+							miCliente.asignarPlan(planElegido).toString(); // Plan anterior.
+							
+							println("\n Le recomendamos seguir este plan y en en transcurso de "
+									+ "una semana ir cambiando los alimentos para llegar a este nuevo plan: ");
+							
+							println(planElegido.toString()); // Plan nuevo.
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	static void f3() {

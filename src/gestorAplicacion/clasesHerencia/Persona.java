@@ -24,6 +24,10 @@ public abstract class Persona {
 		return this.identificacion;
 	}
 	
+	public Gimnasio getGimnasio() {
+		return this.gimnasio;
+	}
+	
 	public Persona() {this(null, null, 0);}
 	
 	@Override

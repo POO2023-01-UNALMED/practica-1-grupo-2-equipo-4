@@ -17,6 +17,9 @@ public class Cliente extends Persona implements Serializable {
 	public PlanAlimentacion planAlimentacion;
 	public PlanEjercicio planEjercicio;
 	
+	public ArrayList<PlanAlimentacion> historicoPlanesAlimentacion = new ArrayList<>();
+	public ArrayList<PlanEjercicio> historicoPlanesEjercicio = new ArrayList<>();
+	
 	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
 	public Cliente(String nombre, Gimnasio gimnasio, int identificacion,
@@ -116,6 +119,24 @@ public class Cliente extends Persona implements Serializable {
 		
 		this.entrenador.setDisponibilidad("NO DISPONIBLE");
 	}
+	
+	public PlanAlimentacion asignarPlan(PlanAlimentacion planAlimentacion) {
+		this.planAlimentacion = planAlimentacion;
+		
+		if (this.historicoPlanesAlimentacion.isEmpty()) {
+			this.historicoPlanesAlimentacion.add(planAlimentacion);
+		}
+		
+		else { // Muestra el plan anterior y se recomienda seguir con este plan e ir 
+			// Cambiando gradualmente las comidas hasta seguir el nuevo plan
+			this.historicoPlanesAlimentacion.add(planAlimentacion);
+			
+			PlanAlimentacion planAnterior = historicoPlanesAlimentacion.get(historicoPlanesAlimentacion.indexOf(planAlimentacion) - 1);
+			return planAnterior;
+		}
+		return null;
+	}
+	
 	
 	public static void generarPlanAlimentacion() {}
 }
