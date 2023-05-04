@@ -13,15 +13,19 @@ public class Comida implements Serializable {
     public double grasas;
     public TipoComida tipo;
     private PreferenciaAlimenticia preferenciaAlimenticia;
-    public Cliente objetivoCliente;
+    public ObjetivoCliente objetivoCliente;
+    
+    public static ArrayList<Comida> listaComidas = new ArrayList<Comida>();
 
     // Constructor, getters y setters
-    public Comida(String nombre, ArrayList<Alimento> listaAlimentos, TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, Cliente objetivoCliente) {
+    public Comida(String nombre, ArrayList<Alimento> listaAlimentos, TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, ObjetivoCliente objetivoCliente) {
         this.nombre = nombre;
         this.listaAlimentos = listaAlimentos;
         this.tipo = tipo;
         this.preferenciaAlimenticia = preferenciaAlimenticia;
         this.objetivoCliente = objetivoCliente;
+        
+        listaComidas.add(this);
     }
 
     public String getNombre() {
@@ -88,16 +92,20 @@ public class Comida implements Serializable {
         this.preferenciaAlimenticia = preferenciaAlimenticia;
     }
 
-    public Cliente getObjetivoCliente() {
+    public ObjetivoCliente getObjetivoCliente() {
         return objetivoCliente;
     }
 
-    public void setObjetivoCliente(Cliente objetivoCliente) {
+    public void setObjetivoCliente(ObjetivoCliente objetivoCliente) {
         this.objetivoCliente = objetivoCliente;
     }
 
-    public void calcularCalorias() {
-        // logica
+	public double calcularCalorias() {
+    	double caloriasTotales = 0;
+    	
+    	
+    	
+        return caloriasTotales;
     }
 
     public void calcularMacronutrientes() {
