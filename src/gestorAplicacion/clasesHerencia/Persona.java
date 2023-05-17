@@ -1,7 +1,10 @@
 package gestorAplicacion.clasesHerencia;
 import gestorAplicacion.clasesPrincipales.*;
+import java.io.Serializable;
 
-public abstract class Persona {
+public abstract class Persona implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	protected String nombre;
 	protected Gimnasio gimnasio;
 	protected int identificacion;
@@ -21,11 +24,11 @@ public abstract class Persona {
 	}
 	
 	public int getIdentificacion() {
-		return this.identificacion;
+		return identificacion;
 	}
 	
 	public Gimnasio getGimnasio() {
-		return this.gimnasio;
+		return gimnasio;
 	}
 	
 	public Persona() {this(null, null, 0);}

@@ -31,10 +31,46 @@ public class Main {
 		byte opcion;
 		String salir = "n";
 		
+		println("HOLA\nBienvenido a Gimbro, tu asistente personal\nInicia sesión para continuar");
+		print("INICIO DE SESION\nIngrese su identificación:");
+		
+		
+		Cliente miCliente = null;
+
+		int ident = readInt();
+		boolean repetir = true;
+
+		while(true){
+			for (Cliente c : empresa.getClientes()) {
+				if (c.getIdentificacion() == ident) {
+					miCliente = c;
+					repetir = false;
+					break;
+				}
+			}
+			if (repetir == true){
+				System.out.println("Inicio de sesión incorrecto");
+				ident = readInt();
+			} else {
+				System.out.println("funciona");
+				break;
+			}
+		}
+		
 		
 
+		/*
+		if (miCliente == null) {
+			println("Identificación incorrecta, no estás subscrito a nuestro gimnasio");
+			System.exit(0);
+		}*/
 
+		/*for (Movimiento movimiento: empresa.getMovimientos()){
+			System.out.println(movimiento.getTipoEjercicio());
+		}*/
+		
 		do {
+
 
 			println("\n\nMENU PRINCIPAL");
 			println("1. Reservar Gimnasio");
@@ -55,7 +91,7 @@ public class Main {
 					recomendarPlanAlimentacion();
 					break;
 				case 3:
-					f3();
+					recomendarPlanEjercicio(miCliente);
 					break;
 				case 4:
 					f4();
@@ -81,6 +117,7 @@ public class Main {
 		print("¡Gracias por usar Jimbro!");
 		sc.close();	
 	}
+
 	
 	
 	// Funciones útiles
@@ -100,7 +137,7 @@ public class Main {
 	
 	//Salir y guardar
 	private static void salirDelSistema(Empresa empresa){
-		System.out.println("Le agradecemos por utilizar nuestros servicios/n Vuelva pronto");
+		System.out.println("Le agradecemos por utilizar nuestros servicios \n Vuelva pronto");
 		Serializador.serializar(empresa);
 		System.exit(0);
 	}
@@ -389,8 +426,9 @@ public class Main {
 		}
 	}
 	
-	static void f3() {
-		
+	static void recomendarPlanEjercicio(Cliente miCliente) {
+		System.out.println("Basandonos en tu objetivo y tu nivel de experiencia hemos desarrollado un plan para tí");
+		System.out.println(miCliente.generarPlanEjercicio());
 	}
 	
 	static void f4() {
