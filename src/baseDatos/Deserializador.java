@@ -14,7 +14,7 @@ import gestorAplicacion.clasesPrincipales.*;
 
 
 public class Deserializador {
-    private static File rutaTemp = new File("\\src\\baseDatos\\temp");
+    private static File rutaTemp = new File("src\\baseDatos\\temp");
     public static void desearilizar(Empresa empresa){
         File[] docs = rutaTemp.listFiles();
         FileInputStream fis;

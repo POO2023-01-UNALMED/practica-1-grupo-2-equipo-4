@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import gestorAplicacion.clasesPrincipales.Empresa;
 
 public class Serializador {
-    private static File rutaTemp =  new File("\\src\\baseDatos\\temp");
+    private static File rutaTemp =  new File("src\\baseDatos\\temp");
 
     public static void serializar (Empresa empresa){
         FileOutputStream fos;

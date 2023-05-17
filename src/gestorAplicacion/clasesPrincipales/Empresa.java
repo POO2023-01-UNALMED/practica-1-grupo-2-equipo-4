@@ -185,5 +185,18 @@ public class Empresa implements Serializable{
     public List<Alimento> getAlimentos() {
         return alimentos;
     }
+
+    // metodos practicos
+
+    public void asignEntrenadorACliente(Cliente cliente, Entrenador entrenador){
+        cliente.setEntrenador(entrenador);
+    }
     
+    public void asignPlanAlimentacionACliente(Cliente cliente, PlanAlimentacion planAlimentacion){
+        cliente.set(planAlimentacion);
+    }
+
+    public void asignPlanEjercicioACliente(Cliente cliente, PlanEjercicio planEjercicio){
+        cliente.setPlanEjercicio(planEjercicio);
+    }
 }
