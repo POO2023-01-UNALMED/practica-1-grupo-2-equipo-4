@@ -101,12 +101,15 @@ public class Comida implements Serializable {
     }
 
 	public double calcularCalorias() {
-    	double caloriasTotales = 0;
-    	
-    	
-    	
+        double caloriasTotales = 0;
+    
+        for (Alimento alimento : listaAlimentos) {
+            caloriasTotales += alimento.getCalorias();
+        }
+    
         return caloriasTotales;
     }
+    
 
     public void calcularMacronutrientes() {
         // logica

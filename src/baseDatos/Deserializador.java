@@ -10,9 +10,6 @@ import java.util.List;
 import gestorAplicacion.clasesHerencia.Movimiento;
 import gestorAplicacion.clasesPrincipales.*;
 
-
-
-
 public class Deserializador {
     private static File rutaTemp = new File("src\\baseDatos\\temp");
     public static void desearilizar(Empresa empresa){
@@ -166,5 +163,4 @@ public class Deserializador {
             }
         }
     }
-
 }
