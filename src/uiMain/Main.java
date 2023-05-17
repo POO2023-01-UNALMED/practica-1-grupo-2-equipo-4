@@ -1,6 +1,6 @@
 package uiMain;
 import gestorAplicacion.clasesEnum.*;
-import gestorAplicacion.clasesHerencia.*;
+//import gestorAplicacion.clasesHerencia.*;
 import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
 import java.util.Arrays;

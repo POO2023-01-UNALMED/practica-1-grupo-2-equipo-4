@@ -48,7 +48,6 @@ public class PlanEjercicio implements Plan, Serializable {
 
     @Override
     public Plan crearPLanSemanal() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'crearPLanSemanal'");
     }
 
