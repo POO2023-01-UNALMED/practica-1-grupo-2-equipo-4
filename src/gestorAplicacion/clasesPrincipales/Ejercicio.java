@@ -4,7 +4,7 @@ import gestorAplicacion.clasesEnum.*;
 //import java.io.Serializable;
 
 import java.util.Random;
-import java.util.Set;
+
 
 public class Ejercicio extends Movimiento /*implements Serializable*/ {
 	private static final long serialVersionUID = 1L;

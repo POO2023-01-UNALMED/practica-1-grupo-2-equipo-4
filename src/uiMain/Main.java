@@ -1,7 +1,9 @@
 package uiMain;
 import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.*;
+import baseDatos.Serializador;
 import gestorAplicacion.clasesPrincipales.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,131 +13,33 @@ import java.util.HashMap;
 public class Main {
 	// Se crea el escaner de inputs
 	static Scanner sc = new Scanner(System.in);
-	// Se crean espacios para los objetos de nuestras clases
-	static ArrayList<Alimento> alimentos = new ArrayList<Alimento>();
-	static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-	static ArrayList<Comida> comidas = new ArrayList<Comida>();
-	static ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
-	static ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
-	static ArrayList<Gimnasio> gimnasios = new ArrayList<Gimnasio>();
-	static ArrayList<Maquina> maquinas = new ArrayList<Maquina>();
-	static ArrayList<PlanAlimentacion> planesAlimentacion = new ArrayList<PlanAlimentacion>();
-	static ArrayList<PlanEjercicio> planesEjercicio = new ArrayList<PlanEjercicio>();
-	static ArrayList<Rutina> rutinas = new ArrayList<Rutina>();
-	
-	static {
-		// ¿Cómo cargamos los objetos del EscritorLector?
-		// Discutir con Jacobo
-        // Orden de creación F1: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio.
-		// Orden de creación F2: Gimnasio, Entrenador, Cliente, Alimento, Comida, PlanAlimentacion.
-		
-		Gimnasio g1 = new Gimnasio("Golds", "Med", "Robledo", true); // abierto
-		
-		gimnasios.add(g1);
-		// Clientes Similares. Sexo, PreferenciaAlim, Objetivo. Rangos Altura, peso, Edad
-		
-		Cliente c1 = new Cliente("Platz", g1, 777, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c2 = new Cliente("Arnold", g1, 778, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c3 = new Cliente("Max", g1, 779, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c4 = new Cliente("Tren", g1, 780, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c5 = new Cliente("Jeff", g1, 781, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		
-		clientes.add(c1); clientes.add(c2); clientes.add(c3); clientes.add(c4); clientes.add(c5);
-		
-		Alimento alimento1 = new Alimento("Manzana", 50, 0.5, 13, 0.4, null);
-		Alimento alimento2 = new Alimento("Lechuga", 5, 0.5, 1, 0.1, null);
-		Alimento alimento3 = new Alimento("Pollo", 150, 25, 0, 5, null);
-		Alimento alimento4 = new Alimento("Arroz", 200, 4, 45, 1, null);
-		Alimento alimento5 = new Alimento("Pescado", 120, 20, 0, 3, null);
-		Alimento alimento6 = new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null);
-		Alimento alimento7 = new Alimento("Ternera", 250, 26, 0, 17, null);
-		Alimento alimento8 = new Alimento("Camarones", 10, 1, 1, 1, Alergeno.MARISCO);
-		
-		Comida comida4 = new Comida("Comida 4", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-		Comida comida5 = new Comida("Comida 5", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-		
-		// Creación de las listas de alimentos
-		ArrayList<Alimento> listaAlimentos1 = new ArrayList<>();
-		ArrayList<Alimento> listaAlimentos2 = new ArrayList<>();
-		ArrayList<Alimento> listaAlimentos3 = new ArrayList<>();
-
-		// Agregar los alimentos a las listas correspondientes
-		listaAlimentos1.add(alimento1);
-		listaAlimentos1.add(alimento2);
-		listaAlimentos1.add(alimento3);
-
-		listaAlimentos2.add(alimento4);
-		listaAlimentos2.add(alimento5);
-		listaAlimentos2.add(alimento6);
-
-		listaAlimentos3.add(alimento7);
-		
-		for (Cliente c : clientes) { // Para cada cliente creo un plan
-		    PlanAlimentacion pc1 = new PlanAlimentacion("Plan Cliente " + c.getNombre(), 3);
-
-		    // Creación del plan semanal
-		    HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<>();
-		    
-		    if (c.getNombre().equals("Max") || c.getNombre().equals("Tren")) {
-		    	ArrayList<Comida> comidasDia = planSemanal.get(DiaSemana.LUNES); // Obtén las comidas del día LUNES
-		    	if (comidasDia != null) {
-		            comidasDia.add(comida4); // Agrega la nueva comida con alérgeno MARISCO
-		            comidasDia.add(comida5); // Agrega otra comida con alérgeno MARISCO
-		        }
-		    } 
-		    
-		    for (DiaSemana dia : DiaSemana.values()) {
-		        ArrayList<Comida> comidasDia = new ArrayList<>();
-
-		        // Lógica para crear comidas diferentes según el día de la semana
-		        // Aquí puedes implementar tu propia lógica o crear nuevas instancias de Comida según corresponda
-
-		        if (dia == DiaSemana.LUNES || dia == DiaSemana.MIERCOLES || dia == DiaSemana.VIERNES) {
-		            Comida comida1 = new Comida("Comida 1", new ArrayList<>(Arrays.asList(
-		                new Alimento("Manzana", 50, 0.5, 13, 0.4, null),
-		                new Alimento("Lechuga", 5, 0.5, 1, 0.1, null),
-		                new Alimento("Pollo", 150, 25, 0, 5, null)
-		            )), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-
-		            comidasDia.add(comida1);
-		        } else if (dia == DiaSemana.MARTES || dia == DiaSemana.JUEVES) {
-		            Comida comida2 = new Comida("Comida 2", new ArrayList<>(Arrays.asList(
-		                new Alimento("Arroz", 200, 4, 45, 1, null),
-		                new Alimento("Pescado", 120, 20, 0, 3, null),
-		                new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null)
-		            )), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-
-		            comidasDia.add(comida2);
-		        } else if (dia == DiaSemana.SABADO || dia == DiaSemana.DOMINGO) {
-		            Comida comida3 = new Comida("Comida 3", new ArrayList<>(Arrays.asList(
-		                new Alimento("Ternera", 250, 26, 0, 17, null)
-		            )), TipoComida.Cena, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-
-		            comidasDia.add(comida3);
-		        }
-
-		        // Agregar el ArrayList comidasDia al HashMap planSemanal con el día como clave
-		        planSemanal.put(dia, comidasDia);
-		    }
-
-		    pc1.setPlanSemanal(planSemanal);
-		    c.planAlimentacion = pc1;
-		}
-		
-		// Hacer algunas comidas alérgicas.
-		
-		
+	static long readLong(){
+		return sc.nextLong();
 	}
+	static String readln(){
+		sc.nextLine();
+		return sc.nextLine();
+	}
+	// Se crean espacios para los objetos de nuestras clases
+
+
 	
 	public static void main(String[] args) {
+
+		Empresa empresa = new Empresa();
+
 		byte opcion;
 		String salir = "n";
 		
+		
+
+
 		do {
+
 			println("\n\nMENU PRINCIPAL");
 			println("1. Reservar Gimnasio");
 			println("2. Recomendación de Plan de Alimentación Semanal");
-			println("3. Funcionalidad 3");
+			println("3. Recomendación de plan de ejercicio semanal");
 			println("4. Funcionalidad 4");
 			println("5. Funcionalidad 5");
 			println("6. Salir");
@@ -145,7 +49,7 @@ public class Main {
 			
 			switch (opcion) {
 				case 1:
-					reservarGimnasio();
+					reservarGimnasio(empresa);
 					break;
 				case 2:
 					recomendarPlanAlimentacion();
@@ -160,6 +64,7 @@ public class Main {
 					f5();
 					break;
 				case 6:
+					salirDelSistema(empresa);
 					break;
 				default:
 					println("Digitó una opción incorrecta");
@@ -193,14 +98,21 @@ public class Main {
 	
 	private static int readInt() {int i = sc.nextInt(); return i;}
 	
+	//Salir y guardar
+	private static void salirDelSistema(Empresa empresa){
+		System.out.println("Le agradecemos por utilizar nuestros servicios/n Vuelva pronto");
+		Serializador.serializar(empresa);
+		System.exit(0);
+	}
+
 	// Funcionalidades
-	static void reservarGimnasio() {
+	static void reservarGimnasio(Empresa empresa) {
 		// Ingresar la identificación del cliente y encontrar el objeto asociado
 		print("Ingrese su identificación: ");
 		int ident = readInt();
 		Cliente miCliente = null;
 		
-		for (Cliente c : clientes) {
+		for (Cliente c : empresa.getClientes()) {
 			if (c.getIdentificacion() == ident) {
 				miCliente = c;
 				break;
@@ -478,7 +390,7 @@ public class Main {
 	}
 	
 	static void f3() {
-		System.out.println("*Logica funcionalidad 3*");
+		
 	}
 	
 	static void f4() {
