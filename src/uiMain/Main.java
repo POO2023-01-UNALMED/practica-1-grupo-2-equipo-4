@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.HashMap;
-//import baseDatos.EscritorLector;
 
 public class Main {
 	// Se crea el escaner de inputs
@@ -22,9 +21,14 @@ public class Main {
 	// Se crean espacios para los objetos de nuestras clases
 	
 	public static void main(String[] args) {
+		
+		// Objetos
+		
+		
 		Empresa empresa = new Empresa();
 		
-		print(empresa.getClientes().get(0).getIdentificacion());
+		
+		// Comprobacion
 		
 		
 		byte opcion;
