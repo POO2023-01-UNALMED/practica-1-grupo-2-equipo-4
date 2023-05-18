@@ -24,13 +24,26 @@ public class PlanEjercicio implements Plan, Serializable {
     public PlanEjercicio(){}
 
     @Override
-    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad) {
-
+    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad, String intensidad) {
     	TipoEjercicio[] array = {TipoEjercicio.EMPUJAR, TipoEjercicio.EMPUJAR, TipoEjercicio.HALAR, 
             TipoEjercicio.HALAR, TipoEjercicio.PIERNA, TipoEjercicio.PIERNA, TipoEjercicio.CARDIO};
         Random rand = new Random();
         HashMap<DiaSemana, Rutina> planSemanalEjercio = new HashMap<DiaSemana, Rutina>();
         
+        int factorIntensidad;
+        switch(intensidad) {
+            case "Básico":
+                factorIntensidad = 1;
+                break;
+            case "Medio":
+                factorIntensidad = 2;
+                break;
+            case "Alto":
+                factorIntensidad = 3;
+                break;
+            default:
+                factorIntensidad = 2;
+        }
 
         for (int i = 0; i < array.length; i++) {
             int randomIndexToSwap = rand.nextInt(array.length);
@@ -40,10 +53,10 @@ public class PlanEjercicio implements Plan, Serializable {
         }    
         int index = 0;
         for (DiaSemana dia: DiaSemana.values()){
-            planSemanalEjercio.put(dia, Rutina.generarRutina(array[index], objetivo, dificultad));
+            planSemanalEjercio.put(dia, Rutina.generarRutina(array[index], objetivo, dificultad, factorIntensidad));
             index++;
         }
-        return new PlanEjercicio(planSemanalEjercio);
+        return new PlanEjercicio("Plan " + intensidad, planSemanalEjercio);
     }
 
     @Override
@@ -53,10 +66,10 @@ public class PlanEjercicio implements Plan, Serializable {
 
     @Override
     public String toString(){
-        return "TU PLAN PARA LA SEMANA\n" + "Lunes: " + getPlanSemanalEjercio().get(DiaSemana.LUNES)
-        + "\nMartes: " + getPlanSemanalEjercio().get(DiaSemana.MARTES)+ "\nMiercoles: " + getPlanSemanalEjercio().get(DiaSemana.MIERCOLES) 
-        + "\nJueves: " + getPlanSemanalEjercio().get(DiaSemana.JUEVES)+ "\nViernes: " + getPlanSemanalEjercio().get(DiaSemana.VIERNES)
-        + "\nSabado: " + getPlanSemanalEjercio().get(DiaSemana.SABADO)+ "\nDomingo: " + getPlanSemanalEjercio().get(DiaSemana.DOMINGO);
+        return "TU PLAN PARA LA SEMANA\n" + "Lunes: " + getPlanSemanalEjercicio().get(DiaSemana.LUNES)
+        + "\nMartes: " + getPlanSemanalEjercicio().get(DiaSemana.MARTES)+ "\nMiercoles: " + getPlanSemanalEjercicio().get(DiaSemana.MIERCOLES) 
+        + "\nJueves: " + getPlanSemanalEjercicio().get(DiaSemana.JUEVES)+ "\nViernes: " + getPlanSemanalEjercicio().get(DiaSemana.VIERNES)
+        + "\nSabado: " + getPlanSemanalEjercicio().get(DiaSemana.SABADO)+ "\nDomingo: " + getPlanSemanalEjercicio().get(DiaSemana.DOMINGO);
     }
 
     //metodos get y set
@@ -68,7 +81,7 @@ public class PlanEjercicio implements Plan, Serializable {
         this.nombre = nombre;
     }
     
-    public HashMap<DiaSemana, Rutina> getPlanSemanalEjercio() {
+    public HashMap<DiaSemana, Rutina> getPlanSemanalEjercicio() {
         return planSemanalEjercio;}
 
     public String getNombre(){
@@ -76,3 +89,4 @@ public class PlanEjercicio implements Plan, Serializable {
     }
     
 }
+

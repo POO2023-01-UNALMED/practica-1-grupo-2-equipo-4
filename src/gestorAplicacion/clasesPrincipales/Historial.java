@@ -62,24 +62,25 @@ public class Historial {
         PlanEjercicio planRecomendado;
         HashMap<DiaSemana, Rutina> planSemanalEjercicio;
         int asistencias = vecesAsistidasAlGimnasio();
-    
+        
         // Obteniendo el objetivo y la dificultad del cliente actual.
         ObjetivoCliente objetivoActual = cliente.getObjetivoCliente();
         NivelCliente dificultadActual = cliente.getNivelCliente();
+        String intensidad;
     
         if(asistencias < 10) {
-            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
-            planRecomendado = new PlanEjercicio("Plan Basico", planSemanalEjercicio);
+            intensidad = "Básico";
         } else if(asistencias >= 10 && asistencias < 20) {
-            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
-            planRecomendado = new PlanEjercicio("Plan Medio", planSemanalEjercicio);
+            intensidad = "Medio";
         } else {
-            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
-            planRecomendado = new PlanEjercicio("Plan Alto", planSemanalEjercicio);
+            intensidad = "Alto";
         }
-    
+        planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual, intensidad)).getPlanSemanalEjercicio();
+        planRecomendado = new PlanEjercicio("Plan " + intensidad, planSemanalEjercicio);
+        
         return planRecomendado;
     }
+    
     
     
 }
