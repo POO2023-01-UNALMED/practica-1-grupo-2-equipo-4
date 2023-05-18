@@ -14,8 +14,7 @@ public class Historial {
         this.historialPlanes = new ArrayList<>();
         this.gimnasiosVisitados = new HashSet<>();
         this.visitasGimnasio = new HashMap<>();
-    }
-    
+    }    
 
     public Cliente getCliente() {
         return cliente;

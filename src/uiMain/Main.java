@@ -6,6 +6,7 @@ import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 import java.util.HashMap;
 
 public class Main {
@@ -21,42 +22,20 @@ public class Main {
 	// Se crean espacios para los objetos de nuestras clases
 	
 	public static void main(String[] args) {
-		
-		// Objetos
-		
+		// 1. Objetos. Revisar Requisitos en guiaObjetos.txt dentro de uiMain.
 		
 		Empresa empresa = new Empresa();
 		
+		// 1. agregarObjetos a Empresa. No necesariamente todo a la vez. Lo puedes ir creando de a poco.
 		
-		// Comprobacion
+		// 2. revisar que la creación de objetos sea correcta.
 		
 		
 		byte opcion;
 		String salir = "n";
 		
-		
-		println("!Hola! Bienvenido a Gimbro, tu asistente personal\n");
-		print("-----INICIO DE SESION-----\nIngrese su identificación: ");
-		
 		Cliente miCliente = null;
-
-		while (miCliente == null) {
-		    int ident = readInt();
-		    boolean clienteEncontrado = false;
-
-		    for (Cliente c : empresa.getClientes()) {
-		        if (c.getIdentificacion() == ident) {
-		            miCliente = c;
-		            clienteEncontrado = true;
-		            break;
-		        }
-		    }
-
-		    if (!clienteEncontrado) {
-		        println("Identificación incorrecta, no estás suscrito a nuestro gimnasio.\nVuelve a ingresar tu identificación: ");
-		    }
-		}
-		
+	
 		do {
 
 			println("\n\nMENU PRINCIPAL");
