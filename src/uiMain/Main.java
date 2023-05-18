@@ -1,141 +1,68 @@
 package uiMain;
 import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.*;
+import baseDatos.Serializador;
 import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.HashMap;
-//import baseDatos.EscritorLector;
 
 public class Main {
 	// Se crea el escaner de inputs
 	static Scanner sc = new Scanner(System.in);
-	// Se crean espacios para los objetos de nuestras clases
-	static ArrayList<Alimento> alimentos = new ArrayList<Alimento>();
-	static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-	static ArrayList<Comida> comidas = new ArrayList<Comida>();
-	static ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
-	static ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
-	static ArrayList<Gimnasio> gimnasios = new ArrayList<Gimnasio>();
-	static ArrayList<Maquina> maquinas = new ArrayList<Maquina>();
-	static ArrayList<PlanAlimentacion> planesAlimentacion = new ArrayList<PlanAlimentacion>();
-	static ArrayList<PlanEjercicio> planesEjercicio = new ArrayList<PlanEjercicio>();
-	static ArrayList<Rutina> rutinas = new ArrayList<Rutina>();
-	
-	static {
-		// ¿Cómo cargamos los objetos del EscritorLector?
-		// Discutir con Jacobo
-        // Orden de creación F1: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio.
-		// Orden de creación F2: Gimnasio, Entrenador, Cliente, Alimento, Comida, PlanAlimentacion.
-		
-		Gimnasio g1 = new Gimnasio("Golds", "Med", "Robledo", true); // abierto
-		
-		gimnasios.add(g1);
-		// Clientes Similares. Sexo, PreferenciaAlim, Objetivo. Rangos Altura, peso, Edad
-		
-		Cliente c1 = new Cliente("Platz", g1, 777, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c2 = new Cliente("Arnold", g1, 778, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c3 = new Cliente("Max", g1, 779, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c4 = new Cliente("Tren", g1, 780, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		Cliente c5 = new Cliente("Jeff", g1, 781, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
-		
-		clientes.add(c1); clientes.add(c2); clientes.add(c3); clientes.add(c4); clientes.add(c5);
-		
-		Alimento alimento1 = new Alimento("Manzana", 50, 0.5, 13, 0.4, null);
-		Alimento alimento2 = new Alimento("Lechuga", 5, 0.5, 1, 0.1, null);
-		Alimento alimento3 = new Alimento("Pollo", 150, 25, 0, 5, null);
-		Alimento alimento4 = new Alimento("Arroz", 200, 4, 45, 1, null);
-		Alimento alimento5 = new Alimento("Pescado", 120, 20, 0, 3, null);
-		Alimento alimento6 = new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null);
-		Alimento alimento7 = new Alimento("Ternera", 250, 26, 0, 17, null);
-		Alimento alimento8 = new Alimento("Camarones", 10, 1, 1, 1, Alergeno.MARISCO);
-		
-		Comida comida4 = new Comida("Comida 4", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-		Comida comida5 = new Comida("Comida 5", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-		
-		// Creación de las listas de alimentos
-		ArrayList<Alimento> listaAlimentos1 = new ArrayList<>();
-		ArrayList<Alimento> listaAlimentos2 = new ArrayList<>();
-		ArrayList<Alimento> listaAlimentos3 = new ArrayList<>();
-
-		// Agregar los alimentos a las listas correspondientes
-		listaAlimentos1.add(alimento1);
-		listaAlimentos1.add(alimento2);
-		listaAlimentos1.add(alimento3);
-
-		listaAlimentos2.add(alimento4);
-		listaAlimentos2.add(alimento5);
-		listaAlimentos2.add(alimento6);
-
-		listaAlimentos3.add(alimento7);
-		
-		for (Cliente c : clientes) { // Para cada cliente creo un plan
-		    PlanAlimentacion pc1 = new PlanAlimentacion("Plan Cliente " + c.getNombre(), 3);
-
-		    // Creación del plan semanal
-		    HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<>();
-		    
-		    if (c.getNombre().equals("Max") || c.getNombre().equals("Tren")) {
-		    	ArrayList<Comida> comidasDia = planSemanal.get(DiaSemana.LUNES); // Obtén las comidas del día LUNES
-		    	if (comidasDia != null) {
-		            comidasDia.add(comida4); // Agrega la nueva comida con alérgeno MARISCO
-		            comidasDia.add(comida5); // Agrega otra comida con alérgeno MARISCO
-		        }
-		    } 
-		    
-		    for (DiaSemana dia : DiaSemana.values()) {
-		        ArrayList<Comida> comidasDia = new ArrayList<>();
-
-		        // Lógica para crear comidas diferentes según el día de la semana
-		        // Aquí puedes implementar tu propia lógica o crear nuevas instancias de Comida según corresponda
-
-		        if (dia == DiaSemana.LUNES || dia == DiaSemana.MIERCOLES || dia == DiaSemana.VIERNES) {
-		            Comida comida1 = new Comida("Comida 1", new ArrayList<>(Arrays.asList(
-		                new Alimento("Manzana", 50, 0.5, 13, 0.4, null),
-		                new Alimento("Lechuga", 5, 0.5, 1, 0.1, null),
-		                new Alimento("Pollo", 150, 25, 0, 5, null)
-		            )), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-
-		            comidasDia.add(comida1);
-		        } else if (dia == DiaSemana.MARTES || dia == DiaSemana.JUEVES) {
-		            Comida comida2 = new Comida("Comida 2", new ArrayList<>(Arrays.asList(
-		                new Alimento("Arroz", 200, 4, 45, 1, null),
-		                new Alimento("Pescado", 120, 20, 0, 3, null),
-		                new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null)
-		            )), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-
-		            comidasDia.add(comida2);
-		        } else if (dia == DiaSemana.SABADO || dia == DiaSemana.DOMINGO) {
-		            Comida comida3 = new Comida("Comida 3", new ArrayList<>(Arrays.asList(
-		                new Alimento("Ternera", 250, 26, 0, 17, null)
-		            )), TipoComida.Cena, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
-
-		            comidasDia.add(comida3);
-		        }
-
-		        // Agregar el ArrayList comidasDia al HashMap planSemanal con el día como clave
-		        planSemanal.put(dia, comidasDia);
-		    }
-
-		    pc1.setPlanSemanal(planSemanal);
-		    c.planAlimentacion = pc1;
-		}
-		
-		// Hacer algunas comidas alérgicas.
-		
-		
+	static long readLong(){
+		return sc.nextLong();
 	}
+	static String readln(){
+		sc.nextLine();
+		return sc.nextLine();
+	}
+	// Se crean espacios para los objetos de nuestras clases
 	
 	public static void main(String[] args) {
+		
+		// Objetos
+		
+		
+		Empresa empresa = new Empresa();
+		
+		
+		// Comprobacion
+		
+		
 		byte opcion;
 		String salir = "n";
 		
+		
+		println("!Hola! Bienvenido a Gimbro, tu asistente personal\n");
+		print("-----INICIO DE SESION-----\nIngrese su identificación: ");
+		
+		Cliente miCliente = null;
+
+		while (miCliente == null) {
+		    int ident = readInt();
+		    boolean clienteEncontrado = false;
+
+		    for (Cliente c : empresa.getClientes()) {
+		        if (c.getIdentificacion() == ident) {
+		            miCliente = c;
+		            clienteEncontrado = true;
+		            break;
+		        }
+		    }
+
+		    if (!clienteEncontrado) {
+		        println("Identificación incorrecta, no estás suscrito a nuestro gimnasio.\nVuelve a ingresar tu identificación: ");
+		    }
+		}
+		
 		do {
+
 			println("\n\nMENU PRINCIPAL");
 			println("1. Reservar Gimnasio");
 			println("2. Recomendación de Plan de Alimentación Semanal");
-			println("3. Funcionalidad 3");
+			println("3. Recomendación de plan de ejercicio semanal");
 			println("4. Funcionalidad 4");
 			println("5. Funcionalidad 5");
 			println("6. Salir");
@@ -145,10 +72,10 @@ public class Main {
 			
 			switch (opcion) {
 				case 1:
-					reservarGimnasio();
+					reservarGimnasio(empresa, miCliente);
 					break;
 				case 2:
-					recomendarPlanAlimentacion();
+					recomendarPlanAlimentacion(empresa, miCliente);
 					break;
 				case 3:
 					f3();
@@ -160,6 +87,7 @@ public class Main {
 					f5();
 					break;
 				case 6:
+					salirDelSistema(empresa);
 					break;
 				default:
 					println("Digitó una opción incorrecta");
@@ -174,7 +102,7 @@ public class Main {
 			}
 		} while (opcion != 6 && !salir.toLowerCase().equals("y"));
 		print("¡Gracias por usar Jimbro!");
-		sc.close();	
+		sc.close();
 	}
 	
 	
@@ -193,137 +121,126 @@ public class Main {
 	
 	private static int readInt() {int i = sc.nextInt(); return i;}
 	
+	//Salir y guardar
+	private static void salirDelSistema(Empresa empresa){
+		System.out.println("Le agradecemos por utilizar nuestros servicios/n Vuelva pronto");
+		Serializador.serializar(empresa);
+		System.exit(0);
+	}
+
 	// Funcionalidades
-	static void reservarGimnasio() {
-		// Ingresar la identificación del cliente y encontrar el objeto asociado
-		print("Ingrese su identificación: ");
-		int ident = readInt();
-		Cliente miCliente = null;
+	static void reservarGimnasio(Empresa empresa, Cliente miCliente) {
+		print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
+		String gimnasioDeseado = readString();
+		print("Ingrese la ciudad en la que desea entrenar: ");
+		String ciudadGimnasioDeseado = readString();
+		print("Ingrese la rutina que va a realizar: ");
+		String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
 		
-		for (Cliente c : clientes) {
-			if (c.getIdentificacion() == ident) {
-				miCliente = c;
+		// Buscar Gimnasio en Ciudad
+		Gimnasio gimnasioElegido = null;
+		for (Gimnasio g: empresa.getGimnasios()) { // Revisar igualdad de Nombre y Ciudad
+			if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
+				gimnasioElegido = g;
 				break;
 			}
 		}
 		
-		if (miCliente == null) {
-			println("Identificación incorrecta");
-			System.exit(0);
+		if (gimnasioElegido == null) {
+			println("No hay sedes disponibles");
 		}
-		
-		else
-			print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
-			String gimnasioDeseado = readString();
-			print("Ingrese la ciudad en la que desea entrenar: ");
-			String ciudadGimnasioDeseado = readString();
-			print("Ingrese la rutina que va a realizar: ");
-			String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
-			
-			// Buscar Gimnasio en Ciudad
-			Gimnasio gimnasioElegido = null;
-			for (Gimnasio g: gimnasios) { // Revisar igualdad de Nombre y Ciudad
-				if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
-					gimnasioElegido = g;
+		else {
+			// Inicializar lista de maquinas necesarias para hacer la rutina
+			ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
+			// Buscar rutina deseada por el cliente por Nombre
+			Rutina rutinaBuscar = null;
+			for (Rutina rutina : empresa.getRutinas()) {
+				if (rutina.getNombre().equals(rutinaDeseada)) {
+					rutinaBuscar = rutina;
 					break;
 				}
 			}
 			
-			if (gimnasioElegido == null) {
-				println("No hay sedes disponibles");
+			if (rutinaBuscar == null) {
+				println("No hay gimnasios disponibles para esta rutina en " + ciudadGimnasioDeseado);
 			}
-			else {
-				// Inicializar lista de maquinas necesarias para hacer la rutina
-				ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
-				// Buscar rutina deseada por el cliente por Nombre
-				Rutina rutinaBuscar = null;
-				for (Rutina rutina : rutinas) {
-					if (rutina.getNombre().equals(rutinaDeseada)) {
-						rutinaBuscar = rutina;
-						break;
-					}
+			else { // Quiero ver si mi gimnasio tiene las maquinas necesarias
+				for (Ejercicio e : rutinaBuscar.getEjercicios()) {
+					maquinasNecesarias.add(e.getMaquina());
 				}
-				
-				if (rutinaBuscar == null) {
-					println("No hay gimnasios disponibles para esta rutina en " + ciudadGimnasioDeseado);
+			}
+			
+			ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
+			
+			if (sedesDisponibles.size() == 0) {
+				println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
+			}
+			
+			else { // Muestro las sedes disponibles para entrenar esa rutina
+				println("Sedes disponibles para entrenar:");
+				for (int i = 1; i <= sedesDisponibles.size(); i++) {
+					println(i +": " + sedesDisponibles.get(i-1).getSede());
 				}
-				else { // Quiero ver si mi gimnasio tiene las maquinas necesarias
-					for (Ejercicio e : rutinaBuscar.getEjercicios()) {
-						maquinasNecesarias.add(e.getMaquina());
-					}
+				print("Ingrese el número de la sede en la que desea entrenar: ");
+				byte opcSede = readByte();
+				
+				if (opcSede <= 0 || opcSede > sedesDisponibles.size()) {
+					println("Opción incorrecta");
 				}
-				
-				ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
-				
-				if (sedesDisponibles.size() == 0) {
-					println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
-				}
-				
-				else { // Muestro las sedes disponibles para entrenar esa rutina
-					println("Sedes disponibles para entrenar:");
-					for (int i = 1; i <= sedesDisponibles.size(); i++) {
-						println(i +": " + sedesDisponibles.get(i-1).getSede());
-					}
-					print("Ingrese el número de la sede en la que desea entrenar: ");
-					byte opcSede = readByte();
+				else { // Selecciona la intensidad del entrenamiento y el horario de reserva del Entrenador en esta Sede seleccionada.
+					Gimnasio sedeGimnasio = sedesDisponibles.get(opcSede-1);
+					println("Sede seleccionada: " + sedeGimnasio.toString());
 					
-					if (opcSede <= 0 || opcSede > sedesDisponibles.size()) {
-						println("Opción incorrecta");
+					print("Seleccione la intensidad del entrenamiento (PRINCIPIANTE/INTERMEDIO/AVANZADO): ");
+					String intensidad = readString();					
+					
+					if (!intensidad.equalsIgnoreCase("PRINCIPIANTE") && !intensidad.equalsIgnoreCase("INTERMEDIO") 
+							&& !intensidad.equalsIgnoreCase("AVANZADO")) {
+						println("Intensidad Incorrecta. Seleccione PRINCIPIANTE/INTERMEDIO/AVANZADO");
+						System.exit(0);
 					}
-					else { // Selecciona la intensidad del entrenamiento y el horario de reserva del Entrenador en esta Sede seleccionada.
-						Gimnasio sedeGimnasio = sedesDisponibles.get(opcSede-1);
-						println("Sede seleccionada: " + sedeGimnasio.toString());
-						
-						print("Seleccione la intensidad del entrenamiento (PRINCIPIANTE/INTERMEDIO/AVANZADO): ");
-						String intensidad = readString();					
-						
-						if (!intensidad.equalsIgnoreCase("PRINCIPIANTE") && !intensidad.equalsIgnoreCase("INTERMEDIO") 
-								&& !intensidad.equalsIgnoreCase("AVANZADO")) {
-							println("Intensidad Incorrecta. Seleccione PRINCIPIANTE/INTERMEDIO/AVANZADO");
-							System.exit(0);
-						}
-						
-						print("Seleccione el horario en el que asistirá (MAÑANA/TARDE): ");
-						String horarioAsistencia = readString();
+					
+					print("Seleccione el horario en el que asistirá (MAÑANA/TARDE): ");
+					String horarioAsistencia = readString();
 
-						if (!horarioAsistencia.equalsIgnoreCase("MAÑANA") && !horarioAsistencia.equalsIgnoreCase("TARDE")) {
-							println("Horario Incorrecto. Seleccione MAÑANA/TARDE");
-							System.exit(0);
-						}
-						
-						ArrayList<Entrenador> entrenadoresSede = sedeGimnasio.getListaEntrenadores(); // Filtrar sobre esta lista.
-						ArrayList<Entrenador> entrenadoresDisponibles = new ArrayList<>(); // Contiene los entrenadores adecuados.
-						
-						for (Entrenador e : entrenadoresSede) { // Filtra sobre los entrenadores y llena la lista de objetos.
-							if (!e.getDisponibilidad().equalsIgnoreCase("NO DISPONIBLE")) {
-								Entrenador entrenadorDisponible = e.entrenadoresDisponibles(horarioAsistencia, intensidad); // SEGUNDO MÉTODO
-								
-								if (entrenadorDisponible != null) {
-									entrenadoresDisponibles.add(entrenadorDisponible);
-								}
+					if (!horarioAsistencia.equalsIgnoreCase("MAÑANA") && !horarioAsistencia.equalsIgnoreCase("TARDE")) {
+						println("Horario Incorrecto. Seleccione MAÑANA/TARDE");
+						System.exit(0);
+					}
+					
+					ArrayList<Entrenador> entrenadoresSede = sedeGimnasio.getListaEntrenadores(); // Filtrar sobre esta lista.
+					ArrayList<Entrenador> entrenadoresDisponibles = new ArrayList<>(); // Contiene los entrenadores adecuados.
+					
+					for (Entrenador e : entrenadoresSede) { // Filtra sobre los entrenadores y llena la lista de objetos.
+						if (!e.getDisponibilidad().equalsIgnoreCase("NO DISPONIBLE")) {
+							Entrenador entrenadorDisponible = e.entrenadoresDisponibles(horarioAsistencia, intensidad); // SEGUNDO MÉTODO
+							
+							if (entrenadorDisponible != null) {
+								entrenadoresDisponibles.add(entrenadorDisponible);
 							}
 						}
+					}
+					
+					if (entrenadoresDisponibles.size() == 0) {
+						println("No hay entrenadores disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
+					}
+					else {
+					println("Entrenadores Disponibles: ");
+					for (int i=1; i<=entrenadoresDisponibles.size(); i++) {
+						println(i + ". "+ entrenadoresDisponibles.get(i-1).getNombre());
+					}
+					
+					print("Seleccione el entrenador deseado: ");
+					byte opcionEntrenador = readByte();
+					
+					if (opcionEntrenador <= 0 || opcionEntrenador > entrenadoresDisponibles.size()) 
+						println("Opción incorrecta");
+					
+					else { // Se pide seleccione uno de los adecuados.
+						Entrenador entrenadorElegido = entrenadoresDisponibles.get(opcionEntrenador-1);
+						print("Entrenador seleccionado: " + entrenadorElegido.getNombre());
 						
-						if (entrenadoresDisponibles.size() == 0) {
-							println("No hay entrenadores disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
-						}
-						else {
-						println("Entrenadores Disponibles: ");
-						for (int i=1; i<=entrenadoresDisponibles.size(); i++) {
-							println(i + ". "+ entrenadoresDisponibles.get(i-1).getNombre());
-						}
-						
-						print("Seleccione el entrenador deseado: ");
-						byte opcionEntrenador = readByte();
-						
-						if (opcionEntrenador <= 0 || opcionEntrenador > entrenadoresDisponibles.size()) 
-							println("Opción incorrecta");
-						
-						else { // Se pide seleccione uno de los adecuados.
-							Entrenador entrenadorElegido = entrenadoresDisponibles.get(opcionEntrenador-1);
-							print("Entrenador seleccionado: " + entrenadorElegido.getNombre());
-							
-							miCliente.asignarEntrenador(entrenadorElegido); // TERCER MÉTODO
+						miCliente.asignarEntrenador(entrenadorElegido); // TERCER MÉTODO
 						}
 					}		
 				}
@@ -331,23 +248,7 @@ public class Main {
 		}
 	}
 	
-	static void recomendarPlanAlimentacion() { //Se va a recomendar un plan de alimentacion
-		print("Ingrese su identificación: ");
-		int ident = readInt();
-		Cliente miCliente = null;
-		
-		for (Cliente c : clientes) {
-			if (c.getIdentificacion() == ident) {
-				miCliente = c;
-				break;
-			}
-		}
-		
-		if (miCliente == null) {
-			println("Identificación incorrecta");
-			System.exit(0);
-		}
-		
+	static void recomendarPlanAlimentacion(Empresa empresa, Cliente miCliente) { //Se va a recomendar un plan de alimentacion		
 		// Hago la extracción de clientes similares a mi cliente actual. (PRIMER METODO EN GIMNASIO)
 		ArrayList<Cliente> clientesSimilares = miCliente.getGimnasio().clientesSimilares(miCliente);
 		
@@ -478,7 +379,7 @@ public class Main {
 	}
 	
 	static void f3() {
-		System.out.println("*Logica funcionalidad 3*");
+		
 	}
 	
 	static void f4() {
