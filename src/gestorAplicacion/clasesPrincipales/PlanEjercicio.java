@@ -24,6 +24,11 @@ public class PlanEjercicio implements Plan, Serializable {
     public PlanEjercicio(){}
 
     @Override
+    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad) {
+        return crearPLanSemanal(objetivo, dificultad, "Medio");
+    }
+
+    @Override
     public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad, String intensidad) {
     	TipoEjercicio[] array = {TipoEjercicio.EMPUJAR, TipoEjercicio.EMPUJAR, TipoEjercicio.HALAR, 
             TipoEjercicio.HALAR, TipoEjercicio.PIERNA, TipoEjercicio.PIERNA, TipoEjercicio.CARDIO};

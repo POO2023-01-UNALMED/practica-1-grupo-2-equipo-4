@@ -52,6 +52,16 @@ public class PlanAlimentacion implements Plan, Serializable {
     	return p;
     }
     
+    @Override
+    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad, String intensidad) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
     public PlanAlimentacion filtrarPorAlergenos(ArrayList<Alergeno> alergias) {
     	for (ArrayList<Comida> comidasDia : planSemanal.values()) { // Para las comidas de cada día
             for (Comida comida : comidasDia) { // Para cada comida
