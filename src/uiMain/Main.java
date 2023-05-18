@@ -5,6 +5,7 @@ import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 import java.util.HashMap;
 //import baseDatos.EscritorLector;
 
@@ -128,9 +129,26 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
+<<<<<<< Updated upstream
 		byte opcion;
 		String salir = "n";
 		
+=======
+		// 1. Objetos. Revisar Requisitos en guiaObjetos.txt dentro de uiMain.
+		
+		Empresa empresa = new Empresa();
+		
+		// 1. agregarObjetos a Empresa. No necesariamente todo a la vez. Lo puedes ir creando de a poco.
+		
+		// 2. revisar que la creación de objetos sea correcta.
+		
+		
+		byte opcion;
+		String salir = "n";
+		
+		Cliente miCliente = null;
+	
+>>>>>>> Stashed changes
 		do {
 			println("\n\nMENU PRINCIPAL");
 			println("1. Reservar Gimnasio");

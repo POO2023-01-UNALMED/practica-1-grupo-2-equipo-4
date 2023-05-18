@@ -27,9 +27,12 @@ public class Entrenador extends Persona implements Serializable {
 		listaEntrenadores.add(this);
 	}
 	
+<<<<<<< Updated upstream
 	public Entrenador() {this(null, null, 0, null, null, null, null);}
 	
 	
+=======
+>>>>>>> Stashed changes
 	public String getFormacion() {
 		return formacion;
 	}
