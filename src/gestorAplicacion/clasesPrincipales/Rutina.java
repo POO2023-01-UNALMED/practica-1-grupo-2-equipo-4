@@ -16,7 +16,7 @@ public class Rutina implements Serializable{
 
     private ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
     private TipoEjercicio tipoEjercicio;
-    private final int NUMEJERCIOS = 7; // abierto a discusión
+    private static final int NUMEJERCIOS = 7; // abierto a discusión
 
     public Rutina(String nombre, ArrayList<Ejercicio> ejercicios, TipoEjercicio tipoEjercicio){
         this.nombre = nombre;
@@ -35,14 +35,13 @@ public class Rutina implements Serializable{
         Random random = new Random();
 
         ArrayList<Movimiento> movCalentamiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.CALENTAMIENTO);
-        System.out.println(movCalentamiento.size());
         ArrayList<Movimiento> movEstiramiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.ESTIRAMIENTO);
         ejercicios.add(Ejercicio.generarEjercicio(movCalentamiento.get(random.nextInt(movCalentamiento.size())), objetivo ));
 
         Collections.shuffle(movimientosDisponibles);
 
         for (int i = 0; i < movimientosDisponibles.size(); i++){
-            if (i==6){
+            if (i==(NUMEJERCIOS - 1)){
                 break;
             }else {
                 ejercicios.add(Ejercicio.generarEjercicio(movimientosDisponibles.get(i), objetivo));

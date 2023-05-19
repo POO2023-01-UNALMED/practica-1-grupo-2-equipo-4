@@ -16,6 +16,9 @@ public abstract class Persona implements Serializable {
 		this.gimnasio = gimnasio;
 		this.identificacion = identificacion;
 	}
+	public Persona(String nombre, int identificacion){
+		this(nombre, null, identificacion);
+	}
 	
 	public String getNombre() {
 		return nombre;

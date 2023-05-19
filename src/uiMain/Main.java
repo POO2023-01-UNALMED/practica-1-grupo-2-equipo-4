@@ -102,7 +102,8 @@ public class Main {
 				while (!salir.toLowerCase().equals("y") && !salir.toLowerCase().equals("n"));
 			}
 		} while (opcion != 6 && !salir.toLowerCase().equals("y"));
-		print("¡Gracias por usar Jimbro!");
+
+		salirDelSistema(empresa);
 		sc.close();
 	}
 
