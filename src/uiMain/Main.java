@@ -3,12 +3,10 @@ import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.*;
 import baseDatos.Serializador;
 import gestorAplicacion.clasesPrincipales.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.HashMap;
-//import baseDatos.EscritorLector;
 
 public class Main {
 	// Se crea el escaner de inputs
@@ -21,53 +19,43 @@ public class Main {
 		return sc.nextLine();
 	}
 	// Se crean espacios para los objetos de nuestras clases
-
-
 	
 	public static void main(String[] args) {
-
+		
+		// Objetos
+		
+		
 		Empresa empresa = new Empresa();
-
+		
+		
+		// Comprobacion
+		
+		
 		byte opcion;
 		String salir = "n";
 		
-		println("HOLA\nBienvenido a Gimbro, tu asistente personal\nInicia sesión para continuar");
-		print("INICIO DE SESION\nIngrese su identificación:");
 		
+		println("!Hola! Bienvenido a Gimbro, tu asistente personal\n");
+		print("-----INICIO DE SESION-----\nIngrese su identificación: ");
 		
 		Cliente miCliente = null;
 
-		int ident = readInt();
-		boolean repetir = true;
+		while (miCliente == null) {
+		    int ident = readInt();
+		    boolean clienteEncontrado = false;
 
-		while(true){
-			for (Cliente c : empresa.getClientes()) {
-				if (c.getIdentificacion() == ident) {
-					miCliente = c;
-					repetir = false;
-					break;
-				}
-			}
-			if (repetir == true){
-				System.out.println("Inicio de sesión incorrecto");
-				ident = readInt();
-			} else {
-				System.out.println("funciona");
-				break;
-			}
+		    for (Cliente c : empresa.getClientes()) {
+		        if (c.getIdentificacion() == ident) {
+		            miCliente = c;
+		            clienteEncontrado = true;
+		            break;
+		        }
+		    }
+
+		    if (!clienteEncontrado) {
+		        println("Identificación incorrecta, no estás suscrito a nuestro gimnasio.\nVuelve a ingresar tu identificación: ");
+		    }
 		}
-		
-		
-
-		/*
-		if (miCliente == null) {
-			println("Identificación incorrecta, no estás subscrito a nuestro gimnasio");
-			System.exit(0);
-		}*/
-
-		/*for (Movimiento movimiento: empresa.getMovimientos()){
-			System.out.println(movimiento.getTipoEjercicio());
-		}*/
 		
 		do {
 
@@ -85,10 +73,10 @@ public class Main {
 			
 			switch (opcion) {
 				case 1:
-					reservarGimnasio(empresa);
+					reservarGimnasio(empresa, miCliente);
 					break;
 				case 2:
-					recomendarPlanAlimentacion();
+					recomendarPlanAlimentacion(empresa, miCliente);
 					break;
 				case 3:
 					recomendarPlanEjercicio(miCliente);
@@ -115,7 +103,7 @@ public class Main {
 			}
 		} while (opcion != 6 && !salir.toLowerCase().equals("y"));
 		print("¡Gracias por usar Jimbro!");
-		sc.close();	
+		sc.close();
 	}
 
 	
@@ -143,136 +131,118 @@ public class Main {
 	}
 
 	// Funcionalidades
-	static void reservarGimnasio(Empresa empresa) {
-		// Ingresar la identificación del cliente y encontrar el objeto asociado
-		print("Ingrese su identificación: ");
-		int ident = readInt();
-		Cliente miCliente = null;
+	static void reservarGimnasio(Empresa empresa, Cliente miCliente) {
+		print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
+		String gimnasioDeseado = readString();
+		print("Ingrese la ciudad en la que desea entrenar: ");
+		String ciudadGimnasioDeseado = readString();
+		print("Ingrese la rutina que va a realizar: ");
+		String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
 		
-		for (Cliente c : empresa.getClientes()) {
-			if (c.getIdentificacion() == ident) {
-				miCliente = c;
+		// Buscar Gimnasio en Ciudad
+		Gimnasio gimnasioElegido = null;
+		for (Gimnasio g: empresa.getGimnasios()) { // Revisar igualdad de Nombre y Ciudad
+			if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
+				gimnasioElegido = g;
 				break;
 			}
 		}
 		
-		if (miCliente == null) {
-			println("Identificación incorrecta");
-			System.exit(0);
+		if (gimnasioElegido == null) {
+			println("No hay sedes disponibles");
 		}
-		
-		else
-			print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
-			String gimnasioDeseado = readString();
-			print("Ingrese la ciudad en la que desea entrenar: ");
-			String ciudadGimnasioDeseado = readString();
-			print("Ingrese la rutina que va a realizar: ");
-			String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
-			
-			// Buscar Gimnasio en Ciudad
-			Gimnasio gimnasioElegido = null;
-			for (Gimnasio g: gimnasios) { // Revisar igualdad de Nombre y Ciudad
-				if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
-					gimnasioElegido = g;
+		else {
+			// Inicializar lista de maquinas necesarias para hacer la rutina
+			ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
+			// Buscar rutina deseada por el cliente por Nombre
+			Rutina rutinaBuscar = null;
+			for (Rutina rutina : empresa.getRutinas()) {
+				if (rutina.getNombre().equals(rutinaDeseada)) {
+					rutinaBuscar = rutina;
 					break;
 				}
 			}
 			
-			if (gimnasioElegido == null) {
-				println("No hay sedes disponibles");
+			if (rutinaBuscar == null) {
+				println("No hay gimnasios disponibles para esta rutina en " + ciudadGimnasioDeseado);
 			}
-			else {
-				// Inicializar lista de maquinas necesarias para hacer la rutina
-				ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
-				// Buscar rutina deseada por el cliente por Nombre
-				Rutina rutinaBuscar = null;
-				for (Rutina rutina : rutinas) {
-					if (rutina.getNombre().equals(rutinaDeseada)) {
-						rutinaBuscar = rutina;
-						break;
-					}
+			else { // Quiero ver si mi gimnasio tiene las maquinas necesarias
+				for (Ejercicio e : rutinaBuscar.getEjercicios()) {
+					maquinasNecesarias.add(e.getMaquina());
 				}
-				
-				if (rutinaBuscar == null) {
-					println("No hay gimnasios disponibles para esta rutina en " + ciudadGimnasioDeseado);
+			}
+			
+			ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
+			
+			if (sedesDisponibles.size() == 0) {
+				println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
+			}
+			
+			else { // Muestro las sedes disponibles para entrenar esa rutina
+				println("Sedes disponibles para entrenar:");
+				for (int i = 1; i <= sedesDisponibles.size(); i++) {
+					println(i +": " + sedesDisponibles.get(i-1).getSede());
 				}
-				else { // Quiero ver si mi gimnasio tiene las maquinas necesarias
-					for (Ejercicio e : rutinaBuscar.getEjercicios()) {
-						maquinasNecesarias.add(e.getMaquina());
-					}
+				print("Ingrese el número de la sede en la que desea entrenar: ");
+				byte opcSede = readByte();
+				
+				if (opcSede <= 0 || opcSede > sedesDisponibles.size()) {
+					println("Opción incorrecta");
 				}
-				
-				ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
-				
-				if (sedesDisponibles.size() == 0) {
-					println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
-				}
-				
-				else { // Muestro las sedes disponibles para entrenar esa rutina
-					println("Sedes disponibles para entrenar:");
-					for (int i = 1; i <= sedesDisponibles.size(); i++) {
-						println(i +": " + sedesDisponibles.get(i-1).getSede());
-					}
-					print("Ingrese el número de la sede en la que desea entrenar: ");
-					byte opcSede = readByte();
+				else { // Selecciona la intensidad del entrenamiento y el horario de reserva del Entrenador en esta Sede seleccionada.
+					Gimnasio sedeGimnasio = sedesDisponibles.get(opcSede-1);
+					println("Sede seleccionada: " + sedeGimnasio.toString());
 					
-					if (opcSede <= 0 || opcSede > sedesDisponibles.size()) {
-						println("Opción incorrecta");
+					print("Seleccione la intensidad del entrenamiento (PRINCIPIANTE/INTERMEDIO/AVANZADO): ");
+					String intensidad = readString();					
+					
+					if (!intensidad.equalsIgnoreCase("PRINCIPIANTE") && !intensidad.equalsIgnoreCase("INTERMEDIO") 
+							&& !intensidad.equalsIgnoreCase("AVANZADO")) {
+						println("Intensidad Incorrecta. Seleccione PRINCIPIANTE/INTERMEDIO/AVANZADO");
+						System.exit(0);
 					}
-					else { // Selecciona la intensidad del entrenamiento y el horario de reserva del Entrenador en esta Sede seleccionada.
-						Gimnasio sedeGimnasio = sedesDisponibles.get(opcSede-1);
-						println("Sede seleccionada: " + sedeGimnasio.toString());
-						
-						print("Seleccione la intensidad del entrenamiento (PRINCIPIANTE/INTERMEDIO/AVANZADO): ");
-						String intensidad = readString();					
-						
-						if (!intensidad.equalsIgnoreCase("PRINCIPIANTE") && !intensidad.equalsIgnoreCase("INTERMEDIO") 
-								&& !intensidad.equalsIgnoreCase("AVANZADO")) {
-							println("Intensidad Incorrecta. Seleccione PRINCIPIANTE/INTERMEDIO/AVANZADO");
-							System.exit(0);
-						}
-						
-						print("Seleccione el horario en el que asistirá (MAÑANA/TARDE): ");
-						String horarioAsistencia = readString();
+					
+					print("Seleccione el horario en el que asistirá (MAÑANA/TARDE): ");
+					String horarioAsistencia = readString();
 
-						if (!horarioAsistencia.equalsIgnoreCase("MAÑANA") && !horarioAsistencia.equalsIgnoreCase("TARDE")) {
-							println("Horario Incorrecto. Seleccione MAÑANA/TARDE");
-							System.exit(0);
-						}
-						
-						ArrayList<Entrenador> entrenadoresSede = sedeGimnasio.getListaEntrenadores(); // Filtrar sobre esta lista.
-						ArrayList<Entrenador> entrenadoresDisponibles = new ArrayList<>(); // Contiene los entrenadores adecuados.
-						
-						for (Entrenador e : entrenadoresSede) { // Filtra sobre los entrenadores y llena la lista de objetos.
-							if (!e.getDisponibilidad().equalsIgnoreCase("NO DISPONIBLE")) {
-								Entrenador entrenadorDisponible = e.entrenadoresDisponibles(horarioAsistencia, intensidad); // SEGUNDO MÉTODO
-								
-								if (entrenadorDisponible != null) {
-									entrenadoresDisponibles.add(entrenadorDisponible);
-								}
+					if (!horarioAsistencia.equalsIgnoreCase("MAÑANA") && !horarioAsistencia.equalsIgnoreCase("TARDE")) {
+						println("Horario Incorrecto. Seleccione MAÑANA/TARDE");
+						System.exit(0);
+					}
+					
+					ArrayList<Entrenador> entrenadoresSede = sedeGimnasio.getListaEntrenadores(); // Filtrar sobre esta lista.
+					ArrayList<Entrenador> entrenadoresDisponibles = new ArrayList<>(); // Contiene los entrenadores adecuados.
+					
+					for (Entrenador e : entrenadoresSede) { // Filtra sobre los entrenadores y llena la lista de objetos.
+						if (!e.getDisponibilidad().equalsIgnoreCase("NO DISPONIBLE")) {
+							Entrenador entrenadorDisponible = e.entrenadoresDisponibles(horarioAsistencia, intensidad); // SEGUNDO MÉTODO
+							
+							if (entrenadorDisponible != null) {
+								entrenadoresDisponibles.add(entrenadorDisponible);
 							}
 						}
+					}
+					
+					if (entrenadoresDisponibles.size() == 0) {
+						println("No hay entrenadores disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
+					}
+					else {
+					println("Entrenadores Disponibles: ");
+					for (int i=1; i<=entrenadoresDisponibles.size(); i++) {
+						println(i + ". "+ entrenadoresDisponibles.get(i-1).getNombre());
+					}
+					
+					print("Seleccione el entrenador deseado: ");
+					byte opcionEntrenador = readByte();
+					
+					if (opcionEntrenador <= 0 || opcionEntrenador > entrenadoresDisponibles.size()) 
+						println("Opción incorrecta");
+					
+					else { // Se pide seleccione uno de los adecuados.
+						Entrenador entrenadorElegido = entrenadoresDisponibles.get(opcionEntrenador-1);
+						print("Entrenador seleccionado: " + entrenadorElegido.getNombre());
 						
-						if (entrenadoresDisponibles.size() == 0) {
-							println("No hay entrenadores disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
-						}
-						else {
-						println("Entrenadores Disponibles: ");
-						for (int i=1; i<=entrenadoresDisponibles.size(); i++) {
-							println(i + ". "+ entrenadoresDisponibles.get(i-1).getNombre());
-						}
-						
-						print("Seleccione el entrenador deseado: ");
-						byte opcionEntrenador = readByte();
-						
-						if (opcionEntrenador <= 0 || opcionEntrenador > entrenadoresDisponibles.size()) 
-							println("Opción incorrecta");
-						
-						else { // Se pide seleccione uno de los adecuados.
-							Entrenador entrenadorElegido = entrenadoresDisponibles.get(opcionEntrenador-1);
-							print("Entrenador seleccionado: " + entrenadorElegido.getNombre());
-							
-							miCliente.asignarEntrenador(entrenadorElegido); // TERCER MÉTODO
+						miCliente.asignarEntrenador(entrenadorElegido); // TERCER MÉTODO
 						}
 					}		
 				}
@@ -280,23 +250,7 @@ public class Main {
 		}
 	}
 	
-	static void recomendarPlanAlimentacion() { //Se va a recomendar un plan de alimentacion
-		print("Ingrese su identificación: ");
-		int ident = readInt();
-		Cliente miCliente = null;
-		
-		for (Cliente c : clientes) {
-			if (c.getIdentificacion() == ident) {
-				miCliente = c;
-				break;
-			}
-		}
-		
-		if (miCliente == null) {
-			println("Identificación incorrecta");
-			System.exit(0);
-		}
-		
+	static void recomendarPlanAlimentacion(Empresa empresa, Cliente miCliente) { //Se va a recomendar un plan de alimentacion		
 		// Hago la extracción de clientes similares a mi cliente actual. (PRIMER METODO EN GIMNASIO)
 		ArrayList<Cliente> clientesSimilares = miCliente.getGimnasio().clientesSimilares(miCliente);
 		

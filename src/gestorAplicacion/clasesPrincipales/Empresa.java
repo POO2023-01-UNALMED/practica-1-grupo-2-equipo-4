@@ -7,10 +7,9 @@ import java.util.List;
 
 import baseDatos.Deserializador;
 import gestorAplicacion.clasesHerencia.Movimiento;
-
 import java.util.Iterator;
 
-public class Empresa implements Serializable{
+public class Empresa implements Serializable {
   
     private static final long serialVersionUID = 1L;
 
@@ -188,15 +187,15 @@ public class Empresa implements Serializable{
 
     // metodos practicos
 
-    public void asignEntrenadorACliente(Cliente cliente, Entrenador entrenador){
-        cliente.setEntrenador(entrenador);
-    }
-    
-    public void asignPlanAlimentacionACliente(Cliente cliente, PlanAlimentacion planAlimentacion){
-        cliente.set(planAlimentacion);
-    }
-
-    public void asignPlanEjercicioACliente(Cliente cliente, PlanEjercicio planEjercicio){
-        cliente.setPlanEjercicio(planEjercicio);
-    }
+//    public void asignEntrenadorACliente(Cliente cliente, Entrenador entrenador){
+//        cliente.setEntrenador(entrenador);
+//    }
+//    
+//    public void asignPlanAlimentacionACliente(Cliente cliente, PlanAlimentacion planAlimentacion){
+//        cliente.set(planAlimentacion);
+//    }
+//
+//    public void asignPlanEjercicioACliente(Cliente cliente, PlanEjercicio planEjercicio){
+//        cliente.setPlanEjercicio(planEjercicio);
+//    }
 }

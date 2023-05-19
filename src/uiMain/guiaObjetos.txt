@@ -1,0 +1,28 @@
+Orden de creación cantidad y requisitos
+
+Gimansio
+(10 objetos)
+
+Gimnasio(String nombre, String ciudad, String sede, boolean abierto)
+
+Gimnasios en Medellín (5) y en Bogotá (5)
+
+De los 5 en Medellín, (3) se llaman igual.
+De los 5 en Bogotá, (4) se llaman igual.
+
+En Medellín 5 sedes distintas.
+En Bogotá 5 sedes distintas.
+
+Los gimnasios tendran listas de maquinas.  
+
+
+Alimento 
+(51 objetos)
+
+(String nombre, double calorias, double proteinas, double carbohidratos, double grasas, Alergeno alergeno)
+
+
+Alimento 
+(51 objetos)
+
+
