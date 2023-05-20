@@ -1,150 +1,141 @@
 package uiMain;
 import gestorAplicacion.clasesEnum.*;
-import gestorAplicacion.clasesHerencia.*;
-import baseDatos.Serializador;
+//import gestorAplicacion.clasesHerencia.*;
 import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
 import java.util.HashMap;
+//import baseDatos.EscritorLector;
 
 public class Main {
 	// Se crea el escaner de inputs
 	static Scanner sc = new Scanner(System.in);
-	static long readLong(){
-		return sc.nextLong();
-	}
-	static String readln(){
-		sc.nextLine();
-		return sc.nextLine();
-	}
 	// Se crean espacios para los objetos de nuestras clases
+	static ArrayList<Alimento> alimentos = new ArrayList<Alimento>();
+	static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+	static ArrayList<Comida> comidas = new ArrayList<Comida>();
+	static ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
+	static ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
+	static ArrayList<Gimnasio> gimnasios = new ArrayList<Gimnasio>();
+	static ArrayList<Maquina> maquinas = new ArrayList<Maquina>();
+	static ArrayList<PlanAlimentacion> planesAlimentacion = new ArrayList<PlanAlimentacion>();
+	static ArrayList<PlanEjercicio> planesEjercicio = new ArrayList<PlanEjercicio>();
+	static ArrayList<Rutina> rutinas = new ArrayList<Rutina>();
+	
+	static {
+		// ¿Cómo cargamos los objetos del EscritorLector?
+		// Discutir con Jacobo
+        // Orden de creación F1: Gimnasio, Entrenador, Cliente, Maquina, Movimiento, Ejercicio.
+		// Orden de creación F2: Gimnasio, Entrenador, Cliente, Alimento, Comida, PlanAlimentacion.
+		
+		Gimnasio g1 = new Gimnasio("Golds", "Med", "Robledo", true); // abierto
+		
+		gimnasios.add(g1);
+		// Clientes Similares. Sexo, PreferenciaAlim, Objetivo. Rangos Altura, peso, Edad
+		
+		Cliente c1 = new Cliente("Platz", g1, 777, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c2 = new Cliente("Arnold", g1, 778, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c3 = new Cliente("Max", g1, 779, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c4 = new Cliente("Tren", g1, 780, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		Cliente c5 = new Cliente("Jeff", g1, 781, 180, 68, "H", 18, null, PreferenciaAlimenticia.Vegano, NivelCliente.PRINCIPIANTE, ObjetivoCliente.BAJARPESO);
+		
+		clientes.add(c1); clientes.add(c2); clientes.add(c3); clientes.add(c4); clientes.add(c5);
+		
+		Alimento alimento1 = new Alimento("Manzana", 50, 0.5, 13, 0.4, null);
+		Alimento alimento2 = new Alimento("Lechuga", 5, 0.5, 1, 0.1, null);
+		Alimento alimento3 = new Alimento("Pollo", 150, 25, 0, 5, null);
+		Alimento alimento4 = new Alimento("Arroz", 200, 4, 45, 1, null);
+		Alimento alimento5 = new Alimento("Pescado", 120, 20, 0, 3, null);
+		Alimento alimento6 = new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null);
+		Alimento alimento7 = new Alimento("Ternera", 250, 26, 0, 17, null);
+		Alimento alimento8 = new Alimento("Camarones", 10, 1, 1, 1, Alergeno.MARISCO);
+		
+		Comida comida4 = new Comida("Comida 4", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+		Comida comida5 = new Comida("Comida 5", new ArrayList<>(Arrays.asList(alimento8)), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+		
+		// Creación de las listas de alimentos
+		ArrayList<Alimento> listaAlimentos1 = new ArrayList<>();
+		ArrayList<Alimento> listaAlimentos2 = new ArrayList<>();
+		ArrayList<Alimento> listaAlimentos3 = new ArrayList<>();
+
+		// Agregar los alimentos a las listas correspondientes
+		listaAlimentos1.add(alimento1);
+		listaAlimentos1.add(alimento2);
+		listaAlimentos1.add(alimento3);
+
+		listaAlimentos2.add(alimento4);
+		listaAlimentos2.add(alimento5);
+		listaAlimentos2.add(alimento6);
+
+		listaAlimentos3.add(alimento7);
+		
+		for (Cliente c : clientes) { // Para cada cliente creo un plan
+		    PlanAlimentacion pc1 = new PlanAlimentacion("Plan Cliente " + c.getNombre(), 3);
+
+		    // Creación del plan semanal
+		    HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<>();
+		    
+		    if (c.getNombre().equals("Max") || c.getNombre().equals("Tren")) {
+		    	ArrayList<Comida> comidasDia = planSemanal.get(DiaSemana.LUNES); // Obtén las comidas del día LUNES
+		    	if (comidasDia != null) {
+		            comidasDia.add(comida4); // Agrega la nueva comida con alérgeno MARISCO
+		            comidasDia.add(comida5); // Agrega otra comida con alérgeno MARISCO
+		        }
+		    } 
+		    
+		    for (DiaSemana dia : DiaSemana.values()) {
+		        ArrayList<Comida> comidasDia = new ArrayList<>();
+
+		        // Lógica para crear comidas diferentes según el día de la semana
+		        // Aquí puedes implementar tu propia lógica o crear nuevas instancias de Comida según corresponda
+
+		        if (dia == DiaSemana.LUNES || dia == DiaSemana.MIERCOLES || dia == DiaSemana.VIERNES) {
+		            Comida comida1 = new Comida("Comida 1", new ArrayList<>(Arrays.asList(
+		                new Alimento("Manzana", 50, 0.5, 13, 0.4, null),
+		                new Alimento("Lechuga", 5, 0.5, 1, 0.1, null),
+		                new Alimento("Pollo", 150, 25, 0, 5, null)
+		            )), TipoComida.Desayuno, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+
+		            comidasDia.add(comida1);
+		        } else if (dia == DiaSemana.MARTES || dia == DiaSemana.JUEVES) {
+		            Comida comida2 = new Comida("Comida 2", new ArrayList<>(Arrays.asList(
+		                new Alimento("Arroz", 200, 4, 45, 1, null),
+		                new Alimento("Pescado", 120, 20, 0, 3, null),
+		                new Alimento("Zanahoria", 35, 0.6, 8, 0.2, null)
+		            )), TipoComida.Almuerzo, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+
+		            comidasDia.add(comida2);
+		        } else if (dia == DiaSemana.SABADO || dia == DiaSemana.DOMINGO) {
+		            Comida comida3 = new Comida("Comida 3", new ArrayList<>(Arrays.asList(
+		                new Alimento("Ternera", 250, 26, 0, 17, null)
+		            )), TipoComida.Cena, PreferenciaAlimenticia.Vegano, ObjetivoCliente.BAJARPESO);
+
+		            comidasDia.add(comida3);
+		        }
+
+		        // Agregar el ArrayList comidasDia al HashMap planSemanal con el día como clave
+		        planSemanal.put(dia, comidasDia);
+		    }
+
+		    pc1.setPlanSemanal(planSemanal);
+		    c.planAlimentacion = pc1;
+		}
+		
+		// Hacer algunas comidas alérgicas.
+		
+		
+	}
 	
 	public static void main(String[] args) {
-		// 1. Objetos. Revisar Requisitos en guiaObjetos.txt dentro de uiMain.
-		
-		
-		//Alimento
-		Alimento a1 = new Alimento("Manzana", 52, 0.3, 14, 0.2, null);
-        Alimento a2 = new Alimento("Banana", 96, 1.2, 23, 0.2, null);
-        Alimento a3 = new Alimento("Zanahoria", 41, 0.9, 10, 0.2, null);
-        Alimento a4 = new Alimento("Tomate", 18, 0.9, 3.9, 0.2, null);
-        Alimento a5 = new Alimento("Papa", 77, 2, 17, 0.1, null);
-        Alimento a6 = new Alimento("Lechuga", 5, 0.5, 1, 0.1, null);
-        Alimento a7 = new Alimento("Espárragos", 20, 2.2, 3.7, 0.2, null);
-        Alimento a8 = new Alimento("Brócoli", 55, 3.7, 11, 0.6, null);
-        Alimento a9 = new Alimento("Cebolla", 40, 1.1, 9.3, 0.1, null);
-        Alimento a10 = new Alimento("Arroz", 130, 2.7, 28, 0.3, null);
-        Alimento a11 = new Alimento("Lentejas", 116, 9, 20, 0.4, null);
-        Alimento a12 = new Alimento("Garbanzos", 164, 8.9, 27, 2.6, null);
-        
-        Alimento a13 = new Alimento("Leche", 60, 3.3, 4.8, 3.2, Alergeno.LACTOSA);
-        Alimento a14 = new Alimento("Huevo", 155, 12.6, 0.6, 11, Alergeno.HUEVO);
-        Alimento a15 = new Alimento("Pollo", 165, 31, 0, 3.6, null);
-        
-        Alimento a16 = new Alimento("Carne de res", 250, 26, 0, 17, null);
-        Alimento a17 = new Alimento("Pescado", 206, 22, 0, 13, null);
-        Alimento a18 = new Alimento("Atún", 184, 25, 0, 8, null);
-        
-        Alimento a19 = new Alimento("Camarones", 85, 18, 0.2, 1.2, Alergeno.MARISCO);
-        Alimento a20 = new Alimento("Queso", 402, 25, 1.3, 33, Alergeno.LACTOSA);
-        Alimento a21 = new Alimento("Pan", 265, 9, 49, 3.1, Alergeno.GLUTEN);
-        Alimento a22 = new Alimento("Mantequilla", 717, 0.9, 0.1, 81, Alergeno.LACTOSA);
-        Alimento a23 = new Alimento("Nueces", 654, 15, 13, 65, Alergeno.FRUTOSECO);
-        Alimento a24 = new Alimento("Fresas", 32, 0.7, 7.7, 0.3, null);
-        Alimento a25 = new Alimento("Sandía", 30, 0.6, 7.6, 0.2, null);
-        Alimento a26 = new Alimento("Naranja", 43, 0.9, 9, 0.1, null);
-        Alimento a27 = new Alimento("Uva", 69, 0.7, 18, 0.2, null);
-        Alimento a28 = new Alimento("Kiwi", 41, 1.1, 9, 0.5, null);
-        Alimento a29 = new Alimento("Plátano", 96, 1.2, 23, 0.2, null);
-        Alimento a30 = new Alimento("Cereza", 50, 1, 12, 0.3, null);
-        Alimento a31 = new Alimento("Pera", 57, 0.4, 15, 0.2, null);
-        Alimento a32 = new Alimento("Melón", 34, 0.8, 8.6, 0.2, null);
-        Alimento a33 = new Alimento("Piña", 50, 0.5, 13, 0.1, null);
-        Alimento a34 = new Alimento("Mango", 60, 0.8, 14, 0.4, null);
-        Alimento a35 = new Alimento("Papaya", 43, 0.5, 11, 0.4, null);
-        Alimento a36 = new Alimento("Calabaza", 26, 1, 6.5, 0.1, null);
-        Alimento a37 = new Alimento("Remolacha", 43, 1.6, 10, 0.1, null);
-        Alimento a38 = new Alimento("Espinaca", 23, 2.9, 3.6, 0.4, null);
-        Alimento a39 = new Alimento("Coliflor", 25, 1.9, 5, 0.3, null);
-        Alimento a40 = new Alimento("Aceite de oliva", 884, 0, 0, 100, null);
-        Alimento a41 = new Alimento("Azúcar", 387, 0, 100, 0, null);
-        Alimento a42 = new Alimento("Sal", 0, 0, 0, 0, null);
-        Alimento a43 = new Alimento("Vinagre", 18, 0, 0.2, 0, null);
-        Alimento a44 = new Alimento("Canela", 247, 4, 81, 3.2, null);
-        Alimento a45 = new Alimento("Chocolate", 546, 7.8, 57, 31, null);
-        Alimento a46 = new Alimento("Miel", 304, 0.3, 82, 0, null);
-        Alimento a47 = new Alimento("Avena", 389, 16.9, 66, 6.9, null);
-        Alimento a48 = new Alimento("Yogur", 61, 3.5, 4.7, 3.3, Alergeno.LACTOSA);
-        Alimento a49 = new Alimento("Aceitunas", 145, 1.2, 3.8, 15, null);
-        Alimento a50 = new Alimento("Mermelada", 250, 0.4, 63, 0.2, null);
-        Alimento a51 = new Alimento("Avellanas", 628, 15, 17, 61, Alergeno.FRUTOSECO);
-		
-		// Comida
-        
-        Comida c1 = new Comida("Desayuno saludable 1", obtenerListaAlimentosDesayuno(a1, a2, a3), TipoComida.DESAYUNO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.MANTENER);
-        Comida c2 = new Comida("Desayuno saludable 2", obtenerListaAlimentosDesayuno(a1, a2, a3), TipoComida.DESAYUNO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.AUMENTAR);
-        Comida c3 = new Comida("Desayuno saludable 3", obtenerListaAlimentosDesayuno(a1, a2, a3), TipoComida.DESAYUNO, PreferenciaAlimenticia.VEGETARIANO, ObjetivoCliente.BAJARPESO);
-        Comida c4 = new Comida("Desayuno saludable 4", obtenerListaAlimentosDesayuno(a1, a2, a3), TipoComida.DESAYUNO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.DEFINIR);
-        Comida c5 = new Comida("Desayuno saludable 5", obtenerListaAlimentosDesayuno(a1, a2, a3), TipoComida.DESAYUNO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.ACONDICIONAR);
-        Comida c6 = new Comida("Desayuno saludable 6", obtenerListaAlimentosDesayuno(a1, a2, a3), TipoComida.DESAYUNO, PreferenciaAlimenticia.VEGANO, ObjetivoCliente.MANTENER);
-
-        Comida c7 = new Comida("Almuerzo equilibrado 1", obtenerListaAlimentosAlmuerzo(a1, a2, a3), TipoComida.ALMUERZO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.MANTENER);
-        Comida c8 = new Comida("Almuerzo equilibrado 2", obtenerListaAlimentosAlmuerzo(a1, a2, a3), TipoComida.ALMUERZO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.AUMENTAR);
-        Comida c9 = new Comida("Almuerzo equilibrado 3", obtenerListaAlimentosAlmuerzo(a1, a2, a3), TipoComida.ALMUERZO, PreferenciaAlimenticia.VEGETARIANO, ObjetivoCliente.BAJARPESO);
-        Comida c10 = new Comida("Almuerzo equilibrado 4", obtenerListaAlimentosAlmuerzo(a1, a2, a3), TipoComida.ALMUERZO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.DEFINIR);
-        Comida c11 = new Comida("Almuerzo equilibrado 5", obtenerListaAlimentosAlmuerzo(a1, a2, a3), TipoComida.ALMUERZO, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.ACONDICIONAR);
-        Comida c12 = new Comida("Almuerzo equilibrado 6", obtenerListaAlimentosAlmuerzo(a1, a2, a3), TipoComida.ALMUERZO, PreferenciaAlimenticia.VEGANO, ObjetivoCliente.MANTENER);
-
-        Comida c13 = new Comida("Cena ligera 1", obtenerListaAlimentosCena(a1, a2, a3), TipoComida.CENA, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.MANTENER);
-        Comida c14 = new Comida("Cena ligera 2", obtenerListaAlimentosCena(a1, a2, a3), TipoComida.CENA, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.AUMENTAR);
-        Comida c15 = new Comida("Cena ligera 3", obtenerListaAlimentosCena(a1, a2, a3), TipoComida.CENA, PreferenciaAlimenticia.VEGETARIANO, ObjetivoCliente.BAJARPESO);
-        Comida c16 = new Comida("Cena ligera 4", obtenerListaAlimentosCena(a1, a2, a3), TipoComida.CENA, PreferenciaAlimenticia.SINRESTRICCIONES, ObjetivoCliente.DEFINIR);
-        Comida c17 = new Comida("Cena ligera 5", obtenerListaAlimentosCena(a1, a2, a3), TipoComida.CENA, PreferenciaAlimenticia.VEGANO, ObjetivoCliente.ACONDICIONAR);
-        
-		Empresa empresa = new Empresa();
-		
-		// 1. agregarObjetos a Empresa. No necesariamente todo a la vez. Lo puedes ir creando de a poco.
-		
-		// 2. revisar que la creación de objetos sea correcta.
-		
 		byte opcion;
 		String salir = "n";
 		
-		// INICIO DE SESIÓN UTILIZANDO LA IDENTIFICACIÓN DE MI CLIENTE.
-		
-		println(">>> GIMBRO <<< \nTU ASISTENTE PERSONAL\n");
-		print(">>>INICIO DE SESION<<<\nIngrese su identificación: ");
-		
-		Cliente miCliente = null;
-
-		while (miCliente == null) {
-		    int ident = readInt();
-		    boolean clienteEncontrado = false;
-
-		    for (Cliente c : empresa.getClientes()) {
-		        if (c.getIdentificacion() == ident) {
-		            miCliente = c;
-		            clienteEncontrado = true;
-		            print("\nBienvenido. ¡Es un gusto tenerte de vuelta!");
-		            break;
-		        }
-		    }
-
-		    if (!clienteEncontrado) {
-		        println("Identificación incorrecta, no estás suscrito a nuestro gimnasio.\nVuelve a ingresar tu identificación: ");
-		    }
-		}
-		
-		
-		
 		do {
-
 			println("\n\nMENU PRINCIPAL");
 			println("1. Reservar Gimnasio");
 			println("2. Recomendación de Plan de Alimentación Semanal");
-			println("3. Recomendación de plan de ejercicio semanal");
+			println("3. Funcionalidad 3");
 			println("4. Funcionalidad 4");
 			println("5. Funcionalidad 5");
 			println("6. Salir");
@@ -154,10 +145,10 @@ public class Main {
 			
 			switch (opcion) {
 				case 1:
-					reservarGimnasio(empresa, miCliente);
+					reservarGimnasio();
 					break;
 				case 2:
-					recomendarPlanAlimentacion(empresa, miCliente);
+					recomendarPlanAlimentacion();
 					break;
 				case 3:
 					f3();
@@ -169,7 +160,6 @@ public class Main {
 					f5();
 					break;
 				case 6:
-					salirDelSistema(empresa);
 					break;
 				default:
 					println("Digitó una opción incorrecta");
@@ -184,7 +174,7 @@ public class Main {
 			}
 		} while (opcion != 6 && !salir.toLowerCase().equals("y"));
 		print("¡Gracias por usar Jimbro!");
-		sc.close();
+		sc.close();	
 	}
 	
 	
@@ -203,126 +193,137 @@ public class Main {
 	
 	private static int readInt() {int i = sc.nextInt(); return i;}
 	
-	//Salir y guardar
-	private static void salirDelSistema(Empresa empresa){
-		System.out.println("Le agradecemos por utilizar nuestros servicios/n Vuelva pronto");
-		Serializador.serializar(empresa);
-		System.exit(0);
-	}
-
 	// Funcionalidades
-	static void reservarGimnasio(Empresa empresa, Cliente miCliente) {
-		print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
-		String gimnasioDeseado = readString();
-		print("Ingrese la ciudad en la que desea entrenar: ");
-		String ciudadGimnasioDeseado = readString();
-		print("Ingrese la rutina que va a realizar: ");
-		String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
+	static void reservarGimnasio() {
+		// Ingresar la identificación del cliente y encontrar el objeto asociado
+		print("Ingrese su identificación: ");
+		int ident = readInt();
+		Cliente miCliente = null;
 		
-		// Buscar Gimnasio en Ciudad
-		Gimnasio gimnasioElegido = null;
-		for (Gimnasio g: empresa.getGimnasios()) { // Revisar igualdad de Nombre y Ciudad
-			if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
-				gimnasioElegido = g;
+		for (Cliente c : clientes) {
+			if (c.getIdentificacion() == ident) {
+				miCliente = c;
 				break;
 			}
 		}
 		
-		if (gimnasioElegido == null) {
-			println("No hay sedes disponibles");
+		if (miCliente == null) {
+			println("Identificación incorrecta");
+			System.exit(0);
 		}
-		else {
-			// Inicializar lista de maquinas necesarias para hacer la rutina
-			ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
-			// Buscar rutina deseada por el cliente por Nombre
-			Rutina rutinaBuscar = null;
-			for (Rutina rutina : empresa.getRutinas()) {
-				if (rutina.getNombre().equals(rutinaDeseada)) {
-					rutinaBuscar = rutina;
+		
+		else
+			print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
+			String gimnasioDeseado = readString();
+			print("Ingrese la ciudad en la que desea entrenar: ");
+			String ciudadGimnasioDeseado = readString();
+			print("Ingrese la rutina que va a realizar: ");
+			String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
+			
+			// Buscar Gimnasio en Ciudad
+			Gimnasio gimnasioElegido = null;
+			for (Gimnasio g: gimnasios) { // Revisar igualdad de Nombre y Ciudad
+				if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
+					gimnasioElegido = g;
 					break;
 				}
 			}
 			
-			if (rutinaBuscar == null) {
-				println("No hay gimnasios disponibles para esta rutina en " + ciudadGimnasioDeseado);
+			if (gimnasioElegido == null) {
+				println("No hay sedes disponibles");
 			}
-			else { // Quiero ver si mi gimnasio tiene las maquinas necesarias
-				for (Ejercicio e : rutinaBuscar.getEjercicios()) {
-					maquinasNecesarias.add(e.getMaquina());
+			else {
+				// Inicializar lista de maquinas necesarias para hacer la rutina
+				ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
+				// Buscar rutina deseada por el cliente por Nombre
+				Rutina rutinaBuscar = null;
+				for (Rutina rutina : rutinas) {
+					if (rutina.getNombre().equals(rutinaDeseada)) {
+						rutinaBuscar = rutina;
+						break;
+					}
 				}
-			}
-			
-			ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
-			
-			if (sedesDisponibles.size() == 0) {
-				println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
-			}
-			
-			else { // Muestro las sedes disponibles para entrenar esa rutina
-				println("Sedes disponibles para entrenar:");
-				for (int i = 1; i <= sedesDisponibles.size(); i++) {
-					println(i +": " + sedesDisponibles.get(i-1).getSede());
-				}
-				print("Ingrese el número de la sede en la que desea entrenar: ");
-				byte opcSede = readByte();
 				
-				if (opcSede <= 0 || opcSede > sedesDisponibles.size()) {
-					println("Opción incorrecta");
+				if (rutinaBuscar == null) {
+					println("No hay gimnasios disponibles para esta rutina en " + ciudadGimnasioDeseado);
 				}
-				else { // Selecciona la intensidad del entrenamiento y el horario de reserva del Entrenador en esta Sede seleccionada.
-					Gimnasio sedeGimnasio = sedesDisponibles.get(opcSede-1);
-					println("Sede seleccionada: " + sedeGimnasio.toString());
-					
-					print("Seleccione la intensidad del entrenamiento (PRINCIPIANTE/INTERMEDIO/AVANZADO): ");
-					String intensidad = readString();					
-					
-					if (!intensidad.equalsIgnoreCase("PRINCIPIANTE") && !intensidad.equalsIgnoreCase("INTERMEDIO") 
-							&& !intensidad.equalsIgnoreCase("AVANZADO")) {
-						println("Intensidad Incorrecta. Seleccione PRINCIPIANTE/INTERMEDIO/AVANZADO");
-						System.exit(0);
+				else { // Quiero ver si mi gimnasio tiene las maquinas necesarias
+					for (Ejercicio e : rutinaBuscar.getEjercicios()) {
+						maquinasNecesarias.add(e.getMaquina());
 					}
+				}
+				
+				ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
+				
+				if (sedesDisponibles.size() == 0) {
+					println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
+				}
+				
+				else { // Muestro las sedes disponibles para entrenar esa rutina
+					println("Sedes disponibles para entrenar:");
+					for (int i = 1; i <= sedesDisponibles.size(); i++) {
+						println(i +": " + sedesDisponibles.get(i-1).getSede());
+					}
+					print("Ingrese el número de la sede en la que desea entrenar: ");
+					byte opcSede = readByte();
 					
-					print("Seleccione el horario en el que asistirá (MAÑANA/TARDE): ");
-					String horarioAsistencia = readString();
+					if (opcSede <= 0 || opcSede > sedesDisponibles.size()) {
+						println("Opción incorrecta");
+					}
+					else { // Selecciona la intensidad del entrenamiento y el horario de reserva del Entrenador en esta Sede seleccionada.
+						Gimnasio sedeGimnasio = sedesDisponibles.get(opcSede-1);
+						println("Sede seleccionada: " + sedeGimnasio.toString());
+						
+						print("Seleccione la intensidad del entrenamiento (PRINCIPIANTE/INTERMEDIO/AVANZADO): ");
+						String intensidad = readString();					
+						
+						if (!intensidad.equalsIgnoreCase("PRINCIPIANTE") && !intensidad.equalsIgnoreCase("INTERMEDIO") 
+								&& !intensidad.equalsIgnoreCase("AVANZADO")) {
+							println("Intensidad Incorrecta. Seleccione PRINCIPIANTE/INTERMEDIO/AVANZADO");
+							System.exit(0);
+						}
+						
+						print("Seleccione el horario en el que asistirá (MAÑANA/TARDE): ");
+						String horarioAsistencia = readString();
 
-					if (!horarioAsistencia.equalsIgnoreCase("MAÑANA") && !horarioAsistencia.equalsIgnoreCase("TARDE")) {
-						println("Horario Incorrecto. Seleccione MAÑANA/TARDE");
-						System.exit(0);
-					}
-					
-					ArrayList<Entrenador> entrenadoresSede = sedeGimnasio.getListaEntrenadores(); // Filtrar sobre esta lista.
-					ArrayList<Entrenador> entrenadoresDisponibles = new ArrayList<>(); // Contiene los entrenadores adecuados.
-					
-					for (Entrenador e : entrenadoresSede) { // Filtra sobre los entrenadores y llena la lista de objetos.
-						if (!e.getDisponibilidad().equalsIgnoreCase("NO DISPONIBLE")) {
-							Entrenador entrenadorDisponible = e.entrenadoresDisponibles(horarioAsistencia, intensidad); // SEGUNDO MÉTODO
-							
-							if (entrenadorDisponible != null) {
-								entrenadoresDisponibles.add(entrenadorDisponible);
+						if (!horarioAsistencia.equalsIgnoreCase("MAÑANA") && !horarioAsistencia.equalsIgnoreCase("TARDE")) {
+							println("Horario Incorrecto. Seleccione MAÑANA/TARDE");
+							System.exit(0);
+						}
+						
+						ArrayList<Entrenador> entrenadoresSede = sedeGimnasio.getListaEntrenadores(); // Filtrar sobre esta lista.
+						ArrayList<Entrenador> entrenadoresDisponibles = new ArrayList<>(); // Contiene los entrenadores adecuados.
+						
+						for (Entrenador e : entrenadoresSede) { // Filtra sobre los entrenadores y llena la lista de objetos.
+							if (!e.getDisponibilidad().equalsIgnoreCase("NO DISPONIBLE")) {
+								Entrenador entrenadorDisponible = e.entrenadoresDisponibles(horarioAsistencia, intensidad); // SEGUNDO MÉTODO
+								
+								if (entrenadorDisponible != null) {
+									entrenadoresDisponibles.add(entrenadorDisponible);
+								}
 							}
 						}
-					}
-					
-					if (entrenadoresDisponibles.size() == 0) {
-						println("No hay entrenadores disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
-					}
-					else {
-					println("Entrenadores Disponibles: ");
-					for (int i=1; i<=entrenadoresDisponibles.size(); i++) {
-						println(i + ". "+ entrenadoresDisponibles.get(i-1).getNombre());
-					}
-					
-					print("Seleccione el entrenador deseado: ");
-					byte opcionEntrenador = readByte();
-					
-					if (opcionEntrenador <= 0 || opcionEntrenador > entrenadoresDisponibles.size()) 
-						println("Opción incorrecta");
-					
-					else { // Se pide seleccione uno de los adecuados.
-						Entrenador entrenadorElegido = entrenadoresDisponibles.get(opcionEntrenador-1);
-						print("Entrenador seleccionado: " + entrenadorElegido.getNombre());
 						
-						miCliente.asignarEntrenador(entrenadorElegido); // TERCER MÉTODO
+						if (entrenadoresDisponibles.size() == 0) {
+							println("No hay entrenadores disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
+						}
+						else {
+						println("Entrenadores Disponibles: ");
+						for (int i=1; i<=entrenadoresDisponibles.size(); i++) {
+							println(i + ". "+ entrenadoresDisponibles.get(i-1).getNombre());
+						}
+						
+						print("Seleccione el entrenador deseado: ");
+						byte opcionEntrenador = readByte();
+						
+						if (opcionEntrenador <= 0 || opcionEntrenador > entrenadoresDisponibles.size()) 
+							println("Opción incorrecta");
+						
+						else { // Se pide seleccione uno de los adecuados.
+							Entrenador entrenadorElegido = entrenadoresDisponibles.get(opcionEntrenador-1);
+							print("Entrenador seleccionado: " + entrenadorElegido.getNombre());
+							
+							miCliente.asignarEntrenador(entrenadorElegido); // TERCER MÉTODO
 						}
 					}		
 				}
@@ -330,7 +331,23 @@ public class Main {
 		}
 	}
 	
-	static void recomendarPlanAlimentacion(Empresa empresa, Cliente miCliente) { //Se va a recomendar un plan de alimentacion		
+	static void recomendarPlanAlimentacion() { //Se va a recomendar un plan de alimentacion
+		print("Ingrese su identificación: ");
+		int ident = readInt();
+		Cliente miCliente = null;
+		
+		for (Cliente c : clientes) {
+			if (c.getIdentificacion() == ident) {
+				miCliente = c;
+				break;
+			}
+		}
+		
+		if (miCliente == null) {
+			println("Identificación incorrecta");
+			System.exit(0);
+		}
+		
 		// Hago la extracción de clientes similares a mi cliente actual. (PRIMER METODO EN GIMNASIO)
 		ArrayList<Cliente> clientesSimilares = miCliente.getGimnasio().clientesSimilares(miCliente);
 		
@@ -461,7 +478,7 @@ public class Main {
 	}
 	
 	static void f3() {
-		
+		System.out.println("*Logica funcionalidad 3*");
 	}
 	
 	static void f4() {
