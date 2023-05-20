@@ -408,7 +408,7 @@ public class Main {
         PlanAlimentacion p9 = new PlanAlimentacion("Plan completo 7", obtenerPlanAlim(co4, co10, co17, co3, co11, co17));
         PlanAlimentacion p10 = new PlanAlimentacion("Plan completo 8", obtenerPlanAlim(co5, co9, co13, co2, co7, co13));
         
-        PlanAlimentacion[] misPlanesAlimentación = {p1, p2, p3, p4, p5, p6, p7, p8, p9, p10};
+        PlanAlimentacion[] misPlanesAlimentacion = {p1, p2, p3, p4, p5, p6, p7, p8, p9, p10};
         
 
 		Empresa empresa = new Empresa();
@@ -419,12 +419,14 @@ public class Main {
 		
 		empresa.agregarObjetosGimnasio(misGimnasios); 
 		empresa.agregarObjetosEntrenador(misEntrenadores); 
-		empresa.agregarObjetosCliente(misClientes); 
+		empresa.agregarObjetosCliente(misClientes);
+		empresa.agregarObjetosMaquina(misMaquinas);
 		empresa.agregarObjetosMovimiento(misMovimientos);
 		empresa.agregarObjetosEjercicio(misEjercicios);
 		empresa.agregarObjetosRutina(misRutinas);
 		empresa.agregarObjetosAlimentos(misAlimentos);
 		empresa.agregarObjetosComida(misComidas);
+		empresa.agregarObjetosPlanAlimentacion(misPlanesAlimentacion);
 		
 		
 		byte opcion;
