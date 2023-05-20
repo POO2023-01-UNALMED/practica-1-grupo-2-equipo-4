@@ -19,6 +19,12 @@ public class PlanAlimentacion implements Plan, Serializable {
         this.planSemanal = new HashMap<>();
     }
 
+    public PlanAlimentacion(String nombrePlan, HashMap<DiaSemana, ArrayList<Comida>> planSemanal) {
+    	this.nombrePlan = nombrePlan;
+    	this.numComidas = 3;
+        this.planSemanal = planSemanal;
+    }
+    
     public String getNombrePlan() {
         return nombrePlan;
     }

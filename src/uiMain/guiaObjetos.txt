@@ -207,11 +207,6 @@ Utilizar los alimentos de antes para crear las comidas.
 1. Que algunas comidas tengan alimentos con Alergenos. No necesariamente todas.
 
 
-Plan Ejercicio
-(10)
-
-Plan planEje1 = Plan.
-
 Plan Alimentacion
 (10)
 
