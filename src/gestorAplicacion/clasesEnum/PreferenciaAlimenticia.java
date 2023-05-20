@@ -1,8 +1,8 @@
 package gestorAplicacion.clasesEnum;
 
 public enum PreferenciaAlimenticia {
-    Vegetariano,
-    Vegano,
-    SinRestricciones
+    VEGETARIANO,
+    VEGANO,
+    SINRESTRICCIONES
 }
 

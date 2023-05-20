@@ -28,7 +28,7 @@ Entrenador
 
 Constructor
 (String nombre, Gimnasio gimnasio, int identificacion, 
-String formacion, Cliente cliente, NivelCliente nivelEntrenador, 
+String formacion, Cliente cliente, NivelCliente.nivelEntrenador, 
 String disponibilidad)
 
 Entrenadores de distintos NivelCliente. Pueden ser varios del mismo nivel dentro del mismo gimnasio.
