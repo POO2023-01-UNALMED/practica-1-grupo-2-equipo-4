@@ -2,7 +2,6 @@ Orden de creación, cantidad y requisitos
 ------------
 ORDEN:
 GIMNASIO, ENTRENADOR, CLIENTE, MAQUINA, MOVIMIENTO, EJERCICIO, RUTINA.
-ALIMENTO, COMIDA.
 
 ------- Jacobo -----------
 PLAN ALIMENTACION.
@@ -172,12 +171,11 @@ r3.add(eje7); r3.add(eje8); r3.add(eje9);
 -----------------------------------------------------------------------
 Se crean así:
 
-Rutina rut1 = new Rutina("Entrenamiento de Fit Medellin", r1, null);
-Rutina rut2 = new Rutina("Entrenamiento de Fit Bogota", r2, null);
-Rutina rut3 = new Rutina("Entrenamiento de Superfit Medellin", r3, null);
+Rutina rut1 = new Rutina("Entrenamiento de Fit Medellin", r1, null); // PRIMEROS 3 EJERCICIOS
+Rutina rut2 = new Rutina("Entrenamiento de Fit Bogota", r2, null); // 4 5 6
+Rutina rut3 = new Rutina("Entrenamiento de Superfit Medellin", r3, null); 7 8 9
 
 las demás rutinas son libres.
-
 
 Rutina rut4 = Rutina.generarRutina(TipoEjercicio, Objetivo, NivelCliente);
 
@@ -218,3 +216,6 @@ Plan Alimentacion
 Plan planAlim1 = ??
 
 
+
+
+Entrenador "MAÑANA" / "TARDE" / "NO DISPONIBLE"

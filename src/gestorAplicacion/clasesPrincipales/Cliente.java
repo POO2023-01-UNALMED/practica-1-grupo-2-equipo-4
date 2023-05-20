@@ -43,7 +43,7 @@ public class Cliente extends Persona implements Serializable {
 		listaClientes.add(this);
 	}
 	
-	public Cliente(int ident) {this("", null, ident, 1, 1, "M", 10, null, null, null, null);}
+	public Cliente(int ident) {this.identificacion = ident;}
 
 	public void setPlanEjercicio (Plan planEjercicio) {
 		this.planEjercicio = planEjercicio;

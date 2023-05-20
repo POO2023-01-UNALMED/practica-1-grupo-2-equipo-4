@@ -5,25 +5,20 @@ import java.util.*;
 
 public class Historial {
     private Cliente cliente;
-    private List<PlanEjercicio> historialPlanes;
-    private Set<Gimnasio> gimnasiosVisitados;
-    private Map<Gimnasio, Integer> visitasGimnasio;
-
+    private List<PlanEjercicio> historialPlanes = new ArrayList<>();
+    private Set<Gimnasio> gimnasiosVisitados = new HashSet<>();
+    private Map<Gimnasio, Integer> visitasGimnasio = new HashMap<>();
 
     public Historial(Cliente cliente) {
         this.cliente = cliente;
         this.historialPlanes = new ArrayList<>();
         this.gimnasiosVisitados = new HashSet<>();
         this.visitasGimnasio = new HashMap<>();
-    }
-    
+    }    
 
     public Cliente getCliente() {
         return cliente;
     }
-
-   
-    
 
     public List<PlanEjercicio> getHistorialPlanes() {
         return historialPlanes;
@@ -62,30 +57,24 @@ public class Historial {
         PlanEjercicio planRecomendado;
         HashMap<DiaSemana, Rutina> planSemanalEjercicio;
         int asistencias = vecesAsistidasAlGimnasio();
-        
+    
         // Obteniendo el objetivo y la dificultad del cliente actual.
         ObjetivoCliente objetivoActual = cliente.getObjetivoCliente();
         NivelCliente dificultadActual = cliente.getNivelCliente();
-        String intensidad;
     
         if(asistencias < 10) {
-            intensidad = "Básico";
+            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
+            planRecomendado = new PlanEjercicio("Plan Basico", planSemanalEjercicio);
         } else if(asistencias >= 10 && asistencias < 20) {
-            intensidad = "Medio";
+            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
+            planRecomendado = new PlanEjercicio("Plan Medio", planSemanalEjercicio);
         } else {
-            intensidad = "Alto";
+            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
+            planRecomendado = new PlanEjercicio("Plan Alto", planSemanalEjercicio);
         }
-        planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual, intensidad)).getPlanSemanalEjercicio();
-        planRecomendado = new PlanEjercicio("Plan " + intensidad, planSemanalEjercicio);
-        
+    
         return planRecomendado;
     }
     
     
-    
 }
-
-
-
-
-
