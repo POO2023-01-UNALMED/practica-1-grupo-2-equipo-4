@@ -2,7 +2,6 @@ Orden de creación, cantidad y requisitos
 ------------
 ORDEN:
 GIMNASIO, ENTRENADOR, CLIENTE, MAQUINA, MOVIMIENTO, EJERCICIO, RUTINA.
-ALIMENTO, COMIDA.
 
 ------- Jacobo -----------
 PLAN ALIMENTACION.
@@ -28,7 +27,7 @@ Entrenador
 
 Constructor
 (String nombre, Gimnasio gimnasio, int identificacion, 
-String formacion, Cliente cliente, NivelCliente.nivelEntrenador, 
+String formacion, Cliente cliente, NivelCliente nivelEntrenador, 
 String disponibilidad)
 
 Entrenadores de distintos NivelCliente. Pueden ser varios del mismo nivel dentro del mismo gimnasio.
@@ -172,12 +171,11 @@ r3.add(eje7); r3.add(eje8); r3.add(eje9);
 -----------------------------------------------------------------------
 Se crean así:
 
-Rutina rut1 = new Rutina("Entrenamiento de Fit Medellin", r1, null);
-Rutina rut2 = new Rutina("Entrenamiento de Fit Bogota", r2, null);
-Rutina rut3 = new Rutina("Entrenamiento de Superfit Medellin", r3, null);
+Rutina rut1 = new Rutina("Entrenamiento de Fit Medellin", r1, null); // PRIMEROS 3 EJERCICIOS
+Rutina rut2 = new Rutina("Entrenamiento de Fit Bogota", r2, null); // 4 5 6
+Rutina rut3 = new Rutina("Entrenamiento de Superfit Medellin", r3, null); 7 8 9
 
 las demás rutinas son libres.
-
 
 Rutina rut4 = Rutina.generarRutina(TipoEjercicio, Objetivo, NivelCliente);
 
@@ -207,9 +205,17 @@ Utilizar los alimentos de antes para crear las comidas.
 1. Que algunas comidas tengan alimentos con Alergenos. No necesariamente todas.
 
 
+Plan Ejercicio
+(10)
+
+Plan planEje1 = Plan.
+
 Plan Alimentacion
 (10)
 
 Plan planAlim1 = ??
 
 
+
+
+Entrenador "MAÑANA" / "TARDE" / "NO DISPONIBLE"

@@ -77,10 +77,6 @@ public class Rutina implements Serializable{
 		return nombre;}
     
     public int retNumEje() {return this.NUMEJERCIOS;}
-	public Rutina obtenerRutina(Ejercicio eje10, Ejercicio eje11, Ejercicio eje12, Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
     
     
 }
