@@ -18,6 +18,7 @@ public class Cliente extends Persona implements Serializable {
 	private ObjetivoCliente objetivoCliente;
 	public PlanAlimentacion planAlimentacion;
 	public Plan planEjercicio;
+	private Historial historialPlanes;
 	
 	public ArrayList<PlanAlimentacion> historicoPlanesAlimentacion = new ArrayList<>();
 	public ArrayList<PlanEjercicio> historicoPlanesEjercicio = new ArrayList<>();
@@ -42,7 +43,7 @@ public class Cliente extends Persona implements Serializable {
 		listaClientes.add(this);
 	}
 	
-	public Cliente() {this(null, null, 0, 0, 0, null, 0, null, null, null, null);}
+	public Cliente(int ident) {this.identificacion = ident;}
 
 	public void setPlanEjercicio (Plan planEjercicio) {
 		this.planEjercicio = planEjercicio;
@@ -117,6 +118,14 @@ public class Cliente extends Persona implements Serializable {
 		this.objetivoCliente = objetivoCliente;
 	}
 	
+	public Historial getHistorialPlanes() {
+		return historialPlanes;
+	}
+
+	public void setHistorialPlanes(Historial historialPlanes) {
+		this.historialPlanes = historialPlanes;
+	}
+
 	public String toString() {return "Nombre: " + this.getNombre()
 	+ "Gimnasio: " + this.gimnasio.toString()
 	+ "Nivel: " + this.getNivelCliente()

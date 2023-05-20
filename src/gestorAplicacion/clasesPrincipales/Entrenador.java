@@ -27,9 +27,6 @@ public class Entrenador extends Persona implements Serializable {
 		listaEntrenadores.add(this);
 	}
 	
-	public Entrenador() {this(null, null, 0, null, null, null, null);}
-	
-	
 	public String getFormacion() {
 		return formacion;
 	}
