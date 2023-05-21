@@ -74,5 +74,10 @@ public class PlanEjercicio implements Plan, Serializable {
     public String getNombre(){
         return nombre;
     }
+	@Override
+	public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad, String nombrePlan) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

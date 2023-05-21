@@ -122,11 +122,4 @@ public class PlanAlimentacion implements Plan, Serializable {
 
         return planFormateado;
     }
-
-    @Override
-    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crearPLanSemanal'");
-    }
-    
 }
