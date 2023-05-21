@@ -122,5 +122,4 @@ public class PlanAlimentacion implements Plan, Serializable {
 
         return planFormateado;
     }
-
 }

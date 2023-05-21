@@ -6,6 +6,7 @@ import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 import java.util.HashMap;
 
 public class Main {
@@ -21,8 +22,8 @@ public class Main {
 	// Se crean espacios para los objetos de nuestras clases
 	
 	public static void main(String[] args) {
-		Empresa empresa = new Empresa();		
-		
+    Empresa empresa = new Empresa();
+
 		byte opcion;
 		String salir = "n";
 		
@@ -76,6 +77,7 @@ public class Main {
 		sc.close();
 	}
 	
+
 	// Funciones útiles
 	private static void print(Object string) {
 		System.out.print(string);
