@@ -7,8 +7,6 @@ import java.util.List;
 
 import baseDatos.Deserializador;
 import gestorAplicacion.clasesHerencia.Movimiento;
-import gestorAplicacion.clasesHerencia.Plan;
-
 import java.util.Iterator;
 
 public class Empresa implements Serializable {
@@ -111,8 +109,8 @@ public class Empresa implements Serializable {
         this.rutinas = rutinas;
     }
     
-    public void setPlanesEjercicio (List<PlanEjercicio> list) {
-        this.planesEjercicio = list;
+    public void setPlanesEjercicio (List<PlanEjercicio> planesEjercicio) {
+        this.planesEjercicio = planesEjercicio;
     }
     
     public void setComidas (List<Comida> comidas) {
@@ -185,10 +183,6 @@ public class Empresa implements Serializable {
 
     public List<Alimento> getAlimentos() {
         return alimentos;
-    }
-
-    public PlanEjercicio convertirAPlanEjercicio (Plan planEjercicio){
-        return new PlanEjercicio(((PlanEjercicio) planEjercicio).getPlanSemanalEjercio());
     }
 
     // metodos practicos

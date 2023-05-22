@@ -1,7 +1,7 @@
 package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
-import gestorAplicacion.clasesHerencia.Persona;
-import gestorAplicacion.clasesHerencia.Plan;
+import gestorAplicacion.clasesHerencia.*;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,9 +16,11 @@ public class Cliente extends Persona implements Serializable{
 	private Entrenador entrenador;
 	private PreferenciaAlimenticia preferenciaAlimenticia;
 	private NivelCliente nivelCliente;
-	private ObjetivoCliente objetivoCliente;
-	public PlanAlimentacion planAlimentacion;
-	public Plan planEjercicio;
+
+	
+	private PlanAlimentacion planAlimentacion;
+	private Plan planEjercicio;
+	private ObjetivoCliente objetivoCliente
 	
 	public ArrayList<PlanAlimentacion> historicoPlanesAlimentacion = new ArrayList<>();
 	public ArrayList<PlanEjercicio> historicoPlanesEjercicio = new ArrayList<>();
