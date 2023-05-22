@@ -15,6 +15,10 @@ public class Maquina implements Serializable {
         this.gimnasio.agregarMaquina(this);
     }
 	
+	public static void disponibilidad() {
+		
+	}
+	
 	public void setNombre(String nombre) {
 	    this.nombre = nombre;
 	}

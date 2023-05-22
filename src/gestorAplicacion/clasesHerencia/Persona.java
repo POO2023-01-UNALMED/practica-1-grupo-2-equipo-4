@@ -2,6 +2,8 @@ package gestorAplicacion.clasesHerencia;
 import java.io.Serializable;
 
 import gestorAplicacion.clasesPrincipales.*;
+import java.io.Serializable;
+
 
 public abstract class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,6 +16,9 @@ public abstract class Persona implements Serializable {
 		this.gimnasio = gimnasio;
 		this.identificacion = identificacion;
 	}
+	public Persona(String nombre, int identificacion){
+		this(nombre, null, identificacion);
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -24,11 +29,11 @@ public abstract class Persona implements Serializable {
 	}
 	
 	public int getIdentificacion() {
-		return this.identificacion;
+		return identificacion;
 	}
 	
 	public Gimnasio getGimnasio() {
-		return this.gimnasio;
+		return gimnasio;
 	}
 	
 	public Persona() {this(null, null, 0);}

@@ -16,7 +16,7 @@ public class Rutina implements Serializable{
 
     private ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
     private TipoEjercicio tipoEjercicio;
-    private final int NUMEJERCIOS = 7;
+    private static final int NUMEJERCIOS = 7;
 
     public Rutina(String nombre, ArrayList<Ejercicio> ejercicios, TipoEjercicio tipoEjercicio){
         this.nombre = nombre;
@@ -28,25 +28,26 @@ public class Rutina implements Serializable{
         this.tipoEjercicio = tipoEjercicio;
     }
 
-    public static Rutina generarRutina(TipoEjercicio tipoEjercicio, ObjetivoCliente objetivo, NivelCliente dificultad, int intensidad){
+    
+    public static Rutina generarRutina(TipoEjercicio tipoEjercicio, ObjetivoCliente objetivo, NivelCliente dificultad){
         ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
         ArrayList<Movimiento> movimientosDisponibles = Movimiento.filtrarMovimientosPorDificultad(Movimiento.filtrarMovimientosPorTipo(tipoEjercicio), dificultad);
         Random random = new Random();
 
         ArrayList<Movimiento> movCalentamiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.CALENTAMIENTO);
         ArrayList<Movimiento> movEstiramiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.ESTIRAMIENTO);
-        ejercicios.add(Ejercicio.generarEjercicio(movCalentamiento.get(random.nextInt(movCalentamiento.size())), objetivo, intensidad));
+        ejercicios.add(Ejercicio.generarEjercicio(movCalentamiento.get(random.nextInt(movCalentamiento.size())), objetivo ));
 
         Collections.shuffle(movimientosDisponibles);
 
         for (int i = 0; i < movimientosDisponibles.size(); i++){
-            if (i==6){
+            if (i==(NUMEJERCIOS - 1)){
                 break;
             }else {
-                ejercicios.add(Ejercicio.generarEjercicio(movimientosDisponibles.get(i), objetivo, intensidad));
+                ejercicios.add(Ejercicio.generarEjercicio(movimientosDisponibles.get(i), objetivo));
             }
         }
-        ejercicios.add(Ejercicio.generarEjercicio(movEstiramiento.get(random.nextInt(movEstiramiento.size())), objetivo, intensidad));
+        ejercicios.add(Ejercicio.generarEjercicio(movEstiramiento.get(random.nextInt(movEstiramiento.size())), objetivo ));
         
         return new Rutina(ejercicios, tipoEjercicio);
     }
@@ -58,6 +59,7 @@ public class Rutina implements Serializable{
         }
         return toString;
     }
+	
 
 	//Metodos get y set
     public void setEjercicios (ArrayList<Ejercicio> ejercicios) {
@@ -66,15 +68,15 @@ public class Rutina implements Serializable{
         this.tipoEjercicio = tipoEjercicio;}
     public void setNombre(String nombre) {
 		this.nombre = nombre;}
-
-        public ArrayList<Ejercicio> getEjercicios() {
-            return ejercicios;}
-        public TipoEjercicio getTipoEjercicio() {
-            return tipoEjercicio;}
-        public String getNombre() {
-            return nombre;}
-        
-        public int retNumEje() {return this.NUMEJERCIOS;}
-        
-    }
     
+    public ArrayList<Ejercicio> getEjercicios() {
+        return ejercicios;}
+    public TipoEjercicio getTipoEjercicio() {
+        return tipoEjercicio;}
+    public String getNombre() {
+		return nombre;}
+    
+    public int retNumEje() {return Rutina.NUMEJERCIOS;}
+    
+    
+}

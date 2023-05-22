@@ -31,13 +31,11 @@ public class Movimiento implements Serializable {
 			listaMovimientos.add(this);
 		}	
     }
-	
-	public Movimiento(String nombre, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad) {
-        this(nombre, null, null, tipoEjercicio, maquina, dificultad,true);
-    }
-	
+
 	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad) {
         this(nombre, descripcion, musculoPrincipal, tipoEjercicio, maquina, dificultad,true);
+        
+        this.maquina.setMovimientoRealizado(this);
     }
 
 	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina) {
