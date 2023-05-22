@@ -14,14 +14,17 @@ public class Gimnasio implements Serializable {
 	private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
 	private ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
-	public static ArrayList<Gimnasio> listaGimnasios = new ArrayList<>();
+	public static ArrayList<Gimnasio> listaGimnasios = new ArrayList<Gimnasio>();
 	
 	public Gimnasio(String nombre, String ciudad, String sede, boolean abierto) {
 		this.nombre = nombre;
 		this.ciudad = ciudad;
 		this.sede = sede;
 		this.setAbierto(abierto);
+		
+		listaGimnasios.add(this);
 	}
+	
 	
 	public void setNombre(String nombre) {
 	    this.nombre = nombre;
@@ -46,11 +49,7 @@ public class Gimnasio implements Serializable {
 	public String getSede() {
 	    return this.sede;
 	  }
-	
-	public void setListaGimnasios(ArrayList<Gimnasio> listaGimnasios) {
-		Gimnasio.listaGimnasios = listaGimnasios;
-	}
-	
+ 
 	public boolean isAbierto() {
 		return abierto;
 	}
@@ -132,22 +131,10 @@ public class Gimnasio implements Serializable {
 	
 	public ArrayList<Gimnasio> sedesDisponibles(ArrayList<Maquina> maquinas) {
 		ArrayList<Gimnasio> sedesDisponibles = new ArrayList<>();
-		ArrayList<String> maquinasEnString = new ArrayList<>();
-		
-		
-		for (Maquina m : maquinas) {
-			maquinasEnString.add(m.getNombre());
-		}
 		
 		for (Gimnasio g : listaGimnasios) {
-			ArrayList<String> maquinasSedeEnString = new ArrayList<>();
-			
-			for (Maquina m : g.getListaMaquinas()) {
-				maquinasSedeEnString.add(m.getNombre());
-			}
-			
 			if (g.abierto) {
-				if (maquinasSedeEnString.containsAll(maquinasEnString)) {
+				if (g.listaMaquinas.containsAll(maquinas)) {
 					sedesDisponibles.add(g);
 				}
 			}

@@ -1,14 +1,14 @@
 package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
-import gestorAplicacion.clasesHerencia.Persona;
-import gestorAplicacion.clasesHerencia.Plan;
+import gestorAplicacion.clasesHerencia.*;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Cliente extends Persona implements Serializable {
+public class Cliente extends Persona implements Serializable{
 	private static final long serialVersionUID = 1L;
+
 	private double altura;
 	private double peso;
 	private String sexo;
@@ -16,17 +16,21 @@ public class Cliente extends Persona implements Serializable {
 	private Entrenador entrenador;
 	private PreferenciaAlimenticia preferenciaAlimenticia;
 	private NivelCliente nivelCliente;
-	private ObjetivoCliente objetivoCliente;
-	public PlanAlimentacion planAlimentacion;
-	public Plan planEjercicio;
-	private Historial historialPlanes;
+
+	
+	private PlanAlimentacion planAlimentacion;
+	private Plan planEjercicio;
+	private ObjetivoCliente objetivoCliente
+	
+	public ArrayList<PlanAlimentacion> historicoPlanesAlimentacion = new ArrayList<>();
+	public ArrayList<PlanEjercicio> historicoPlanesEjercicio = new ArrayList<>();
 	
 	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
-	public Cliente(String nombre, Gimnasio gimnasio, int identificacion,
+	public Cliente(String nombre, int identificacion,
 			double altura, double peso, String sexo, int edad, Entrenador entrenador, PreferenciaAlimenticia preferenciaAlimenticia,
 			NivelCliente nivelCliente, ObjetivoCliente objetivoCliente) {
-		super(nombre, gimnasio, identificacion);
+		super(nombre, identificacion);
 		
 		this.setAltura(altura);
 		this.setPeso(peso);
@@ -37,11 +41,18 @@ public class Cliente extends Persona implements Serializable {
 		this.setNivelCliente(nivelCliente);
 		this.setObjetivoCliente(objetivoCliente);
 		
-		this.gimnasio.agregarCliente(this);
 		listaClientes.add(this);
 	}
+
+	public Cliente (String nombre, int identificacion, Gimnasio gimnasio,
+	double altura, double peso, String sexo, int edad, Entrenador entrenador, PreferenciaAlimenticia preferenciaAlimenticia,
+	NivelCliente nivelCliente, ObjetivoCliente objetivoCliente){
+		this(nombre, identificacion, altura, peso, sexo, edad, entrenador, preferenciaAlimenticia, nivelCliente, objetivoCliente);
+		this.gimnasio = gimnasio;
+
+		gimnasio.agregarCliente(this);
+	}
 	
-	public Cliente(int ident) {this.identificacion = ident;}
 
 	public void setPlanEjercicio (Plan planEjercicio) {
 		this.planEjercicio = planEjercicio;
@@ -116,14 +127,6 @@ public class Cliente extends Persona implements Serializable {
 		this.objetivoCliente = objetivoCliente;
 	}
 	
-	public Historial getHistorialPlanes() {
-		return historialPlanes;
-	}
-
-	public void setHistorialPlanes(Historial historialPlanes) {
-		this.historialPlanes = historialPlanes;
-	}
-
 	public String toString() {return "Nombre: " + this.getNombre()
 	+ "Gimnasio: " + this.gimnasio.toString()
 	+ "Nivel: " + this.getNivelCliente()
@@ -138,29 +141,30 @@ public class Cliente extends Persona implements Serializable {
 		this.entrenador.setDisponibilidad("NO DISPONIBLE");
 	}
 	
-	public void asignarPlan(PlanAlimentacion planAlimentacion) {
+	public PlanAlimentacion asignarPlan(PlanAlimentacion planAlimentacion) {
 		this.planAlimentacion = planAlimentacion;
 		
-		if (this.historialPlanes == null) { 
-			// Si no había tenido un historial se lo creo y agrego el nuevo plan de alimentación.
-			Historial historialParaPlanesAlimentacion = new Historial(this);
-			this.setHistorialPlanes(historialParaPlanesAlimentacion); 
-			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
+		if (this.historicoPlanesAlimentacion.isEmpty()) {
+			this.historicoPlanesAlimentacion.add(planAlimentacion);
 		}
 		
-		else {
-			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
+		else { // Muestra el plan anterior y se recomienda seguir con este plan e ir 
+			// Cambiando gradualmente las comidas hasta seguir el nuevo plan
+			this.historicoPlanesAlimentacion.add(planAlimentacion);
+			
+			PlanAlimentacion planAnterior = historicoPlanesAlimentacion.get(historicoPlanesAlimentacion.indexOf(planAlimentacion) - 1);
+			return planAnterior;
 		}
+		return null;
 	}
 	
 	
 	public static void generarPlanAlimentacion() {}
 
 	public String generarPlanEjercicio(){
-		Plan plan = new PlanEjercicio();	
-		setPlanEjercicio(plan.crearPLanSemanal(getObjetivoCliente(), getNivelCliente()));
+		PlanEjercicio plan = new PlanEjercicio();	
+		plan.setDificultad(getNivelCliente());
+		setPlanEjercicio(plan.crearPLanSemanal(getObjetivoCliente()));
 		return getPlanEjercicio().toString();
-
-
 	}
 }

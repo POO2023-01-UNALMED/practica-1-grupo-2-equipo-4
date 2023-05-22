@@ -22,10 +22,17 @@ public class Entrenador extends Persona implements Serializable {
 		this.setCliente(cliente);
 		this.setNivelEntrenador(nivelEntrenador);
 		this.setDisponibilidad(disponibilidad);
-		
-		this.gimnasio.agregarEntrenador(this);
+
 		listaEntrenadores.add(this);
 	}
+
+	public Entrenador(String nombre, int identificacion, 
+			String formacion, Cliente cliente, NivelCliente nivelEntrenador, 
+			String disponibilidad){
+				this(nombre, null, identificacion, formacion, null, nivelEntrenador, disponibilidad);
+			}
+	
+	public Entrenador() {this(null, null, 0, null, null, null, null);}
 	
 	public String getFormacion() {
 		return formacion;
