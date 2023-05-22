@@ -5,13 +5,14 @@ import java.util.*;
 
 public class Historial {
     private Cliente cliente;
-    private List<PlanEjercicio> historialPlanes = new ArrayList<>();
+    private List<PlanEjercicio> historialPlanesEjercicio = new ArrayList<>();
+    private List<PlanAlimentacion> historialPlanesAlimentacion = new ArrayList<>();
     private Set<Gimnasio> gimnasiosVisitados = new HashSet<>();
     private Map<Gimnasio, Integer> visitasGimnasio = new HashMap<>();
 
     public Historial(Cliente cliente) {
         this.cliente = cliente;
-        this.historialPlanes = new ArrayList<>();
+        this.historialPlanesEjercicio = new ArrayList<>();
         this.gimnasiosVisitados = new HashSet<>();
         this.visitasGimnasio = new HashMap<>();
     }    
@@ -20,16 +21,24 @@ public class Historial {
         return cliente;
     }
 
-    public List<PlanEjercicio> getHistorialPlanes() {
-        return historialPlanes;
+    public List<PlanEjercicio> getHistorialPlanesEjercicio() {
+        return historialPlanesEjercicio;
     }
 
-    public Set<Gimnasio> getGimnasiosVisitados() {
+    public List<PlanAlimentacion> getHistorialPlanesAlimentacion() {
+		return historialPlanesAlimentacion;
+	}
+
+	public Set<Gimnasio> getGimnasiosVisitados() {
         return gimnasiosVisitados;
     }
 
-    public void agregarPlan(PlanEjercicio plan) {
-        this.historialPlanes.add(plan);
+    public void agregarPlanEjercicio(PlanEjercicio plan) {
+        this.historialPlanesEjercicio.add(plan);
+    }
+    
+    public void agregarPlanAlimentacion(PlanAlimentacion plan) {
+        this.historialPlanesAlimentacion.add(plan);
     }
 
     public void agregarGimnasio(Gimnasio gimnasio) {

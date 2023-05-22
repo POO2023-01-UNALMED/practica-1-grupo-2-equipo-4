@@ -69,6 +69,8 @@ public class PlanAlimentacion implements Plan, Serializable {
     }
 
     public PlanAlimentacion filtrarPorAlergenos(ArrayList<Alergeno> alergias) {
+    	Alimento proteinaComplementaria = new Alimento("Proteina", 100, 24, 3, 0, null);
+    	
     	for (ArrayList<Comida> comidasDia : planSemanal.values()) { // Para las comidas de cada día
             for (Comida comida : comidasDia) { // Para cada comida
             	
@@ -80,11 +82,13 @@ public class PlanAlimentacion implements Plan, Serializable {
                     }
                 }
                 
-                comida.listaAlimentos.removeAll(alimentosAlergenos); // Eliminar todos los que dan alergia en esa comida
+                comida.listaAlimentos.removeAll(alimentosAlergenos); // Eliminar todos los que dan alergia en esa comida         
+                // Se recomienda un nuevo alimento con proteína para complementar esa comida.
                 
-                comida.listaAlimentos.add(new Alimento("Proteina", 100, 24, 3, 0, null));
-                // Se agrega un nuevo alimento con proteína para complementar esa comida.
-            }
+                if (!comida.listaAlimentos.contains(proteinaComplementaria)) {
+                	comida.listaAlimentos.add(proteinaComplementaria);
+                }
+            }   
         }
         return this;
     }

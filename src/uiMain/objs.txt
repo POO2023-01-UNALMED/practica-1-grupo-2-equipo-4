@@ -46,62 +46,6 @@ Gimnasio g1 = new Gimnasio("Gymbro", "Medellín", "Prado", true);
 	    
 	    Entrenador[] misEntrenadores = {e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20, e21, e22, e23, e24, e25, e26, e27, e28, e29, e30};
 	    
-	    
-	    //CLIENTES
-	    
-	    Cliente c1 = new Cliente("Gilberto", g1, 912384723, 1.72, 71.2, "M", 19, e2, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.AUMENTAR);
-	    Cliente c2 = new Cliente("Sandro", g1, 42391242, 1.72, 71.2, "M", 19, e1, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c3 = new Cliente("Sebastian", g1, 1025640725, 1.72, 71.2, "M", 19, e2, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c4 = new Cliente("Andrea", g1, 1032131241, 1.62, 57.3, "F", 22, e3, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c5 = new Cliente("Juan", g1, 1012314134, 1.82, 75.2, "M", 24, e3, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c6 = new Cliente("José", g2, 45453453, 1.72, 71.2, "M", 19, e4, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.AUMENTAR);
-	    Cliente c7 = new Cliente("Andrés", g2, 234534536, 1.72, 71.2, "M", 19, e4, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c8 = new Cliente("Felipe", g2, 636346633, 1.72, 71.2, "M", 19, e5, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c9 = new Cliente("Sofía", g2, 1934285823, 1.62, 57.3, "F", 22, e6, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c10 = new Cliente("Juan", g2, 234235234, 1.82, 75.2, "M", 24, e6, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c11 = new Cliente("Rodrigo", g3, 67376535, 1.72, 71.2, "M", 19, e7, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.AUMENTAR);
-	    Cliente c12 = new Cliente("Juan Esteban", g3, 564656466, 1.72, 71.2, "M", 19, e8, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c13 = new Cliente("Jerónimo", g3, 564564525 , 1.72, 71.2, "M", 19, e9, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c14 = new Cliente("Sara", g3, 451521021, 1.62, 57.3, "F", 22, e8, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c15 = new Cliente("Sergio", g3, 505556567, 1.82, 75.2, "M", 24, e9, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c16 = new Cliente("Esteban", g4, 454534632, 1.72, 71.2, "M", 19, e10, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.AUMENTAR);
-	    Cliente c17 = new Cliente("Duván", g4, 988152187, 1.72, 71.2, "M", 19, e10, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c18 = new Cliente("Santiago", g4, 72541885 , 1.72, 71.2, "M", 19, e11, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c19 = new Cliente("María", g4, 108286585, 1.62, 57.3, "F", 22, e12, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c20= new Cliente("Manuel", g4, 981818585, 1.82, 75.2, "M", 24, e11, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c21 = new Cliente("Miguel", g5, 234235234 , 1.72, 71.2, "M", 19, e13, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c22 = new Cliente("Andrés", g5, 516455135 , 1.72, 71.2, "M", 19, e13, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c23 = new Cliente("María", g5, 45452123, 1.62, 57.3, "F", 22, e14, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c24 = new Cliente("Manuel", g5, 56475642, 1.82, 75.2, "M", 24, e14, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c25 = new Cliente("Daniel", g5, 536186710, 1.72, 71.2, "M", 19, e15, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c26 = new Cliente("Santiago", g6, 231455123, 1.72, 71.2, "M", 19, e16, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c27 = new Cliente("Santiago", g6, 231241251, 1.72, 71.2, "M", 19, e16, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c28 = new Cliente("María", g6, 11256563, 1.62, 57.3, "F", 22, e16, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c29 = new Cliente("Manuel", g6, 231245235, 1.82, 75.2, "M", 24, e17, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c30 = new Cliente("Daniel", g6, 15589833, 1.72, 71.2, "M", 19, e18, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c31 = new Cliente("Santiago", g7, 233652441, 1.72, 71.2, "M", 19, e19, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c32 = new Cliente("Santiago", g7, 231646824, 1.72, 71.2, "M", 19, e19, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c33 = new Cliente("María", g7, 545481650, 1.62, 57.3, "F", 22, e20, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c34 = new Cliente("Manuel", g7, 55159047, 1.82, 75.2, "M", 24, e20, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c35 = new Cliente("Juan", g7, 673345170, 1.72, 71.2, "M", 19, e21, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c36 = new Cliente("Carlos", g8, 1241734524, 1.72, 71.2, "M", 19, e22, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c37 = new Cliente("Angerson", g8, 123854422, 1.72, 71.2, "M", 19, e23, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c38 = new Cliente("Sofía", g8, 21426432, 1.62, 57.3, "F", 22, e24, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c39 = new Cliente("Alexis", g8, 23125341, 1.82, 75.2, "M", 24, e22, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c40 = new Cliente("José", g8, 85484824, 1.72, 71.2, "M", 19, e24, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c41 = new Cliente("Miguel Angel", g9, 233652441, 1.72, 71.2, "M", 19, e25, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c42 = new Cliente("Esneider", g9, 231646824, 1.72, 71.2, "M", 19, e25, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c43 = new Cliente("María", g9, 545481650, 1.62, 57.3, "F", 22, e26, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c44 = new Cliente("Manuel", g9, 55159047, 1.82, 75.2, "M", 24, e26, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c45 = new Cliente("Daniel", g9, 673345170, 1.72, 71.2, "M", 19, e27, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    Cliente c46 = new Cliente("Stiven", g10, 2131251323, 1.72, 71.2, "M", 19, e28, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c47 = new Cliente("Oscar", g10, 25424340, 1.72, 71.2, "M", 19, e28, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
-	    Cliente c48 = new Cliente("Claudia", g10, 31239421, 1.62, 57.3, "F", 22, e29, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
-	    Cliente c49 = new Cliente("Walter", g10, 548478957, 1.82, 75.2, "M", 40, e29, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
-	    Cliente c50 = new Cliente("Miguel", g10, 2312300, 1.72, 71.2, "M", 19, e30, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
-	    
-	    Cliente[] misClientes = {c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50};
-	    
 	    //MAQUINA
 	    
 	    Maquina m1 = new Maquina("Barra", g1);
@@ -385,18 +329,135 @@ Gimnasio g1 = new Gimnasio("Gymbro", "Medellín", "Prado", true);
         
         PlanAlimentacion[] misPlanesAlimentación = {p1, p2, p3, p4, p5, p6, p7, p8, p9, p10};
         
-
-		Empresa empresa = new Empresa();
-		
+		//CLIENTES // NECESITO MISMA PREFERENCIA ALIMENTICIA PARA 3
+	    // NECESITO ASIGNARLES LOS PLANES DE ALIMENTACION
+	    
+	    Cliente c1 = new Cliente("Gilberto", g1, 912384723, 1.72, 71.2, "M", 19, e2, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.AUMENTAR);
+	    Cliente c2 = new Cliente("Sandro", g1, 42391242, 1.72, 71.2, "M", 19, e1, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c3 = new Cliente("Sebastian", g1, 1025640725, 1.72, 71.2, "M", 19, e2, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c4 = new Cliente("Andrea", g1, 1032131241, 1.62, 57.3, "F", 22, e3, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c5 = new Cliente("Juan", g1, 1012314134, 1.82, 75.2, "M", 24, e3, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    
+	    Cliente c6 = new Cliente("José", g2, 45453453, 1.72, 71.2, "M", 19, e4, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.AUMENTAR);
+	    Cliente c7 = new Cliente("Andrés", g2, 234534536, 1.72, 71.2, "M", 19, e4, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c8 = new Cliente("Felipe", g2, 636346633, 1.72, 71.2, "M", 19, e5, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c9 = new Cliente("Sofía", g2, 1934285823, 1.62, 57.3, "F", 22, e6, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c10 = new Cliente("Juan", g2, 234235234, 1.82, 75.2, "M", 24, e6, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    
+	    Cliente c11 = new Cliente("Rodrigo", g3, 67376535, 1.72, 71.2, "M", 19, e7, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c12 = new Cliente("Juan Esteban", g3, 564656466, 1.72, 71.2, "M", 19, e8, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c13 = new Cliente("Jerónimo", g3, 564564525 , 1.72, 71.2, "M", 19, e9, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c14 = new Cliente("Sara", g3, 451521021, 1.62, 57.3, "F", 22, e8, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c15 = new Cliente("Sergio", g3, 505556567, 1.82, 75.2, "M", 24, e9, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    
+	    Cliente c16 = new Cliente("Esteban", g4, 454534632, 1.72, 71.2, "M", 19, e10, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.AVANZADO, ObjetivoCliente.BAJARPESO);
+	    Cliente c17 = new Cliente("Duván", g4, 988152187, 1.72, 71.2, "M", 19, e10, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    Cliente c18 = new Cliente("Santiago", g4, 72541885 , 1.72, 71.2, "M", 19, e11, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    Cliente c19 = new Cliente("María", g4, 108286585, 1.62, 57.3, "F", 22, e12, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c20= new Cliente("Manuel", g4, 981818585, 1.82, 75.2, "M", 24, e11, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    
+	    Cliente c21 = new Cliente("Miguel", g5, 234235234 , 1.72, 71.2, "M", 19, e13, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.DEFINIR);
+	    Cliente c22 = new Cliente("Andrés", g5, 516455135 , 1.72, 71.2, "M", 19, e13, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.DEFINIR);
+	    Cliente c23 = new Cliente("María", g5, 45452123, 1.62, 57.3, "F", 22, e14, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c24 = new Cliente("Manuel", g5, 56475642, 1.82, 75.2, "M", 24, e14, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c25 = new Cliente("Daniel", g5, 536186710, 1.72, 71.2, "M", 19, e15, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.DEFINIR);
+	    
+	    Cliente c26 = new Cliente("Santiago", g6, 231455123, 1.72, 71.2, "M", 19, e16, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c27 = new Cliente("Santiago", g6, 231241251, 1.72, 71.2, "M", 19, e16, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c28 = new Cliente("María", g6, 11256563, 1.62, 57.3, "F", 22, e16, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.AUMENTAR);
+	    Cliente c29 = new Cliente("Manuel", g6, 231245235, 1.82, 75.2, "M", 24, e17, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c30 = new Cliente("Daniel", g6, 15589833, 1.72, 71.2, "M", 19, e18, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    
+	    Cliente c31 = new Cliente("Santiago", g7, 233652441, 1.72, 71.2, "M", 19, e19, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    Cliente c32 = new Cliente("Santiago", g7, 231646824, 1.72, 71.2, "M", 19, e19, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    Cliente c33 = new Cliente("María", g7, 545481650, 1.62, 57.3, "F", 22, e20, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.AUMENTAR);
+	    Cliente c34 = new Cliente("Manuel", g7, 55159047, 1.82, 75.2, "M", 24, e20, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c35 = new Cliente("Juan", g7, 673345170, 1.72, 71.2, "M", 19, e21, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    
+	    Cliente c36 = new Cliente("Carlos", g8, 1241734524, 1.72, 71.2, "M", 19, e22, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c37 = new Cliente("Angerson", g8, 123854422, 1.72, 71.2, "M", 19, e23, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c38 = new Cliente("Sofía", g8, 21426432, 1.62, 57.3, "F", 22, e24, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c39 = new Cliente("Alexis", g8, 23125341, 1.82, 75.2, "M", 24, e22, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c40 = new Cliente("José", g8, 85484824, 1.72, 71.2, "M", 19, e24, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    
+	    Cliente c41 = new Cliente("Miguel Angel", g9, 233652441, 1.72, 71.2, "M", 19, e25, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    Cliente c42 = new Cliente("Esneider", g9, 231646824, 1.72, 71.2, "M", 19, e25, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    Cliente c43 = new Cliente("María", g9, 545481650, 1.62, 57.3, "F", 22, e26, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c44 = new Cliente("Manuel", g9, 55159047, 1.82, 75.2, "M", 24, e26, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c45 = new Cliente("Daniel", g9, 673345170, 1.72, 71.2, "M", 19, e27, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.BAJARPESO);
+	    
+	    Cliente c46 = new Cliente("Stiven", g10, 2131251323, 1.72, 71.2, "M", 19, e28, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c47 = new Cliente("Oscar", g10, 25424340, 1.72, 71.2, "M", 19, e28, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.AUMENTAR);
+	    Cliente c48 = new Cliente("Claudia", g10, 31239421, 1.62, 57.3, "F", 22, e29, PreferenciaAlimenticia.VEGANO, NivelCliente.PRINCIPIANTE, ObjetivoCliente.DEFINIR);
+	    Cliente c49 = new Cliente("Walter", g10, 548478957, 1.82, 75.2, "M", 40, e29, PreferenciaAlimenticia.VEGETARIANO, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    Cliente c50 = new Cliente("Miguel", g10, 2312300, 1.72, 71.2, "M", 19, e30, PreferenciaAlimenticia.SINRESTRICCIONES, NivelCliente.INTERMEDIO, ObjetivoCliente.ACONDICIONAR);
+	    
+	    // Seteo de Planes de alimentacion
+	    
+	    c1.planAlimentacion = p3;
+	    c2.planAlimentacion = p4;
+	    c3.planAlimentacion = p5;
+	    c4.planAlimentacion = p2;
+	    c5.planAlimentacion = p5;
+	    c6.planAlimentacion = p6;
+	    c7.planAlimentacion = p7;
+	    c8.planAlimentacion = p8;
+	    c9.planAlimentacion = p1;
+	    c10.planAlimentacion = p10;
+	    c11.planAlimentacion = p9;
+	    c12.planAlimentacion = p8;
+	    c13.planAlimentacion = p7;
+	    c14.planAlimentacion = p2;
+	    c15.planAlimentacion = p1;
+	    c16.planAlimentacion = p6;
+	    c17.planAlimentacion = p7;
+	    c18.planAlimentacion = p8;
+	    c19.planAlimentacion = p2;
+	    c20.planAlimentacion = p1;
+	    c21.planAlimentacion = p5;
+	    c22.planAlimentacion = p6;
+	    c23.planAlimentacion = p2;
+	    c24.planAlimentacion = p1;
+	    c25.planAlimentacion = p8;
+	    c26.planAlimentacion = p7;
+	    c27.planAlimentacion = p6;
+	    c28.planAlimentacion = p2;
+	    c29.planAlimentacion = p1;
+	    c30.planAlimentacion = p9;
+	    c31.planAlimentacion = p10;
+	    c32.planAlimentacion = p9;
+	    c33.planAlimentacion = p2;
+	    c34.planAlimentacion = p1;
+	    c35.planAlimentacion = p8;
+	    c36.planAlimentacion = p7;
+	    c37.planAlimentacion = p6;
+	    c38.planAlimentacion = p2;
+	    c39.planAlimentacion = p1;
+	    c40.planAlimentacion = p10;
+	    c41.planAlimentacion = p9;
+	    c42.planAlimentacion = p8;
+	    c43.planAlimentacion = p2;
+	    c44.planAlimentacion = p1;
+	    c45.planAlimentacion = p7;
+	    c46.planAlimentacion = p6;
+	    c47.planAlimentacion = p5;
+	    c48.planAlimentacion = p2;
+	    c49.planAlimentacion = p1;
+	    c50.planAlimentacion = p3;
+	    
+	    Cliente[] misClientes = {c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50};
+	    
 		// 1. agregarObjetos a Empresa. No necesariamente todo a la vez. Lo puedes ir creando de a poco.
 		
 		// 2. revisar que la creación de objetos sea correcta.
 		
 		empresa.agregarObjetosGimnasio(misGimnasios); 
-		empresa.agregarObjetosEntrenador(misEntrenadores); 
-		empresa.agregarObjetosCliente(misClientes); 
+		empresa.agregarObjetosEntrenador(misEntrenadores);
+		empresa.agregarObjetosMaquina(misMaquinas);
 		empresa.agregarObjetosMovimiento(misMovimientos);
 		empresa.agregarObjetosEjercicio(misEjercicios);
 		empresa.agregarObjetosRutina(misRutinas);
 		empresa.agregarObjetosAlimentos(misAlimentos);
 		empresa.agregarObjetosComida(misComidas);
+		empresa.agregarObjetosPlanAlimentacion(misPlanesAlimentación);
+		empresa.agregarObjetosCliente(misClientes);

@@ -5,6 +5,7 @@ import gestorAplicacion.clasesHerencia.Plan;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente extends Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,9 +20,6 @@ public class Cliente extends Persona implements Serializable {
 	public PlanAlimentacion planAlimentacion;
 	public Plan planEjercicio;
 	private Historial historialPlanes;
-	
-	public ArrayList<PlanAlimentacion> historicoPlanesAlimentacion = new ArrayList<>();
-	public ArrayList<PlanEjercicio> historicoPlanesEjercicio = new ArrayList<>();
 	
 	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
@@ -140,21 +138,19 @@ public class Cliente extends Persona implements Serializable {
 		this.entrenador.setDisponibilidad("NO DISPONIBLE");
 	}
 	
-	public PlanAlimentacion asignarPlan(PlanAlimentacion planAlimentacion) {
+	public void asignarPlan(PlanAlimentacion planAlimentacion) {
 		this.planAlimentacion = planAlimentacion;
 		
-		if (this.historicoPlanesAlimentacion.isEmpty()) {
-			this.historicoPlanesAlimentacion.add(planAlimentacion);
+		if (this.historialPlanes == null) { 
+			// Si no había tenido un historial se lo creo y agrego el nuevo plan de alimentación.
+			Historial historialParaPlanesAlimentacion = new Historial(this);
+			this.setHistorialPlanes(historialParaPlanesAlimentacion); 
+			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
 		}
 		
-		else { // Muestra el plan anterior y se recomienda seguir con este plan e ir 
-			// Cambiando gradualmente las comidas hasta seguir el nuevo plan
-			this.historicoPlanesAlimentacion.add(planAlimentacion);
-			
-			PlanAlimentacion planAnterior = historicoPlanesAlimentacion.get(historicoPlanesAlimentacion.indexOf(planAlimentacion) - 1);
-			return planAnterior;
+		else {
+			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
 		}
-		return null;
 	}
 	
 	

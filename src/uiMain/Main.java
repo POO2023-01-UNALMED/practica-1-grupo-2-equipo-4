@@ -22,12 +22,32 @@ public class Main {
 	// Se crean espacios para los objetos de nuestras clases
 	
 	public static void main(String[] args) {
-    Empresa empresa = new Empresa();
-
+		Empresa empresa = new Empresa();
+		
 		byte opcion;
 		String salir = "n";
 		
 		Cliente miCliente = null;
+		
+		println("!Hola! Bienvenido a Gimbro, tu asistente personal\n");
+		print("-----INICIO DE SESION-----\nIngrese su identificación: ");
+
+		while (miCliente == null) {
+		    int ident = readInt();
+		    boolean clienteEncontrado = false;
+
+		    for (Cliente c : empresa.getClientes()) {
+		        if (c.getIdentificacion() == ident) {
+		            miCliente = c;
+		            clienteEncontrado = true;
+		            break;
+		        }
+		    }
+
+		    if (!clienteEncontrado) {
+		        println("Identificación incorrecta, no estás suscrito a nuestro gimnasio.\nVuelve a ingresar tu identificación: ");
+		    }
+		}
 	
 		do {
 
@@ -104,13 +124,17 @@ public class Main {
 	static void reservarGimnasio(Empresa empresa, Cliente miCliente) {
 		print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
 		String gimnasioDeseado = readString();
+		sc.nextLine(); 
 		print("Ingrese la ciudad en la que desea entrenar: ");
 		String ciudadGimnasioDeseado = readString();
+		sc.nextLine(); 
 		print("Ingrese la rutina que va a realizar: ");
-		String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
+		String rutinaDeseada = sc.nextLine(); // El nombre debe ser igual al del objeto de Rutina
+		
 		
 		// Buscar Gimnasio en Ciudad
 		Gimnasio gimnasioElegido = null;
+		
 		for (Gimnasio g: empresa.getGimnasios()) { // Revisar igualdad de Nombre y Ciudad
 			if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
 				gimnasioElegido = g;
@@ -121,6 +145,8 @@ public class Main {
 		if (gimnasioElegido == null) {
 			println("No hay sedes disponibles");
 		}
+		
+		
 		else {
 			// Inicializar lista de maquinas necesarias para hacer la rutina
 			ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
@@ -142,7 +168,13 @@ public class Main {
 				}
 			}
 			
+			gimnasioElegido.setListaGimnasios(new ArrayList<>(empresa.getGimnasios())); // Seteo Todos los gimnasios con informacion actualizada
+			
 			ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
+			
+			for (Gimnasio sede : sedesDisponibles) {
+				sede.getListaMaquinas();
+			}
 			
 			if (sedesDisponibles.size() == 0) {
 				println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
@@ -224,6 +256,8 @@ public class Main {
 		// Hago la extracción de clientes similares a mi cliente actual. (PRIMER METODO EN GIMNASIO)
 		ArrayList<Cliente> clientesSimilares = miCliente.getGimnasio().clientesSimilares(miCliente);
 		
+		// NECESITO OBJETOS DE MISMA PREFERENCIA ALIMENTICIA.
+		
 		if (clientesSimilares.size() == 0) {
 			println("Por favor agende una cita con nuestro nutricionista.");
 		}
@@ -231,7 +265,10 @@ public class Main {
 		else { // Utilizo los clientes similares para guardar Planes que podrían servir.
 			ArrayList<PlanAlimentacion> planesAdecuados = new ArrayList<>();
 			
-			for (Cliente c : clientesSimilares) {planesAdecuados.add(c.planAlimentacion);}
+			for (Cliente c : clientesSimilares) {
+				//print(c.getPlanAlimentacion());
+				planesAdecuados.add(c.planAlimentacion);
+			}
 			
 			// Le pido al cliente sus alergias.
 			ArrayList<Alergeno> alergias = new ArrayList<>();
@@ -296,7 +333,7 @@ public class Main {
 					PlanAlimentacion planElegido = planesAdecuados.get(opcionPlan-1);
 					println("Plan Alimenticio Personalizado: ");
 					
-					miCliente.asignarPlan(planElegido);
+					miCliente.asignarPlan(planElegido); // TERCER METODO
 					
 					print(planElegido.toString());
 				}
@@ -328,22 +365,10 @@ public class Main {
 					
 					else { // Se pide seleccione uno de los adecuados.
 						PlanAlimentacion planElegido = planesModificados.get(opcionPlan-1);
-						print("Plan Alimenticio seleccionado: " + planElegido.nombrePlan);
+						println("Plan Alimenticio seleccionado: " + planElegido.nombrePlan);
 						
-						if (miCliente.asignarPlan(planElegido) == null) { // Si no tiene histórico de planes alimenticios
-							println("le recomendamos el nuevo plan: ");
-							println(planElegido.toString());
-						}
-						else { // Muestro el plan que tiene, y le doy una recomendación para hacer la transición de planes.
-							println("En su histórico se muestra el plan anterior: ");
-							
-							miCliente.asignarPlan(planElegido).toString(); // Plan anterior.
-							
-							println("\n Le recomendamos seguir este plan y en en transcurso de "
-									+ "una semana ir cambiando los alimentos para llegar a este nuevo plan: ");
-							
-							println(planElegido.toString()); // Plan nuevo.
-						}
+						miCliente.asignarPlan(planElegido); // TERCER MÉTODO DE NUEVO.
+						print(planElegido.toString());
 					}
 				}
 			}
