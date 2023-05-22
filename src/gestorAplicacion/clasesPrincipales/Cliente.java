@@ -138,29 +138,19 @@ public class Cliente extends Persona implements Serializable {
 		this.entrenador.setDisponibilidad("NO DISPONIBLE");
 	}
 	
-	public PlanAlimentacion asignarPlan(PlanAlimentacion planAlimentacion) {
+	public void asignarPlan(PlanAlimentacion planAlimentacion) {
 		this.planAlimentacion = planAlimentacion;
 		
 		if (this.historialPlanes == null) { 
-			// Si no había tenido un historial se lo creo y agrego el nuevo plan.
+			// Si no había tenido un historial se lo creo y agrego el nuevo plan de alimentación.
 			Historial historialParaPlanesAlimentacion = new Historial(this);
 			this.setHistorialPlanes(historialParaPlanesAlimentacion); 
 			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
-			return planAlimentacion;
 		}
 		
 		else {
-	        // Si ya tenía un historial, se verifica si hay un plan anterior.
-	        List<PlanAlimentacion> planesPrevios = this.historialPlanes.getHistorialPlanesAlimentacion();
-	        int ultimoIndice = planesPrevios.size() - 1;
-	        if (ultimoIndice >= 0) {
-	            PlanAlimentacion planAnterior = planesPrevios.get(ultimoIndice);
-	            // Aquí puedes hacer algo con el plan anterior, como mostrarlo por ejemplo
-	            return planAnterior;
-	        }
-	        this.historialPlanes.agregarPlanAlimentacion(planAlimentacion); 
-	        }
-		return planAlimentacion;
+			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
+		}
 	}
 	
 	
