@@ -45,7 +45,7 @@ public class Cliente extends Persona implements Serializable{
 	public Cliente (String nombre, int identificacion, Gimnasio gimnasio,
 	double altura, double peso, String sexo, int edad, Entrenador entrenador, PreferenciaAlimenticia preferenciaAlimenticia,
 	NivelCliente nivelCliente, ObjetivoCliente objetivoCliente){
-		this(nombre, identificacion, altura, peso, sexo, edad, entrenador, preferenciaAlimenticia, nivelCliente, objetivoCliente)
+		this(nombre, identificacion, altura, peso, sexo, edad, entrenador, preferenciaAlimenticia, nivelCliente, objetivoCliente);
 		this.gimnasio = gimnasio;
 
 		gimnasio.agregarCliente(this);
@@ -160,10 +160,9 @@ public class Cliente extends Persona implements Serializable{
 	public static void generarPlanAlimentacion() {}
 
 	public String generarPlanEjercicio(){
-		Plan plan = new PlanEjercicio();	
-		setPlanEjercicio(plan.crearPLanSemanal(getObjetivoCliente(), getNivelCliente()));
+		PlanEjercicio plan = new PlanEjercicio();	
+		plan.setDificultad(getNivelCliente());
+		setPlanEjercicio(plan.crearPLanSemanal(getObjetivoCliente()));
 		return getPlanEjercicio().toString();
-
-
 	}
 }

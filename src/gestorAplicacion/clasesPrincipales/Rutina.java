@@ -76,7 +76,7 @@ public class Rutina implements Serializable{
     public String getNombre() {
 		return nombre;}
     
-    public int retNumEje() {return this.NUMEJERCIOS;}
+    public int retNumEje() {return Rutina.NUMEJERCIOS;}
     
     
 }

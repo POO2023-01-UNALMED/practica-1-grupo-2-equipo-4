@@ -55,7 +55,6 @@ public class Movimiento implements Serializable {
 	public static ArrayList<Movimiento> filtrarMovimientosPorTipo(TipoEjercicio tipoEjercicio) {
 		
 		ArrayList<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
-		
 		for (Movimiento movimiento : listaMovimientos){
 			if (movimiento.getTipoEjercicio() == tipoEjercicio) {
 				movimientosFiltrados.add(movimiento);

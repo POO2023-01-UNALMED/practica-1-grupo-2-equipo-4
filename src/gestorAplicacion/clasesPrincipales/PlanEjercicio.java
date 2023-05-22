@@ -10,8 +10,10 @@ import gestorAplicacion.clasesHerencia.Plan;
 public class PlanEjercicio implements Plan, Serializable {
     private static final long serialVersionUID = 1L;
 	
-    String nombre;
+    private String nombre;
+    private NivelCliente dificultad;
     private HashMap<DiaSemana, Rutina> planSemanalEjercio = new HashMap<DiaSemana, Rutina>();
+
 
     public PlanEjercicio(HashMap<DiaSemana, Rutina> planSemanalEjercio){    
         this.planSemanalEjercio = planSemanalEjercio;
@@ -20,11 +22,12 @@ public class PlanEjercicio implements Plan, Serializable {
         this.nombre = nombre;
         this.planSemanalEjercio = planSemanalEjercio;
     }
-
     public PlanEjercicio(){}
 
+
+
     @Override
-    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad) {
+    public Plan crearPLanSemanal(ObjetivoCliente objetivo) {
 
     	TipoEjercicio[] array = {TipoEjercicio.EMPUJAR, TipoEjercicio.EMPUJAR, TipoEjercicio.HALAR, 
             TipoEjercicio.HALAR, TipoEjercicio.PIERNA, TipoEjercicio.PIERNA, TipoEjercicio.CARDIO};
@@ -40,15 +43,15 @@ public class PlanEjercicio implements Plan, Serializable {
         }    
         int index = 0;
         for (DiaSemana dia: DiaSemana.values()){
-            planSemanalEjercio.put(dia, Rutina.generarRutina(array[index], objetivo, dificultad));
+            planSemanalEjercio.put(dia, Rutina.generarRutina(array[index], objetivo, getDificultad()));
             index++;
         }
         return new PlanEjercicio(planSemanalEjercio);
     }
 
-    @Override
-    public Plan crearPLanSemanal() {
-        throw new UnsupportedOperationException("Unimplemented method 'crearPLanSemanal'");
+    public Plan crearPlanSemanal(ObjetivoCliente objetivo, NivelCliente nivel){
+        setDificultad(nivel);
+        return crearPLanSemanal(objetivo);
     }
 
     @Override
@@ -62,17 +65,27 @@ public class PlanEjercicio implements Plan, Serializable {
     //metodos get y set
 
     public void setplanSemanalEjercio (HashMap<DiaSemana, Rutina> planSemanalEjercio) {
-        this.planSemanalEjercio = planSemanalEjercio;}
+        this.planSemanalEjercio = planSemanalEjercio;
+    }
 
     public void setNombre (String nombre){
         this.nombre = nombre;
     }
+
+    public void setDificultad(NivelCliente dificultad){
+        this.dificultad = dificultad;
+    }
     
     public HashMap<DiaSemana, Rutina> getPlanSemanalEjercio() {
-        return planSemanalEjercio;}
+        return planSemanalEjercio;
+    }
 
     public String getNombre(){
         return nombre;
+    }
+
+    public NivelCliente getDificultad(){
+        return dificultad;
     }
     
 }

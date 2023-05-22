@@ -4,20 +4,15 @@ import gestorAplicacion.clasesHerencia.*;
 import java.util.HashMap;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PlanAlimentacion implements Plan, Serializable {
 	private static final long serialVersionUID = 1L;
 	public String nombrePlan;
-    private final int numComidas;
+    private final int NUMCOMIDAS = 3;
     private ArrayList<Comida> comidasFiltradas;
     private HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<DiaSemana, ArrayList<Comida>>();
 
-    public PlanAlimentacion(String nombrePlan, int numComidas) {
-        this.nombrePlan = nombrePlan;
-        this.numComidas = numComidas;
-        this.comidasFiltradas = new ArrayList<Comida>(); // Tiene 3 comidas únicamente
-        this.planSemanal = new HashMap<>();
-    }
 
     public String getNombrePlan() {
         return nombrePlan;
@@ -27,8 +22,8 @@ public class PlanAlimentacion implements Plan, Serializable {
         this.nombrePlan = nombrePlan;
     }
 
-    public int getNumComidas() {
-        return numComidas;
+    public int getNUMCOMIDAS() {
+        return NUMCOMIDAS;
     }
 
     public ArrayList<Comida> getComidasFiltradas() {
@@ -47,10 +42,6 @@ public class PlanAlimentacion implements Plan, Serializable {
         this.planSemanal = planSemanal;
     }
 
-    public Plan crearPLanSemanal() {
-        PlanAlimentacion p = new PlanAlimentacion("", 3);
-    	return p;
-    }
     
     public PlanAlimentacion filtrarPorAlergenos(ArrayList<Alergeno> alergias) {
     	for (ArrayList<Comida> comidasDia : planSemanal.values()) { // Para las comidas de cada día
@@ -108,9 +99,52 @@ public class PlanAlimentacion implements Plan, Serializable {
     }
 
     @Override
-    public Plan crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente dificultad) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crearPLanSemanal'");
+    public Plan crearPLanSemanal(ObjetivoCliente objetivo) {
+        Empresa empresa = new Empresa();
+        Random random = new Random();
+        ArrayList<Comida> comidasFiltradas= new ArrayList<Comida>();
+
+        int limiteCalBajo = 0;
+        int limiteCalAlto = 0;
+
+
+        switch(objetivo){
+            case ACONDICIONAR:
+                limiteCalAlto = 2500/NUMCOMIDAS;
+                limiteCalBajo = 2000/NUMCOMIDAS;
+            case AUMENTAR:
+                limiteCalAlto = 3000/NUMCOMIDAS;
+                limiteCalBajo = 2500/NUMCOMIDAS;
+            case DEFINIR:
+                limiteCalAlto = 1500/NUMCOMIDAS;
+                limiteCalBajo = 1700/NUMCOMIDAS;
+            case BAJARPESO:
+                limiteCalAlto = 1300/NUMCOMIDAS;
+                limiteCalBajo = 1800/NUMCOMIDAS;
+            case MANTENER:
+                limiteCalAlto = 1500/NUMCOMIDAS;
+                limiteCalBajo = 2000/NUMCOMIDAS;
+                
+        }
+
+        for (Comida comida: empresa.getComidas()){
+            if (comida.getCalorias() <= limiteCalAlto && comida.getCalorias() >= limiteCalAlto){
+                comidasFiltradas.add(comida);
+            }
+        }
+        setComidasFiltradas(comidasFiltradas);
+
+        for (DiaSemana dia: DiaSemana.values()){
+            ArrayList<Comida> comidasDelDia = new ArrayList<Comida>();
+            for (int i=0; i< NUMCOMIDAS; i++){
+                comidasDelDia.add(comidasFiltradas.get(random.nextInt(comidasFiltradas.size())));
+            }
+            planSemanal.put(dia, comidasDelDia);
+        }
+        return this;
     }
+
+   
+  
     
 }
