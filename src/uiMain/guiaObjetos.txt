@@ -1,28 +1,221 @@
-Orden de creación cantidad y requisitos
+Orden de creación, cantidad y requisitos
+------------
+ORDEN:
+GIMNASIO, ENTRENADOR, CLIENTE, MAQUINA, MOVIMIENTO, EJERCICIO, RUTINA.
+
+------- Jacobo -----------
+PLAN ALIMENTACION.
+PLAN EJERCICIO.
+-------------------------- 
 
 Gimansio
 (10 objetos)
 
+Constructor
 Gimnasio(String nombre, String ciudad, String sede, boolean abierto)
 
-Gimnasios en Medellín (5) y en Bogotá (5)
+Gimnasios en Medellin (5) y en Bogota (5).
 
-De los 5 en Medellín, (3) se llaman igual.
-De los 5 en Bogotá, (4) se llaman igual.
+De los 5 en Medellin, (3) tienen mismo nombre.
+De los 5 en Bogota, (3) tienen mismo nombre.
 
-En Medellín 5 sedes distintas.
-En Bogotá 5 sedes distintas.
+En Medellin 5 sedes distintas. (Robledo, Envigado...)
+En Bogota 5 sedes distintas.
 
-Los gimnasios tendran listas de maquinas.  
+Entrenador
+(30) (3 por gimnasio)
+
+Constructor
+(String nombre, Gimnasio gimnasio, int identificacion, 
+String formacion, Cliente cliente, NivelCliente nivelEntrenador, 
+String disponibilidad)
+
+Entrenadores de distintos NivelCliente. Pueden ser varios del mismo nivel dentro del mismo gimnasio.
+
+Entrenadores de disponibilidad (MAÑANA / TARDE / NO DISPONIBLE) La mayoría en Mañana o Tarde.
+
+Entrenadores de formación (MUSCULACION / GIMNASIA / CARDIO / CROSSFIT)
+
+El cliente se pasa como argumento null.
+
+Cliente 
+(50 clientes) (cada gimnasio tiene 5 clientes) 
+
+(String nombre, Gimnasio gimnasio, int identificacion,
+double altura, double peso, String sexo, int edad, Entrenador entrenador, 
+PreferenciaAlimenticia preferenciaAlimenticia,
+NivelCliente nivelCliente, ObjetivoCliente objetivoCliente)
+
+De los 5 clientes por gimnasio:
+
+1. Por lo menos 3 con el mismo sexo, Preferencia Alimenticia, Objetivo Cliente, Peso, Edad y Altura.
+
+2. Dos sean Principiante, Dos intermedio y uno avanzado.
 
 
-Alimento 
+Maquina
+(18 Maquinas) ()
+
+(String nombre, Gimnasio gimnasio)
+
+1. Crear 3 maquinas que pertenecen al mismo gimnasio 
+
+// Ejemplo
+Maquina m1 = new Maquina("Barra", g1);
+Maquina m2 = new Maquina("Polea", g1);
+Maquina m3 = new Maquina("Libre", g1);
+
+2. Agregar esas maquinas a otro gimnasio del mismo nombre y ciudad (HAY 3).
+
+// Ejemplo
+
+g1 y g2 son gimnasios en Medellín de nombre (FIT)
+
+g2.agregarMaquina(m1); g2.agregarMaquina(m2); g2.agregarMaquina(m3);
+
+El otro gimnasio del mismo nombre y ciudad queda con otras maquinas distintas
+
+Maquina m4 = new Maquina("A", g3);
+Maquina m5 = new Maquina("B", g3);
+Maquina m6 = new Maquina("C", g3);
+
+----- Repetir este proceso con el gimnasio g4, g5, g6, 
+
+g4 y g5 son gimnasios en Bogotá del mismo nombre (FIT BOGOTA) y g6 es otro gimnasio en Bogotá
+
+Maquinas de g4 y g5:
+
+m7, m8 y m9
+
+
+maquinas de g6
+
+m10, m11, m12
+
+----- Repetir este proceso con el gimnasio g7, g8, g9 (SUPERFIT MEDELLIN) 
+
+g7 y g8 son gimnasios de nombre (SUPERFIT) y quedan en Medellín. g8 es otro gimnasio cualquiera en Medellin
+
+g9 puede ser en bogotá o en medellín y de un nombre cualquiera.
+
+Maquinas de g7 y g8:
+
+m13, m14 y m15
+
+
+maquinas de g9
+
+m16, m17, m18
+
+
+
+Movimiento
+(60)
+
+(String nombre, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad)
+
+0. Nombres distintos para todos.
+
+1. (12 de cada uno de los tipos (EMPUJAR, HALAR, PIERNA, CARDIO)) el resto entre CALENTAMIENTO / ESTIRAMIENTO
+
+2. De a 20 por cada NivelCliente
+
+
+Crear los siguientes movimientos obligatoriamente: 
+
+// Segun las maquinas de los gimnasios 1 y 2
+Movimiento mov1 = new Movimiento("a", TipoEjercicio.EMPUJAR, m1, NivelCliente)
+Movimiento mov2 = new Movimiento("b", TipoEjercicio.HALAR, m2, NivelCliente)
+Movimiento mov3 = new Movimiento("c", TipoEjercicio.PIERNA, m3, NivelCliente)
+
+
+// Las Maquinas de los gimnasios 4 y 5
+Movimiento mov4 = new Movimiento("d", TipoEjercicio.EMPUJAR, m7, NivelCliente)
+Movimiento mov5 = new Movimiento("e", TipoEjercicio.HALAR, m8, NivelCliente)
+Movimiento mov6 = new Movimiento("f", TipoEjercicio.PIERNA, m9, NivelCliente)
+
+
+// Las Maquinas de los gimnasios 7 y 8
+Movimiento mov7 = new Movimiento("g", TipoEjercicio.EMPUJAR, m13, NivelCliente)
+Movimiento mov8 = new Movimiento("h", TipoEjercicio.HALAR, m14, NivelCliente)
+Movimiento mov9 = new Movimiento("i", TipoEjercicio.PIERNA, m15, NivelCliente)
+
+los demás movimientos son libres
+
+Ejercicio
+(misma cantidad de movimientos)
+
+Ejercicio eje1 = Ejercicio.generarEjercicio(mov1, Objetivo);
+
+Así hasta el ejercicio 9
+
+
+
+
+Rutina
+
+Necesito tres rutinas especiales:
+
+ArrayList<Ejercicio> r1 = new ArrayList<Ejercicio>();
+
+r1.add(eje1); r1.add(eje2); r1.add(eje3);
+----------------------------------------------------------
+ArrayList<Ejercicio> r2 = new ArrayList<Ejercicio>();
+
+r2.add(eje4); r2.add(eje5); r2.add(eje6);
+----------------------------------------------------------
+ArrayList<Ejercicio> r2 = new ArrayList<Ejercicio>();
+
+r3.add(eje7); r3.add(eje8); r3.add(eje9);
+
+-----------------------------------------------------------------------
+Se crean así:
+
+Rutina rut1 = new Rutina("Entrenamiento de Fit Medellin", r1, null); // PRIMEROS 3 EJERCICIOS
+Rutina rut2 = new Rutina("Entrenamiento de Fit Bogota", r2, null); // 4 5 6
+Rutina rut3 = new Rutina("Entrenamiento de Superfit Medellin", r3, null); 7 8 9
+
+las demás rutinas son libres.
+
+Rutina rut4 = Rutina.generarRutina(TipoEjercicio, Objetivo, NivelCliente);
+
+
+Alimento
 (51 objetos)
+
+Constructor
+- Revisar Clase Enum Alergeno
 
 (String nombre, double calorias, double proteinas, double carbohidratos, double grasas, Alergeno alergeno)
 
+Realista en cuanto a macro-nutrientes.
 
-Alimento 
-(51 objetos)
+Por lo menos un alimento por cada tipo de alergeno Alergeno.HUEVO (En total 5) ...
+Si no es de algún alergeno, ponerle null como argumento dentro de alergeno.
 
 
+Comida
+(17 comidas)
+
+(String nombre, ArrayList<Alimento> listaAlimentos, 
+TipoComida tipo, PreferenciaAlimenticia preferenciaAlimenticia, ObjetivoCliente objetivoCliente)
+
+
+Utilizar los alimentos de antes para crear las comidas.
+1. Que algunas comidas tengan alimentos con Alergenos. No necesariamente todas.
+
+
+Plan Ejercicio
+(10)
+
+Plan planEje1 = Plan.
+
+Plan Alimentacion
+(10)
+
+Plan planAlim1 = ??
+
+
+
+
+Entrenador "MAÑANA" / "TARDE" / "NO DISPONIBLE"

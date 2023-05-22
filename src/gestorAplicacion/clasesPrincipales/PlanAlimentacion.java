@@ -2,17 +2,29 @@ package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import gestorAplicacion.clasesHerencia.*;
 import java.util.HashMap;
+import java.util.Random;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class PlanAlimentacion implements Plan, Serializable {
 	private static final long serialVersionUID = 1L;
 	public String nombrePlan;
-    private final int NUMCOMIDAS = 3;
+    private final int numComidas;
     private ArrayList<Comida> comidasFiltradas;
     private HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<DiaSemana, ArrayList<Comida>>();
 
+    public PlanAlimentacion(String nombrePlan, int numComidas) {
+        this.nombrePlan = nombrePlan;
+        this.numComidas = numComidas;
+        this.comidasFiltradas = new ArrayList<Comida>(); // Tiene 3 comidas únicamente
+        this.planSemanal = new HashMap<>();
+    }
+    
+    public PlanAlimentacion(String nombrePlan, HashMap<DiaSemana, ArrayList<Comida>> planSemanal) {
+    	this.nombrePlan = nombrePlan;
+    	this.numComidas = 3;
+        this.planSemanal = planSemanal;
+    }
 
     public String getNombrePlan() {
         return nombrePlan;
@@ -22,8 +34,8 @@ public class PlanAlimentacion implements Plan, Serializable {
         this.nombrePlan = nombrePlan;
     }
 
-    public int getNUMCOMIDAS() {
-        return NUMCOMIDAS;
+    public int getNumComidas() {
+        return numComidas;
     }
 
     public ArrayList<Comida> getComidasFiltradas() {
@@ -42,8 +54,16 @@ public class PlanAlimentacion implements Plan, Serializable {
         this.planSemanal = planSemanal;
     }
 
+    public Plan crearPLanSemanal() {
+        PlanAlimentacion p = new PlanAlimentacion("", 3);
+    	return p;
+    }
     
+
+
     public PlanAlimentacion filtrarPorAlergenos(ArrayList<Alergeno> alergias) {
+    	Alimento proteinaComplementaria = new Alimento("Proteina", 100, 24, 3, 0, null);
+    	
     	for (ArrayList<Comida> comidasDia : planSemanal.values()) { // Para las comidas de cada día
             for (Comida comida : comidasDia) { // Para cada comida
             	
@@ -55,11 +75,13 @@ public class PlanAlimentacion implements Plan, Serializable {
                     }
                 }
                 
-                comida.listaAlimentos.removeAll(alimentosAlergenos); // Eliminar todos los que dan alergia en esa comida
+                comida.listaAlimentos.removeAll(alimentosAlergenos); // Eliminar todos los que dan alergia en esa comida         
+                // Se recomienda un nuevo alimento con proteína para complementar esa comida.
                 
-                comida.listaAlimentos.add(new Alimento("Proteina", 100, 24, 3, 0, null));
-                // Se agrega un nuevo alimento con proteína para complementar esa comida.
-            }
+                if (!comida.listaAlimentos.contains(proteinaComplementaria)) {
+                	comida.listaAlimentos.add(proteinaComplementaria);
+                }
+            }   
         }
         return this;
     }
@@ -97,7 +119,6 @@ public class PlanAlimentacion implements Plan, Serializable {
 
         return planFormateado;
     }
-
     @Override
     public Plan crearPLanSemanal(ObjetivoCliente objetivo) {
         Empresa empresa = new Empresa();
@@ -110,20 +131,20 @@ public class PlanAlimentacion implements Plan, Serializable {
 
         switch(objetivo){
             case ACONDICIONAR:
-                limiteCalAlto = 2500/NUMCOMIDAS;
-                limiteCalBajo = 2000/NUMCOMIDAS;
+                limiteCalAlto = 2500/3;
+                limiteCalBajo = 2000/3;
             case AUMENTAR:
-                limiteCalAlto = 3000/NUMCOMIDAS;
-                limiteCalBajo = 2500/NUMCOMIDAS;
+                limiteCalAlto = 3000/3;
+                limiteCalBajo = 2500/3;
             case DEFINIR:
-                limiteCalAlto = 1500/NUMCOMIDAS;
-                limiteCalBajo = 1700/NUMCOMIDAS;
+                limiteCalAlto = 1500/3;
+                limiteCalBajo = 1700/3;
             case BAJARPESO:
-                limiteCalAlto = 1300/NUMCOMIDAS;
-                limiteCalBajo = 1800/NUMCOMIDAS;
+                limiteCalAlto = 1300/3;
+                limiteCalBajo = 1800/3;
             case MANTENER:
-                limiteCalAlto = 1500/NUMCOMIDAS;
-                limiteCalBajo = 2000/NUMCOMIDAS;
+                limiteCalAlto = 1500/3;
+                limiteCalBajo = 2000/3;
                 
         }
 
@@ -136,15 +157,11 @@ public class PlanAlimentacion implements Plan, Serializable {
 
         for (DiaSemana dia: DiaSemana.values()){
             ArrayList<Comida> comidasDelDia = new ArrayList<Comida>();
-            for (int i=0; i< NUMCOMIDAS; i++){
+            for (int i=0; i< 3; i++){
                 comidasDelDia.add(comidasFiltradas.get(random.nextInt(comidasFiltradas.size())));
             }
             planSemanal.put(dia, comidasDelDia);
         }
         return this;
     }
-
-   
-  
-    
 }
