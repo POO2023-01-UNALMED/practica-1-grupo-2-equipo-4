@@ -270,10 +270,6 @@ public class Main {
 				planesAdecuados.add(c.planAlimentacion);
 			}
 			
-			for (PlanAlimentacion p : planesAdecuados) {
-				print(p.getNombrePlan());
-			}
-			
 			// Le pido al cliente sus alergias.
 			ArrayList<Alergeno> alergias = new ArrayList<>();
 			
@@ -322,6 +318,7 @@ public class Main {
 			    println("No alérgico. Se ingresó una opción distinta de SI.");
 			}
 			
+			// HASTA AQUÍ FUNCIONA BIEN. REVISAR CASOS DE ALERGIAS. REVISAR MÉTODO ASIGNARPLAN
 			
 			if (alergias.isEmpty()) { // Muestro todos los planes y le pido al usuario que escoja uno.
 				println("Planes Disponibles: ");
@@ -338,7 +335,7 @@ public class Main {
 					PlanAlimentacion planElegido = planesAdecuados.get(opcionPlan-1);
 					println("Plan Alimenticio Personalizado: ");
 					
-					miCliente.asignarPlan(planElegido);
+					miCliente.asignarPlan(planElegido); // TERCER METODO
 					
 					print(planElegido.toString());
 				}

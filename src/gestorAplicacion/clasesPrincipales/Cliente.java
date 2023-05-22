@@ -20,9 +20,6 @@ public class Cliente extends Persona implements Serializable {
 	public Plan planEjercicio;
 	private Historial historialPlanes;
 	
-	public ArrayList<PlanAlimentacion> historicoPlanesAlimentacion = new ArrayList<>();
-	public ArrayList<PlanEjercicio> historicoPlanesEjercicio = new ArrayList<>();
-	
 	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
 	public Cliente(String nombre, Gimnasio gimnasio, int identificacion,
@@ -143,15 +140,24 @@ public class Cliente extends Persona implements Serializable {
 	public PlanAlimentacion asignarPlan(PlanAlimentacion planAlimentacion) {
 		this.planAlimentacion = planAlimentacion;
 		
-		if (this.historicoPlanesAlimentacion.isEmpty()) {
-			this.historicoPlanesAlimentacion.add(planAlimentacion);
+		if (this.historialPlanes == null) {
+			this.setHistorialPlanes(new Historial(this)); // Si no había tenido un historial se lo creo.
+		}
+		// REVISAR PRIMERO SI EL HISTORIAL ES NULL
+		// Es primera vez que obtiene un plan de alimentación.
+		if (this.historialPlanes.getHistorialPlanesAlimentacion().isEmpty()) {
+			
+			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
 		}
 		
-		else { // Muestra el plan anterior y se recomienda seguir con este plan e ir 
+		else { 
+			// Muestra el plan anterior y se recomienda seguir con este plan e ir 
 			// Cambiando gradualmente las comidas hasta seguir el nuevo plan
-			this.historicoPlanesAlimentacion.add(planAlimentacion);
+			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
 			
-			PlanAlimentacion planAnterior = historicoPlanesAlimentacion.get(historicoPlanesAlimentacion.indexOf(planAlimentacion) - 1);
+			PlanAlimentacion planAnterior = historialPlanes.getHistorialPlanesAlimentacion().get(
+					historialPlanes.getHistorialPlanesAlimentacion().indexOf(planAlimentacion) - 1
+					);
 			return planAnterior;
 		}
 		return null;
