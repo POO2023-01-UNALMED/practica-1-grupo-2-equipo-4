@@ -28,6 +28,26 @@ public class Main {
 		String salir = "n";
 		
 		Cliente miCliente = null;
+		
+		println("!Hola! Bienvenido a Gimbro, tu asistente personal\n");
+		print("-----INICIO DE SESION-----\nIngrese su identificación: ");
+
+		while (miCliente == null) {
+		    int ident = readInt();
+		    boolean clienteEncontrado = false;
+
+		    for (Cliente c : empresa.getClientes()) {
+		        if (c.getIdentificacion() == ident) {
+		            miCliente = c;
+		            clienteEncontrado = true;
+		            break;
+		        }
+		    }
+
+		    if (!clienteEncontrado) {
+		        println("Identificación incorrecta, no estás suscrito a nuestro gimnasio.\nVuelve a ingresar tu identificación: ");
+		    }
+		}
 	
 		do {
 
@@ -104,13 +124,17 @@ public class Main {
 	static void reservarGimnasio(Empresa empresa, Cliente miCliente) {
 		print("Ingrese el nombre del gimnasio en el que desea entrenar: ");
 		String gimnasioDeseado = readString();
+		sc.nextLine(); 
 		print("Ingrese la ciudad en la que desea entrenar: ");
 		String ciudadGimnasioDeseado = readString();
+		sc.nextLine(); 
 		print("Ingrese la rutina que va a realizar: ");
-		String rutinaDeseada = readString(); // El nombre debe ser igual al del objeto de Rutina
+		String rutinaDeseada = sc.nextLine(); // El nombre debe ser igual al del objeto de Rutina
+		
 		
 		// Buscar Gimnasio en Ciudad
 		Gimnasio gimnasioElegido = null;
+		
 		for (Gimnasio g: empresa.getGimnasios()) { // Revisar igualdad de Nombre y Ciudad
 			if ((g.getNombre().equals(gimnasioDeseado)) && (g.getCiudad().equals(ciudadGimnasioDeseado))) {
 				gimnasioElegido = g;
@@ -121,6 +145,8 @@ public class Main {
 		if (gimnasioElegido == null) {
 			println("No hay sedes disponibles");
 		}
+		
+		
 		else {
 			// Inicializar lista de maquinas necesarias para hacer la rutina
 			ArrayList<Maquina> maquinasNecesarias = new ArrayList<>();
@@ -142,7 +168,13 @@ public class Main {
 				}
 			}
 			
+			gimnasioElegido.setListaGimnasios(new ArrayList<>(empresa.getGimnasios())); // Seteo Todos los gimnasios con informacion actualizada
+			
 			ArrayList<Gimnasio> sedesDisponibles = gimnasioElegido.sedesDisponibles(maquinasNecesarias); // PRIMER MÉTODO EN GIMNASIO
+			
+			for (Gimnasio sede : sedesDisponibles) {
+				sede.getListaMaquinas();
+			}
 			
 			if (sedesDisponibles.size() == 0) {
 				println("No hay sedes disponibles en "+ciudadGimnasioDeseado+" para esta rutina");
