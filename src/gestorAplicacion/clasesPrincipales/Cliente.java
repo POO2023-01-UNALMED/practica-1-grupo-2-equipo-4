@@ -5,6 +5,7 @@ import gestorAplicacion.clasesHerencia.Plan;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente extends Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -140,27 +141,26 @@ public class Cliente extends Persona implements Serializable {
 	public PlanAlimentacion asignarPlan(PlanAlimentacion planAlimentacion) {
 		this.planAlimentacion = planAlimentacion;
 		
-		if (this.historialPlanes == null) {
-			this.setHistorialPlanes(new Historial(this)); // Si no había tenido un historial se lo creo.
-		}
-		// REVISAR PRIMERO SI EL HISTORIAL ES NULL
-		// Es primera vez que obtiene un plan de alimentación.
-		if (this.historialPlanes.getHistorialPlanesAlimentacion().isEmpty()) {
-			
+		if (this.historialPlanes == null) { 
+			// Si no había tenido un historial se lo creo y agrego el nuevo plan.
+			Historial historialParaPlanesAlimentacion = new Historial(this);
+			this.setHistorialPlanes(historialParaPlanesAlimentacion); 
 			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
+			return planAlimentacion;
 		}
 		
-		else { 
-			// Muestra el plan anterior y se recomienda seguir con este plan e ir 
-			// Cambiando gradualmente las comidas hasta seguir el nuevo plan
-			this.historialPlanes.agregarPlanAlimentacion(planAlimentacion);
-			
-			PlanAlimentacion planAnterior = historialPlanes.getHistorialPlanesAlimentacion().get(
-					historialPlanes.getHistorialPlanesAlimentacion().indexOf(planAlimentacion) - 1
-					);
-			return planAnterior;
-		}
-		return null;
+		else {
+	        // Si ya tenía un historial, se verifica si hay un plan anterior.
+	        List<PlanAlimentacion> planesPrevios = this.historialPlanes.getHistorialPlanesAlimentacion();
+	        int ultimoIndice = planesPrevios.size() - 1;
+	        if (ultimoIndice >= 0) {
+	            PlanAlimentacion planAnterior = planesPrevios.get(ultimoIndice);
+	            // Aquí puedes hacer algo con el plan anterior, como mostrarlo por ejemplo
+	            return planAnterior;
+	        }
+	        this.historialPlanes.agregarPlanAlimentacion(planAlimentacion); 
+	        }
+		return planAlimentacion;
 	}
 	
 	

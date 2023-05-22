@@ -318,8 +318,6 @@ public class Main {
 			    println("No alérgico. Se ingresó una opción distinta de SI.");
 			}
 			
-			// HASTA AQUÍ FUNCIONA BIEN. REVISAR CASOS DE ALERGIAS. REVISAR MÉTODO ASIGNARPLAN
-			
 			if (alergias.isEmpty()) { // Muestro todos los planes y le pido al usuario que escoja uno.
 				println("Planes Disponibles: ");
 				for (int i=1; i<=planesAdecuados.size(); i++) {
@@ -367,22 +365,10 @@ public class Main {
 					
 					else { // Se pide seleccione uno de los adecuados.
 						PlanAlimentacion planElegido = planesModificados.get(opcionPlan-1);
-						print("Plan Alimenticio seleccionado: " + planElegido.nombrePlan);
+						println("Plan Alimenticio seleccionado: " + planElegido.nombrePlan);
 						
-						if (miCliente.asignarPlan(planElegido) == null) { // Si no tiene histórico de planes alimenticios
-							println("le recomendamos el nuevo plan: ");
-							println(planElegido.toString());
-						}
-						else { // Muestro el plan que tiene, y le doy una recomendación para hacer la transición de planes.
-							println("En su histórico se muestra el plan anterior: ");
-							
-							miCliente.asignarPlan(planElegido).toString(); // Plan anterior.
-							
-							println("\n Le recomendamos seguir este plan y en en transcurso de "
-									+ "una semana ir cambiando los alimentos para llegar a este nuevo plan: ");
-							
-							println(planElegido.toString()); // Plan nuevo.
-						}
+						miCliente.asignarPlan(planElegido); // TERCER MÉTODO DE NUEVO.
+						print(planElegido.toString());
 					}
 				}
 			}
