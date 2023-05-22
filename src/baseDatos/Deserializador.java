@@ -73,7 +73,6 @@ public class Deserializador {
                 try {
                     fis = new FileInputStream(file);
                     ois = new ObjectInputStream(fis);
-
                     empresa.setMovimientos((List<Movimiento>) ois.readObject());
                     for (Movimiento movimiento: empresa.getMovimientos()){
                         Movimiento.listaMovimientos.add(movimiento);

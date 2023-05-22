@@ -2,8 +2,8 @@
  * 
  */
 /**
- * @author Lenovo
+ * @author svald
  *
  */
-module myproyect {
+module J1 {
 }
