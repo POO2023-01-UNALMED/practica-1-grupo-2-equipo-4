@@ -22,8 +22,8 @@ public class Main {
 	// Se crean espacios para los objetos de nuestras clases
 	
 	public static void main(String[] args) {
-    Empresa empresa = new Empresa();
-
+		Empresa empresa = new Empresa();
+		
 		byte opcion;
 		String salir = "n";
 		
@@ -256,6 +256,8 @@ public class Main {
 		// Hago la extracción de clientes similares a mi cliente actual. (PRIMER METODO EN GIMNASIO)
 		ArrayList<Cliente> clientesSimilares = miCliente.getGimnasio().clientesSimilares(miCliente);
 		
+		// NECESITO OBJETOS DE MISMA PREFERENCIA ALIMENTICIA.
+		
 		if (clientesSimilares.size() == 0) {
 			println("Por favor agende una cita con nuestro nutricionista.");
 		}
@@ -263,7 +265,14 @@ public class Main {
 		else { // Utilizo los clientes similares para guardar Planes que podrían servir.
 			ArrayList<PlanAlimentacion> planesAdecuados = new ArrayList<>();
 			
-			for (Cliente c : clientesSimilares) {planesAdecuados.add(c.planAlimentacion);}
+			for (Cliente c : clientesSimilares) {
+				//print(c.getPlanAlimentacion());
+				planesAdecuados.add(c.planAlimentacion);
+			}
+			
+			for (PlanAlimentacion p : planesAdecuados) {
+				print(p.getNombrePlan());
+			}
 			
 			// Le pido al cliente sus alergias.
 			ArrayList<Alergeno> alergias = new ArrayList<>();
@@ -312,6 +321,7 @@ public class Main {
 			} else if (!opcionFrutosSecos.equals("NO")) {
 			    println("No alérgico. Se ingresó una opción distinta de SI.");
 			}
+			
 			
 			if (alergias.isEmpty()) { // Muestro todos los planes y le pido al usuario que escoja uno.
 				println("Planes Disponibles: ");
