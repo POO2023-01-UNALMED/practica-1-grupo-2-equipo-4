@@ -28,7 +28,6 @@ public class Rutina implements Serializable{
         this.tipoEjercicio = tipoEjercicio;
     }
 
-    
     public static Rutina generarRutina(TipoEjercicio tipoEjercicio, ObjetivoCliente objetivo, NivelCliente dificultad){
         ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
         ArrayList<Movimiento> movimientosDisponibles = Movimiento.filtrarMovimientosPorDificultad(Movimiento.filtrarMovimientosPorTipo(tipoEjercicio), dificultad);
@@ -59,7 +58,6 @@ public class Rutina implements Serializable{
         }
         return toString;
     }
-	
 
 	//Metodos get y set
     public void setEjercicios (ArrayList<Ejercicio> ejercicios) {
@@ -68,15 +66,15 @@ public class Rutina implements Serializable{
         this.tipoEjercicio = tipoEjercicio;}
     public void setNombre(String nombre) {
 		this.nombre = nombre;}
+
+        public ArrayList<Ejercicio> getEjercicios() {
+            return ejercicios;}
+        public TipoEjercicio getTipoEjercicio() {
+            return tipoEjercicio;}
+        public String getNombre() {
+            return nombre;}
+        
+        public int retNumEje() {return NUMEJERCIOS;}
+        
+    }
     
-    public ArrayList<Ejercicio> getEjercicios() {
-        return ejercicios;}
-    public TipoEjercicio getTipoEjercicio() {
-        return tipoEjercicio;}
-    public String getNombre() {
-		return nombre;}
-    
-    public int retNumEje() {return Rutina.NUMEJERCIOS;}
-    
-    
-}

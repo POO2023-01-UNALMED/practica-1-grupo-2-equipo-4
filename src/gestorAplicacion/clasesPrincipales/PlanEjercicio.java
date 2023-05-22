@@ -53,6 +53,11 @@ public class PlanEjercicio implements Plan, Serializable {
         setDificultad(nivel);
         return crearPLanSemanal(objetivo);
     }
+    
+    public PlanEjercicio crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente nivel) {
+    	PlanEjercicio plan = new PlanEjercicio();
+    	return plan.crearPLanSemanal(objetivo, nivel);
+    }
 
     @Override
     public String toString(){
