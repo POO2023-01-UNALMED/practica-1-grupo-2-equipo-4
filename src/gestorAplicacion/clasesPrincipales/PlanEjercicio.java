@@ -9,28 +9,32 @@ import gestorAplicacion.clasesHerencia.Plan;
 
 public class PlanEjercicio implements Plan, Serializable {
     private static final long serialVersionUID = 1L;
-	
     private String nombre;
     private NivelCliente dificultad;
     private HashMap<DiaSemana, Rutina> planSemanalEjercio = new HashMap<DiaSemana, Rutina>();
 
-
     public PlanEjercicio(HashMap<DiaSemana, Rutina> planSemanalEjercio){    
         this.planSemanalEjercio = planSemanalEjercio;
     }
+    
     public PlanEjercicio(String nombre, HashMap<DiaSemana, Rutina> planSemanalEjercio){
         this.nombre = nombre;
         this.planSemanalEjercio = planSemanalEjercio;
     }
+    
     public PlanEjercicio(){}
 
-
-
     @Override
-    public Plan crearPLanSemanal(ObjetivoCliente objetivo) {
+    public Plan crearPlanSemanal(ObjetivoCliente objetivo) {
 
-    	TipoEjercicio[] array = {TipoEjercicio.EMPUJAR, TipoEjercicio.EMPUJAR, TipoEjercicio.HALAR, 
-            TipoEjercicio.HALAR, TipoEjercicio.PIERNA, TipoEjercicio.PIERNA, TipoEjercicio.CARDIO};
+    	TipoEjercicio[] array = {TipoEjercicio.EMPUJAR, 
+				    			TipoEjercicio.EMPUJAR, 
+				    			TipoEjercicio.HALAR, 
+					            TipoEjercicio.HALAR, 
+					            TipoEjercicio.PIERNA, 
+					            TipoEjercicio.PIERNA, 
+					            TipoEjercicio.CARDIO};
+    	
         Random rand = new Random();
         HashMap<DiaSemana, Rutina> planSemanalEjercio = new HashMap<DiaSemana, Rutina>();
         
@@ -51,20 +55,31 @@ public class PlanEjercicio implements Plan, Serializable {
 
     public Plan crearPlanSemanal(ObjetivoCliente objetivo, NivelCliente nivel){
         setDificultad(nivel);
-        return crearPLanSemanal(objetivo);
+        return crearPlanSemanal(objetivo);
     }
     
-    public PlanEjercicio crearPLanSemanal(ObjetivoCliente objetivo, NivelCliente nivel) {
+    public PlanEjercicio crearPlanEjercicioSemanal(ObjetivoCliente objetivo, NivelCliente nivel) {
     	PlanEjercicio plan = new PlanEjercicio();
-    	return plan.crearPLanSemanal(objetivo, nivel);
+    	return (PlanEjercicio) plan.crearPlanSemanal(objetivo, nivel);
     }
 
     @Override
     public String toString(){
-        return "TU PLAN PARA LA SEMANA\n" + "Lunes: " + getPlanSemanalEjercio().get(DiaSemana.LUNES)
-        + "\nMartes: " + getPlanSemanalEjercio().get(DiaSemana.MARTES)+ "\nMiercoles: " + getPlanSemanalEjercio().get(DiaSemana.MIERCOLES) 
-        + "\nJueves: " + getPlanSemanalEjercio().get(DiaSemana.JUEVES)+ "\nViernes: " + getPlanSemanalEjercio().get(DiaSemana.VIERNES)
-        + "\nSabado: " + getPlanSemanalEjercio().get(DiaSemana.SABADO)+ "\nDomingo: " + getPlanSemanalEjercio().get(DiaSemana.DOMINGO);
+        return "TU PLAN PARA LA SEMANA\n" 
+		        + "Lunes: " 
+		        + getPlanSemanalEjercio().get(DiaSemana.LUNES)
+		        + "\nMartes: " 
+		        + getPlanSemanalEjercio().get(DiaSemana.MARTES)
+		        + "\nMiercoles: " 
+		        + getPlanSemanalEjercio().get(DiaSemana.MIERCOLES) 
+		        + "\nJueves: " 
+		        + getPlanSemanalEjercio().get(DiaSemana.JUEVES)
+		        + "\nViernes: " 
+		        + getPlanSemanalEjercio().get(DiaSemana.VIERNES)
+		        + "\nSabado: " 
+		        + getPlanSemanalEjercio().get(DiaSemana.SABADO)
+		        + "\nDomingo: " 
+		        + getPlanSemanalEjercio().get(DiaSemana.DOMINGO);
     }
 
     //metodos get y set
@@ -92,5 +107,4 @@ public class PlanEjercicio implements Plan, Serializable {
     public NivelCliente getDificultad(){
         return dificultad;
     }
-    
 }

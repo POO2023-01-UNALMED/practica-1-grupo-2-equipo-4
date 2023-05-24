@@ -25,27 +25,27 @@ public class Gimnasio implements Serializable {
 	
 	public void setNombre(String nombre) {
 	    this.nombre = nombre;
-	  }
+	}
 
 	public String getNombre() {
 	    return this.nombre;
-	  }
+	}
 	
 	public void setCiudad(String ciudad) {
 	    this.ciudad = ciudad;
-	  }
+	}
 	
 	public String getCiudad() {
 	    return this.ciudad;
-	  }
+	}
 	
 	public void setSede(String sede) {
 	    this.sede = sede;
-	  }
+	}
 	
 	public String getSede() {
 	    return this.sede;
-	  }
+	}
 	
 	public void setListaGimnasios(ArrayList<Gimnasio> listaGimnasios) {
 		Gimnasio.listaGimnasios = listaGimnasios;
@@ -59,36 +59,41 @@ public class Gimnasio implements Serializable {
 		this.abierto = abierto;
 	}
 
-
 	public void setListaMaquinas(ArrayList<Maquina> listaMaquinas) {
 	    this.listaMaquinas = listaMaquinas;
-	  }
+	}
 	
 	public ArrayList<Maquina> getListaMaquinas() {
 	    return this.listaMaquinas;
-	  }  
+	}  
 
 	public void setListaEntrenadores(ArrayList<Entrenador> listaEntrenadores) {
 	    this.listaEntrenadores = listaEntrenadores;
-	  }
+	}
 	
 	public ArrayList<Entrenador> getListaEntrenadores() {
 	    return this.listaEntrenadores;
-	  }	
+	}	
 
 	public void setListaClientes(ArrayList<Cliente> listaClientes) {
 	    this.listaClientes = listaClientes;
-	  }
+	}
 	
 	public ArrayList<Cliente> getListaClientes() {
 	    return this.listaClientes;
-	  }    
+	}    
 	
-	public void agregarEntrenador(Entrenador e) {listaEntrenadores.add(e);}
+	public void agregarEntrenador(Entrenador e) {
+		listaEntrenadores.add(e);
+	}
 	
-	public void agregarMaquina(Maquina m) {listaMaquinas.add(m);}
+	public void agregarMaquina(Maquina m) {
+		listaMaquinas.add(m);
+	}
 	
-	public void agregarCliente(Cliente c) {listaClientes.add(c);}
+	public void agregarCliente(Cliente c) {
+		listaClientes.add(c);
+	}
 	
 	public boolean tieneEntrenadoresPrincipiante() {
 		boolean b = false;
@@ -126,14 +131,18 @@ public class Gimnasio implements Serializable {
 		return b;
 	}
 	
+	@Override
 	public String toString() {
-		return this.nombre + " " + this.ciudad + " sede " + this.sede;
+		return this.nombre 
+				+ " " 
+				+ this.ciudad 
+				+ " sede " 
+				+ this.sede;
 	}
 	
 	public ArrayList<Gimnasio> sedesDisponibles(ArrayList<Maquina> maquinas) {
 		ArrayList<Gimnasio> sedesDisponibles = new ArrayList<>();
 		ArrayList<String> maquinasEnString = new ArrayList<>();
-		
 		
 		for (Maquina m : maquinas) {
 			maquinasEnString.add(m.getNombre());

@@ -31,7 +31,6 @@ public class Empresa implements Serializable {
         Deserializador.desearilizar(this);
     }
 
-
     public void agregarObjetosGimnasio(Gimnasio[] gimnasios){
         for (Gimnasio gimnasio : gimnasios ){
             this.gimnasios.add(gimnasio);
@@ -190,18 +189,4 @@ public class Empresa implements Serializable {
     public PlanEjercicio convertirAPlanEjercicio (Plan planEjercicio){
         return new PlanEjercicio(((PlanEjercicio) planEjercicio).getPlanSemanalEjercio());
     }
-
-    // metodos practicos
-
-//    public void asignEntrenadorACliente(Cliente cliente, Entrenador entrenador){
-//        cliente.setEntrenador(entrenador);
-//    }
-//    
-//    public void asignPlanAlimentacionACliente(Cliente cliente, PlanAlimentacion planAlimentacion){
-//        cliente.set(planAlimentacion);
-//    }
-//
-//    public void asignPlanEjercicioACliente(Cliente cliente, PlanEjercicio planEjercicio){
-//        cliente.setPlanEjercicio(planEjercicio);
-//    }
 }

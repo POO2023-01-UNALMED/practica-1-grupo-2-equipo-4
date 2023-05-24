@@ -109,17 +109,4 @@ public class Comida implements Serializable {
     
         return caloriasTotales;
     }
-    
-
-    public void calcularMacronutrientes() {
-        // logica
-    }
-
-    public void filtrarComidasPorObjetivo() {
-        // logica
-    }
-
-    public void filtrarComidasPorPreferenciaAlimenticia() {
-        // logica
-    }
 }

@@ -60,7 +60,6 @@ public class Historial {
         }
         return totalVisitas;
     }
-
     
     public PlanEjercicio recomendarPlan() {
         PlanEjercicio planRecomendado;
@@ -72,18 +71,16 @@ public class Historial {
         NivelCliente dificultadActual = cliente.getNivelCliente();
     
         if(asistencias < 10) {
-            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
+            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPlanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
             planRecomendado = new PlanEjercicio("Plan Basico", planSemanalEjercicio);
         } else if(asistencias >= 10 && asistencias < 20) {
-            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
+            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPlanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
             planRecomendado = new PlanEjercicio("Plan Medio", planSemanalEjercicio);
         } else {
-            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPLanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
+            planSemanalEjercicio = ((PlanEjercicio)new PlanEjercicio().crearPlanSemanal(objetivoActual, dificultadActual)).getPlanSemanalEjercio();
             planRecomendado = new PlanEjercicio("Plan Alto", planSemanalEjercicio);
         }
     
         return planRecomendado;
     }
-    
-    
 }

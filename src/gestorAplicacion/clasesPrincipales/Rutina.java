@@ -11,19 +11,21 @@ import java.util.Random;
 public class Rutina implements Serializable{
     private static final long serialVersionUID = 1L;
 	private String nombre;
+	private ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
+	private TipoEjercicio tipoEjercicio;
+	private static final int NUMEJERCIOS = 7;
 
-    public Rutina(String nombre) {this.setNombre(nombre);}
+    public Rutina(String nombre) {
+    	this.setNombre(nombre);
+    }
 
-    private ArrayList<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
-    private TipoEjercicio tipoEjercicio;
-    private static final int NUMEJERCIOS = 7;
-
+    public Rutina(ArrayList<Ejercicio> ejercicios, TipoEjercicio tipoEjercicio){
+    	this.ejercicios = ejercicios;
+    	this.tipoEjercicio = tipoEjercicio;
+    }
+    
     public Rutina(String nombre, ArrayList<Ejercicio> ejercicios, TipoEjercicio tipoEjercicio){
         this.nombre = nombre;
-    	this.ejercicios = ejercicios;
-        this.tipoEjercicio = tipoEjercicio;
-    }
-    public Rutina(ArrayList<Ejercicio> ejercicios, TipoEjercicio tipoEjercicio){
     	this.ejercicios = ejercicios;
         this.tipoEjercicio = tipoEjercicio;
     }
@@ -40,7 +42,7 @@ public class Rutina implements Serializable{
         Collections.shuffle(movimientosDisponibles);
 
         for (int i = 0; i < movimientosDisponibles.size(); i++){
-            if (i==(NUMEJERCIOS - 1)){
+            if (i==(NUMEJERCIOS - 2)){
                 break;
             }else {
                 ejercicios.add(Ejercicio.generarEjercicio(movimientosDisponibles.get(i), objetivo));
@@ -51,30 +53,51 @@ public class Rutina implements Serializable{
         return new Rutina(ejercicios, tipoEjercicio);
     }
 
+    @Override
     public String toString(){
         String toString = getTipoEjercicio() + "\n";
         for (Ejercicio ejercicio : getEjercicios()){
-            toString = toString + ejercicio.getNombre() +" = " + ejercicio.getMaquina().getNombre() + " --> " + ejercicio.getRepeticiones() + "X" + ejercicio.getSeries() + "\n";
+            toString = toString 
+	            		+ ejercicio.getNombre() 
+	            		+ " = " 
+	            		+ ejercicio.getMaquina().getNombre() 
+	            		+ " ---> " 
+	            		+ ejercicio.getRepeticiones() 
+	            		+ "x" 
+	            		+ ejercicio.getSeries() 
+	            		+ "\n";
         }
         return toString;
     }
 
 	//Metodos get y set
+    
     public void setEjercicios (ArrayList<Ejercicio> ejercicios) {
-        this.ejercicios = ejercicios;}
-    public void setTipoEjercicio (TipoEjercicio tipoEjercicio) {
-        this.tipoEjercicio = tipoEjercicio;}
-    public void setNombre(String nombre) {
-		this.nombre = nombre;}
-
-        public ArrayList<Ejercicio> getEjercicios() {
-            return ejercicios;}
-        public TipoEjercicio getTipoEjercicio() {
-            return tipoEjercicio;}
-        public String getNombre() {
-            return nombre;}
-        
-        public int retNumEje() {return NUMEJERCIOS;}
-        
+        this.ejercicios = ejercicios;
     }
+    
+    public void setTipoEjercicio (TipoEjercicio tipoEjercicio) {
+        this.tipoEjercicio = tipoEjercicio;
+    }
+    
+    public void setNombre(String nombre) {
+		this.nombre = nombre;
+    }
+
+    public ArrayList<Ejercicio> getEjercicios() {
+    	return ejercicios;
+    }
+    
+    public TipoEjercicio getTipoEjercicio() {
+    	return tipoEjercicio;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+      
+    public int retNumEje() {
+    	return NUMEJERCIOS;
+    }
+}
     

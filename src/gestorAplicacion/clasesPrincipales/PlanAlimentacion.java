@@ -9,20 +9,18 @@ import java.util.ArrayList;
 public class PlanAlimentacion implements Plan, Serializable {
 	private static final long serialVersionUID = 1L;
 	public String nombrePlan;
-    private final int numComidas;
+    private final int NUMCOMIDAS = 3;
     private ArrayList<Comida> comidasFiltradas;
     private HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<DiaSemana, ArrayList<Comida>>();
 
-    public PlanAlimentacion(String nombrePlan, int numComidas) {
+    public PlanAlimentacion(String nombrePlan) {
         this.nombrePlan = nombrePlan;
-        this.numComidas = numComidas;
         this.comidasFiltradas = new ArrayList<Comida>(); // Tiene 3 comidas únicamente
         this.planSemanal = new HashMap<>();
     }
     
     public PlanAlimentacion(String nombrePlan, HashMap<DiaSemana, ArrayList<Comida>> planSemanal) {
     	this.nombrePlan = nombrePlan;
-    	this.numComidas = 3;
         this.planSemanal = planSemanal;
     }
 
@@ -35,7 +33,7 @@ public class PlanAlimentacion implements Plan, Serializable {
     }
 
     public int getNumComidas() {
-        return numComidas;
+        return NUMCOMIDAS;
     }
 
     public ArrayList<Comida> getComidasFiltradas() {
@@ -53,13 +51,6 @@ public class PlanAlimentacion implements Plan, Serializable {
     public void setPlanSemanal(HashMap<DiaSemana, ArrayList<Comida>> planSemanal) {
         this.planSemanal = planSemanal;
     }
-
-    public Plan crearPLanSemanal() {
-        PlanAlimentacion p = new PlanAlimentacion("", 3);
-    	return p;
-    }
-    
-
 
     public PlanAlimentacion filtrarPorAlergenos(ArrayList<Alergeno> alergias) {
     	Alimento proteinaComplementaria = new Alimento("Proteina", 100, 24, 3, 0, null);
@@ -86,6 +77,7 @@ public class PlanAlimentacion implements Plan, Serializable {
         return this;
     }
     
+    @Override
     public String toString() {
         String planFormateado = "";
         ArrayList<DiaSemana> dias = new ArrayList<>();
@@ -119,8 +111,9 @@ public class PlanAlimentacion implements Plan, Serializable {
 
         return planFormateado;
     }
+    
     @Override
-    public Plan crearPLanSemanal(ObjetivoCliente objetivo) {
+    public Plan crearPlanSemanal(ObjetivoCliente objetivo) {
         Empresa empresa = new Empresa();
         Random random = new Random();
         ArrayList<Comida> comidasFiltradas= new ArrayList<Comida>();
@@ -131,20 +124,20 @@ public class PlanAlimentacion implements Plan, Serializable {
 
         switch(objetivo){
             case ACONDICIONAR:
-                limiteCalAlto = 2500/3;
-                limiteCalBajo = 2000/3;
+                limiteCalAlto = 2500/NUMCOMIDAS;
+                limiteCalBajo = 2000/NUMCOMIDAS;
             case AUMENTAR:
-                limiteCalAlto = 3000/3;
-                limiteCalBajo = 2500/3;
+                limiteCalAlto = 3000/NUMCOMIDAS;
+                limiteCalBajo = 2500/NUMCOMIDAS;
             case DEFINIR:
-                limiteCalAlto = 1500/3;
-                limiteCalBajo = 1700/3;
+                limiteCalAlto = 1500/NUMCOMIDAS;
+                limiteCalBajo = 1700/NUMCOMIDAS;
             case BAJARPESO:
-                limiteCalAlto = 1300/3;
-                limiteCalBajo = 1800/3;
+                limiteCalAlto = 1300/NUMCOMIDAS;
+                limiteCalBajo = 1800/NUMCOMIDAS;
             case MANTENER:
-                limiteCalAlto = 1500/3;
-                limiteCalBajo = 2000/3;
+                limiteCalAlto = 1500/NUMCOMIDAS;
+                limiteCalBajo = 2000/NUMCOMIDAS;
                 
         }
 

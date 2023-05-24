@@ -17,8 +17,8 @@ public class Cliente extends Persona implements Serializable {
 	private PreferenciaAlimenticia preferenciaAlimenticia;
 	private NivelCliente nivelCliente;
 	private ObjetivoCliente objetivoCliente;
-	public PlanAlimentacion planAlimentacion;
-	public Plan planEjercicio;
+	private PlanAlimentacion planAlimentacion;
+	private Plan planEjercicio;
 	private Historial historialPlanes;
 	
 	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
@@ -36,20 +36,16 @@ public class Cliente extends Persona implements Serializable {
 		this.setPreferenciaAlimenticia(preferenciaAlimenticia);
 		this.setNivelCliente(nivelCliente);
 		this.setObjetivoCliente(objetivoCliente);
+		this.setPlanAlimentacion(planAlimentacion);
+		this.setPlanEjercicio(planEjercicio);
 		
 		this.gimnasio.agregarCliente(this);
 		listaClientes.add(this);
 	}
 	
-
-	public void setPlanEjercicio (Plan planEjercicio) {
-		this.planEjercicio = planEjercicio;
+	public Cliente() {
+		this(null, null, 0, 0, 0, null, 0, null, null, null, null);
 	}
-	
-	public Plan getPlanEjercicio() {
-		return planEjercicio;
-	}
-	
 	
 	public double getAltura() {
 		return altura;
@@ -115,6 +111,22 @@ public class Cliente extends Persona implements Serializable {
 		this.objetivoCliente = objetivoCliente;
 	}
 	
+	public void setPlanAlimentacion (PlanAlimentacion planAlimentacion) {
+		this.planAlimentacion = planAlimentacion;
+	}
+	
+	public PlanAlimentacion getPlanAlimentacion() {
+		return planAlimentacion;
+	}
+	
+	public void setPlanEjercicio (Plan planEjercicio) {
+		this.planEjercicio = planEjercicio;
+	}
+	
+	public Plan getPlanEjercicio() {
+		return planEjercicio;
+	}
+	
 	public Historial getHistorialPlanes() {
 		return historialPlanes;
 	}
@@ -122,7 +134,7 @@ public class Cliente extends Persona implements Serializable {
 	public void setHistorialPlanes(Historial historialPlanes) {
 		this.historialPlanes = historialPlanes;
 	}
-
+	
 	public String toString() {return "Nombre: " + this.getNombre()
 	+ "Gimnasio: " + this.gimnasio.toString()
 	+ "Nivel: " + this.getNivelCliente()
@@ -137,7 +149,7 @@ public class Cliente extends Persona implements Serializable {
 		this.entrenador.setDisponibilidad("NO DISPONIBLE");
 	}
 	
-	public void asignarPlan(PlanAlimentacion planAlimentacion) {
+	public void asignarPlanAlimentacion(PlanAlimentacion planAlimentacion) {
 		this.planAlimentacion = planAlimentacion;
 		
 		if (this.historialPlanes == null) { 
@@ -152,13 +164,25 @@ public class Cliente extends Persona implements Serializable {
 		}
 	}
 	
+	public void asignarPlanEjercicio(PlanEjercicio planEjercicio) {
+		this.planEjercicio = planEjercicio;
+		
+		if (this.historialPlanes == null) { 
+			// Si no había tenido un historial se lo creo y agrego el nuevo plan de ejercicio.
+			Historial historialParaPlanesEjercicio = new Historial(this);
+			this.setHistorialPlanes(historialParaPlanesEjercicio); 
+			this.historialPlanes.agregarPlanEjercicio(planEjercicio);
+		}
+		
+		else {
+			this.historialPlanes.agregarPlanEjercicio(planEjercicio);
+		}
+	}
 	
-	public static void generarPlanAlimentacion() {}
-
 	public String generarPlanEjercicio(){
 		PlanEjercicio plan = new PlanEjercicio();	
 		plan.setDificultad(getNivelCliente());
-		setPlanEjercicio(plan.crearPLanSemanal(getObjetivoCliente()));
+		setPlanEjercicio(plan.crearPlanSemanal(getObjetivoCliente()));
 		return getPlanEjercicio().toString();
 	}
 }
