@@ -184,7 +184,7 @@ public class Gimnasio implements Serializable {
 				maquinasSedeEnString.add(m.getNombre());
 			}
 			
-			if (g.abierto) {
+			if (g.abierto && (g.ciudad == this.ciudad)) {
 				// Si g está abierto y contiene todas las máquinas que necesito
 				// para hacer mi rutina
 				// Entonces es una sede disponible
