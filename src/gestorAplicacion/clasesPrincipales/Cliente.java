@@ -7,6 +7,32 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+//Autores: Esteban Vásquez Pérez.
+
+//Finalidad de la clase: 
+//La clase cliente representa una de las Personas que está asistiendo a nuestros Gimnasios
+//El cliente es el usuario principal de la aplicación. 
+//Tiene acceso a todas las funcionalidades a través de su número de identificación.
+
+//Estructuras de datos:
+//Utilizamos un ArrayList para guardar cada uno de los clientes
+
+//Componentes:
+//Atributos heredados de Persona: nombre, gimnasio, identificación.
+//Atributos que describen el físico del cliente
+//Un objeto de entrenador
+
+//Una serie de descripciones del cliente que incluyen
+//preferencia alimenticia (por ejemplo si es vegano)
+//nivel cliente que puede ser (PRINCIPIANTE, INTERMEDIO, AVANZADO)
+//Un objetivo particular del cliente (por ejemplo bajar de peso)
+//un PlanAlimentacion que el cliente sigue en este momento.
+//un Plan que va a representar el PlanEjercicio
+//un Historial de planes que contiene
+//historial de gimnasios visitados
+//historial de planes de ejercicio y alimentación
+//un historial que tiene los gimnasios que ha visitado y la cantidad de veces que ha ido.
+
 public class Cliente extends Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private double altura;
@@ -22,6 +48,8 @@ public class Cliente extends Persona implements Serializable {
 	private Historial historialPlanes;
 	
 	public static ArrayList<Cliente> listaClientes = new ArrayList<>();
+	
+	//Constructor 
 	
 	public Cliente(String nombre, Gimnasio gimnasio, int identificacion,
 			double altura, double peso, String sexo, int edad, Entrenador entrenador, PreferenciaAlimenticia preferenciaAlimenticia,
@@ -39,13 +67,18 @@ public class Cliente extends Persona implements Serializable {
 		this.setPlanAlimentacion(planAlimentacion);
 		this.setPlanEjercicio(planEjercicio);
 		
+		// Genera excepción de puntero nulo si no se usa el constructor ingresando un gimnasio.
 		this.gimnasio.agregarCliente(this);
 		listaClientes.add(this);
 	}
 	
+	//Constructor por defecto
+	
 	public Cliente() {
 		this(null, null, 0, 0, 0, null, 0, null, null, null, null);
 	}
+	
+	//Métodos Set y Get
 	
 	public double getAltura() {
 		return altura;
@@ -135,21 +168,39 @@ public class Cliente extends Persona implements Serializable {
 		this.historialPlanes = historialPlanes;
 	}
 	
-	public String toString() {return "Nombre: " + this.getNombre()
-	+ "Gimnasio: " + this.gimnasio.toString()
-	+ "Nivel: " + this.getNivelCliente()
-	+ "Entrenador: " + this.getEntrenador().getNombre()
-	+ "Plan Alimentacion: " + this.planAlimentacion.getNombrePlan();
+	// toString para mostrar información relevante sobre el cliente
+
+	@Override
+	public String toString() {return "Nombre: " 
+	+ this.getNombre()
+	+ "Gimnasio: " 
+	+ this.gimnasio.toString()
+	+ "Nivel: " 
+	+ this.getNivelCliente()
+	+ "Entrenador: " 
+	+ this.getEntrenador().getNombre()
+	+ "Plan Alimentacion: " 
+	+ this.planAlimentacion.getNombrePlan();
 	}
 	
 	public void asignarEntrenador(Entrenador entrenador) {
+		// Tercer Método dentro de la primera funcionalidad. 
+		// Es análogo al ejemplo del video en donde se asigna una silla a un Pasajero.
+		// Se hace el cambio por referencia de la disponiblidad de un entrenador.
+				
 		this.entrenador = entrenador;
 		entrenador.setCliente(this);
 		
 		this.entrenador.setDisponibilidad("NO DISPONIBLE");
+		// Si se vuelve a llamar la funcionalidad, el mismo entrenador ya no estará disponible
+
 	}
 	
 	public void asignarPlanAlimentacion(PlanAlimentacion planAlimentacion) {
+		// Tercer método dentro de la segunda funcionalidad.
+		// Sirve para que los planes de alimentación se vayan añadiendo 
+		// a medida el cliente va cambiando de plan de alimentación
+				
 		this.planAlimentacion = planAlimentacion;
 		
 		if (this.historialPlanes == null) { 
@@ -165,6 +216,7 @@ public class Cliente extends Persona implements Serializable {
 	}
 	
 	public void asignarPlanEjercicio(PlanEjercicio planEjercicio) {
+		
 		this.planEjercicio = planEjercicio;
 		
 		if (this.historialPlanes == null) { 
@@ -180,6 +232,8 @@ public class Cliente extends Persona implements Serializable {
 	}
 	
 	public String generarPlanEjercicio(){
+		//Se crea un Plan de Ejercicio usando el método crearPlanSemanal
+		
 		PlanEjercicio plan = new PlanEjercicio();	
 		plan.setDificultad(getNivelCliente());
 		setPlanEjercicio(plan.crearPlanSemanal(getObjetivoCliente()));

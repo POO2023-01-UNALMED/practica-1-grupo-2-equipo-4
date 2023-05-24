@@ -6,13 +6,24 @@ import java.util.Random;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/*Autores: Juan Ospina, Esteban Vásquez, Jacobo Ochoa
+ * Finalidad de la clase: La clase guarda la información del plan de alimentación para la semana recomendado al cliente */
+
 public class PlanAlimentacion implements Plan, Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	/*Atributos: nombrePlan, numComidas-> comidas al día*/
+	//Estructuras de datos: HashMap planSemanal-> A cada día de la semana se le asigna un ArrayList de comidas
+	//						ArrayList comidasFiltradas-> comidas que puede consumir el cliente 
+	//										   basado en especificaciones como alergias, cantidad de macronutrientes/calorias, entre otros
+	
 	public String nombrePlan;
     private final int NUMCOMIDAS = 3;
     private ArrayList<Comida> comidasFiltradas;
     private HashMap<DiaSemana, ArrayList<Comida>> planSemanal = new HashMap<DiaSemana, ArrayList<Comida>>();
 
+    //Sobrecarga de constructores
+    
     public PlanAlimentacion(String nombrePlan) {
         this.nombrePlan = nombrePlan;
         this.comidasFiltradas = new ArrayList<Comida>(); // Tiene 3 comidas únicamente
@@ -24,6 +35,8 @@ public class PlanAlimentacion implements Plan, Serializable {
         this.planSemanal = planSemanal;
     }
 
+    //Métodos Set y Get
+    
     public String getNombrePlan() {
         return nombrePlan;
     }
@@ -52,6 +65,8 @@ public class PlanAlimentacion implements Plan, Serializable {
         this.planSemanal = planSemanal;
     }
 
+    //Método que descarta todos los alimentos que contenga alguno de los alérgenos listados en el parámetro
+
     public PlanAlimentacion filtrarPorAlergenos(ArrayList<Alergeno> alergias) {
     	Alimento proteinaComplementaria = new Alimento("Proteina", 100, 24, 3, 0, null);
     	
@@ -76,6 +91,8 @@ public class PlanAlimentacion implements Plan, Serializable {
         }
         return this;
     }
+    
+    //toString para mostrarle en pantalla al usuario, el plan de alimentación semanal
     
     @Override
     public String toString() {
@@ -112,6 +129,10 @@ public class PlanAlimentacion implements Plan, Serializable {
         return planFormateado;
     }
     
+    //Sobreescribe el método Plan crearPlanSemana(ObjetivoCliente) de la interfaz Plan
+    //Crea un plan de alimentación para todos los días de la semana, 
+    //cada comida comprendida en el plan debe estar en un rango de calorias determinado por el objetivo del parametro
+    
     @Override
     public Plan crearPlanSemanal(ObjetivoCliente objetivo) {
         Empresa empresa = new Empresa();
@@ -121,6 +142,7 @@ public class PlanAlimentacion implements Plan, Serializable {
         int limiteCalBajo = 0;
         int limiteCalAlto = 0;
 
+        //Asigna un rango de calorias para las comidas según el objetivo
 
         switch(objetivo){
             case ACONDICIONAR:
@@ -140,6 +162,7 @@ public class PlanAlimentacion implements Plan, Serializable {
                 limiteCalBajo = 2000/NUMCOMIDAS;
                 
         }
+        //Agrega las comidas que cumplen con el parametro a una lista
 
         for (Comida comida: empresa.getComidas()){
             if (comida.getCalorias() <= limiteCalAlto && comida.getCalorias() >= limiteCalAlto){
@@ -147,6 +170,7 @@ public class PlanAlimentacion implements Plan, Serializable {
             }
         }
         setComidasFiltradas(comidasFiltradas);
+        //Agrega tres comidas cualquiera que hagan parte de la lista de comidas filtradas a cada día de la semana
 
         for (DiaSemana dia: DiaSemana.values()){
             ArrayList<Comida> comidasDelDia = new ArrayList<Comida>();

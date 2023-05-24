@@ -3,13 +3,30 @@ package gestorAplicacion.clasesPrincipales;
 import gestorAplicacion.clasesEnum.*;
 import java.util.*;
 
+//Autores: Juan Jose Ospina Erazo.
+
+//Finalidad de la clase: 
+//El historial sirve para almacenar la historia de planes de ejercicio
+//la historia de los planes de alimentación, entre otros aspectos de un cliente.
+
+//Estructuras de datos:
+//Utilizamos un List para los historiales de planes
+//Utilizamos un Set para guardar elementos no duplicados de gimnasio
+//Utilizamos un Map para guardar llaves de gimnasio y valores de las veces que se ha asistido a este gimnasio
+
+//Componentes:
+//Las listas de historiales, la lista de gimnasios visitados
+//y el HashMap del gimnasio visitado y las veces que el cliente lo visita.
+
 public class Historial {
     private Cliente cliente;
     private List<PlanEjercicio> historialPlanesEjercicio = new ArrayList<>();
     private List<PlanAlimentacion> historialPlanesAlimentacion = new ArrayList<>();
     private Set<Gimnasio> gimnasiosVisitados = new HashSet<>();
     private Map<Gimnasio, Integer> visitasGimnasio = new HashMap<>();
-
+    
+    //Constructor 
+    
     public Historial(Cliente cliente) {
         this.cliente = cliente;
         this.historialPlanesEjercicio = new ArrayList<>();
@@ -17,6 +34,8 @@ public class Historial {
         this.visitasGimnasio = new HashMap<>();
     }    
 
+    //Métodos Set y Get
+    
     public Cliente getCliente() {
         return cliente;
     }
@@ -41,6 +60,8 @@ public class Historial {
         this.historialPlanesAlimentacion.add(plan);
     }
 
+    // Métodos para acutalizar el historial
+    
     public void agregarGimnasio(Gimnasio gimnasio) {
         this.gimnasiosVisitados.add(gimnasio);
     
@@ -54,6 +75,8 @@ public class Historial {
     }
 
     public int vecesAsistidasAlGimnasio() {
+    	// Hace la sumatoria de visitas al gimnasio
+
         int totalVisitas = 0;
         for(Integer visitas : this.visitasGimnasio.values()) {
             totalVisitas += visitas;
@@ -62,6 +85,8 @@ public class Historial {
     }
     
     public PlanEjercicio recomendarPlan() {
+    	// Método de funcionalidad 4 para documentar
+    	
         PlanEjercicio planRecomendado;
         HashMap<DiaSemana, Rutina> planSemanalEjercicio;
         int asistencias = vecesAsistidasAlGimnasio();

@@ -6,6 +6,21 @@ import gestorAplicacion.clasesHerencia.Plan;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//Autores: Esteban Vásquez Pérez.
+
+//Finalidad de la clase: 
+//La clase entrenador sirve para crear objetos de los entrenadores que pertenecen a 
+//un gimnasio. Los entrenadores se pueden asignar a clientes según un nivel
+
+//Estructuras de datos: 
+//Utilizamos un ArrayList para guardar cada uno de los entrenadores. 
+
+//Componentes: 
+//Atributos básicos que describen al entrenador. Nombre, gimnasio, identificación. 
+//Un atributo de formación que puede ser 
+//Un cliente personalizado que se le asigna. 
+//el horario de disponiblididad
+
 public class Entrenador extends Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int edad;
@@ -22,7 +37,7 @@ public class Entrenador extends Persona implements Serializable {
 	
 	public Entrenador(String nombre, Gimnasio gimnasio, int identificacion, int edad,
 			String formacion, Cliente cliente, NivelCliente nivelEntrenador, String disponibilidad) {
-		super(nombre, gimnasio, identificacion);
+		super(nombre, gimnasio, identificacion); // Constructor de padre (clase Persona).
 
 		this.setEdad(edad);
 		this.setFormacion(formacion);
@@ -30,15 +45,21 @@ public class Entrenador extends Persona implements Serializable {
 		this.setNivelEntrenador(nivelEntrenador);
 		this.setDisponibilidad(disponibilidad);
 		
+		// Genera calificaciones aleatorias con valores enteros (entre 1 y 5), y estas son entre 10 y 20.
 		this.calificaciones = this.generarListaCalificaciones();
 		
+		// Arroja excepción si se crean entrenadores sin un gimnasio.
 		this.gimnasio.agregarEntrenador(this);
 		listaEntrenadores.add(this);
 	}
 	
+	//Constructor por defecto
+	
 	public Entrenador() {
 		this(null, null, 0, 0, null, null, null, null);
 	}
+	
+	//Métodos Set y Get
 	
 	public int getEdad() {
 		return edad;
@@ -104,23 +125,38 @@ public class Entrenador extends Persona implements Serializable {
 		this.planEjercicioRecomendado = planEjercicioRecomendado;
 	}
 	
-
+	// toString que retorna información básica del entrenador
+	
 	@Override
-	public String toString() {return "Nombre: " + this.getNombre()
-			+ "\nGimnasio: " + this.gimnasio.toString()
-			+ "\nNivel: " + this.getNivelEntrenador()
-			+ "\nCliente: " + this.getCliente().getNombre()
-			+ "\nDisponibilidad: " + this.getDisponibilidad() + "\n";
+	public String toString() {return "Nombre: " 
+		+ this.getNombre()
+		+ "\nGimnasio: " 
+		+ this.gimnasio.toString()
+		+ "\nNivel: " 
+		+ this.getNivelEntrenador()
+		+ "\nCliente: " 
+		+ this.getCliente().getNombre()
+		+ "\nDisponibilidad: " 
+		+ this.getDisponibilidad() 
+		+ "\n";
 	}
 	
+	//Método que retorno un String con descripción con datos de Entrenador que serán usados en la funcionalidad 5
+	
 	public String descripcionHojaVida() {return this.getNombre() 
-			+ "\nCalificacion Promedio: " + this.calificacionPromedio
-			+ "\nEdad: " + this.getEdad()
-			+ "\nFormacion: " + this.getFormacion()
-			+ "\nNivel: " + this.getNivelEntrenador()
-			+ "\nGimnasio: " + this.gimnasio.toString()
-			+ "\nDisponibilidad: " + this.getDisponibilidad()
-			+ "\n";
+		+ "\nCalificacion Promedio: " 
+		+ this.calificacionPromedio
+		+ "\nEdad: " 
+		+ this.getEdad()
+		+ "\nFormacion: " 
+		+ this.getFormacion()
+		+ "\nNivel: " 
+		+ this.getNivelEntrenador()
+		+ "\nGimnasio: " 
+		+ this.gimnasio.toString()
+		+ "\nDisponibilidad: " 
+		+ this.getDisponibilidad()
+		+ "\n";
 	}	
 
 	public Entrenador entrenadoresDisponibles(String horarioAsistencia, String intensidad) {

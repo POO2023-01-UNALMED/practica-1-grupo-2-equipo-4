@@ -4,6 +4,22 @@ import gestorAplicacion.clasesEnum.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//Autores: Juan Manuel Rodríguez Sánchez, Jacobo Ochoa Ramirez.
+
+//Finalidad de la clase: 
+//La clase Movimiento sirve para representar una acción física que se hace al entrenar.
+//La clase Movimiento además sirve para ser Padre de la Clase ejercicio.
+//Un ejercicio es un tipo de Movimiento, pero la diferencia es que el ejercicio tiene unas
+//repeticiones y unas series.
+
+//Estructuras de datos:
+//Utilizamos un ArrayList para guardar cada uno de los movimientos
+
+//Componentes:
+//Atributos básicos que describen el movimiento. 
+//Un atributo de completado si el movimiento ya se hizo.
+//Una máquina que DEBE SER ASIGNADA en el momento de crear un movimiento.
+
 public class Movimiento implements Serializable {
 	private static final long serialVersionUID = 1L; 
 
@@ -25,23 +41,31 @@ public class Movimiento implements Serializable {
         this.maquina = maquina;
         this.dificultad = dificultad;
 
+        // Arroja excepción si no se asigna una máquina dentro del constructor.
         this.maquina.setMovimientoRealizado(this);
 
 		if (ejercicio == true){
+			// Siempre se agrega a la lista de movimientos
 			listaMovimientos.add(this);
 		}	
     }
 	
 	public Movimiento(String nombre, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad) {
-        this(nombre, null, null, tipoEjercicio, maquina, dificultad,true);
+		// Caso de sobrecarga si solo se da nombre, tipoEjercicio, maquina y dificultad.
+		
+		this(nombre, null, null, tipoEjercicio, maquina, dificultad,true);
     }
 	
 	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, NivelCliente dificultad) {
-        this(nombre, descripcion, musculoPrincipal, tipoEjercicio, maquina, dificultad,true);
+		// Caso de sobrecarga
+		
+		this(nombre, descripcion, musculoPrincipal, tipoEjercicio, maquina, dificultad,true);
     }
 
 	public Movimiento(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina) {
-        this.nombre = nombre;
+		// Caso de sobrecarga
+		
+		this.nombre = nombre;
         this.descripcion = descripcion;
         this.musculoPrincipal = musculoPrincipal;
         this.tipoEjercicio = tipoEjercicio;
@@ -55,7 +79,10 @@ public class Movimiento implements Serializable {
 	
 	
 	public static ArrayList<Movimiento> filtrarMovimientosPorTipo(TipoEjercicio tipoEjercicio) {
-		
+		// Se encarga de recibir un tipoEjercicio que ingresa el cliente
+		// Por ejemplo TipoEjercicio.CALENTAMIENTO.
+		// Luego filtra todos los movimientos dentro de mi lista que tienen este tipo
+			
 		ArrayList<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
 		
 		for (Movimiento movimiento : listaMovimientos){
@@ -67,6 +94,10 @@ public class Movimiento implements Serializable {
 	}
 
 	public static ArrayList<Movimiento> filtrarMovimientosPorDificultad(ArrayList<Movimiento> movimientosPorTipo, NivelCliente dificultad){
+		// Se encarga de recibir una lista de movimientos
+		// Sobre esta lista hace un filtro de dificultad y retorna 
+		// únicamente los movimientos de esta lista que tienen la dificultad deseada.
+		
 		ArrayList<Movimiento> movimientosFiltrados = new ArrayList<Movimiento>();
 	
 		for (Movimiento movimiento : movimientosPorTipo){
@@ -77,6 +108,8 @@ public class Movimiento implements Serializable {
 		}
 		return movimientosFiltrados;
 	}
+	
+	//Métodos Set y Get
 	
 	public void setNombre(String nombre) {
 	    this.nombre = nombre;
