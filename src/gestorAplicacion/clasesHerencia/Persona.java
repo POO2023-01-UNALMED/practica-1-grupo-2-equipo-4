@@ -3,6 +3,13 @@ import java.io.Serializable;
 
 import gestorAplicacion.clasesPrincipales.*;
 
+//Autores: Esteban Vásquez Pérez
+
+//Finalidad de la clase: 
+//La clase abstracta persona sirve como un modelo para heredar atributos a las clases
+//Entrenador y Cliente. Es una clase sencilla que implementa atributos de nombre, identificación
+//y Gimnasio en el que entrena.
+
 public abstract class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String nombre;
@@ -14,6 +21,8 @@ public abstract class Persona implements Serializable {
 		this.gimnasio = gimnasio;
 		this.identificacion = identificacion;
 	}
+	
+	//Métodos Set y Get
 	
 	public String getNombre() {
 		return nombre;

@@ -5,6 +5,8 @@ import baseDatos.Serializador;
 import gestorAplicacion.clasesPrincipales.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import java.util.HashMap;
@@ -29,8 +31,8 @@ public class Main {
 		
 		Cliente miCliente = null;
 		
-		println("!Hola! Bienvenido a Gimbro, tu asistente personal\n");
-		print("-----INICIO DE SESION-----\nIngrese su identificación: ");
+		println("¡Hola! Bienvenido a Gymbro\n");
+		print("-----INICIO DE SESIÓN-----\nIngrese su identificación: ");
 
 		while (miCliente == null) {
 		    int ident = readInt();
@@ -51,12 +53,12 @@ public class Main {
 	
 		do {
 
-			println("\n\nMENU PRINCIPAL");
+			println("\n\nMENÚ PRINCIPAL");
 			println("1. Reservar Gimnasio");
 			println("2. Recomendación de Plan de Alimentación Semanal");
-			println("3. Recomendación de plan de ejercicio semanal");
+			println("3. Recomendación de Plan de Ejercicio Semanal");
 			println("4. Funcionalidad 4");
-			println("5. Funcionalidad 5");
+			println("5. Recomendación de Entrenadores");
 			println("6. Salir");
 			print("Ingrese la opción que requiera: ");
 			
@@ -76,7 +78,7 @@ public class Main {
 					f4();
 					break;
 				case 5:
-					f5();
+					recomendarEntrenadores(empresa, miCliente);
 					break;
 				case 6:
 					salirDelSistema(empresa);
@@ -93,7 +95,7 @@ public class Main {
 				while (!salir.toLowerCase().equals("y") && !salir.toLowerCase().equals("n"));
 			}
 		} while (opcion != 6 && !salir.toLowerCase().equals("y"));
-		print("¡Gracias por usar Jimbro!");
+		print("¡Gracias por usar Gymbro!");
 		sc.close();
 	}
 	
@@ -113,9 +115,11 @@ public class Main {
 	
 	private static int readInt() {int i = sc.nextInt(); return i;}
 	
+	
 	//Salir y guardar
 	private static void salirDelSistema(Empresa empresa){
-		System.out.println("Le agradecemos por utilizar nuestros servicios/n Vuelva pronto");
+		System.out.println("Le agradecemos por utilizar nuestros servicios");
+		System.out.println("¡Vuelva pronto!");
 		Serializador.serializar(empresa);
 		System.exit(0);
 	}
@@ -196,7 +200,7 @@ public class Main {
 					println("Sede seleccionada: " + sedeGimnasio.toString());
 					
 					print("Seleccione la intensidad del entrenamiento (PRINCIPIANTE/INTERMEDIO/AVANZADO): ");
-					String intensidad = readString();					
+					String intensidad = readString().toUpperCase();					
 					
 					if (!intensidad.equalsIgnoreCase("PRINCIPIANTE") && !intensidad.equalsIgnoreCase("INTERMEDIO") 
 							&& !intensidad.equalsIgnoreCase("AVANZADO")) {
@@ -205,7 +209,7 @@ public class Main {
 					}
 					
 					print("Seleccione el horario en el que asistirá (MAÑANA/TARDE): ");
-					String horarioAsistencia = readString();
+					String horarioAsistencia = readString().toUpperCase();
 
 					if (!horarioAsistencia.equalsIgnoreCase("MAÑANA") && !horarioAsistencia.equalsIgnoreCase("TARDE")) {
 						println("Horario Incorrecto. Seleccione MAÑANA/TARDE");
@@ -267,7 +271,7 @@ public class Main {
 			
 			for (Cliente c : clientesSimilares) {
 				//print(c.getPlanAlimentacion());
-				planesAdecuados.add(c.planAlimentacion);
+				planesAdecuados.add(c.getPlanAlimentacion());
 			}
 			
 			// Le pido al cliente sus alergias.
@@ -333,7 +337,7 @@ public class Main {
 					PlanAlimentacion planElegido = planesAdecuados.get(opcionPlan-1);
 					println("Plan Alimenticio Personalizado: ");
 					
-					miCliente.asignarPlan(planElegido); // TERCER METODO
+					miCliente.asignarPlanAlimentacion(planElegido); // TERCER METODO
 					
 					print(planElegido.toString());
 				}
@@ -367,7 +371,7 @@ public class Main {
 						PlanAlimentacion planElegido = planesModificados.get(opcionPlan-1);
 						println("Plan Alimenticio seleccionado: " + planElegido.nombrePlan);
 						
-						miCliente.asignarPlan(planElegido); // TERCER MÉTODO DE NUEVO.
+						miCliente.asignarPlanAlimentacion(planElegido); // TERCER MÉTODO DE NUEVO.
 						print(planElegido.toString());
 					}
 				}
@@ -376,7 +380,7 @@ public class Main {
 	}
 	
 	static void recomendarPlanEjercicio(Cliente miCliente) {
-		System.out.println("Basandonos en tu objetivo y tu nivel de experiencia hemos desarrollado un plan para tí");
+		System.out.println("Basándonos en tu objetivo y tu nivel de experiencia, hemos desarrollado un plan para ti");
 		System.out.println(miCliente.generarPlanEjercicio());
 	}
 	
@@ -384,7 +388,147 @@ public class Main {
 		System.out.println("*Logica funcionalidad 4*");
 	}
 	
-	static void f5() {
-		System.out.println("*Logica funcionalidad 5*");
+	static void recomendarEntrenadores(Empresa empresa, Cliente miCliente) {
+		print("Ingrese el nombre de su gimnasio principal: ");
+		String gimnasioEscrito = readString().toUpperCase();
+
+		// Revisar si el gimnasio ingresado es igual al que se le atribuye al cliente.
+		Gimnasio gimnasioPrincipal = null;
+		Gimnasio gimnasioCliente = miCliente.getGimnasio();
+		for (Gimnasio g : empresa.getGimnasios()) { // Revisar igualdad de Nombre
+			if ((g.getNombre().equalsIgnoreCase(gimnasioEscrito)) && (gimnasioCliente.getNombre().equalsIgnoreCase(gimnasioEscrito))) {
+				gimnasioPrincipal = g;
+				break;
+			}
+		}
+
+		if (gimnasioPrincipal == null) {
+			println("Este no es su gimnasio principal.");
+		}
+
+		else {
+			// Se obtienen los entrenadores de la sede del cliente.
+			ArrayList<Entrenador> entrenadoresSedeCliente = gimnasioPrincipal.getListaEntrenadores();
+			ArrayList<Entrenador> entrenadoresFiltrados = new ArrayList<>();
+			
+			// Se filtran los entrenadores según nivel (mismo del cliente), edad (no mayor a
+			// 10 años respecto a la del cliente), formacion (debe estar enfocada en el
+			// objetivo del cliente).
+			for (Entrenador e : entrenadoresSedeCliente) {
+				Entrenador entrenadorFiltrado = e.filtroEntrenadores(miCliente);
+
+				if (entrenadorFiltrado != null) {
+					entrenadoresFiltrados.add(entrenadorFiltrado);
+				}
+			}
+			
+			// Se comparan las califcaciones promedio de los entrenadores filtrados.
+			Comparator<Entrenador> comparadorCalificacionPromedio = new Comparator<Entrenador>() {
+				@Override
+				public int compare(Entrenador entrenador1, Entrenador entrenador2) {
+					if (entrenador1.calificacionPromedio > entrenador2.calificacionPromedio) {
+						return -1;
+					} else if (entrenador1.calificacionPromedio < entrenador2.calificacionPromedio) {
+						return 1;
+					} else {
+						return 0;
+					}
+
+				}
+			};
+			
+			// Se ordenan de mayor a menor calificacion promedio.
+			Collections.sort(entrenadoresFiltrados, comparadorCalificacionPromedio);
+
+			ArrayList<Entrenador> entrenadoresRecomendados = new ArrayList<>();
+			
+			// Se añaden solo los tres mejores entrenadores a lista de recomendados.
+			for (int i = 0; i < entrenadoresFiltrados.size(); i++) {
+				if (entrenadoresRecomendados.size() < 3) {
+					entrenadoresRecomendados.add(entrenadoresFiltrados.get(i));
+				} 
+				
+				else {
+					break;
+				}
+			}
+			
+			// Se muestra el TOP 3 recomendados y sus "hojas de vida".
+			print("\n");
+			println("TOP ENTRENADORES RECOMENDADOS\n");
+			for (int i = 1; i <= entrenadoresRecomendados.size(); i++) {
+				println(i + ". " + entrenadoresRecomendados.get(i - 1).descripcionHojaVida());
+			}
+
+			print("Seleccione el entrenador deseado: ");
+			byte opcionEntrenador = readByte();
+
+			if (opcionEntrenador <= 0 || opcionEntrenador > entrenadoresRecomendados.size())
+				println("Opción incorrecta.");
+			
+			// Se selecciona y asigna el entrenador al cliente.
+			else {
+				Entrenador entrenadorElegido = entrenadoresRecomendados.get(opcionEntrenador - 1);
+				println("Entrenador seleccionado: " + entrenadorElegido.getNombre());
+
+				miCliente.asignarEntrenador(entrenadorElegido);
+
+				ArrayList<String> opcionesCambiarPlanes = new ArrayList<>();
+				opcionesCambiarPlanes.add("Ambos");
+				opcionesCambiarPlanes.add("Solo el Plan de Ejercicio");
+				opcionesCambiarPlanes.add("Solo el Plan de Alimentación");
+				
+				// Se empiezan a dar las opciones para asignar o no, uno de los dos o ambos
+				// planes (Ejercicio y Alimentación) recomendados que tiene el entrenador.
+				if ((entrenadorElegido.getPlanEjercicioRecomendado() != null
+						&& entrenadorElegido.getPlanAlimentacionRecomendado() != null)
+						&& ((miCliente.getPlanEjercicio() != null 
+						|| miCliente.getPlanEjercicio() == null) 
+						&& (miCliente.getPlanAlimentacion() != null 
+						|| miCliente.getPlanAlimentacion() == null))) {
+					
+					print("\n");
+					println("El entrenador seleccionado cuenta con un Plan de Ejercicio y un Plan de Alimentación recomendados."
+							+ "\nDesea asignar ambos como sus planes actuales o solo uno de ellos: ");
+					print("\n");
+					
+					for (int i = 1; i <= opcionesCambiarPlanes.size(); i++) {
+						println(i + ". " + opcionesCambiarPlanes.get(i - 1));
+					}
+					
+					print("\n");
+					print("Seleccione la opción deseada: ");
+					byte opcionCambiarPlanes = readByte();
+
+					if (opcionCambiarPlanes <= 0 || opcionCambiarPlanes > opcionesCambiarPlanes.size())
+						println("Opción incorrecta.");
+
+					else {
+						String planElegido = opcionesCambiarPlanes.get(opcionCambiarPlanes - 1);
+						if (planElegido == "Ambos") {
+							miCliente.asignarPlanEjercicio(entrenadorElegido.getPlanEjercicioRecomendado());
+							println(miCliente.getPlanEjercicio());
+							miCliente.asignarPlanAlimentacion(entrenadorElegido.getPlanAlimentacionRecomendado());
+							print(miCliente.getPlanAlimentacion());
+							println("Se asignaron ambos planes.");
+						}
+						
+						if (planElegido == "Solo el Plan de Ejercicio") {
+							miCliente.asignarPlanEjercicio(entrenadorElegido.getPlanEjercicioRecomendado());
+							print("\n");
+							println(miCliente.getPlanEjercicio());
+							println("Se asignó el Plan de Ejercicio.");
+						}
+						
+						if (planElegido == "Solo el Plan de Alimentación") {
+							miCliente.asignarPlanAlimentacion(entrenadorElegido.getPlanAlimentacionRecomendado());
+							print("\n");
+							print(miCliente.getPlanAlimentacion());
+							println("Se asignó el Plan de Alimentación.");
+						}
+					}
+				}
+			}
+		}
 	}
 }

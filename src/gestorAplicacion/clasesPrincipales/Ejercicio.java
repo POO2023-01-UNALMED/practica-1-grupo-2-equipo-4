@@ -16,6 +16,7 @@ public class Ejercicio extends Movimiento /*implements Serializable*/ {
 		this.setRepeticiones(repeticiones);
 		this.setSeries(series);
 	}
+	
 	public Ejercicio(String nombre, String descripcion, String musculoPrincipal, TipoEjercicio tipoEjercicio, Maquina maquina, int repeticiones, int series, NivelCliente dificultad) {
 		super(nombre, descripcion, musculoPrincipal, tipoEjercicio, maquina, dificultad);
 		this.setRepeticiones(repeticiones);
@@ -47,11 +48,13 @@ public class Ejercicio extends Movimiento /*implements Serializable*/ {
 			repeticiones = 10 +random.nextInt(5);
 			series = 1;
 			movimiento.setDescripcion(movimiento.getDescripcion() + "	|Recuerda que los calentamientos están expresados en minutos");
-		}else {
+		}
+		
+		else {
 			switch(objetivo){
 				case AUMENTAR:
 					repeticiones = 8 + random.nextInt(4);
-					series = 1 + random.nextInt(2);
+					series = 2 + random.nextInt(2);
 					break;
 				case DEFINIR:
 					repeticiones = 14 + random.nextInt(3);

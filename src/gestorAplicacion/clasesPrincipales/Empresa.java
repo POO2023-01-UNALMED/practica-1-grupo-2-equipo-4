@@ -11,6 +11,23 @@ import gestorAplicacion.clasesHerencia.Plan;
 
 import java.util.Iterator;
 
+//Autores: Jacobo Ochoa.
+
+//Finalidad de la clase: 
+//La clase Comida sirve para almacenar listas de alimentos que componen
+//una de las tres comidas diarias.
+
+//Estructuras de datos:
+//Utilizamos un ArrayList para guardar la lista de alimentos
+
+//Componentes:
+
+//Unos atributos de nombre, TipoComida, PreferenciaAlimenticia y ObjetivoCliente
+//que describen el tipo de la comida
+
+//Unos atributos de Macronutrientes que se calculan con un método que mostraremos más adelante
+//Una lista estática de todas las comidas que se van creando
+
 public class Empresa implements Serializable {
   
     private static final long serialVersionUID = 1L;
@@ -30,7 +47,6 @@ public class Empresa implements Serializable {
     public Empresa (){
         Deserializador.desearilizar(this);
     }
-
 
     public void agregarObjetosGimnasio(Gimnasio[] gimnasios){
         for (Gimnasio gimnasio : gimnasios ){
@@ -190,18 +206,4 @@ public class Empresa implements Serializable {
     public PlanEjercicio convertirAPlanEjercicio (Plan planEjercicio){
         return new PlanEjercicio(((PlanEjercicio) planEjercicio).getPlanSemanalEjercio());
     }
-
-    // metodos practicos
-
-//    public void asignEntrenadorACliente(Cliente cliente, Entrenador entrenador){
-//        cliente.setEntrenador(entrenador);
-//    }
-//    
-//    public void asignPlanAlimentacionACliente(Cliente cliente, PlanAlimentacion planAlimentacion){
-//        cliente.set(planAlimentacion);
-//    }
-//
-//    public void asignPlanEjercicioACliente(Cliente cliente, PlanEjercicio planEjercicio){
-//        cliente.setPlanEjercicio(planEjercicio);
-//    }
 }
