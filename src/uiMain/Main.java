@@ -26,7 +26,6 @@ public class Main {
 	public static void main(String[] args) {
 		Empresa empresa = new Empresa();
 		
-		
 		byte opcion;
 		String salir = "n";
 		
@@ -115,42 +114,6 @@ public class Main {
 	private static String readString() {String input = sc.next(); return input;}
 	
 	private static int readInt() {int i = sc.nextInt(); return i;}
-	
-	private static HashMap<DiaSemana, ArrayList<Comida>> obtenerPlanAlim(Comida co3, Comida co9, Comida co15, 
-			Comida co32, Comida co92, Comida co152) {
-        ArrayList<Comida> listaComidas1 = new ArrayList<>();
-        listaComidas1.add(co3); listaComidas1.add(co9);  listaComidas1.add(co15);
-        
-        ArrayList<Comida> listaComidas2 = new ArrayList<>();
-        listaComidas2.add(co32); listaComidas2.add(co92);  listaComidas2.add(co152); 
-        
-        HashMap<DiaSemana, ArrayList<Comida>> planAlim = new HashMap<>();
-        
-        planAlim.put(DiaSemana.LUNES, listaComidas1);
-        planAlim.put(DiaSemana.MARTES, listaComidas2);
-        planAlim.put(DiaSemana.MIERCOLES, listaComidas1);
-        planAlim.put(DiaSemana.JUEVES, listaComidas2);
-        planAlim.put(DiaSemana.VIERNES, listaComidas1);
-        planAlim.put(DiaSemana.SABADO, listaComidas2);
-        planAlim.put(DiaSemana.DOMINGO, listaComidas1);
-        
-        return planAlim;
-    }
-	
-	private static ArrayList<Ejercicio> obtenerRutina(Ejercicio e1, Ejercicio e2, Ejercicio e3) {
-        ArrayList<Ejercicio> listaEjercicios = new ArrayList<>();
-        listaEjercicios.add(e1);
-        listaEjercicios.add(e2);
-        listaEjercicios.add(e3);
-        return listaEjercicios;
-    }
-	private static ArrayList<Alimento> obtenerListaAlimentos(Alimento a1, Alimento a2, Alimento a3) {
-        ArrayList<Alimento> listaAlimentos = new ArrayList<>();
-        listaAlimentos.add(a1);
-        listaAlimentos.add(a2);
-        listaAlimentos.add(a3);
-        return listaAlimentos;
-    }
 	
 	
 	//Salir y guardar
@@ -427,13 +390,13 @@ public class Main {
 	
 	static void recomendarEntrenadores(Empresa empresa, Cliente miCliente) {
 		print("Ingrese el nombre de su gimnasio principal: ");
-		String gimnasioEscrito = readString();
+		String gimnasioEscrito = readString().toUpperCase();
 
 		// Revisar si el gimnasio ingresado es igual al que se le atribuye al cliente.
 		Gimnasio gimnasioPrincipal = null;
 		Gimnasio gimnasioCliente = miCliente.getGimnasio();
 		for (Gimnasio g : empresa.getGimnasios()) { // Revisar igualdad de Nombre
-			if ((g.getNombre().equals(gimnasioEscrito)) && (gimnasioCliente.getNombre().equals(gimnasioEscrito))) {
+			if ((g.getNombre().equalsIgnoreCase(gimnasioEscrito)) && (gimnasioCliente.getNombre().equalsIgnoreCase(gimnasioEscrito))) {
 				gimnasioPrincipal = g;
 				break;
 			}
@@ -491,7 +454,8 @@ public class Main {
 			}
 			
 			// Se muestra el TOP 3 recomendados y sus "hojas de vida".
-			println("TOP Entrenadores Recomendados: ");
+			print("\n");
+			println("TOP ENTRENADORES RECOMENDADOS\n");
 			for (int i = 1; i <= entrenadoresRecomendados.size(); i++) {
 				println(i + ". " + entrenadoresRecomendados.get(i - 1).descripcionHojaVida());
 			}
@@ -523,16 +487,16 @@ public class Main {
 						&& (miCliente.getPlanAlimentacion() != null 
 						|| miCliente.getPlanAlimentacion() == null))) {
 					
+					print("\n");
 					println("El entrenador seleccionado cuenta con un Plan de Ejercicio y un Plan de Alimentación recomendados."
 							+ "\nDesea asignar ambos como sus planes actuales o solo uno de ellos: ");
+					print("\n");
 					
-					miCliente.getPlanEjercicio();
-					miCliente.getPlanAlimentacion();
-
 					for (int i = 1; i <= opcionesCambiarPlanes.size(); i++) {
 						println(i + ". " + opcionesCambiarPlanes.get(i - 1));
 					}
-
+					
+					print("\n");
 					print("Seleccione la opción deseada: ");
 					byte opcionCambiarPlanes = readByte();
 
@@ -543,20 +507,24 @@ public class Main {
 						String planElegido = opcionesCambiarPlanes.get(opcionCambiarPlanes - 1);
 						if (planElegido == "Ambos") {
 							miCliente.asignarPlanEjercicio(entrenadorElegido.getPlanEjercicioRecomendado());
-							miCliente.getPlanEjercicio();
+							println(miCliente.getPlanEjercicio());
 							miCliente.asignarPlanAlimentacion(entrenadorElegido.getPlanAlimentacionRecomendado());
-							miCliente.getPlanAlimentacion();
-							print("Se asignaron ambos planes.");
+							print(miCliente.getPlanAlimentacion());
+							println("Se asignaron ambos planes.");
 						}
 						
 						if (planElegido == "Solo el Plan de Ejercicio") {
 							miCliente.asignarPlanEjercicio(entrenadorElegido.getPlanEjercicioRecomendado());
-							print("Se asignó el Plan de Ejercicio.");
+							print("\n");
+							println(miCliente.getPlanEjercicio());
+							println("Se asignó el Plan de Ejercicio.");
 						}
 						
-						if (planElegido == "Solo el Plan de Alimentacion") {
+						if (planElegido == "Solo el Plan de Alimentación") {
 							miCliente.asignarPlanAlimentacion(entrenadorElegido.getPlanAlimentacionRecomendado());
-							print("Se asignó el Plan de Alimentación.");
+							print("\n");
+							print(miCliente.getPlanAlimentacion());
+							println("Se asignó el Plan de Alimentación.");
 						}
 					}
 				}

@@ -119,7 +119,8 @@ public class Entrenador extends Persona implements Serializable {
 			+ "\nFormacion: " + this.getFormacion()
 			+ "\nNivel: " + this.getNivelEntrenador()
 			+ "\nGimnasio: " + this.gimnasio.toString()
-			+ "\nDisponibilidad: " + this.getDisponibilidad();
+			+ "\nDisponibilidad: " + this.getDisponibilidad()
+			+ "\n";
 	}	
 
 	public Entrenador entrenadoresDisponibles(String horarioAsistencia, String intensidad) {

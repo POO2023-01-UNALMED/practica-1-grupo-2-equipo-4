@@ -65,7 +65,9 @@ public class PlanEjercicio implements Plan, Serializable {
 
     @Override
     public String toString(){
-        return "TU PLAN PARA LA SEMANA\n" 
+        return "\n" 
+        		+ "-----TU PLAN DE EJERCICIO-----\n" 
+        		+ "\n"
 		        + "Lunes: " 
 		        + getPlanSemanalEjercio().get(DiaSemana.LUNES)
 		        + "\nMartes: " 
