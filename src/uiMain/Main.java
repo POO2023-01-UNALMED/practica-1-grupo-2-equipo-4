@@ -57,9 +57,8 @@ public class Main {
 			println("1. Reservar Gimnasio");
 			println("2. Recomendación de Plan de Alimentación Semanal");
 			println("3. Recomendación de Plan de Ejercicio Semanal");
-			println("4. Funcionalidad 4");
-			println("5. Recomendación de Entrenadores");
-			println("6. Salir");
+			println("4. Recomendación de Entrenadores");
+			println("5. Salir");
 			print("Ingrese la opción que requiera: ");
 			
 			opcion = readByte();
@@ -75,9 +74,6 @@ public class Main {
 					recomendarPlanEjercicio(miCliente);
 					break;
 				case 4:
-					f4();
-					break;
-				case 5:
 					recomendarEntrenadores(empresa, miCliente);
 					break;
 				case 6:
