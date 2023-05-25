@@ -1,3 +1,3 @@
-java -jar gimbro.jar
+java -jar gymbro.jar
 @echo off
 pause

@@ -96,7 +96,7 @@ public class PlanAlimentacion implements Plan, Serializable {
     
     @Override
     public String toString() {
-        String planFormateado = "-----TU PLAN DE ALIMENTACIÓN-----\n" + "\n";
+        String planFormateado = "--------------------TU PLAN DE ALIMENTACIÓN--------------------\n" + "\n";
         ArrayList<DiaSemana> dias = new ArrayList<>();
 
         for (DiaSemana dia : DiaSemana.values()) {
