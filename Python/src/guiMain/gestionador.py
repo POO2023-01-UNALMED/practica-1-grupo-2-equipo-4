@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox, Button
+from tkinter import messagebox, Button, Label
 import os
 
 
@@ -8,7 +8,7 @@ def main():
     current_directory = os.path.dirname(os.path.abspath(__file__))
     dir_imagenes = os.path.join(current_directory, "pics")
 
-    # Función para el path de una imagen
+    # Función para el path de una imagen (SOLO FUNCIONA CON IMAGENES PNG)
     def im(nombre_imagen: str):
         return os.path.join(dir_imagenes, nombre_imagen)
 
@@ -67,21 +67,38 @@ def main():
     bottom_right_frame = tk.Frame(right_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
     bottom_right_frame.place(relx=0.5, rely=0.997, relwidth=0.995, relheight=0.6, anchor="s")
 
-    button_frame = tk.Frame(bottom_left_frame, bg="#F0F0F0")
+    # Definir método para mostrar imágenes que se cambian cuando pasa el cursor por encima
+    def cambiar_imagen(event):
+        nonlocal i
+        i = (i + 1) % len(imagenes_inicio)  # Voy cambiando el índice del programa global
+        imagen = tk.PhotoImage(file=imagenes_inicio[i])  # Tomo la imagen
+        espacio_imagenes_bottom_left.config(image=imagen)  # La configuro
+        espacio_imagenes_bottom_left.image = imagen  # Actualizo la referencia
+
+    # Definir un Label para las imágenes
+    espacio_imagenes_bottom_left = Label(bottom_left_frame)
+    i = 0  # Variable del índice de la imagen. Debe ser global para que sea posible correr el programa
+    imagenes_inicio = [im("buff.png"), im("diet.png"), im("buff2.png"), im("diet2.png"), im("buff3.png")]
+    imagen_inicial = tk.PhotoImage(file=imagenes_inicio[i])
+    espacio_imagenes_bottom_left.config(image=imagen_inicial)
+    espacio_imagenes_bottom_left.bind("<Enter>", cambiar_imagen)  # Llamo al método cambiar imagen con el evento
+
+    espacio_imagenes_bottom_left.pack(side="top")  # Posiciono las imagenes arriba del botón
+
+    # Se define el espacio para el botón de ir a inicio de sesión
+    button_frame = tk.Frame(bottom_left_frame)
     button_frame.pack(side="bottom", pady=10)
 
-    imagen = tk.PhotoImage(file=im("don.png"))
-    label_imagen = tk.Label(bottom_left_frame, image=imagen)
-    label_imagen.pack()
-
     boton_inferior = tk.Button(button_frame, text="Ir al inicio de sesión", width=20, height=3,
-                               font=("Verdana", 14, "bold italic"), bd=2, relief="solid")
+                               font=("Verdana", 14, "bold italic"), bd=2, relief="solid", cursor="hand2")
     boton_inferior.pack()
+
+    # Quiero que al dar clic en este botón me lleve al inicio de sesión
 
     # Ahora llenamos toda la información
     # Título
     label_principal = "GYMBRO"
-    titulo = tk.Label(top_frame, text=label_principal, font=("Verdana", 24, "bold underline"))
+    titulo = Label(top_frame, text=label_principal, font=("Verdana", 24, "bold underline"))
     titulo.place(rely=0.5, relwidth=0.998, relheight=0.96, anchor="w")
 
     bienvenida_str = "TE DAMOS LA BIENVENIDA" \
@@ -89,7 +106,7 @@ def main():
                      "deportivos y tengas una vida saludable." \
                      + 6 * "\n" + "Desarrollado por Juan Ospina, Jacobo Ochoa, Juan Manuel, \nSebastián y Esteban."
 
-    bienvenida = tk.Text(upper_left_frame, fg="black", bg="#F0F0F0", font=("Verdana", 12, "bold"), cursor="hand2")
+    bienvenida = tk.Text(upper_left_frame, fg="black", bg="#F0F0F0", font=("Verdana", 12, "bold"), cursor="arrow")
     bienvenida.insert(tk.END, bienvenida_str, "justifying")
     bienvenida.tag_configure("justifying", justify="center")
     bienvenida.config(state="disabled")
@@ -124,14 +141,13 @@ def main():
 
     # Siguiente:
     # Grid en P6 con fotos que cambian con el uso del botón
-    # Imágenes del sistema en la parte superior de P4 que se cambien cuando se pasa el cursor por encima
     # Botón en la parte inferior de P4 que lleve al inicio de sesión
 
     root.mainloop()
 
     # Esto va en la siguiente ventana después de presionar P4
 
-    # label = tk.Label(main_frame, text="¡Hola! Bienvenido a Gymbro\n-----INICIO DE SESIÓN-----",
+    # label = Label(main_frame, text="¡Hola! Bienvenido a Gymbro\n-----INICIO DE SESIÓN-----",
     #                  font=('Helvetica', 18, 'bold'), bg='light blue')
     # label.pack(pady=10)
     #
