@@ -112,23 +112,58 @@ def main():
     bienvenida.config(state="disabled")
     bienvenida.pack(expand=True, fill="both", side="bottom")
 
+    # Definir la funcionalidad que permita ver imagenes de los desarrolladores
+
+    imagenes = {
+        "Juan Ospina": [im("diet.png"), im("diet.png"), im("diet.png"), im("diet.png")],
+        "Jacobo Ochoa": [im("diet2.png"), im("diet2.png"), im("diet2.png"), im("diet2.png")],
+        "Juan Manuel": [im("diet.png"), im("diet.png"), im("diet.png"), im("diet.png")],
+        "Sebastián": [im("diet2.png"), im("diet2.png"), im("diet2.png"), im("diet2.png")],
+        "Esteban": [im("diet.png"), im("diet.png"), im("diet.png"), im("diet.png")]
+    }
+
+    # Definimos la función
+    def actualizar_imagenes(persona):
+        # Actualizar las imágenes en el grid
+        for i, imagen in enumerate(imagenes[persona]):
+            label = Label(upper_right_frame, image=imagen)
+            label.grid(row=i // 2, column=i % 2, padx=10, pady=10)
+            grid_labels.append(label)
+
+    grid_labels = []
+
     # Definimos la función
     def textos_hojas_vida():
+        global imagenes
         if button["text"] == "Hoja de vida de Juan Ospina":
             button["text"] = "Hoja de vida de Jacobo Ochoa"
+            actualizar_imagenes("Jacobo Ochoa")
+
         elif button["text"] == "Hoja de vida de Jacobo Ochoa":
             button["text"] = "Hoja de vida de Juan Manuel"
+            actualizar_imagenes("Juan Manuel")
+
         elif button["text"] == "Hoja de vida de Juan Manuel":
             button["text"] = "Hoja de vida de Sebastián"
+            actualizar_imagenes("Sebastián")
+
         elif button["text"] == "Hoja de vida de Sebastián":
             button["text"] = "Hoja de vida de Esteban"
+            actualizar_imagenes("Esteban")
+
         elif button["text"] == "Hoja de vida de Esteban":
             button["text"] = "Hoja de vida de Juan Ospina"
+            actualizar_imagenes("Juan Ospina")
 
-    # Botón de hojas de vida
     button = Button(upper_right_frame, text="Hoja de vida de Juan Ospina", bg="#F0F0F0", command=textos_hojas_vida,
                     font=("Verdana", 12, "bold"), cursor="hand2")
-    button.pack(expand=True, fill="both")
+    button.grid(row=0, column=0, columnspan=2)
+
+    # Crear los Labels iniciales para las imágenes
+    for i, imagen in enumerate(imagenes["Juan Ospina"]):
+        label = Label(upper_right_frame, image=imagen)
+        label.grid(row=i // 2 + 1, column=i % 2, padx=10, pady=10)
+        grid_labels.append(label)
 
     # Menú inicio
     main_menu = tk.Menu(top_frame)
