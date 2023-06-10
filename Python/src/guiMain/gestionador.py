@@ -135,9 +135,15 @@ def main():
     imgs = [  # Aquí van las imágenes de nosotros. Un set de imágenes del integrante por cada fila
         [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
         [im("d2.png"), im("d2.png"), im("d2.png"), im("d2.png")],
+<<<<<<< Updated upstream
         [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
         [im("d2.png"), im("d2.png"), im("d2.png"), im("d2.png")],
         [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
+=======
+        [im("buff.png"), im("buff.png"), im("buff.png"), im("buff.png")],
+        [im("buff2.png"), im("buff2.png"), im("buff2.png"), im("buff2.png")],
+        [im("esteban1.png"), im("esteban2.png"), im("esteban3.png"), im("esteban4.png")],
+>>>>>>> Stashed changes
     ]
 
     imgs_labels = []  # Primero convierto a Label con cada path
