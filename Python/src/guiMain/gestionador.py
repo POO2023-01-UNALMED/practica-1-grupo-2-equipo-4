@@ -112,58 +112,87 @@ def main():
     bienvenida.config(state="disabled")
     bienvenida.pack(expand=True, fill="both", side="bottom")
 
-    # Definir la funcionalidad que permita ver imagenes de los desarrolladores
+    # Definimos la funcionalidad para que cada vez que se de clic a la hoja de vida, esta se cambie
+    # Y muestre cuatro imágenes del desarrollador correspondiente.
 
-    imagenes = {
-        "Juan Ospina": [im("diet.png"), im("diet.png"), im("diet.png"), im("diet.png")],
-        "Jacobo Ochoa": [im("diet2.png"), im("diet2.png"), im("diet2.png"), im("diet2.png")],
-        "Juan Manuel": [im("diet.png"), im("diet.png"), im("diet.png"), im("diet.png")],
-        "Sebastián": [im("diet2.png"), im("diet2.png"), im("diet2.png"), im("diet2.png")],
-        "Esteban": [im("diet.png"), im("diet.png"), im("diet.png"), im("diet.png")]
-    }
 
-    # Definimos la función
-    def actualizar_imagenes(persona):
-        # Actualizar las imágenes en el grid
-        for i, imagen in enumerate(imagenes[persona]):
-            label = Label(upper_right_frame, image=imagen)
-            label.grid(row=i // 2, column=i % 2, padx=10, pady=10)
-            grid_labels.append(label)
+    def cambiar_imagenes_devs():
+        """Hace un proceso parecido al de cambiar_imagen"""
+        nonlocal j
+        j = (j + 1) % len(imgs)  # Hace el módulo entre las cuatro imágenes mientras va sumando a la variable global
+        photo_imgs = []  # Llena la lista con las cuatro photo_imgs de cada desarrollador
+        for k, i_paths in enumerate(imgs[j]):
+            photo_img = tk.PhotoImage(file=i_paths).subsample(2, 2)  # Hace un escalamiento de las imágenes
+            labels[k].config(image=photo_img)  # Hace la configuración del label
+            photo_imgs.append(photo_img)  # añade todas las imágenes a esta lista para actualizar la referencia
 
-    grid_labels = []
+        lab1.image = photo_imgs[0]
+        lab2.image = photo_imgs[1]
+        lab3.image = photo_imgs[2]
+        lab4.image = photo_imgs[3]
 
-    # Definimos la función
-    def textos_hojas_vida():
-        global imagenes
+    j = 0
+    imgs = [  # Aquí van las imágenes de nosotros. Un set de imágenes del integrante por cada fila
+        [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
+        [im("d2.png"), im("d2.png"), im("d2.png"), im("d2.png")],
+        [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
+        [im("d2.png"), im("d2.png"), im("d2.png"), im("d2.png")],
+        [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
+    ]
+
+    imgs_labels = []  # Primero convierto a Label con cada path
+
+    for row in imgs:
+        row_images = []
+        for img_path in row:
+            image = Label(bottom_right_frame)
+            image.image = tk.PhotoImage(file=img_path).subsample(2, 2)  # Reescalo
+            image.config(image=image.image)  # Hago la configuración inicial
+            row_images.append(image)
+        imgs_labels.append(row_images)  # Lleno la lista para luego usarlo en el grid
+
+    # Lleno el grid con un padx y pady
+    lab1 = imgs_labels[0][0]
+    lab2 = imgs_labels[0][1]
+    lab3 = imgs_labels[0][2]
+    lab4 = imgs_labels[0][3]
+
+    lab1.grid(row=0, column=0, padx=3, pady=5)
+    lab2.grid(row=0, column=1, padx=3, pady=5)
+    lab3.grid(row=1, column=0, padx=3, pady=5)
+    lab4.grid(row=1, column=1, padx=3, pady=5)
+
+    labels = [lab1, lab2, lab3, lab4]  # Esto es para usarlo dentro de cambiar_imagenes_devs
+
+    # Hago que las imágenes tengan distribución uniforme en el frame
+    bottom_right_frame.grid_rowconfigure(0, weight=1)
+    bottom_right_frame.grid_rowconfigure(1, weight=1)
+    bottom_right_frame.grid_columnconfigure(0, weight=1)
+    bottom_right_frame.grid_columnconfigure(1, weight=1)
+
+    def actualizar_hojas_vida():
+        """Esta función cambia el texto del botón y las imágenes en el frame de abajo"""
         if button["text"] == "Hoja de vida de Juan Ospina":
             button["text"] = "Hoja de vida de Jacobo Ochoa"
-            actualizar_imagenes("Jacobo Ochoa")
-
+            cambiar_imagenes_devs()
         elif button["text"] == "Hoja de vida de Jacobo Ochoa":
             button["text"] = "Hoja de vida de Juan Manuel"
-            actualizar_imagenes("Juan Manuel")
-
+            cambiar_imagenes_devs()
         elif button["text"] == "Hoja de vida de Juan Manuel":
             button["text"] = "Hoja de vida de Sebastián"
-            actualizar_imagenes("Sebastián")
-
+            cambiar_imagenes_devs()
         elif button["text"] == "Hoja de vida de Sebastián":
             button["text"] = "Hoja de vida de Esteban"
-            actualizar_imagenes("Esteban")
-
+            cambiar_imagenes_devs()
         elif button["text"] == "Hoja de vida de Esteban":
             button["text"] = "Hoja de vida de Juan Ospina"
-            actualizar_imagenes("Juan Ospina")
+            cambiar_imagenes_devs()
 
-    button = Button(upper_right_frame, text="Hoja de vida de Juan Ospina", bg="#F0F0F0", command=textos_hojas_vida,
+    # Quiero definir un grid para el bottom_right_frame
+    # Botón de hojas de vida inicial
+    button = Button(upper_right_frame, text="Hoja de vida de Juan Ospina", bg="#F0F0F0", command=actualizar_hojas_vida,
                     font=("Verdana", 12, "bold"), cursor="hand2")
-    button.grid(row=0, column=0, columnspan=2)
-
-    # Crear los Labels iniciales para las imágenes
-    for i, imagen in enumerate(imagenes["Juan Ospina"]):
-        label = Label(upper_right_frame, image=imagen)
-        label.grid(row=i // 2 + 1, column=i % 2, padx=10, pady=10)
-        grid_labels.append(label)
+    button.pack(expand=True, fill="both")
 
     # Menú inicio
     main_menu = tk.Menu(top_frame)
@@ -171,12 +200,9 @@ def main():
     menu_bar.add_command(label="Salir", command=salir_ventana_principal)
     menu_bar.add_command(label="Acerca de", command=mostrar_descripcion)
 
+    # creo las partes del menú
     main_menu.add_cascade(label="Inicio", menu=menu_bar)
     root.config(menu=main_menu)
-
-    # Siguiente:
-    # Grid en P6 con fotos que cambian con el uso del botón
-    # Botón en la parte inferior de P4 que lleve al inicio de sesión
 
     root.mainloop()
 
