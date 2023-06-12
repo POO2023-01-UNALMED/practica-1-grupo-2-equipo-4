@@ -2,8 +2,63 @@ import tkinter as tk
 from tkinter import messagebox, Button, Label
 import os
 
+def ventana_principal_usuario(root):
+    # Cerrar la ventana principal
+    root.destroy()
 
-def main():
+    # Crear la ventana secundaria
+    ventana_usuario = tk.Tk()
+    ventana_usuario.title("Gymbro")
+
+    # Configurar la ventana secundaria
+    ventana_usuario.state('zoomed')
+
+    # Funcionalidad para los botones de la barra de menú
+    def archivo_func():
+        messagebox.showinfo("Archivo", "Funcionalidad del botón Archivo")
+
+    def ayuda_func():
+        messagebox.showinfo("Ayuda", "Funcionalidad del botón Ayuda")
+
+    def procesos_consultas_func():
+        messagebox.showinfo("Procesos y Consultas", "Funcionalidad del botón Procesos y Consultas")
+
+    # Crear la barra de menú
+    barra_menu = tk.Frame(ventana_usuario, bg="white")
+    barra_menu.pack(side="top", fill="x", pady=(0, 2))
+
+    # Estilos de botones
+    boton_estilo = {
+        "background": "#ECECEC",
+        "foreground": "#333333",
+        "font": ("Verdana", 12),
+        "bd": 0,
+        "relief": "flat",
+        "activebackground": "#CCCCCC",
+        "activeforeground": "#333333",
+        "padx": 10,
+        "pady": 5,
+    }
+
+    # Crear los botones del menú
+    boton_archivo = tk.Button(barra_menu, text="Archivo", command=archivo_func, **boton_estilo)
+    boton_archivo.pack(side="left", padx=(0, 5))
+
+    boton_procesos_consultas = tk.Button(barra_menu, text="Procesos y Consultas", command=procesos_consultas_func, **boton_estilo)
+    boton_procesos_consultas.pack(side="left", padx=(0, 5))
+
+    boton_ayuda = tk.Button(barra_menu, text="Ayuda", command=ayuda_func, **boton_estilo)
+    boton_ayuda.pack(side="left")
+
+    # Agregar la línea negra de separación
+    linea_separacion = tk.Frame(ventana_usuario, height=1, bg="black")
+    linea_separacion.pack(side="top", fill="x", pady=(0, 0))
+
+    # Iniciar el bucle principal de la ventana secundaria
+    ventana_usuario.mainloop()
+
+
+def ventana_principal():
     # Obtención de paths para las imágenes
     current_directory = os.path.dirname(os.path.abspath(__file__))
     dir_imagenes = os.path.join(current_directory, "pics")
@@ -26,18 +81,7 @@ def main():
     root = tk.Tk()
     root.title("Gymbro")
 
-    # Elementos para la geometría de la pantalla
-    screen_width = root.winfo_screenwidth()  # Ancho de la pantalla
-    screen_height = root.winfo_screenheight()  # Altura de la pantalla
-
-    width = int(screen_width * 0.9)  # 90% del ancho de la pantalla
-    height = int(screen_height * 0.9)  # 90% de la altura de la pantalla
-
-    # Centrar la ventana
-    x = (screen_width // 2) - (width // 2)
-    y = (screen_height // 2) - (height // 2)
-
-    root.geometry(f'{width}x{height}+{x}+{y}')  # Establecer la geometría de la ventana
+    root.state('zoomed')
 
     # Frame principal
     main_frame = tk.Frame(root, bg='light blue')
@@ -90,8 +134,10 @@ def main():
     button_frame.pack(side="bottom", pady=10)
 
     boton_inferior = tk.Button(button_frame, text="Ir al inicio de sesión", width=20, height=3,
-                               font=("Verdana", 14, "bold italic"), bd=2, relief="solid", cursor="hand2")
+                           font=("Verdana", 14, "bold italic"), bd=2, relief="solid", cursor="hand2",
+                           command=lambda: ventana_principal_usuario(root))
     boton_inferior.pack()
+
 
     # Quiero que al dar clic en este botón me lleve al inicio de sesión
 
@@ -253,6 +299,11 @@ def main():
     #     seleccionar_button.pack(pady=10)
 
     # Iniciar la aplicación
+
+    pass
+
+def main():
+    ventana_principal()
 
 
 if __name__ == "__main__":
