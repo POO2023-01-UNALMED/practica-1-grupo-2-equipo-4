@@ -198,7 +198,7 @@ def ventana_principal():
     j = 0
     imgs = [  # Aquí van las imágenes de nosotros. Un set de imágenes del integrante por cada fila
         [im("JuanOspina1.png"), im("JuanOspina2.png"), im("JuanOspina3.png"), im("JuanOspina4.png")],
-        [im("d2.png"), im("d2.png"), im("d2.png"), im("d2.png")],
+        [im("Ochoa1.png"), im("Ochoa3.png"), im("Ochoa2.png"), im("Ochoa4.png")],
         [im("jr1.png"), im("jr2.png"), im("jr3.png"), im("jr4.png")],
         [im("buff2.png"), im("buff2.png"), im("buff2.png"), im("buff2.png")],
         [im("esteban1.png"), im("esteban2.png"), im("esteban3.png"), im("esteban4.png")],
