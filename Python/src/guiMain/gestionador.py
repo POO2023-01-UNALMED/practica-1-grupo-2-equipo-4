@@ -2,8 +2,81 @@ import tkinter as tk
 from tkinter import messagebox, Button, Label
 import os
 
+def ventana_principal_usuario(root):
+    # Cerrar la ventana principal
+    root.destroy()
 
-def main():
+    # Crear la ventana secundaria
+    ventana_usuario = tk.Tk()
+    ventana_usuario.title("Gymbro")
+
+    # Configurar la ventana secundaria
+    ventana_usuario.state('zoomed')
+
+    # Funcionalidad para los botones de la barra de menú
+    def archivo_func():
+        messagebox.showinfo("Archivo", "Funcionalidad del botón Archivo")
+
+    def ayuda_func():
+        messagebox.showinfo("Ayuda", "Funcionalidad del botón Ayuda")
+
+    def mostrar_funcionalidades():
+        # Limpiar el contenido actual
+        for widget in contenido_frame.winfo_children():
+            widget.destroy()
+
+        # Mostrar las funcionalidades
+        titulo_label = tk.Label(contenido_frame, text="Menú de Procesos y Consultas", font=("Verdana", 14), pady=10)
+        titulo_label.pack()
+
+        funcionalidades = ["Funcionalidad 1", "Funcionalidad 2", "Funcionalidad 3", "Funcionalidad 4", "Funcionalidad 5"]
+        for funcionalidad in funcionalidades:
+            boton_funcionalidad = tk.Button(contenido_frame, text=funcionalidad, command=lambda f=funcionalidad: mostrar_mensaje(f), **boton_estilo)
+            boton_funcionalidad.pack(pady=5)
+
+    def mostrar_mensaje(funcionalidad):
+        messagebox.showinfo("Funcionalidad", funcionalidad)
+
+    # Crear la barra de menú
+    barra_menu = tk.Frame(ventana_usuario, bg="white")
+    barra_menu.pack(side="top", fill="x", pady=(0, 2))
+
+    # Estilos de botones
+    boton_estilo = {
+        "background": "white",
+        "foreground": "#333333",
+        "font": ("Verdana", 12),
+        "bd": 0,
+        "relief": "flat",
+        "activebackground": "#CCCCCC",
+        "activeforeground": "#333333",
+        "padx": 10,
+        "pady": 5,
+    }
+
+    # Crear los botones del menú
+    boton_archivo = tk.Button(barra_menu, text="Archivo", command=archivo_func, **boton_estilo)
+    boton_archivo.pack(side="left", padx=(0, 5))
+
+    boton_procesos_consultas = tk.Button(barra_menu, text="Procesos y Consultas", command=mostrar_funcionalidades, **boton_estilo)
+    boton_procesos_consultas.pack(side="left", padx=(0, 5))
+
+    boton_ayuda = tk.Button(barra_menu, text="Ayuda", command=ayuda_func, **boton_estilo)
+    boton_ayuda.pack(side="left")
+
+    # Agregar la línea negra de separación
+    linea_separacion = tk.Frame(ventana_usuario, height=1, bg="black")
+    linea_separacion.pack(side="top", fill="x", pady=(0, 0))
+
+    # Agregar contenido a la ventana
+    contenido_frame = tk.Frame(ventana_usuario, bg="white")
+    contenido_frame.pack(pady=(50, 10), expand=True)
+
+    # Iniciar el bucle principal de la ventana secundaria
+    ventana_usuario.mainloop()
+
+
+def ventana_principal():
     # Obtención de paths para las imágenes
     current_directory = os.path.dirname(os.path.abspath(__file__))
     dir_imagenes = os.path.join(current_directory, "pics")
@@ -26,18 +99,7 @@ def main():
     root = tk.Tk()
     root.title("Gymbro")
 
-    # Elementos para la geometría de la pantalla
-    screen_width = root.winfo_screenwidth()  # Ancho de la pantalla
-    screen_height = root.winfo_screenheight()  # Altura de la pantalla
-
-    width = int(screen_width * 0.9)  # 90% del ancho de la pantalla
-    height = int(screen_height * 0.9)  # 90% de la altura de la pantalla
-
-    # Centrar la ventana
-    x = (screen_width // 2) - (width // 2)
-    y = (screen_height // 2) - (height // 2)
-
-    root.geometry(f'{width}x{height}+{x}+{y}')  # Establecer la geometría de la ventana
+    root.state('zoomed')
 
     # Frame principal
     main_frame = tk.Frame(root, bg='light blue')
@@ -90,8 +152,10 @@ def main():
     button_frame.pack(side="bottom", pady=10)
 
     boton_inferior = tk.Button(button_frame, text="Ir al inicio de sesión", width=20, height=3,
-                               font=("Verdana", 14, "bold italic"), bd=2, relief="solid", cursor="hand2")
+                           font=("Verdana", 14, "bold italic"), bd=2, relief="solid", cursor="hand2",
+                           command=lambda: ventana_principal_usuario(root))
     boton_inferior.pack()
+
 
     # Quiero que al dar clic en este botón me lleve al inicio de sesión
 
@@ -133,11 +197,11 @@ def main():
 
     j = 0
     imgs = [  # Aquí van las imágenes de nosotros. Un set de imágenes del integrante por cada fila
-        [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
+        [im("JuanOspina1.png"), im("JuanOspina2.png"), im("JuanOspina3.png"), im("JuanOspina4.png")],
         [im("d2.png"), im("d2.png"), im("d2.png"), im("d2.png")],
-        [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
-        [im("d2.png"), im("d2.png"), im("d2.png"), im("d2.png")],
-        [im("d1.png"), im("d1.png"), im("d1.png"), im("d1.png")],
+        [im("jr1.png"), im("jr2.png"), im("jr3.png"), im("jr4.png")],
+        [im("buff2.png"), im("buff2.png"), im("buff2.png"), im("buff2.png")],
+        [im("esteban1.png"), im("esteban2.png"), im("esteban3.png"), im("esteban4.png")],
     ]
 
     imgs_labels = []  # Primero convierto a Label con cada path
@@ -253,6 +317,11 @@ def main():
     #     seleccionar_button.pack(pady=10)
 
     # Iniciar la aplicación
+
+    pass
+
+def main():
+    ventana_principal()
 
 
 if __name__ == "__main__":
