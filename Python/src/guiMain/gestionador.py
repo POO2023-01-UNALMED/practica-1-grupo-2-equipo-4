@@ -151,6 +151,12 @@ def ventana_principal_usuario(root):
     mostrar_funcionalidades()
 
     
+"""
+Este código define la ventana principal de la aplicación Gymbro.
+Proporciona una interfaz gráfica de usuario donde los usuarios pueden acceder a funciones relacionadas con entrenamiento y alimentación.
+
+La ventana principal contiene varios frames para organizar los elementos visuales de la interfaz.
+Incluye un frame de título, frames izquierdo y derecho, y frames anidados dentro de ellos."""
 def ventana_principal():
     # Obtención de paths para las imágenes
     current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -345,7 +351,18 @@ def ventana_principal():
 
     root.mainloop()
 
-    # Esto va en la siguiente ventana después de presionar P4
+
+
+    pass
+
+def main():
+    ventana_principal()
+
+
+if __name__ == "__main__":
+    main()
+
+ # Esto va en la siguiente ventana después de presionar P4
 
     # label = Label(main_frame, text="¡Hola! Bienvenido a Gymbro\n-----INICIO DE SESIÓN-----",
     #                  font=('Helvetica', 18, 'bold'), bg='light blue')
@@ -392,12 +409,3 @@ def ventana_principal():
     #     seleccionar_button.pack(pady=10)
 
     # Iniciar la aplicación
-
-    pass
-
-def main():
-    ventana_principal()
-
-
-if __name__ == "__main__":
-    main()
