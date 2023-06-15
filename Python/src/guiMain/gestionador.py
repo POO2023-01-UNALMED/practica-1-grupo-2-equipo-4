@@ -20,11 +20,19 @@ def ventana_principal_usuario(root):
     def mostrar_funcionalidad5():
         messagebox.showinfo("Funcionalidad 5", "Has seleccionado la Funcionalidad 5.")
 
+    # Funciones de las nuevas funcionalidades
+    def mostrar_aplicacion():
+        messagebox.showinfo("Aplicación", "Has seleccionado la Aplicación.")
+
+    def mostrar_salir():
+        messagebox.showinfo("Salir", "Has seleccionado Salir.")
+
     # Creación de la ventana principal de usuario
     ventana_usuario = tk.Toplevel(root)
     ventana_usuario.title("Gymbro - Usuario")
     ventana_usuario.state('zoomed')
 
+    root.withdraw()
     # Frame principal
     main_frame_usuario = tk.Frame(ventana_usuario, bg='light blue')
     main_frame_usuario.pack(fill="both", expand=True)
@@ -57,9 +65,38 @@ def ventana_principal_usuario(root):
                              foreground=[("active", "black")],
                              relief=[("active", "sunken")])
 
+    # Estilo del botón "Salir"
+    estilo_botones_salir = ttk.Style()
+    estilo_botones_salir.configure("BotonesSalir.TButton",
+                                   font=("Verdana", 20),
+                                   background="red",
+                                   relief="solid",
+                                   borderwidth=2)
+    estilo_botones_salir.map("BotonesSalir.TButton",
+                             background=[("active", "dark red")],
+                             foreground=[("active", "black")],
+                             relief=[("active", "sunken")])
+
     # Función del botón "Archivo"
     def mostrar_archivo():
-        messagebox.showinfo("Archivo", "Has seleccionado el botón Archivo.")
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crear botón "Aplicación"
+        aplicacion_btn = ttk.Button(funcionalidades_frame, text="Aplicación", style="Botones.TButton",
+                                    width=25, command=mostrar_aplicacion)
+        aplicacion_btn.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
+
+        # Crear botón "Salir"
+        salir_btn = ttk.Button(funcionalidades_frame, text="Salir", style="BotonesSalir.TButton",
+                               width=25, command=mostrar_salir)
+        salir_btn.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
+
+        # Configuración del grid
+        funcionalidades_frame.grid_rowconfigure(0, weight=1)
+        funcionalidades_frame.grid_columnconfigure(0, weight=1)
+        funcionalidades_frame.grid_columnconfigure(1, weight=1)
 
     archivo_btn = ttk.Button(barra_menu, text="Archivo", width=15, command=mostrar_archivo,
                              style="BotonesMenu.TButton")
