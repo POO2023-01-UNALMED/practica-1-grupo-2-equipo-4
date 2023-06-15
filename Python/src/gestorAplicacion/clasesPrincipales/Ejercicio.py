@@ -1,5 +1,5 @@
-from src.gestorAplicacion.clasesEnum import TipoEjercicio, NivelCliente, ObjetivoCliente
 from src.gestorAplicacion.clasesHerencia.Movimiento import Movimiento
+from src.gestorAplicacion.clasesEnum import TipoEjercicio, NivelCliente, ObjetivoCliente
 from random import randint
 
 # Falta documentar Ejercicio

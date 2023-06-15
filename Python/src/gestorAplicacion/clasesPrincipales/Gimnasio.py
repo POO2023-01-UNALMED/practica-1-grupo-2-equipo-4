@@ -1,8 +1,4 @@
 from src.gestorAplicacion.clasesEnum import NivelCliente
-from src.gestorAplicacion.clasesPrincipales.Maquina import Maquina
-from src.gestorAplicacion.clasesPrincipales.Cliente import Cliente
-from src.gestorAplicacion.clasesPrincipales.Entrenador import Entrenador
-
 # Autores: Jacobo Ochoa Ramírez
 
 # Finalidad de la clase:
@@ -18,6 +14,10 @@ from src.gestorAplicacion.clasesPrincipales.Entrenador import Entrenador
 
 
 class Gimnasio:
+    
+    from src.gestorAplicacion.clasesPrincipales.Maquina import Maquina
+    from src.gestorAplicacion.clasesPrincipales.Cliente import Cliente
+    from src.gestorAplicacion.clasesPrincipales.Entrenador import Entrenador
     listaGimnasios = []
 
     def __init__(self, 

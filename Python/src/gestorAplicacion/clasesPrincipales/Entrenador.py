@@ -1,6 +1,4 @@
 from src.gestorAplicacion.clasesHerencia import Persona
-from src.gestorAplicacion.clasesPrincipales import Cliente, Gimnasio
-from src.gestorAplicacion.clasesEnum import NivelCliente
 import random
 
 # Autores: Esteban Vásquez Pérez y
@@ -20,6 +18,8 @@ import random
 
 
 class Entrenador(Persona):
+    from src.gestorAplicacion.clasesPrincipales import Cliente, Gimnasio
+    from src.gestorAplicacion.clasesEnum import NivelCliente
     listaEntrenadores = []
 
     def __init__(self, nombre: str, gimnasio: Gimnasio, identificacion: int,
