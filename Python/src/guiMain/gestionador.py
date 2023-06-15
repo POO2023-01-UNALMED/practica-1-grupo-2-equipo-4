@@ -2,8 +2,14 @@ import tkinter as tk
 from tkinter import messagebox, Button, Label, ttk
 import os
 
+"""
+    Crea y muestra la ventana principal para el usuario en la aplicación Gymbro.
+
+    Parámetros:
+        - root: La ventana raíz principal de la aplicación.
+
+    """
 def ventana_principal_usuario(root):
-    
     # Funciones de las funcionalidades
     def mostrar_funcionalidad1():
         messagebox.showinfo("Funcionalidad 1", "Has seleccionado la Funcionalidad 1.")
