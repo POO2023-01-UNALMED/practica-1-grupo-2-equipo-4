@@ -1,81 +1,119 @@
 import tkinter as tk
-from tkinter import messagebox, Button, Label
+from tkinter import messagebox, Button, Label, ttk
 import os
 
 def ventana_principal_usuario(root):
-    # Cerrar la ventana principal
-    root.destroy()
+    
+    # Funciones de las funcionalidades
+    def mostrar_funcionalidad1():
+        messagebox.showinfo("Funcionalidad 1", "Has seleccionado la Funcionalidad 1.")
 
-    # Crear la ventana secundaria
-    ventana_usuario = tk.Tk()
-    ventana_usuario.title("Gymbro")
+    def mostrar_funcionalidad2():
+        messagebox.showinfo("Funcionalidad 2", "Has seleccionado la Funcionalidad 2.")
 
-    # Configurar la ventana secundaria
+    def mostrar_funcionalidad3():
+        messagebox.showinfo("Funcionalidad 3", "Has seleccionado la Funcionalidad 3.")
+
+    def mostrar_funcionalidad4():
+        messagebox.showinfo("Funcionalidad 4", "Has seleccionado la Funcionalidad 4.")
+
+    def mostrar_funcionalidad5():
+        messagebox.showinfo("Funcionalidad 5", "Has seleccionado la Funcionalidad 5.")
+
+    # Creación de la ventana principal de usuario
+    ventana_usuario = tk.Toplevel(root)
+    ventana_usuario.title("Gymbro - Usuario")
     ventana_usuario.state('zoomed')
 
-    # Funcionalidad para los botones de la barra de menú
-    def archivo_func():
-        messagebox.showinfo("Archivo", "Funcionalidad del botón Archivo")
+    # Frame principal
+    main_frame_usuario = tk.Frame(ventana_usuario, bg='light blue')
+    main_frame_usuario.pack(fill="both", expand=True)
 
-    def ayuda_func():
-        messagebox.showinfo("Ayuda", "Funcionalidad del botón Ayuda")
+    # Barra de menú
+    barra_menu = tk.Frame(main_frame_usuario, bg="light grey", height=100)
+    barra_menu.pack(fill="x")
 
+    # Estilo de los botones de funcionalidades
+    estilo_botones = ttk.Style()
+    estilo_botones.configure("Botones.TButton",
+                             font=("Verdana", 20),
+                             background="light blue",
+                             relief="solid",
+                             borderwidth=2)
+    estilo_botones.map("Botones.TButton",
+                       background=[("active", "light blue")],
+                       foreground=[("active", "black")],
+                       relief=[("active", "sunken")])
+
+    # Estilo de los botones de barra de menú
+    estilo_botones_menu = ttk.Style()
+    estilo_botones_menu.configure("BotonesMenu.TButton",
+                                   font=("Verdana", 16),
+                                   background="light grey",
+                                   relief="solid",
+                                   borderwidth=2)
+    estilo_botones_menu.map("BotonesMenu.TButton",
+                             background=[("active", "light grey")],
+                             foreground=[("active", "black")],
+                             relief=[("active", "sunken")])
+
+    # Función del botón "Archivo"
+    def mostrar_archivo():
+        messagebox.showinfo("Archivo", "Has seleccionado el botón Archivo.")
+
+    archivo_btn = ttk.Button(barra_menu, text="Archivo", width=15, command=mostrar_archivo,
+                             style="BotonesMenu.TButton")
+    archivo_btn.pack(side="left", padx=10, pady=10)
+
+    # Función del botón "Procesos y Consultas"
     def mostrar_funcionalidades():
-        # Limpiar el contenido actual
-        for widget in contenido_frame.winfo_children():
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
-        # Mostrar las funcionalidades
-        titulo_label = tk.Label(contenido_frame, text="Menú de Procesos y Consultas", font=("Verdana", 14), pady=10)
-        titulo_label.pack()
+        # Crea los botones de las funcionalidades
+        funcionalidad1_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 1", style="Botones.TButton",
+                                        width=25, command=mostrar_funcionalidad1)
+        funcionalidad1_btn.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
 
-        funcionalidades = ["Funcionalidad 1", "Funcionalidad 2", "Funcionalidad 3", "Funcionalidad 4", "Funcionalidad 5"]
-        for funcionalidad in funcionalidades:
-            boton_funcionalidad = tk.Button(contenido_frame, text=funcionalidad, command=lambda f=funcionalidad: mostrar_mensaje(f), **boton_estilo)
-            boton_funcionalidad.pack(pady=5)
+        funcionalidad2_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 2", style="Botones.TButton",
+                                        width=25, command=mostrar_funcionalidad2)
+        funcionalidad2_btn.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
 
-    def mostrar_mensaje(funcionalidad):
-        messagebox.showinfo("Funcionalidad", funcionalidad)
+        funcionalidad3_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 3", style="Botones.TButton",
+                                        width=25, command=mostrar_funcionalidad3)
+        funcionalidad3_btn.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
 
-    # Crear la barra de menú
-    barra_menu = tk.Frame(ventana_usuario, bg="white")
-    barra_menu.pack(side="top", fill="x", pady=(0, 2))
+        funcionalidad4_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 4", style="Botones.TButton",
+                                        width=25, command=mostrar_funcionalidad4)
+        funcionalidad4_btn.grid(row=1, column=1, sticky="nsew", padx=5, pady=5)
 
-    # Estilos de botones
-    boton_estilo = {
-        "background": "white",
-        "foreground": "#333333",
-        "font": ("Verdana", 12),
-        "bd": 0,
-        "relief": "flat",
-        "activebackground": "#CCCCCC",
-        "activeforeground": "#333333",
-        "padx": 10,
-        "pady": 5,
-    }
+        funcionalidad5_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 5", style="Botones.TButton",
+                                        width=25, command=mostrar_funcionalidad5)
+        funcionalidad5_btn.grid(row=2, column=0, columnspan=2, sticky="nsew", padx=5, pady=5)
 
-    # Crear los botones del menú
-    boton_archivo = tk.Button(barra_menu, text="Archivo", command=archivo_func, **boton_estilo)
-    boton_archivo.pack(side="left", padx=(0, 5))
+        # Configuración del grid
+        funcionalidades_frame.grid_rowconfigure(0, weight=1)
+        funcionalidades_frame.grid_rowconfigure(1, weight=1)
+        funcionalidades_frame.grid_rowconfigure(2, weight=1)
+        funcionalidades_frame.grid_columnconfigure(0, weight=1)
+        funcionalidades_frame.grid_columnconfigure(1, weight=1)
 
-    boton_procesos_consultas = tk.Button(barra_menu, text="Procesos y Consultas", command=mostrar_funcionalidades, **boton_estilo)
-    boton_procesos_consultas.pack(side="left", padx=(0, 5))
+    procesos_btn = ttk.Button(barra_menu, text="Procesos y Consultas", width=20, command=mostrar_funcionalidades,
+                              style="BotonesMenu.TButton")
+    procesos_btn.pack(side="left", padx=10, pady=10)
 
-    boton_ayuda = tk.Button(barra_menu, text="Ayuda", command=ayuda_func, **boton_estilo)
-    boton_ayuda.pack(side="left")
+    ayuda_btn = ttk.Button(barra_menu, text="Ayuda", width=10, style="BotonesMenu.TButton")
+    ayuda_btn.pack(side="left", padx=10, pady=10)
 
-    # Agregar la línea negra de separación
-    linea_separacion = tk.Frame(ventana_usuario, height=1, bg="black")
-    linea_separacion.pack(side="top", fill="x", pady=(0, 0))
+    # Frame de las funcionalidades
+    funcionalidades_frame = tk.Frame(main_frame_usuario, bg='white')
+    funcionalidades_frame.pack(fill="both", expand=True)
 
-    # Agregar contenido a la ventana
-    contenido_frame = tk.Frame(ventana_usuario, bg="white")
-    contenido_frame.pack(pady=(50, 10), expand=True)
+    # Mostrar las funcionalidades por defecto al abrir la ventana
+    mostrar_funcionalidades()
 
-    # Iniciar el bucle principal de la ventana secundaria
-    ventana_usuario.mainloop()
-
-
+    
 def ventana_principal():
     # Obtención de paths para las imágenes
     current_directory = os.path.dirname(os.path.abspath(__file__))
