@@ -1,4 +1,4 @@
-from Gimnasio import Gimnasio
+
 
 # Autores: Juan Manuel Rodríguez Sánchez
 
@@ -18,7 +18,8 @@ from Gimnasio import Gimnasio
 
 
 class Maquina:
-    def __init__(self, nombre: str, gimnasio: Gimnasio):
+
+    def __init__(self, nombre: str, gimnasio):
         self.nombre = nombre
         self.gimnasio = gimnasio
         self.movimientoRealizado = None
@@ -26,3 +27,5 @@ class Maquina:
         self.gimnasio.agregarMaquina(self)
 
         
+    def setMovimientoRealizado(self,mov):
+        self.movimientoRealizado = mov

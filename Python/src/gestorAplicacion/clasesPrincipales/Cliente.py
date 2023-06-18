@@ -1,12 +1,4 @@
 from src.gestorAplicacion.clasesHerencia.Persona import Persona
-from src.gestorAplicacion.clasesPrincipales.Gimnasio import Gimnasio
-from src.gestorAplicacion.clasesPrincipales.Historial import Historial
-from src.gestorAplicacion.clasesPrincipales.Entrenador import Entrenador
-from src.gestorAplicacion.clasesPrincipales.PlanEjercicio import PlanEjercicio
-from src.gestorAplicacion.clasesPrincipales.PlanAlimentacion import PlanAlimentacion
-from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
-from src.gestorAplicacion.clasesEnum.ObjetivoCliente import ObjetivoCliente
-from src.gestorAplicacion.clasesEnum.PreferenciaAlimenticia import PreferenciaAlimenticia
 
 
 # Autores: Esteban Vásquez Pérez.
@@ -37,17 +29,22 @@ from src.gestorAplicacion.clasesEnum.PreferenciaAlimenticia import PreferenciaAl
 
 
 class Cliente(Persona):
+
+
+
+    from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
+    from src.gestorAplicacion.clasesEnum.ObjetivoCliente import ObjetivoCliente
+    from src.gestorAplicacion.clasesEnum.PreferenciaAlimenticia import PreferenciaAlimenticia
     listaClientes = []
 
     def __init__(self, 
                 nombre: str, 
-                gimnasio: Gimnasio, 
+                gimnasio,
                 identificacion: int, 
                 altura: float, 
                 peso: float, 
                 sexo: str, 
-                edad: int, 
-                entrenador: Entrenador,
+                edad: int,
                 preferenciaAlimenticia: PreferenciaAlimenticia, 
                 nivelCliente: NivelCliente,
                 objetivoCliente: ObjetivoCliente):
@@ -60,7 +57,7 @@ class Cliente(Persona):
         self.peso = peso
         self.sexo = sexo
         self.edad = edad
-        self.entrenador = entrenador
+        self.entrenador = None
         self.preferenciaAlimenticia = preferenciaAlimenticia
         self.nivelCliente = nivelCliente
         self.objetivoCliente = objetivoCliente
@@ -87,6 +84,7 @@ class Cliente(Persona):
         self.entrenador.disponibilidad = "NO DISPONIBLE"
 
     def asignarPlanAlimentacion(self, planAlimentacion):
+        from src.gestorAplicacion.clasesPrincipales.Historial import Historial
         self.planAlimentacion = planAlimentacion
 
         if self.historialPlanes is None:
@@ -98,6 +96,8 @@ class Cliente(Persona):
             self.historialPlanes.agregarPlanAlimentacion(planAlimentacion)
 
     def asignarPlanEjercicio(self, planEjercicio):
+
+        from src.gestorAplicacion.clasesPrincipales.Historial import Historial
         self.planEjercicio = planEjercicio
 
         if self.historialPlanes is None:
@@ -109,6 +109,8 @@ class Cliente(Persona):
             self.historialPlanes.agregarPlanEjercicio(planEjercicio)
 
     def generarPlanEjercicio(self):
+
+        from src.gestorAplicacion.clasesPrincipales.PlanEjercicio import PlanEjercicio
         plan = PlanEjercicio()
         plan.dificultad = self.nivelCliente
         self.planEjercicio = plan.crearPlanSemanal(self.objetivoCliente)

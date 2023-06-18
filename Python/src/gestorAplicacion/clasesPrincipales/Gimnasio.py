@@ -15,9 +15,10 @@ from src.gestorAplicacion.clasesEnum import NivelCliente
 
 class Gimnasio:
     
-    from src.gestorAplicacion.clasesPrincipales.Maquina import Maquina
-    from src.gestorAplicacion.clasesPrincipales.Cliente import Cliente
-    from src.gestorAplicacion.clasesPrincipales.Entrenador import Entrenador
+
+
+
+
     listaGimnasios = []
 
     def __init__(self, 
@@ -35,13 +36,14 @@ class Gimnasio:
         self.listaClientes = []
 
 
-    def agregarEntrenador(self, e: Entrenador):
+    def agregarEntrenador(self, e):
         self.listaEntrenadores.append(e)
 
-    def agregarMaquina(self, m: Maquina):
+    def agregarMaquina(self, m):
+
         self.listaMaquinas.append(m)
 
-    def agregarCliente(self, c: Cliente):
+    def agregarCliente(self, c):
         self.listaClientes.append(c)
 
 
@@ -99,7 +101,7 @@ class Gimnasio:
 
         return sedesDisponibles
 
-    def clientesSimilares(self, cliente: Cliente):
+    def clientesSimilares(self, cliente):
         clientesSimilares = []
 
         for c in self.listaClientes:

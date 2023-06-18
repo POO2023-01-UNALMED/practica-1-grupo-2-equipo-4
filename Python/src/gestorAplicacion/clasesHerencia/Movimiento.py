@@ -1,5 +1,5 @@
-from src.gestorAplicacion.clasesEnum import TipoEjercicio, NivelCliente
-
+from src.gestorAplicacion.clasesEnum.TipoEjercicio import TipoEjercicio
+from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
 # Autores: Juan Manuel Rodríguez Sánchez, Jacobo Ochoa Ramirez.
 
 # Finalidad de la clase:
@@ -19,10 +19,10 @@ from src.gestorAplicacion.clasesEnum import TipoEjercicio, NivelCliente
 class Movimiento:
     listaMovimientos = []
 
-    def __init__(self, nombre, tipoEjercicio: TipoEjercicio, maquina, dificultad: NivelCliente):
+    def __init__(self, nombre, tipoEjercicio, maquina, dificultad: NivelCliente):
         self.nombre = nombre
         self.tipoEjercicio = tipoEjercicio
-        self.maquina = maquina()  # Asignación obligatoria de máquina
+        self.maquina = maquina  # Asignación obligatoria de máquina
         self.dificultad = dificultad
 
         self.maquina.setMovimientoRealizado(self)

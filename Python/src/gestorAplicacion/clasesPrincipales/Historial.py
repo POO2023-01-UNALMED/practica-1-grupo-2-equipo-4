@@ -1,9 +1,10 @@
 from src.gestorAplicacion.clasesEnum import DiaSemana, ObjetivoCliente, NivelCliente
-from src.gestorAplicacion.clasesPrincipales import PlanEjercicio, PlanAlimentacion
-from src.gestorAplicacion.clasesPrincipales.Gimnasio import Gimnasio
+
 
 
 class Historial:
+
+
     # Autores: Juan Jose Ospina Erazo.
 
     def __init__(self, cliente):
@@ -49,6 +50,7 @@ class Historial:
         return totalVisitas
 
     def recomendarPlan(self):
+        from src.gestorAplicacion.clasesPrincipales import PlanEjercicio
         # Método de funcionalidad 4 para documentar
 
         asistencias = self.vecesAsistidasAlGimnasio()

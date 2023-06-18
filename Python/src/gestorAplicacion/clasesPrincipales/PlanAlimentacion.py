@@ -1,8 +1,10 @@
 from src.gestorAplicacion.clasesEnum import DiaSemana, ObjetivoCliente, Alergeno
-from src.gestorAplicacion.clasesPrincipales.Alimento import Alimento
+
 from random import randint
 
 class PlanAlimentacion:
+
+
     NUMCOMIDAS = 3
 
     def __init__(self, nombrePlan, planSemanal=None):
@@ -11,6 +13,8 @@ class PlanAlimentacion:
         self.planSemanal = planSemanal if planSemanal else {}
 
     def filtrarPorAlergenos(self, alergias):
+        from src.gestorAplicacion.clasesPrincipales.Alimento import Alimento
+
         proteinaComplementaria = Alimento("Proteina", 100, 24, 3, 0, Alergeno.Enum.NINGUNO)
 
         for comidasDia in self.planSemanal.values():
@@ -50,7 +54,7 @@ class PlanAlimentacion:
 
         ## Revisar cómo funciona con objetos serializados
 
-        from clasesPrincipales.Empresa import Empresa
+        from src.gestorAplicacion.clasesPrincipales import Empresa
         empresa = Empresa()
         comidasFiltradas = []
         limiteCalBajo = 0

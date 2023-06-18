@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 
 
 class Persona(ABC):
-    def __init__(self, nombre=None, gimnasio=None, identificacion=0):
+    def __init__(self, nombre=None, gimnasio=None, identificacion=None):
         self.nombre = nombre
         self.gimnasio = gimnasio
         self.identificacion = identificacion
