@@ -18,26 +18,115 @@ def ventana_principal_usuario(root):
 
     # Funciones de las funcionalidades
     def mostrar_funcionalidad1():
-        messagebox.showinfo("Funcionalidad 1", "Has seleccionado la Funcionalidad 1.")
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea las etiquetas de título y descripción
+        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
+                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+        descripcion_detalle = tk.Label(funcionalidades_frame,
+                                            text="Descripcion del detalle del Proceso o la Consulta",
+                                            font=("Verdana", 10), padx=10, pady=10)
+
+        # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
+        titulo_proceso.pack()
+        descripcion_detalle.pack()
+
+        # Crea y añade el FieldFrame al funcionalidades_frame
+        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
+                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
+                                ["algo", "hola", "djio"])
+        superFrame.pack(padx=10, pady=10, expand=True)
 
     #Funcion buscar alimento
     def mostrar_funcionalidad2():
-        #Se crea fieldFrame, No funcionó cambiar tamaño
-        #En teoria se debería destruir el frame de las funcionalidades y crear el FieldFrame encima
-        nuevaVentana = tk.Toplevel(root)
-        nuevaVentana.config(width = 2000, height = 2000)
-        superFrame = FieldFrame(nuevaVentana,"Requerimientos", ["Maximo de calorias","Mínimo de proteinas","Alergenos"], "Datos", ["algo","hola","djio"])
-        superFrame.config(width = 2000, height = 2000)
-        superFrame.pack(fill="both", expand=True)
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea las etiquetas de título y descripción
+        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
+                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+        descripcion_detalle = tk.Label(funcionalidades_frame,
+                                            text="Descripcion del detalle del Proceso o la Consulta",
+                                            font=("Verdana", 10), padx=10, pady=10)
+
+        # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
+        titulo_proceso.pack()
+        descripcion_detalle.pack()
+
+        # Crea y añade el FieldFrame al funcionalidades_frame
+        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
+                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
+                                ["algo", "hola", "djio"])
+        superFrame.pack(padx=10, pady=10, expand=True)
 
     def mostrar_funcionalidad3():
-        messagebox.showinfo("Funcionalidad 3", "Has seleccionado la Funcionalidad 3.")
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea las etiquetas de título y descripción
+        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
+                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+        descripcion_detalle = tk.Label(funcionalidades_frame,
+                                            text="Descripcion del detalle del Proceso o la Consulta",
+                                            font=("Verdana", 10), padx=10, pady=10)
+
+        # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
+        titulo_proceso.pack()
+        descripcion_detalle.pack()
+
+        # Crea y añade el FieldFrame al funcionalidades_frame
+        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
+                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
+                                ["algo", "hola", "djio"])
+        superFrame.pack(padx=10, pady=10, expand=True)
 
     def mostrar_funcionalidad4():
-        messagebox.showinfo("Funcionalidad 4", "Has seleccionado la Funcionalidad 4.")
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea las etiquetas de título y descripción
+        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
+                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+        descripcion_detalle = tk.Label(funcionalidades_frame,
+                                            text="Descripcion del detalle del Proceso o la Consulta",
+                                            font=("Verdana", 10), padx=10, pady=10)
+
+        # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
+        titulo_proceso.pack()
+        descripcion_detalle.pack()
+
+        # Crea y añade el FieldFrame al funcionalidades_frame
+        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
+                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
+                                ["algo", "hola", "djio"])
+        superFrame.pack(padx=10, pady=10, expand=True)
 
     def mostrar_funcionalidad5():
-        messagebox.showinfo("Funcionalidad 5", "Has seleccionado la Funcionalidad 5.")
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea las etiquetas de título y descripción
+        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
+                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+        descripcion_detalle = tk.Label(funcionalidades_frame,
+                                            text="Descripcion del detalle del Proceso o la Consulta",
+                                            font=("Verdana", 10), padx=10, pady=10)
+
+        # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
+        titulo_proceso.pack()
+        descripcion_detalle.pack()
+
+        # Crea y añade el FieldFrame al funcionalidades_frame
+        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
+                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
+                                ["algo", "hola", "djio"])
+        superFrame.pack(padx=10, pady=10, expand=True)
 
     # Funciones de las nuevas funcionalidades
     def mostrar_aplicacion():
