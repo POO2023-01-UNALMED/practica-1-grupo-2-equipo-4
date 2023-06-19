@@ -26,5 +26,6 @@ class FieldFrame(Frame):
     def getValue(self,criterio):
         for i in self._valoresEntry:
             if criterio == i:
-                self._valoresEntry[i]
+                return self._valoresEntry[i].get()
+                break
 
