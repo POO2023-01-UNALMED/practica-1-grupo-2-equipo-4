@@ -423,9 +423,8 @@ def ventana_principal():
         [im("JuanOspina1.png"), im("JuanOspina2.png"), im("JuanOspina3.png"), im("JuanOspina4.png")],
         [im("Ochoa1.png"), im("Ochoa3.png"), im("Ochoa2.png"), im("Ochoa4.png")],
         [im("jr1.png"), im("jr2.png"), im("jr3.png"), im("jr4.png")],
-        [im("buff2.png"), im("buff2.png"), im("buff2.png"), im("buff2.png")],
-        [im("esteban1.png"), im("esteban2.png"), im("esteban3.png"), im("esteban4.png")],
         [im("valdivieso1.png"), im("valdivieso2.png"), im("valdivieso3.png"), im("valdivieso4.png")],
+        [im("esteban1.png"), im("esteban2.png"), im("esteban3.png"), im("esteban4.png")],
     ]
 
     imgs_labels = []  # Primero convierto a Label con cada path
