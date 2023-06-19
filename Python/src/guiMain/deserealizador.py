@@ -1,86 +1,65 @@
 import pickle
 import os
 
+
 def deserializar():
     return deserializarGimnasios(), deserializarEjercicios(), deserializarMaquinas(), deserializarComidas(), deserializarAlimentos(), deserializarMovimientos(), deserializarClientes()
 
 
 def deserializarGimnasios():
-    current_directory = os.getcwd()
-    two_levels_up = os.path.abspath(os.path.join(current_directory, "../../"))
+    directorio = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseDatos", "tempo", "gimnasios.pkl")
 
-    dirgimnasios = os.path.join(two_levels_up, "src/baseDatos/tempo/gimnasios.pkl")
-
-    with open(dirgimnasios, "rb") as file:
+    with open(directorio, "rb") as file:
         gimnasios = pickle.load(file)
 
-    gimnasios
+    return gimnasios
 
 
 def deserializarMaquinas():
-    current_directory = os.getcwd()
-    two_levels_up = os.path.abspath(os.path.join(current_directory, "../../"))
+    directorio = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseDatos", "tempo", "maquinas.pkl")
 
-    dir = os.path.join(two_levels_up, "src/baseDatos/tempo/maquinas.pkl")
-
-    with open(dir, "rb") as file:
+    with open(directorio, "rb") as file:
         objetosDeClase = pickle.load(file)
 
-    objetosDeClase
+    return objetosDeClase
 
 
 def deserializarMovimientos():
-    current_directory = os.getcwd()
-    two_levels_up = os.path.abspath(os.path.join(current_directory, "../../"))
+    directorio = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseDatos", "tempo", "movimientos.pkl")
 
-    dir = os.path.join(two_levels_up, "src/baseDatos/tempo/movimientos.pkl")
-
-    with open(dir, "rb") as file:
+    with open(directorio, "rb") as file:
         objetosDeClase = pickle.load(file)
 
-    objetosDeClase
+    return objetosDeClase
 
 def deserializarEjercicios():
-    current_directory = os.getcwd()
-    two_levels_up = os.path.abspath(os.path.join(current_directory, "../../"))
+    directorio = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseDatos", "tempo", "ejercicios.pkl")
 
-    dir = os.path.join(two_levels_up, "src/baseDatos/tempo/ejercicios.pkl")
-
-    with open(dir, "rb") as file:
+    with open(directorio, "rb") as file:
         objetosDeClase = pickle.load(file)
 
-    objetosDeClase
+    return objetosDeClase
 
 def deserializarAlimentos():
-    current_directory = os.getcwd()
-    two_levels_up = os.path.abspath(os.path.join(current_directory, "../../"))
+    directorio = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseDatos", "tempo", "alimentos.pkl")
 
-    dir = os.path.join(two_levels_up, "src/baseDatos/tempo/alimentos.pkl")
-
-    with open(dir, "rb") as file:
+    with open(directorio, "rb") as file:
         objetosDeClase = pickle.load(file)
 
-    objetosDeClase
+    return objetosDeClase
 
 def deserializarComidas():
-    current_directory = os.getcwd()
-    two_levels_up = os.path.abspath(os.path.join(current_directory, "../../"))
+    directorio = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseDatos", "tempo", "comidas.pkl")
 
-    dir = os.path.join(two_levels_up, "src/baseDatos/tempo/comidas.pkl")
-
-    with open(dir, "rb") as file:
+    with open(directorio, "rb") as file:
         objetosDeClase = pickle.load(file)
 
-    objetosDeClase
+    return objetosDeClase
 
 def deserializarClientes():
-    current_directory = os.getcwd()
-    two_levels_up = os.path.abspath(os.path.join(current_directory, "../../"))
+    directorio = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseDatos", "tempo", "clientes.pkl")
 
-    dir = os.path.join(two_levels_up, "src/baseDatos/tempo/clientes.pkl")
-
-    with open(dir, "rb") as file:
+    with open(directorio, "rb") as file:
         objetosDeClase = pickle.load(file)
 
-    objetosDeClase
-
+    return objetosDeClase

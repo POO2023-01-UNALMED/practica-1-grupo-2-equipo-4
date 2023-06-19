@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0986c872-8adc-424f-a0a8-39b5f1514373" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/practica-1-grupo-2-equipo-4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/practica-1-grupo-2-equipo-4.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Movimiento.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Movimiento.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesPrincipales/Alimento.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesPrincipales/Alimento.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesPrincipales/Ejercicio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesPrincipales/Ejercicio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uiMain/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/uiMain/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/guiMain/gestionador.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/guiMain/gestionador.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,21 +28,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;branch-sebastianv&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/OneDrive/Escritorio/Jacobo/repositorios Github/practica-1-grupo-2-equipo-4&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Juan Manuel/Documents/GitHub/practica-1-grupo-2-equipo-4",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Python.serializar">
+}]]></component>
+  <component name="RunManager" selected="Python.gestionador">
     <configuration name="gestionador" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="practica-1-grupo-2-equipo-4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -75,7 +73,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\Lenovo\OneDrive\Escritorio\Jacobo\repositorios Github\practica-1-grupo-2-equipo-4\env\Scripts\python.exe" />
-      <option name="SDK_NAME" value="Python 3.10 (practica-1-grupo-2-equipo-4)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -114,13 +111,13 @@
     </configuration>
     <list>
       <item itemvalue="Python.gui" />
-      <item itemvalue="Python.serializar" />
       <item itemvalue="Python.gestionador" />
+      <item itemvalue="Python.serializar" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.serializar" />
         <item itemvalue="Python.gestionador" />
+        <item itemvalue="Python.serializar" />
       </list>
     </recent_temporary>
   </component>

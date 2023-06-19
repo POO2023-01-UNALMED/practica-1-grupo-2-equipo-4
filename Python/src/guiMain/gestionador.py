@@ -166,7 +166,16 @@ def ventana_principal_usuario(root):
 
     # Funciones de las nuevas funcionalidades
     def mostrar_aplicacion():
-        messagebox.showinfo("Aplicación", "Has seleccionado la Aplicación.")
+        messagebox.showinfo("Aplicación", "Gymbro consiste en una aplicación que tiene " 
+                            "como fin gestionar el funcionamiento de un gimnasio."
+                            + "\n"
+                            + "\n"
+                            + "Con esta podrás realizar procesos y consultas que llevarán "
+                            "tu disciplina y consistencia con tus planes a otro nivel,"
+                            + "\n"
+                            + "trabajando de la mano de los mejores entrenadores "
+                            "y sus recomendaciones.")
+
 
     # Creación de la ventana principal de usuario
     ventana_usuario = tk.Toplevel(root)
@@ -174,25 +183,29 @@ def ventana_principal_usuario(root):
     ventana_usuario.state('zoomed')
 
     def mostrar_acerca_de():
-        # Borra los widgets existentes en el frame de funcionalidades
-        for widget in funcionalidades_frame.winfo_children():
-            widget.destroy()
-
-        # Crea los espacios para los nombres
-        nombres = ["Juan Jose Ospina Erazo", "Jacobo Arenas", "Esteban Vasquez", "Sebastian Valdivieso", "Juan Manuel"]
-        for i, nombre in enumerate(nombres):
-            etiqueta_nombre = tk.Label(funcionalidades_frame, text=nombre, font=("Verdana", 12), padx=10, pady=10)
-            etiqueta_nombre.pack(pady=5)
+        messagebox.showinfo("Acerca de", "Esta aplicación fue desarrollada "
+                                        "(con sudor y lágrimas) por: "
+                                        + "\n"
+                                        + "\n"
+                                        + "1. Juan José Ospina Erazo"
+                                        + "\n"
+                                        + "2. Jacobo Ochoa Ramírez"
+                                        + "\n"
+                                        + "3. Juan Manuel Rodríguez Sánchez"
+                                        + "\n"
+                                        + "4. Sebastián Valdivieso Zapata"
+                                        + "\n"
+                                        + "5. Esteban Vásquez Pérez")
 
     def mostrar_ayuda():
         # Borra los widgets existentes en el frame de funcionalidades
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
-        # Crear botón "Acerca de"
-        acerca_de_btn = ttk.Button(funcionalidades_frame, text="Acerca de", style="Botones.TButton",
-                                   width=25, command=mostrar_acerca_de)
-        acerca_de_btn.pack(pady=10)
+        # Crear botón "Aplicación"
+        aplicacion_btn = ttk.Button(funcionalidades_frame, text="Acerca de", style="Botones.TButton",
+                                    width=25, command=mostrar_acerca_de)
+        aplicacion_btn.grid(row=0, columnspan=3, sticky="nsew", padx=5, pady=5)
 
     def mostrar_salir():
         # Oculta la ventana de usuario
@@ -344,7 +357,7 @@ def ventana_principal():
         root.destroy()
 
     def mostrar_descripcion():
-        messagebox.showinfo("Descripción del sistema", "Esta aplicación es un asistente de "
+        messagebox.showinfo("Descripción del sistema", "Este sistema es un asistente de "
                                                        "entrenamiento y alimentación "
                                                        "para personas que quieren "
                                                        "llevar su entrenamiento al máximo nivel.")
@@ -419,10 +432,13 @@ def ventana_principal():
     titulo = Label(top_frame, text=label_principal, font=("Verdana", 24, "bold underline"))
     titulo.place(rely=0.5, relwidth=0.998, relheight=0.96, anchor="w")
 
-    bienvenida_str = "TE DAMOS LA BIENVENIDA" \
-                     "\n\n En Gymbro, nuestra meta es que cumplas con tus objetivos \n " \
-                     "deportivos y tengas una vida saludable." \
-                     + 6 * "\n" + "Desarrollado por Juan Ospina, Jacobo Ochoa, Juan Manuel, \nSebastián y Esteban."
+    bienvenida_str = 2 * "\n" + "¡BIENVENIDO A GYMBRO!" \
+                    + 3 * "\n" + "Nuestra meta es que puedas cumplir todos tus " \
+                    + "\n" \
+                    "objetivos deportivos y lleves una vida saludable, \n " \
+                    "teniendo recomendaciones de profesionales." \
+                    + 4 * "\n" \
+                    + '"Porque todos necesitamos un GYMBRO".'
 
     bienvenida = tk.Text(upper_left_frame, fg="black", bg="#F0F0F0", font=("Verdana", 12, "bold"), cursor="arrow")
     bienvenida.insert(tk.END, bienvenida_str, "justifying")
@@ -490,25 +506,139 @@ def ventana_principal():
 
     def actualizar_hojas_vida():
         """Esta función cambia el texto del botón y las imágenes en el frame de abajo"""
-        if button["text"] == "Hoja de vida de Juan Ospina":
-            button["text"] = "Hoja de vida de Jacobo Ochoa"
+
+        if button["text"] == ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                + 3 * "\n"
+                + "Nombre: "
+                  "Juan José Ospina Erazo"
+                + "\n"
+                + "Fecha de nacimiento: "
+                  "9 de mayo del 2000"
+                + "\n"
+                + "Gustos: "
+                  "senderismo, trekking y jugar tenis"):
+
+            button["text"] = ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                             + 3 * "\n"
+                             + "Nombre: "
+                               "Jacobo Ochoa Ramírez"
+                             + "\n"
+                             + "Fecha de nacimiento: "
+                               "28 de enero del 2004"
+                             + "\n"
+                             + "Gustos: "
+                               "balonmano, calistenia, taekwondo")
+
             cambiar_imagenes_devs()
-        elif button["text"] == "Hoja de vida de Jacobo Ochoa":
-            button["text"] = "Hoja de vida de Juan Manuel"
+
+        elif button["text"] == ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                + 3 * "\n"
+                + "Nombre: "
+                  "Jacobo Ochoa Ramírez"
+                + "\n"
+                + "Fecha de nacimiento: "
+                  "28 de enero del 2004"
+                + "\n"
+                + "Gustos: "
+                  "balonmano, calistenia, taekwondo"):
+
+            button["text"] = ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                             + 3 * "\n"
+                             + "Nombre: " 
+                               "Juan Manuel Rodríguez Sánchez"
+                             + "\n"
+                             + "Fecha de nacimiento: " 
+                               "9 de julio del 2004"
+                             + "\n"
+                             + "Gustos: " 
+                               "tecnología, finanzas y escuchar música")
+
             cambiar_imagenes_devs()
-        elif button["text"] == "Hoja de vida de Juan Manuel":
-            button["text"] = "Hoja de vida de Sebastián"
+
+        elif button["text"] == ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                + 3 * "\n"
+                + "Nombre: "
+                  "Juan Manuel Rodríguez Sánchez"
+                + "\n"
+                + "Fecha de nacimiento: "
+                  "9 de julio del 2004"
+                + "\n"
+                + "Gustos: "
+                  "tecnología, finanzas y escuchar música"):
+
+            button["text"] = ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                             + 3 * "\n"
+                             + "Nombre: " 
+                               "Sebastián Valdivieso Zapata"
+                             + "\n"
+                             + "Fecha de nacimiento: " 
+                               "27 de enero del 2004"
+                             + "\n"
+                             + "Gustos: " 
+                             "tocar guitarra y bajo")
+
             cambiar_imagenes_devs()
-        elif button["text"] == "Hoja de vida de Sebastián":
-            button["text"] = "Hoja de vida de Esteban"
+
+        elif button["text"] == ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                + 3 * "\n"
+                + "Nombre: " 
+                  "Sebastián Valdivieso Zapata"
+                + "\n"
+                + "Fecha de nacimiento: " 
+                  "27 de enero del 2004"
+                + "\n"
+                + "Gustos: " 
+                  "tocar guitarra y bajo"):
+
+            button["text"] = ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                             + 3 * "\n"
+                             + "Nombre: " 
+                               "Esteban Vásquez Pérez"
+                             + "\n"
+                             + "Fecha de nacimiento: " 
+                               "3 de enero del 2003"
+                             + "\n"
+                             + "Gustos: " 
+                               "pasear, ir al gimnasio y leer poesía")
+
             cambiar_imagenes_devs()
-        elif button["text"] == "Hoja de vida de Esteban":
-            button["text"] = "Hoja de vida de Juan Ospina"
+
+        elif button["text"] == ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                + 3 * "\n"
+                + "Nombre: "
+                  "Esteban Vásquez Pérez"
+                + "\n"
+                + "Fecha de nacimiento: "
+                  "3 de enero del 2003"
+                + "\n"
+                + "Gustos: "
+                  "pasear, ir al gimnasio y leer poesía"):
+
+            button["text"] = ("BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                             + 3 * "\n"
+                             + "Nombre: "
+                               "Juan José Ospina Erazo"
+                             + "\n"
+                             + "Fecha de nacimiento: "
+                               "9 de mayo del 2000"
+                             + "\n"
+                             + "Gustos: "
+                               "senderismo, trekking y jugar tenis")
+
             cambiar_imagenes_devs()
 
     # Quiero definir un grid para el bottom_right_frame
     # Botón de hojas de vida inicial
-    button = Button(upper_right_frame, text="Hoja de vida de Juan Ospina", bg="#F0F0F0", command=actualizar_hojas_vida,
+    button = Button(upper_right_frame, text="BREVE HOJA DE VIDA DE LOS DESARROLLADORES"
+                                            + 3 * "\n"
+                                            + "Nombre: "
+                                              "Juan José Ospina Erazo"
+                                            + "\n"
+                                            + "Fecha de nacimiento: "
+                                              "9 de mayo del 2000"
+                                            + "\n"
+                                            + "Gustos: "
+                                              "senderismo, trekking y jugar tenis", bg="#F0F0F0", command=actualizar_hojas_vida,
                     font=("Verdana", 12, "bold"), cursor="hand2")
     button.pack(expand=True, fill="both")
 
@@ -516,7 +646,7 @@ def ventana_principal():
     main_menu = tk.Menu(top_frame)
     menu_bar = tk.Menu(main_menu, tearoff=0)
     menu_bar.add_command(label="Salir", command=salir_ventana_principal)
-    menu_bar.add_command(label="Acerca de", command=mostrar_descripcion)
+    menu_bar.add_command(label="Descripción", command=mostrar_descripcion)
 
     # creo las partes del menú
     main_menu.add_cascade(label="Inicio", menu=menu_bar)
