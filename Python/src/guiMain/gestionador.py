@@ -1,9 +1,16 @@
 import tkinter as tk
 from tkinter import messagebox, Button, Label, ttk
 import os
+from src.guiMain.FieldFrame import FieldFrame
+from src.guiMain import deserealizador
+from src.guiMain import serializador
+
 
 """
     Crea y muestra la ventana principal para el usuario en la aplicación Gymbro.
+    Adicionalmente, en ella se puede acceder a las opciones o funcionalidades
+    ademas se añaden botones para conocer mas sobre la aplicacion, y una sesion de ayuda
+    que muestra informacion sobre los desarrolladores
 
     Parámetros:
         - root: La ventana raíz principal de la aplicación.
@@ -11,9 +18,7 @@ import os
     """
 def ventana_principal_usuario(root):
     # Listas de objetos
-    from src.guiMain.FieldFrame import FieldFrame
-    from src.guiMain import deserealizador
-    from src.guiMain import serializador
+
     gimnasios, ejercicios, maquinas, comidas, alimentos, movimientos, clientes = deserealizador.deserializar()
 
     # Funciones de las funcionalidades
@@ -24,10 +29,10 @@ def ventana_principal_usuario(root):
 
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
-                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+                                  font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                            text="Descripcion del detalle del Proceso o la Consulta",
-                                            font=("Verdana", 10), padx=10, pady=10)
+                                       text="Descripcion del detalle del Proceso o la Consulta",
+                                       font=("Verdana", 10), padx=10, pady=10)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
         titulo_proceso.pack()
@@ -69,10 +74,10 @@ def ventana_principal_usuario(root):
 
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
-                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+                                  font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                            text="Descripcion del detalle del Proceso o la Consulta",
-                                            font=("Verdana", 10), padx=10, pady=10)
+                                       text="Descripcion del detalle del Proceso o la Consulta",
+                                       font=("Verdana", 10), padx=10, pady=10)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
         titulo_proceso.pack()
@@ -91,10 +96,10 @@ def ventana_principal_usuario(root):
 
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
-                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+                                  font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                            text="Descripcion del detalle del Proceso o la Consulta",
-                                            font=("Verdana", 10), padx=10, pady=10)
+                                       text="Descripcion del detalle del Proceso o la Consulta",
+                                       font=("Verdana", 10), padx=10, pady=10)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
         titulo_proceso.pack()
@@ -113,10 +118,10 @@ def ventana_principal_usuario(root):
 
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
-                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+                                  font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                            text="Descripcion del detalle del Proceso o la Consulta",
-                                            font=("Verdana", 10), padx=10, pady=10)
+                                       text="Descripcion del detalle del Proceso o la Consulta",
+                                       font=("Verdana", 10), padx=10, pady=10)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
         titulo_proceso.pack()
@@ -132,13 +137,38 @@ def ventana_principal_usuario(root):
     def mostrar_aplicacion():
         messagebox.showinfo("Aplicación", "Has seleccionado la Aplicación.")
 
-    def mostrar_salir():
-        messagebox.showinfo("Salir", "Has seleccionado Salir.")
-
     # Creación de la ventana principal de usuario
     ventana_usuario = tk.Toplevel(root)
     ventana_usuario.title("Gymbro - Usuario")
     ventana_usuario.state('zoomed')
+
+    def mostrar_acerca_de():
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea los espacios para los nombres
+        nombres = ["Juan Jose Ospina Erazo", "Jacobo Arenas", "Esteban Vasquez", "Sebastian Valdivieso", "Juan Manuel"]
+        for i, nombre in enumerate(nombres):
+            etiqueta_nombre = tk.Label(funcionalidades_frame, text=nombre, font=("Verdana", 12), padx=10, pady=10)
+            etiqueta_nombre.pack(pady=5)
+
+    def mostrar_ayuda():
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crear botón "Acerca de"
+        acerca_de_btn = ttk.Button(funcionalidades_frame, text="Acerca de", style="Botones.TButton",
+                                   width=25, command=mostrar_acerca_de)
+        acerca_de_btn.pack(pady=10)
+
+    def mostrar_salir():
+        # Oculta la ventana de usuario
+        ventana_usuario.withdraw()
+        # Muestra la ventana root
+        root.deiconify()
+        root.state('zoomed')
 
     root.withdraw()
     # Frame principal
@@ -248,7 +278,7 @@ def ventana_principal_usuario(root):
                               style="BotonesMenu.TButton")
     procesos_btn.pack(side="left", padx=10, pady=10)
 
-    ayuda_btn = ttk.Button(barra_menu, text="Ayuda", width=10, style="BotonesMenu.TButton")
+    ayuda_btn = ttk.Button(barra_menu, text="Ayuda", width=10, command=mostrar_ayuda, style="BotonesMenu.TButton")
     ayuda_btn.pack(side="left", padx=10, pady=10)
 
     # Frame de las funcionalidades
