@@ -5,7 +5,6 @@ from src.guiMain.FieldFrame import FieldFrame
 from src.guiMain import deserealizador
 from src.guiMain import serializador
 
-
 """
     Crea y muestra la ventana principal para el usuario en la aplicación Gymbro.
     Adicionalmente, en ella se puede acceder a las opciones o funcionalidades
@@ -52,10 +51,10 @@ def ventana_principal_usuario(root):
 
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
-                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+                                  font=("Verdana", 16, "bold"), fg="dark blue", padx=20, pady=5)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                            text="Descripcion del detalle del Proceso o la Consulta",
-                                            font=("Verdana", 10), padx=10, pady=10)
+                                       text="Descripcion del detalle del Proceso o la Consulta",
+                                       font=("Verdana", 14), padx=20, pady=5)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
         titulo_proceso.pack()
@@ -65,7 +64,25 @@ def ventana_principal_usuario(root):
         superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
                                 ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
                                 ["algo", "hola", "djio"])
-        superFrame.pack(padx=10, pady=10, expand=True)
+        superFrame.pack(padx=20, pady=5, expand=True)
+
+        # Crea los botones "Aceptar" y "Borrar"
+        buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
+        aceptarButton = tk.Button(buttons_frame, text="Aceptar", font=("Verdana", 14))
+        borrarButton = tk.Button(buttons_frame, text="Borrar", font=("Verdana", 14))
+
+        def clear_entries():
+            for entry in superFrame._valoresEntry.values():
+                entry.delete(0, 'end')
+
+        borrarButton.config(command=clear_entries)
+
+        # Empaqueta los botones en el nuevo frame
+        aceptarButton.pack(side='left', padx=5)
+        borrarButton.pack(side='left', padx=5)
+
+        # Empaqueta el frame de botones debajo del FieldFrame
+        buttons_frame.pack(pady=10)
 
     def mostrar_funcionalidad3():
         # Borra los widgets existentes en el frame de funcionalidades
@@ -290,7 +307,7 @@ def ventana_principal_usuario(root):
     serializador.serializar(gimnasios, ejercicios, maquinas, comidas, alimentos, movimientos, clientes)
 
 
-    
+
 """
 Este código define la ventana principal de la aplicación Gymbro.
 Proporciona una interfaz gráfica de usuario donde los usuarios pueden acceder a funciones relacionadas con entrenamiento y alimentación.
