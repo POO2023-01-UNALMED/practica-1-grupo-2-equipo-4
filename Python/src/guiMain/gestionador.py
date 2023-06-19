@@ -11,6 +11,7 @@ import os
     """
 def ventana_principal_usuario(root):
     # Listas de objetos
+    from src.guiMain.FieldFrame import FieldFrame
     from src.guiMain import deserealizador
     from src.guiMain import serializador
     gimnasios, ejercicios, maquinas, comidas, alimentos, movimientos, clientes = deserealizador.deserializar()
@@ -19,8 +20,15 @@ def ventana_principal_usuario(root):
     def mostrar_funcionalidad1():
         messagebox.showinfo("Funcionalidad 1", "Has seleccionado la Funcionalidad 1.")
 
+    #Funcion buscar alimento
     def mostrar_funcionalidad2():
-        messagebox.showinfo("Funcionalidad 2", "Has seleccionado la Funcionalidad 2.")
+        #Se crea fieldFrame, No funcionó cambiar tamaño
+        #En teoria se debería destruir el frame de las funcionalidades y crear el FieldFrame encima
+        nuevaVentana = tk.Toplevel(root)
+        nuevaVentana.config(width = 2000, height = 2000)
+        superFrame = FieldFrame(nuevaVentana,"Requerimientos", ["Maximo de calorias","Mínimo de proteinas","Alergenos"], "Datos", ["algo","hola","djio"])
+        superFrame.config(width = 2000, height = 2000)
+        superFrame.pack(fill="both", expand=True)
 
     def mostrar_funcionalidad3():
         messagebox.showinfo("Funcionalidad 3", "Has seleccionado la Funcionalidad 3.")
