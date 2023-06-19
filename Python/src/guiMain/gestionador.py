@@ -67,6 +67,37 @@ def ventana_principal_usuario(root):
                                 ["algo", "hola", "djio"])
         superFrame.pack(padx=10, pady=10, expand=True)
 
+        def buscarAlimento(evento):
+            maxCal = superFrame.getValue("Maximo de calorias")
+            minProt = superFrame.getValue("Mínimo de proteinas")
+            aler = superFrame.getValue("Alergenos")
+
+            print(alimentos[2]._nombre)
+
+            alimentosAceptados = []
+            for alimento in alimentos:
+                lambda : alimentosAceptados.append(alimento) if alimento.encontrarAlimentos( maxCal, minProt, aler ) else print("no")
+
+            for widget in funcionalidades_frame.winfo_children():
+                widget.destroy()
+
+            for alimentoSelec in alimentosAceptados:
+                Label(funcionalidades_frame, text= alimentoSelec._nombre).pack(anchor="c")
+
+
+
+        buttonBuscar = ttk.Button(superFrame, text="Buscar", style="Botones.TButton",
+                                  width=8)
+        buttonBuscar.grid(row=4, column=1, padx=10, pady=10, sticky="w")
+        buttonBuscar.bind("<Button-1>",buscarAlimento)
+
+        etiqueta = Label(funcionalidades_frame, text = "")
+        etiqueta.pack()
+
+
+
+      
+
     def mostrar_funcionalidad3():
         # Borra los widgets existentes en el frame de funcionalidades
         for widget in funcionalidades_frame.winfo_children():

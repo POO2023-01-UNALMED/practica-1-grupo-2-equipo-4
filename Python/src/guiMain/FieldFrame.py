@@ -20,8 +20,10 @@ class FieldFrame(Frame):
 
         for valor in valores:
 
-            val = tkinter.Entry(self,text=valor,font=("Verdana 10"),state= (lambda : "disabled" if valor in habilitado else "normal")()).grid(row = (valores.index(valor) + 1), column=1,padx=10,pady=10,sticky="w")
+            val = tkinter.Entry(self,text=valor,font=("Verdana 10"),state= (lambda : "disabled" if valor in habilitado else "normal")())
+            val.grid(row = (valores.index(valor) + 1), column=1,padx=10,pady=10,sticky="w")
             self._valoresEntry[criterios[valores.index(valor)]] = val
+
 
 
 
@@ -30,6 +32,6 @@ class FieldFrame(Frame):
     def getValue(self,criterio):
         for i in self._valoresEntry:
             if criterio == i:
-                self._valoresEntry[i]
-
+                return self._valoresEntry[i].get()
+                break
 
