@@ -10,6 +10,11 @@ import os
 
     """
 def ventana_principal_usuario(root):
+    # Listas de objetos
+    from src.guiMain import deserealizador
+    from src.guiMain import serializador
+    gimnasios, ejercicios, maquinas, comidas, alimentos, movimientos, clientes = deserealizador.deserializar()
+
     # Funciones de las funcionalidades
     def mostrar_funcionalidad1():
         messagebox.showinfo("Funcionalidad 1", "Has seleccionado la Funcionalidad 1.")
@@ -155,6 +160,8 @@ def ventana_principal_usuario(root):
 
     # Mostrar las funcionalidades por defecto al abrir la ventana
     mostrar_funcionalidades()
+    serializador.serializar(gimnasios, ejercicios, maquinas, comidas, alimentos, movimientos, clientes)
+
 
     
 """
@@ -164,6 +171,8 @@ Proporciona una interfaz gráfica de usuario donde los usuarios pueden acceder a
 La ventana principal contiene varios frames para organizar los elementos visuales de la interfaz.
 Incluye un frame de título, frames izquierdo y derecho, y frames anidados dentro de ellos."""
 def ventana_principal():
+
+
     # Obtención de paths para las imágenes
     current_directory = os.path.dirname(os.path.abspath(__file__))
     dir_imagenes = os.path.join(current_directory, "pics")
@@ -363,10 +372,12 @@ def ventana_principal():
     pass
 
 def main():
+
     ventana_principal()
 
 
 if __name__ == "__main__":
+
     main()
 
  # Esto va en la siguiente ventana después de presionar P4

@@ -26,7 +26,7 @@ def intento():
     direjercicios = os.path.join(two_levels_up, "src/baseDatos/tempo/ejercicios.pkl")
     diralims = os.path.join(two_levels_up, "src/baseDatos/tempo/alimentos.pkl")
     dircomidas = os.path.join(two_levels_up, "src/baseDatos/tempo/comidas.pkl")
-    dirclientes = os.path.join(two_levels_up, "src/baseDatos/tempo/comidas.pkl")
+    dirclientes = os.path.join(two_levels_up, "src/baseDatos/tempo/clientes.pkl")
 
     from src.gestorAplicacion.clasesHerencia.Movimiento import Movimiento
     from src.gestorAplicacion.clasesPrincipales import Ejercicio
