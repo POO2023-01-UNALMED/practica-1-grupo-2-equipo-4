@@ -529,12 +529,22 @@ def ventana_principal_usuario(root):
             # Crea y muestra la lista de máquinas disponibles
         if gimnasios_filtrados:
             titulo_maquinas = tk.Label(funcionalidades_frame, text="Máquinas Disponibles",
-                                       font=("Verdana", 16, "bold"), fg="dark blue", padx=10, pady=10)
+                                       font=("Verdana",
+                                             16,
+                                             "bold"),
+                                       fg="dark blue",
+                                       padx=10,
+                                       pady=10)
             titulo_maquinas.pack()
 
             for gimnasio in gimnasios_filtrados:
                 titulo_sede = tk.Label(funcionalidades_frame, text=f"Sede {gimnasio.nombre} en {gimnasio.sede}",
-                                       font=("Verdana", 14, "bold"), fg="dark green", padx=10, pady=10)
+                                       font=("Verdana",
+                                             14,
+                                             "bold"),
+                                       fg="dark green",
+                                       padx=10,
+                                       pady=10)
                 titulo_sede.pack()
 
                 for maquina in gimnasio.listaMaquinas:
