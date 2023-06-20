@@ -258,7 +258,8 @@ def ventana_principal_usuario(root):
         descripcion_detalle.pack()
 
         # Crea y añade el FieldFrame al funcionalidades_frame
-        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
+        superFrame = FieldFrame(funcionalidades_frame,
+                                "Requerimientos",
                                 ["Máximo de calorías", "Mínimo de proteínas", "Alergeno"], "Datos",
                                 ["algo", "hola", "djio"])
 
@@ -323,59 +324,197 @@ def ventana_principal_usuario(root):
         # Empaqueta el frame de botones debajo del FieldFrame
         buttons_frame.pack(pady=10)
 
+ 
+    # Funciones de las funcionalidades
     def mostrar_funcionalidad4():
-        # Borra los widgets existentes en el frame de funcionalidades
-        for widget in funcionalidades_frame.winfo_children():
-            widget.destroy()
-
-        # Crea las etiquetas de título y descripción
-        titulo_proceso = tk.Label(funcionalidades_frame, text= 2 * "\n" + "Buscar Gimnasios por Ciudad",
-                                  font=("Verdana", 16, "bold"),
-                                  fg="dark blue",
-                                  padx=10,
-                                  pady=10)
-
-        descripcion_detalle = tk.Label(funcionalidades_frame,
-                                       text="Consulte las sedes de los gimnasios presentes en su ciudad.",
-                                       font=("Verdana", 14),
-                                       padx=10,
-                                       pady=10)
-
-        # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
-        titulo_proceso.pack()
-        descripcion_detalle.pack()
-
-    def mostrar_funcionalidad5():
+        # Encuentra todas las ciudades únicas en los datos de los gimnasios
+        cities = list(set([gym.ciudad for gym in gimnasios]))
         # Borra los widgets existentes en el frame de funcionalidades
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame,
-                                  text="Nombre del proceso o consulta",
-                                  font=("Verdana", 12, "bold"),
+                                  text="Buscar Gimnasio",
+                                  font=("Verdana", 16, "bold"), 
                                   fg="dark blue",
-                                  padx=10,
-                                  pady=10)
-
+                                  padx=20,
+                                  pady=5)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                       text="Descripcion del detalle del Proceso o la Consulta",
-                                       font=("Verdana", 10),
-                                       padx=10,
-                                       pady=10)
+                                       text="Ingrese la información requerida para buscar un gimnasio",
+                                       font=("Verdana", 14),
+                                       padx=20,
+                                       pady=5)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
         titulo_proceso.pack()
         descripcion_detalle.pack()
 
         # Crea y añade el FieldFrame al funcionalidades_frame
-        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
-                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
-                                ["algo", "hola", "djio"])
-
-        superFrame.pack(padx=10,
-                        pady=10,
+        superFrame = FieldFrame(funcionalidades_frame,
+                                "Requerimientos",
+                                ["Nombre de gimnasio"],
+                                "Datos",
+                                ["nombre"])
+        superFrame.pack(padx=20,
+                        pady=5,
                         expand=True)
+
+        # Crea el Combobox de ciudades
+        city_label = tk.Label(funcionalidades_frame,
+                              text="Ciudad", 
+                              font=("Verdana", 14),
+                              padx=20,
+                              pady=5)
+        city_combobox = ttk.Combobox(funcionalidades_frame, 
+                                     values=cities, 
+                                     font=("Verdana", 14))
+        city_label.pack()
+        city_combobox.pack()
+
+        # Crea los botones "Aceptar" y "Borrar"
+        buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
+        aceptarButton = tk.Button(buttons_frame, 
+                                  text="Aceptar", 
+                                  font=("Verdana", 14))
+        borrarButton = tk.Button(buttons_frame, 
+                                 text="Borrar",
+                                 font=("Verdana", 14))
+
+        def clear_entries():
+            for entry in superFrame._valoresEntry.values():
+                entry.delete(0, 'end')
+            city_combobox.set('')  # Borra el contenido del Combobox
+
+        borrarButton.config(command=clear_entries)
+
+        # Empaqueta los botones en el nuevo frame
+        aceptarButton.pack(side='left', padx=5)
+        borrarButton.pack(side='left', padx=5)
+
+        # Empaqueta el frame de botones debajo del FieldFrame
+        buttons_frame.pack(pady=10)
+
+        def buscarGimnasio():
+            nombreGym = superFrame.getValue("Nombre de gimnasio")
+            ciudadGym = city_combobox.get()  # Recupera la ciudad seleccionada del Combobox
+
+            gimnasiosAceptados = []
+            for gimnasio in gimnasios:
+                if gimnasio.nombre.lower() == nombreGym.lower() and gimnasio.ciudad.lower() == ciudadGym.lower():
+                    gimnasiosAceptados.append(gimnasio)
+
+            for widget in funcionalidades_frame.winfo_children():
+                widget.destroy()
+
+            for gimnasioSelec in gimnasiosAceptados:
+                Label(funcionalidades_frame, text=gimnasioSelec.sede).pack(anchor="c")
+
+        aceptarButton.config(command=buscarGimnasio)
+
+        etiqueta = Label(funcionalidades_frame, text="")
+        etiqueta.pack()
+
+# Funciones de las funcionalidades
+    def mostrar_funcionalidad5():
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea las etiquetas de título para los checkboxes
+        label_nombre = tk.Label(funcionalidades_frame, text="Nombre", font=("Verdana", 14, "bold"))
+        label_ciudad = tk.Label(funcionalidades_frame, text="Ciudad", font=("Verdana", 14, "bold"))
+
+        # Creación de la variable de control
+        opcion_smartfit = tk.IntVar()
+        opcion_gymbro = tk.IntVar()
+        opcion_bodytech = tk.IntVar()
+
+        opcion_bogota = tk.IntVar()
+        opcion_medellin = tk.IntVar()
+
+        # Crea los checkboxes de nombre con las opciones específicas
+        checkbox_smartfit = tk.Checkbutton(funcionalidades_frame, text="Smartfit", variable=opcion_smartfit,
+                                           font=("Verdana", 14))
+        checkbox_gymbro = tk.Checkbutton(funcionalidades_frame, text="Gymbro", variable=opcion_gymbro,
+                                         font=("Verdana", 14))
+        checkbox_bodytech = tk.Checkbutton(funcionalidades_frame, text="Bodytech", variable=opcion_bodytech,
+                                           font=("Verdana", 14))
+
+        # Crea los checkboxes de ciudad con las opciones específicas
+        checkbox_bogota = tk.Checkbutton(funcionalidades_frame, text="Bogotá", variable=opcion_bogota,
+                                         font=("Verdana", 14))
+        checkbox_medellin = tk.Checkbutton(funcionalidades_frame, text="Medellín", variable=opcion_medellin,
+                                           font=("Verdana", 14))
+
+        # Empaqueta los elementos en el frame
+        label_nombre.pack()
+        checkbox_smartfit.pack()
+        checkbox_gymbro.pack()
+        checkbox_bodytech.pack()
+
+        label_ciudad.pack()
+        checkbox_bogota.pack()
+        checkbox_medellin.pack()
+
+        # Crea y añade el botón de Aceptar
+        boton_aceptar = tk.Button(funcionalidades_frame, text="Aceptar", command=lambda: mostrar_maquinas_disponibles(
+            opcion_smartfit, opcion_gymbro, opcion_bodytech, opcion_bogota, opcion_medellin), font=("Verdana", 14))
+        boton_aceptar.pack(pady=10)
+
+    def mostrar_maquinas_disponibles( opcion_smartfit, opcion_gymbro, opcion_bodytech, opcion_bogota, opcion_medellin):
+        # Obtiene los valores seleccionados de los checkboxes de nombre y ciudad
+        nombre_smartfit = opcion_smartfit.get()
+        nombre_gymbro = opcion_gymbro.get()
+        nombre_bodytech = opcion_bodytech.get()
+
+        ciudad_bogota = opcion_bogota.get()
+        ciudad_medellin = opcion_medellin.get()
+
+        # Filtra los gimnasios según los checkboxes seleccionados
+        gimnasios_filtrados = []
+
+        for gimnasio in gimnasios:
+            if (nombre_smartfit and gimnasio.nombre.lower() == "smartfit"):
+                if(ciudad_bogota and gimnasio.ciudad.lower() == "bogota"):
+                    gimnasios_filtrados.append(gimnasio)
+                if(ciudad_medellin and gimnasio.ciudad.lower() == "medellin"):
+                    gimnasios_filtrados.append(gimnasio)
+            if (nombre_gymbro and gimnasio.nombre.lower() == "gymbro"):
+                if (ciudad_bogota and gimnasio.ciudad.lower() == "bogota"):
+                    gimnasios_filtrados.append(gimnasio)
+                if (ciudad_medellin and gimnasio.ciudad.lower() == "medellin"):
+                    gimnasios_filtrados.append(gimnasio)
+            if (nombre_gymbro and gimnasio.nombre.lower() == "gymbro"):
+                if (ciudad_bogota and gimnasio.ciudad.lower() == "bogota"):
+                    gimnasios_filtrados.append(gimnasio)
+                if (ciudad_medellin and gimnasio.ciudad.lower() == "medellin"):
+                    gimnasios_filtrados.append(gimnasio)
+
+
+        # Obtiene la lista de máquinas disponibles en los gimnasios filtrados
+        maquinas_disponibles = []
+
+        for gimnasio in gimnasios_filtrados:
+            maquinas_disponibles.extend(gimnasio.listaMaquinas)
+
+        # Borra los widgets existentes en el frame de funcionalidades
+        for widget in funcionalidades_frame.winfo_children():
+            widget.destroy()
+
+        # Crea y muestra la lista de máquinas disponibles
+        if maquinas_disponibles:
+            titulo_maquinas = tk.Label(funcionalidades_frame, text="Máquinas Disponibles",
+                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+            titulo_maquinas.pack()
+
+            for maquina in maquinas_disponibles:
+                label_maquina = tk.Label(funcionalidades_frame, text=maquina.nombre)
+                label_maquina.pack()
+        else:
+            mensaje_no_maquinas = tk.Label(funcionalidades_frame, text="No hay máquinas disponibles.")
+            mensaje_no_maquinas.pack()
+
 
     # Funciones de las nuevas funcionalidades
     def mostrar_aplicacion():
