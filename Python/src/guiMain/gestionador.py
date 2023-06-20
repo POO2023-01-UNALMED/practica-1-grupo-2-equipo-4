@@ -382,12 +382,12 @@ def ventana_principal_usuario(root):
         # Crea el Combobox de ciudades
         city_label = tk.Label(funcionalidades_frame,
                               text="Ciudad",
-                              font=("Verdana", 14),
+                              font=("Verdana", 16),
                               padx=20,
                               pady=5)
         city_combobox = ttk.Combobox(funcionalidades_frame,
                                      values=cities,
-                                     font=("Verdana", 14))
+                                     font=("Verdana", 16))
         city_label.pack()
         city_combobox.pack()  # Espacio reducido antes del Combobox
 
@@ -427,11 +427,15 @@ def ventana_principal_usuario(root):
                 widget.destroy()
 
             for gimnasioSelec in gimnasiosAceptados:
-                Label(funcionalidades_frame, text=gimnasioSelec.sede).pack(anchor="c")
+                Label(funcionalidades_frame,
+                      text=gimnasioSelec.sede,
+                      font=("Verdana", 16)).pack(anchor="c")
+
 
         aceptarButton.config(command=buscarGimnasio)
 
-        etiqueta = Label(funcionalidades_frame, text="")
+        etiqueta = Label(funcionalidades_frame,
+                         text="")
         etiqueta.pack()
 
 
@@ -446,8 +450,12 @@ def ventana_principal_usuario(root):
         titulo.pack(pady=10)  # Empaqueta el título con algo de espacio vertical (pady)
 
         # Crea las etiquetas de título para los checkboxes
-        label_nombre = tk.Label(funcionalidades_frame, text="Nombre", font=("Verdana", 14, "bold"))
-        label_ciudad = tk.Label(funcionalidades_frame, text="Ciudad", font=("Verdana", 14, "bold"))
+        label_nombre = tk.Label(funcionalidades_frame,
+                                text="Nombre",
+                                font=("Verdana", 14, "bold"))
+        label_ciudad = tk.Label(funcionalidades_frame,
+                                text="Ciudad",
+                                font=("Verdana", 14, "bold"))
 
         # Creación de la variable de control
         opcion_smartfit = tk.IntVar()
