@@ -4,7 +4,13 @@ import os
 from src.guiMain.FieldFrame import FieldFrame
 from src.guiMain import deserealizador
 from src.guiMain import serializador
+
+from src.gestorAplicacion.clasesEnum.Alergeno import Alergeno
+from src.gestorAplicacion.clasesPrincipales.Alimento import Alimento
 from src.guiMain import excepciones
+
+
+
 
 """
     Crea y muestra la ventana principal para el usuario en la aplicación Gymbro.
@@ -51,11 +57,12 @@ def ventana_principal_usuario(root):
             widget.destroy()
 
         # Crea las etiquetas de título y descripción
-        titulo_proceso = tk.Label(funcionalidades_frame, text="Buscar alimentos",
+
+        titulo_proceso = tk.Label(funcionalidades_frame, text=2 * "\n" + "Añadir Alimento",
                                   font=("Verdana", 16, "bold"), fg="dark blue", padx=20, pady=5)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                       text="Escoge entre una lista de alimentos que cumplen\n"
-                                            " tus requerimientos caloricos y proteinicos, descarta los alimentos a los que seas alergicx",
+                                       text="Añada un alimento con el cual podrá preparar una comida que se ajuste a su Plan de Alimentación y su objetivo.",
+
                                        font=("Verdana", 14), padx=20, pady=5)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
@@ -64,45 +71,68 @@ def ventana_principal_usuario(root):
 
         # Crea y añade el FieldFrame al funcionalidades_frame
         superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
-                                ["Maximo de calorias", "Mínimo de proteinas", "Alergia"], "Datos",
-                                ["algo", "hola", "djio"])
+
+                                ["Nombre", "Calorías", "Proteínas", "Carbohidratos", "Grasas", "Alergeno"], "Datos",
+                                ["ManzanaNueva", "52", "0.3", "14", "0.2", "NINGUNO"])
+
         superFrame.pack(padx=20, pady=5, expand=True)
+
+        def crear_alimento():
+            nombre = superFrame.getValue("Nombre")
+            calorias = superFrame.getValue("Calorías")
+            proteinas = superFrame.getValue("Proteínas")
+            carbohidratos = superFrame.getValue("Carbohidratos")
+            grasas = superFrame.getValue("Grasas")
+            alergeno = (superFrame.getValue("Alergeno")).upper()
+
+            try:
+                calorias = float(calorias)
+                proteinas = float(proteinas)
+                carbohidratos = float(carbohidratos)
+                grasas = float(grasas)
+
+
+                if not excepciones.iserror(float, nombre):
+                    raise excepciones.ErrorNombreAlimento()
+
+                if not excepciones.iserror(float, alergeno):
+                    raise excepciones.ErrorNombreAlergeno()
+
+            except excepciones.ErrorNombreAlimento as e:
+                messagebox.showinfo("Error", str(e))
+
+            except excepciones.ErrorNombreAlergeno as e:
+                messagebox.showinfo("Error", str(e))
+
+            except ValueError as e:
+                messagebox.showinfo("Error", "Por favor ingrese un número.")
+
+
+            else:
+                alimento_nuevo = Alimento(nombre, calorias, proteinas, carbohidratos, grasas, alergeno)
+
+
+                alimentos.append(alimento_nuevo)
+
+
+                for widget in funcionalidades_frame.winfo_children():
+                    widget.destroy()
+
+
+                titulo_proceso = tk.Label(funcionalidades_frame, text=5 * "\n" + "¡Alimento añadido exitosamente!",
+                                          font=("Verdana", 18, "bold"), fg="dark blue", padx=20, pady=5)
+
+                descripcion_detalle = tk.Label(funcionalidades_frame,
+                                               text=2 * "\n" + str(alimento_nuevo),
+                                               font=("Verdana", 16), padx=20, pady=5)
+                titulo_proceso.pack()
+                descripcion_detalle.pack()
+
 
         # Crea los botones "Aceptar" y "Borrar"
         buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
-        aceptarButton = tk.Button(buttons_frame, text="Aceptar", font=("Verdana", 14))
+        aceptarButton = tk.Button(buttons_frame, text="Aceptar", command=crear_alimento, font=("Verdana", 14))
         borrarButton = tk.Button(buttons_frame, text="Borrar", font=("Verdana", 14))
-
-        def clear_entries():
-            for entry in superFrame._valoresEntry.values():
-                entry.delete(0, 'end')
-
-        def buscarAlimento():
-            maxCal = superFrame.getValue("Maximo de calorias")
-            minProt = superFrame.getValue("Mínimo de proteinas")
-            aler = superFrame.getValue("Alergenos")
-
-
-
-            alimentosAceptados = []
-            for alimento in alimentos:
-                if alimento.encontrarAlimentos(maxCal, minProt, aler) == True:
-                    alimentosAceptados.append(alimento._nombre)
-
-
-            for widget in funcionalidades_frame.winfo_children():
-                widget.destroy()
-
-            text = ""
-            for alimentoSelec in alimentosAceptados:
-                text += (f"{alimentoSelec}\n")
-
-
-            listaResultados = Label(funcionalidades_frame, text = text, font=("Verdana", 14), fg="dark blue", padx=20, pady=5)
-            listaResultados.pack(anchor = "c")
-
-        aceptarButton.config(command=buscarAlimento)
-        borrarButton.config(command=clear_entries)
 
         # Empaqueta los botones en el nuevo frame
         aceptarButton.pack(side='left', padx=5)
@@ -111,33 +141,8 @@ def ventana_principal_usuario(root):
         # Empaqueta el frame de botones debajo del FieldFrame
         buttons_frame.pack(pady=10)
 
-
-
-
-
-      
-
     def mostrar_funcionalidad3():
-        # Borra los widgets existentes en el frame de funcionalidades
-        for widget in funcionalidades_frame.winfo_children():
-            widget.destroy()
-
-        # Crea las etiquetas de título y descripción
-        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
-                                  font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
-        descripcion_detalle = tk.Label(funcionalidades_frame,
-                                       text="Descripcion del detalle del Proceso o la Consulta",
-                                       font=("Verdana", 10), padx=10, pady=10)
-
-        # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
-        titulo_proceso.pack()
-        descripcion_detalle.pack()
-
-        # Crea y añade el FieldFrame al funcionalidades_frame
-        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
-                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
-                                ["algo", "hola", "djio"])
-        superFrame.pack(padx=10, pady=10, expand=True)
+        pass
 
     def mostrar_funcionalidad4():
         # Borra los widgets existentes en el frame de funcionalidades
@@ -145,21 +150,32 @@ def ventana_principal_usuario(root):
             widget.destroy()
 
         # Crea las etiquetas de título y descripción
-        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
-                                  font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+        titulo_proceso = tk.Label(funcionalidades_frame, text= 2 * "\n" + "Buscar Gimnasios por Ciudad",
+                                  font=("Verdana", 16, "bold"), fg="dark blue", padx=10, pady=10)
         descripcion_detalle = tk.Label(funcionalidades_frame,
-                                       text="Descripcion del detalle del Proceso o la Consulta",
-                                       font=("Verdana", 10), padx=10, pady=10)
+                                       text="Consulte las sedes de los gimnasios presentes en su ciudad.",
+                                       font=("Verdana", 14), padx=10, pady=10)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
         titulo_proceso.pack()
         descripcion_detalle.pack()
 
-        # Crea y añade el FieldFrame al funcionalidades_frame
-        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
-                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
-                                ["algo", "hola", "djio"])
-        superFrame.pack(padx=10, pady=10, expand=True)
+        seleccionar_ciudad = tk.Label(funcionalidades_frame,
+                                       text= 4 * "\n" + "Seleccione la ciudad que quiere consultar:" + "\n",
+                                       font=("Verdana", 12), padx=20, pady=5)
+        seleccionar_ciudad.pack()
+
+        buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
+        medellinButton = tk.Button(buttons_frame, text="Medellín", font=("Verdana", 14))
+        bogotaButton = tk.Button(buttons_frame, text="Bogotá", font=("Verdana", 14))
+
+        medellinButton.pack(side='left', padx=20)
+        bogotaButton.pack(side='left', padx=20)
+
+        buttons_frame.pack(pady=10)
+
+
+
 
     def mostrar_funcionalidad1():
         # Borra los widgets existentes en el frame de funcionalidades
@@ -371,23 +387,23 @@ def ventana_principal_usuario(root):
             widget.destroy()
 
         # Crea los botones de las funcionalidades
-        funcionalidad1_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 1", style="Botones.TButton",
+        funcionalidad1_btn = ttk.Button(funcionalidades_frame, text="Recomendar Plan Ejercicio", style="Botones.TButton",
                                         width=25, command=mostrar_funcionalidad1)
         funcionalidad1_btn.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
 
-        funcionalidad2_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 2", style="Botones.TButton",
+        funcionalidad2_btn = ttk.Button(funcionalidades_frame, text="Añadir Alimento", style="Botones.TButton",
                                         width=25, command=mostrar_funcionalidad2)
         funcionalidad2_btn.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
 
-        funcionalidad3_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 3", style="Botones.TButton",
+        funcionalidad3_btn = ttk.Button(funcionalidades_frame, text="Buscar Alimento por Calorías, Proteínas y Alergeno", style="Botones.TButton",
                                         width=25, command=mostrar_funcionalidad3)
         funcionalidad3_btn.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
 
-        funcionalidad4_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 4", style="Botones.TButton",
+        funcionalidad4_btn = ttk.Button(funcionalidades_frame, text="Buscar Gimnasios por Ciudad", style="Botones.TButton",
                                         width=25, command=mostrar_funcionalidad4)
         funcionalidad4_btn.grid(row=1, column=1, sticky="nsew", padx=5, pady=5)
 
-        funcionalidad5_btn = ttk.Button(funcionalidades_frame, text="Funcionalidad 5", style="Botones.TButton",
+        funcionalidad5_btn = ttk.Button(funcionalidades_frame, text="Buscar Entrenadores por Formación", style="Botones.TButton",
                                         width=25, command=mostrar_funcionalidad5)
         funcionalidad5_btn.grid(row=2, column=0, columnspan=2, sticky="nsew", padx=5, pady=5)
 

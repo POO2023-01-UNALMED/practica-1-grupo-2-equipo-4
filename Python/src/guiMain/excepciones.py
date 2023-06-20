@@ -10,11 +10,15 @@ class ErrorAlimento(ErrorAplicacion):
         super().__init__("Error en la clase Alimento: " + mensaje)
 
 
-class ErrorValueTypeCalorias(ErrorAlimento):
-    # No ingresó un entero de calorías
+class ErrorNombreAlimento(ErrorAlimento):
+    # No ingresó un nombre de alimento de string
     def __init__(self):
-        super().__init__("Error en el valor de calorías. Por favor ingrese un entero")
+        super().__init__("Error en el valor de nombre. Por favor ingrese una palabra.")
 
+class ErrorNombreAlergeno(ErrorAlimento):
+    # No ingresó un nombre de alergeno de string
+    def __init__(self):
+        super().__init__("Error en el valor de alergeno. Por favor ingrese una palabra.")
 
 class ErrorCaloriasTotales(ErrorAlimento):
     # La suma de calorías en la proteína + grasas + carbohidratos no es igual al total de calorías
@@ -50,60 +54,13 @@ class ErrorCamposIncompletos(ErrorAlimento):
         super().__init__("Faltan campos por llenar")
 
 
-def metodoGestionErroresInventados(nombre, identificacion, caloriasTotales, proteina, grasas, carbohidratos):
-    # Este método se llama dentro de las consultas y creación de objetos.
-    # Se pasan en este orden:
-    # nombre del cliente, identificación del cliente
-    # calorias_totales, proteina, grasas, carbohidratos
 
+
+
+def iserror(func, *args, **kw):
     try:
-        if not isinstance(nombre, str):
-            raise ErrorNombreCliente()
+        func(*args, **kw)
+        return False
+    except Exception:
+        return True
 
-        if not (1 <= identificacion <= 50):
-            raise ErrorIdentificacion()
-
-        if not isinstance(caloriasTotales, int):
-            raise ErrorValueTypeCalorias()
-
-        if (proteina*4 + grasas*9 + carbohidratos*4) != caloriasTotales:
-            raise ErrorCaloriasTotales()
-
-    # Manejo de excepciones llamando a los constructores de las clases
-    except ErrorValueTypeCalorias as e:
-        return str(e)
-    except ErrorCaloriasTotales as e:
-        return str(e)
-    except ErrorNombreCliente as e:
-        return str(e)
-    except ErrorIdentificacion as e:
-        return str(e)
-    except Exception as e:
-        return "Error desconocido:", str(e)
-
-    else:
-        return "No se encontraron errores."
-    finally:
-        return "Finalizando metodoGestionErrores."
-
-"""
-def metodoGestionErroresSugeridos():
-    try:
-        if (#condicion_Atributo_no_Existente):
-        raise ErrorAtributoNoExistente()
-
-        if (#condicion_campos_incompletos):
-        raise ErrorCamposIncompletos()
-
-    except ErrorAtributoNoExistente as e:
-        return str(e)
-    except ErrorCamposIncompletos as e:
-        return str(e)
-    except Exception as e:
-        return "Error desconocido:", str(e)
-
-    else:
-        return "No se encontraron errores."
-    finally:
-        return "Finalizando metodoGestionErrores."
-"""
