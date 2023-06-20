@@ -56,4 +56,12 @@ class Alimento:
         else:
             return True
 
-
+    def __str__(self):
+        return "{}\n \nCalorías: {}\nProteínas: {}\nCarbohidratos: {}\nGrasas: {}\nAlergeno: {}".format(
+            (self.nombre).upper(),
+            self.calorias,
+            self.proteinas,
+            self.carbohidratos,
+            self.grasas,
+            self._alergeno
+        )

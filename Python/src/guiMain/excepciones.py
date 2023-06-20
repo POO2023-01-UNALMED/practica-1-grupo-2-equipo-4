@@ -10,11 +10,15 @@ class ErrorAlimento(ErrorAplicacion):
         super().__init__("Error en la clase Alimento: " + mensaje)
 
 
-class ErrorValueTypeCalorias(ErrorAlimento):
-    # No ingresó un entero de calorías
+class ErrorNombreAlimento(ErrorAlimento):
+    # No ingresó un nombre de alimento de string
     def __init__(self):
-        super().__init__("Error en el valor de calorías. Por favor ingrese un entero")
+        super().__init__("Error en el valor de nombre. Por favor ingrese una palabra.")
 
+class ErrorNombreAlergeno(ErrorAlimento):
+    # No ingresó un nombre de alergeno de string
+    def __init__(self):
+        super().__init__("Error en el valor de alergeno. Por favor ingrese una palabra.")
 
 class ErrorCaloriasTotales(ErrorAlimento):
     # La suma de calorías en la proteína + grasas + carbohidratos no es igual al total de calorías
@@ -86,23 +90,30 @@ def metodoGestionErroresInventados(nombre, identificacion, caloriasTotales, prot
     finally:
         return "Finalizando metodoGestionErrores."
 
-
-def metodoGestionErroresSugeridos():
+def iserror(func, *args, **kw):
     try:
-        if (#condicion_Atributo_no_Existente):
-        raise ErrorAtributoNoExistente()
+        func(*args, **kw)
+        return False
+    except Exception:
+        return True
 
-        if (#condicion_campos_incompletos):
-        raise ErrorCamposIncompletos()
 
-    except ErrorAtributoNoExistente as e:
-        return str(e)
-    except ErrorCamposIncompletos as e:
-        return str(e)
-    except Exception as e:
-        return "Error desconocido:", str(e)
-
-    else:
-        return "No se encontraron errores."
-    finally:
-        return "Finalizando metodoGestionErrores."
+# def metodoGestionErroresSugeridos():
+#     try:
+#         if (condicion_Atributo_no_Existente):
+#             raise ErrorAtributoNoExistente()
+#
+#         if (condicion_campos_incompletos):
+#             raise ErrorCamposIncompletos()
+#
+#     except ErrorAtributoNoExistente as e:
+#         return str(e)
+#     except ErrorCamposIncompletos as e:
+#         return str(e)
+#     except Exception as e:
+#         return "Error desconocido:", str(e)
+#
+#     else:
+#         return "No se encontraron errores."
+#     finally:
+#         return "Finalizando metodoGestionErrores."
