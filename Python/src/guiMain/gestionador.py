@@ -434,6 +434,7 @@ def ventana_principal_usuario(root):
         etiqueta = Label(funcionalidades_frame, text="")
         etiqueta.pack()
 
+
 # Funciones de las funcionalidades
     def mostrar_funcionalidad5():
         # Borra los widgets existentes en el frame de funcionalidades
@@ -443,7 +444,7 @@ def ventana_principal_usuario(root):
             # Crea el título
         titulo = tk.Label(funcionalidades_frame, text="Marca los campos que necesites:", font=("Verdana", 16, "bold"))
         titulo.pack(pady=10)  # Empaqueta el título con algo de espacio vertical (pady)
-        
+
         # Crea las etiquetas de título para los checkboxes
         label_nombre = tk.Label(funcionalidades_frame, text="Nombre", font=("Verdana", 14, "bold"))
         label_ciudad = tk.Label(funcionalidades_frame, text="Ciudad", font=("Verdana", 14, "bold"))
@@ -525,17 +526,23 @@ def ventana_principal_usuario(root):
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
-        # Crea y muestra la lista de máquinas disponibles
-        if maquinas_disponibles:
+            # Crea y muestra la lista de máquinas disponibles
+        if gimnasios_filtrados:
             titulo_maquinas = tk.Label(funcionalidades_frame, text="Máquinas Disponibles",
-                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
+                                       font=("Verdana", 16, "bold"), fg="dark blue", padx=10, pady=10)
             titulo_maquinas.pack()
 
-            for maquina in maquinas_disponibles:
-                label_maquina = tk.Label(funcionalidades_frame, text=maquina.nombre)
-                label_maquina.pack()
+            for gimnasio in gimnasios_filtrados:
+                titulo_sede = tk.Label(funcionalidades_frame, text=f"Sede {gimnasio.nombre} en {gimnasio.sede}",
+                                       font=("Verdana", 14, "bold"), fg="dark green", padx=10, pady=10)
+                titulo_sede.pack()
+
+                for maquina in gimnasio.listaMaquinas:
+                    label_maquina = tk.Label(funcionalidades_frame, text=maquina.nombre, font=("Verdana", 12))
+                    label_maquina.pack()
         else:
-            mensaje_no_maquinas = tk.Label(funcionalidades_frame, text="No hay máquinas disponibles.")
+            mensaje_no_maquinas = tk.Label(funcionalidades_frame, text="No hay máquinas disponibles.",
+                                           font=("Verdana", 12, "bold"))
             mensaje_no_maquinas.pack()
 
 
