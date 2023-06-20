@@ -48,7 +48,10 @@ def ventana_principal_usuario(root):
 
         # Crea y añade el FieldFrame al funcionalidades_frame
         superFrame = FieldFrame(funcionalidades_frame, "Información",
-                                ["Nombre usuario","Identificación","Nombre para el plan"], "Datos",
+                                ["Nombre usuario",
+                                 "Identificación",
+                                 "Nombre para el plan"],
+                                "Datos",
                                 ["algo", "hola", "djio"])
         superFrame.pack(padx=10,
                         pady=10,
@@ -149,13 +152,27 @@ def ventana_principal_usuario(root):
 
         # Crea y añade el FieldFrame al funcionalidades_frame
         superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
-                                ["Nombre", "Calorías", "Proteínas", "Carbohidratos", "Grasas", "Alergeno"], "Datos",
-                                ["ManzanaNueva", "52", "0.3", "14", "0.2", "NINGUNO"])
+                                ["Nombre",
+                                 "Calorías",
+                                 "Proteínas",
+                                 "Carbohidratos",
+                                 "Grasas",
+                                 "Alergeno"],
+                                "Datos",
+                                ["ManzanaNueva",
+                                 "52",
+                                 "0.3",
+                                 "14",
+                                 "0.2",
+                                 "NINGUNO"])
 
         superFrame.pack(padx=20,
                         pady=5,
                         expand=True)
 
+        def clear_entries():
+            for entry in superFrame._valoresEntry.values():
+                entry.delete(0, 'end')
         def crear_alimento():
             nombre = superFrame.getValue("Nombre")
             calorias = superFrame.getValue("Calorías")
@@ -163,6 +180,7 @@ def ventana_principal_usuario(root):
             carbohidratos = superFrame.getValue("Carbohidratos")
             grasas = superFrame.getValue("Grasas")
             alergeno = (superFrame.getValue("Alergeno")).upper()
+            clear_entries()
 
             try:
                 calorias = float(calorias)
@@ -399,6 +417,7 @@ def ventana_principal_usuario(root):
             nombreGym = superFrame.getValue("Nombre de gimnasio")
             ciudadGym = city_combobox.get()  # Recupera la ciudad seleccionada del Combobox
 
+            clear_entries()
             gimnasiosAceptados = []
             for gimnasio in gimnasios:
                 if gimnasio.nombre.lower() == nombreGym.lower() and gimnasio.ciudad.lower() == ciudadGym.lower():
@@ -461,6 +480,7 @@ def ventana_principal_usuario(root):
         boton_aceptar = tk.Button(funcionalidades_frame, text="Aceptar", command=lambda: mostrar_maquinas_disponibles(
             opcion_smartfit, opcion_gymbro, opcion_bodytech, opcion_bogota, opcion_medellin), font=("Verdana", 14))
         boton_aceptar.pack(pady=10)
+        
 
     def mostrar_maquinas_disponibles( opcion_smartfit, opcion_gymbro, opcion_bodytech, opcion_bogota, opcion_medellin):
         # Obtiene los valores seleccionados de los checkboxes de nombre y ciudad
