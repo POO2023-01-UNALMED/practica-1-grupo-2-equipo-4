@@ -619,3 +619,144 @@ public class Main {
 		}
 	}
 }
+
+//package uiMain;
+//import gestorAplicacion.clasesEnum.*;
+//import gestorAplicacion.clasesHerencia.*;
+//import baseDatos.Serializador;
+//import gestorAplicacion.clasesPrincipales.*;
+//import java.util.ArrayList;
+//import java.util.Arrays;
+//import java.util.Collections;
+//import java.util.Comparator;
+//import java.util.Scanner;
+
+//import java.util.HashMap;
+
+//public class Main {
+	// Se crea el escáner de inputs
+	//static Scanner sc = new Scanner(System.in);
+	//static long readLong(){
+		//return sc.nextLong();
+	//}
+	
+	//static String readln(){
+	//	sc.nextLine();
+	//	return sc.nextLine();
+	//}
+	// Se crean espacios para los objetos de nuestras clases
+	
+	//public static void main(String[] args) {
+	//	Empresa empresa = new Empresa();
+	//	
+	////	byte opcion;
+		//String salir = "n";
+		//
+	//	Cliente miCliente = null;
+		
+	//	println("¡Hola! Bienvenido a Gymbro\n");
+	//	print("-----INICIO DE SESIÓN-----");
+	//	println("\n");
+	//	print("Ingrese su identificación: ");
+
+	//	while (miCliente == null) {
+	//	    int ident = readInt();
+	//	    boolean clienteEncontrado = false;
+
+	//	    for (Cliente c : empresa.getClientes()) {
+	//	        if (c.getIdentificacion() == ident) {
+	//	            miCliente = c;
+	//	            clienteEncontrado = true;
+	//	            break;
+	//	        }
+	//	    }
+
+	//	    if (!clienteEncontrado) {
+	//	        println("Identificación incorrecta, no estás suscrito a nuestro gimnasio.\nVuelve a ingresar tu identificación: ");
+	//	    }
+	//	}
+	
+	//	do {
+
+	//		print("\n-----------------MENÚ PRINCIPAL-----------------");
+	//		println("\n");
+	//		println("1. Reservar Gimnasio");
+	//		println("2. Recomendación de Plan de Alimentación Semanal");
+	//		println("3. Recomendación de Plan de Ejercicio Semanal");
+	//		println("4. Recomendación de Entrenadores");
+	//		println("5. Salir");
+	//		print("\n");
+	//		print("Ingrese la opción que requiera: ");
+	//		
+	//		opcion = readByte();
+			
+	//		switch (opcion) {
+	//			case 1:
+	//				reservarGimnasio(empresa, miCliente);
+	//				break;
+	//			case 2:
+	//				recomendarPlanAlimentacion(empresa, miCliente);
+	//				break;
+	//			case 3:
+	//				recomendarPlanEjercicio(miCliente);
+	//				break;
+	//			case 4:
+	//				recomendarEntrenadores(empresa, miCliente);
+	//				break;
+	//			case 5:
+	//				salirDelSistema(empresa);
+	//				break;
+	//			default:
+	//				println("Digitó una opción incorrecta");
+	//		}
+			
+	//		if (opcion != 5) {
+	//			do {
+	//				print("\nDesea salir (y/n): ");
+	//				salir = readString();
+	//			}
+	//			while (!salir.toLowerCase().equalsIgnoreCase("y") 
+	//					&& !salir.toLowerCase().equalsIgnoreCase("n"));
+	//		}
+	//	} while (opcion != 5 
+	//			&& !salir.toLowerCase().equals("y"));
+	//	print("¡Gracias por usar Gymbro!");
+	//	sc.close();
+	//}
+	
+
+	// Funciones útiles
+	
+	//private static void print(Object string) {
+	//	System.out.print(string);
+	//}
+
+	//private static void println(Object string) {
+	//	System.out.println(string);
+	//}
+	
+	//private static byte readByte() {
+	//	byte opcion = sc.nextByte(); 
+	//	return opcion;
+	//}
+	
+	//private static String readString() {
+	//	String input = sc.next(); 
+	//	return input;
+	//}
+	
+	//private static int readInt() {
+	//	int i = sc.nextInt(); 
+	//	return i;
+	//}
+	
+	
+	// Salir y guardar
+	
+	//private static void salirDelSistema(Empresa empresa){
+	//	print("\n");
+	//	System.out.println("Le agradecemos por utilizar nuestros servicios");
+	//	System.out.println("¡Vuelva pronto!");
+	//	Serializador.serializar(empresa);
+	//	System.exit(0);
+	

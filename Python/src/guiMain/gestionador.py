@@ -344,6 +344,7 @@ def ventana_principal_usuario(root):
 
  
     # Funciones de las funcionalidades
+        # Funciones de las funcionalidades
     def mostrar_funcionalidad4():
         # Encuentra todas las ciudades únicas en los datos de los gimnasios
         cities = list(set([gym.ciudad for gym in gimnasios]))
@@ -354,7 +355,7 @@ def ventana_principal_usuario(root):
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame,
                                   text="Buscar Gimnasio",
-                                  font=("Verdana", 16, "bold"), 
+                                  font=("Verdana", 16, "bold"),
                                   fg="dark blue",
                                   padx=20,
                                   pady=5)
@@ -380,22 +381,22 @@ def ventana_principal_usuario(root):
 
         # Crea el Combobox de ciudades
         city_label = tk.Label(funcionalidades_frame,
-                              text="Ciudad", 
+                              text="Ciudad",
                               font=("Verdana", 14),
                               padx=20,
                               pady=5)
-        city_combobox = ttk.Combobox(funcionalidades_frame, 
-                                     values=cities, 
+        city_combobox = ttk.Combobox(funcionalidades_frame,
+                                     values=cities,
                                      font=("Verdana", 14))
         city_label.pack()
-        city_combobox.pack()
+        city_combobox.pack()  # Espacio reducido antes del Combobox
 
         # Crea los botones "Aceptar" y "Borrar"
         buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
-        aceptarButton = tk.Button(buttons_frame, 
-                                  text="Aceptar", 
+        aceptarButton = tk.Button(buttons_frame,
+                                  text="Aceptar",
                                   font=("Verdana", 14))
-        borrarButton = tk.Button(buttons_frame, 
+        borrarButton = tk.Button(buttons_frame,
                                  text="Borrar",
                                  font=("Verdana", 14))
 
@@ -410,14 +411,13 @@ def ventana_principal_usuario(root):
         aceptarButton.pack(side='left', padx=5)
         borrarButton.pack(side='left', padx=5)
 
-        # Empaqueta el frame de botones debajo del FieldFrame
-        buttons_frame.pack(pady=10)
+        # Empaqueta el frame de botones debajo del FieldFrame con un espacio mayor
+        buttons_frame.pack(pady=100)
 
         def buscarGimnasio():
             nombreGym = superFrame.getValue("Nombre de gimnasio")
             ciudadGym = city_combobox.get()  # Recupera la ciudad seleccionada del Combobox
 
-            clear_entries()
             gimnasiosAceptados = []
             for gimnasio in gimnasios:
                 if gimnasio.nombre.lower() == nombreGym.lower() and gimnasio.ciudad.lower() == ciudadGym.lower():
@@ -854,28 +854,76 @@ def ventana_principal():
                     expand=True)
 
     # Frame título anidado en el main_frame
-    top_frame = tk.Frame(main_frame, bg="dark blue", borderwidth=3)
-    top_frame.place(relx=.05, rely=.005, relwidth=.9, relheight=.1, anchor="nw")
+    top_frame = tk.Frame(main_frame,
+                         bg="dark blue",
+                         borderwidth=3)
+    top_frame.place(relx=.05,
+                    rely=.005,
+                    relwidth=.9,
+                    relheight=.1,
+                    anchor="nw")
 
     # Frames anidados (arriba izquierda, arriba derecha) (abajo izaquierda, abajo derecha)
-    left_frame = tk.Frame(main_frame, bg="#6495ED", borderwidth=.5, relief="solid")
-    left_frame.place(relx=.045, rely=.55, relwidth=.45, relheight=.82, anchor="w")
+    left_frame = tk.Frame(main_frame,
+                          bg="#6495ED",
+                          borderwidth=.5,
+                          relief="solid")
+    left_frame.place(relx=.045,
+                     rely=.55,
+                     relwidth=.45,
+                     relheight=.82,
+                     anchor="w")
 
-    right_frame = tk.Frame(main_frame, bg="#6495ED", borderwidth=.5, relief="solid")
-    right_frame.place(relx=.965, rely=.55, relwidth=.45, relheight=.82, anchor="e")
+    right_frame = tk.Frame(main_frame,
+                           bg="#6495ED",
+                           borderwidth=.5,
+                           relief="solid")
+    right_frame.place(relx=.965,
+                      rely=.55,
+                      relwidth=.45,
+                      relheight=.82,
+                      anchor="e")
 
     # Frames anidados a left_frame y right_frame
-    upper_left_frame = tk.Frame(left_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
-    upper_left_frame.place(relx=0.5, rely=0.003, relwidth=0.995, relheight=0.38, anchor="n")
+    upper_left_frame = tk.Frame(left_frame,
+                                bg="#F0F0F0",
+                                borderwidth=.5,
+                                relief="raised")
+    upper_left_frame.place(relx=0.5,
+                           rely=0.003,
+                           relwidth=0.995,
+                           relheight=0.38,
+                           anchor="n")
 
-    bottom_left_frame = tk.Frame(left_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
-    bottom_left_frame.place(relx=0.5, rely=0.997, relwidth=0.995, relheight=0.6, anchor="s")
+    bottom_left_frame = tk.Frame(left_frame,
+                                 bg="#F0F0F0",
+                                 borderwidth=.5,
+                                 relief="raised")
+    bottom_left_frame.place(relx=0.5,
+                            rely=0.997,
+                            relwidth=0.995,
+                            relheight=0.6,
+                            anchor="s")
 
-    upper_right_frame = tk.Frame(right_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
-    upper_right_frame.place(relx=0.5, rely=0.003, relwidth=0.995, relheight=0.38, anchor="n")
+    upper_right_frame = tk.Frame(right_frame,
+                                 bg="#F0F0F0",
+                                 borderwidth=.5,
+                                 relief="raised")
+    upper_right_frame.place(relx=0.5,
+                            rely=0.003,
+                            relwidth=0.995,
+                            relheight=0.38,
+                            anchor="n")
 
-    bottom_right_frame = tk.Frame(right_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
-    bottom_right_frame.place(relx=0.5, rely=0.997, relwidth=0.995, relheight=0.6, anchor="s")
+    bottom_right_frame = tk.Frame(right_frame,
+                                  bg="#F0F0F0",
+                                  borderwidth=.5,
+                                  relief="raised")
+    bottom_right_frame.place(relx=0.5,
+                             rely=0.997,
+                             relwidth=0.995,
+                             relheight=0.6,
+                             anchor="s")
 
     # Definir método para mostrar imágenes que se cambian cuando pasa el cursor por encima
     def cambiar_imagen(event):
@@ -888,7 +936,11 @@ def ventana_principal():
     # Definir un Label para las imágenes
     espacio_imagenes_bottom_left = Label(bottom_left_frame)
     i = 0  # Variable del índice de la imagen. Debe ser global para que sea posible correr el programa
-    imagenes_inicio = [im("buff.png"), im("diet.png"), im("buff2.png"), im("diet2.png"), im("buff3.png")]
+    imagenes_inicio = [im("buff.png"),
+                       im("diet.png"),
+                       im("buff2.png"),
+                       im("diet2.png"),
+                       im("buff3.png")]
     imagen_inicial = tk.PhotoImage(file=imagenes_inicio[i])
     espacio_imagenes_bottom_left.config(image=imagen_inicial)
     espacio_imagenes_bottom_left.bind("<Enter>", cambiar_imagen)  # Llamo al método cambiar imagen con el evento
