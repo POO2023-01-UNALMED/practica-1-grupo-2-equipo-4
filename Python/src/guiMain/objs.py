@@ -40,20 +40,24 @@ def intento():
     g2 = Gimnasio("Gymbro", "Medellin", "Robledo", True)
     g3 = Gimnasio("Gymbro", "Medellin", "Laureles", True)
     g4 = Gimnasio("Bodytech", "Medellin", "San Juan", True)
-    g4 = Gimnasio("Bodytech", "Medellin", "Laureles", True)
-    g4 = Gimnasio("Bodytech", "Medellin", "San Lucas", True)
+    
     g5 = Gimnasio("Smartfit", "Medellin", "Colombia", False)
-    g5 = Gimnasio("Smartfit", "Medellin", "Los Colores", False)
-    g5 = Gimnasio("Smartfit", "Medellin", "Unicentro", False)
+    
     g6 = Gimnasio("Smartfit", "Bogota", "La Candelaria", True)
     g7 = Gimnasio("Smartfit", "Bogota", "20 de Julio", True)
     g8 = Gimnasio("Smartfit", "Bogota", "La Merced", True)
     g9 = Gimnasio("Bodytech", "Bogota", "Santafe", True)
-    g9 = Gimnasio("Bodytech", "Bogota", "Calle90", True)
-    g9 = Gimnasio("Bodytech", "Bogota", "Chicó", True)
+    
 
     g10 = Gimnasio("Gymbro", "Bogota", "Luna Park", True)
-    g10 = Gimnasio("Gymbro", "Bogota", "Santafe", True)
+    
+    g11 = Gimnasio("Bodytech", "Bogota", "Calle90", True)
+    g12 = Gimnasio("Bodytech", "Bogota", "Chicó", True)
+    g13 = Gimnasio("Bodytech", "Medellin", "Laureles", True)
+    g14 = Gimnasio("Bodytech", "Medellin", "San Lucas", True)
+    g15 = Gimnasio("Smartfit", "Medellin", "Los Colores", False)
+    g16 = Gimnasio("Smartfit", "Medellin", "Unicentro", False)
+    g17 = Gimnasio("Gymbro", "Bogota", "Santafe", True)
 
     #MAQUINA
 
