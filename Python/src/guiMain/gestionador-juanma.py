@@ -25,9 +25,11 @@ def ventana_principal_usuario(root):
 
     # Funciones de las funcionalidades
     def mostrar_funcionalidad1():
+
         # Borra los widgets existentes en el frame de funcionalidades
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
+
 
         # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame, text=2 * "\n" + "Recomendar Plan Ejercicio",
@@ -48,10 +50,7 @@ def ventana_principal_usuario(root):
 
         # Crea y añade el FieldFrame al funcionalidades_frame
         superFrame = FieldFrame(funcionalidades_frame, "Información",
-                                ["Nombre usuario",
-                                 "Identificación",
-                                 "Nombre para el plan"],
-                                "Datos",
+                                ["Nombre usuario","Identificación","Nombre para el plan"], "Datos",
                                 ["algo", "hola", "djio"])
         superFrame.pack(padx=10,
                         pady=10,
@@ -67,77 +66,56 @@ def ventana_principal_usuario(root):
                                  text="Borrar",
                                  font=("Verdana", 14))
 
-        def clear_entries():
-            for entry in superFrame._valoresEntry.values():
-                entry.delete(0, 'end')
-
         def creaPlanEjercicio():
             nombre = (superFrame.getValue("Nombre usuario")).capitalize()
             ident = superFrame.getValue("Identificación")
             plan = (superFrame.getValue("Nombre para el plan")).capitalize()
-            cliente_encontrado = False  # Variable para controlar si se encontró el cliente correspondiente
+
+            clear_entries()
 
             try:
-                if not excepciones.iserror(float, nombre):
-                    raise excepciones.ErrorNombreCliente
-                if not excepciones.iserror(float, plan):
-                    raise excepciones.ErrorAplicacion
-                if not (1 <= int(ident) <= 50):
+                if not (1<=int(ident)<=50):
                     raise excepciones.ErrorIdentificacion()
-                if not nombre or not plan:
-                    raise excepciones.ErrorCamposIncompletos
+            except  excepciones.ErrorIdentificacion as e:
+                messagebox.showinfo("Error",str(e))
+
+            else:
+                for widget in funcionalidades_frame.winfo_children():
+                    widget.destroy()
 
                 for user in clientes:
-                    if (user.identificacion == int(ident)) and (user.nombre.lower() == nombre.lower()):
-                        cliente_encontrado = True  # El cliente correspondiente se encontró
+                    if user.identificacion == int(ident):
                         cliente = user
-
-                        clear_entries()
-
-                        for widget in funcionalidades_frame.winfo_children():
-                            widget.destroy()
-
-                        textDisplayed = f"{nombre}, basándonos en tu nivel de habilidad y tu objetivo, hemos creado el plan {plan} para ti\n" \
-                                        + "\n" \
-                                          f"{cliente.generarPlanEjercicio()}"
-
-                        planCliente = tk.Text(funcionalidades_frame,
-                                              fg="black",
-                                              bg="#F0F0F0",
-                                              font=("Verdana", 12, "bold"),
-                                              cursor="arrow")
-
-                        planCliente.insert(tk.END, textDisplayed, "justifying")
-                        planCliente.config(state="disabled")
-
-                        planCliente.pack(expand=True,
-                                         fill="both",
-                                         side="bottom")
-
-                        planCliente.tag_configure('justifying',
-                                                  justify='center')
-
                         break
 
-                if not cliente_encontrado:
-                    raise excepciones.ErrorAtributoNoExistente
+                textDisplayed = f"{nombre}, basándonos en tu nivel de habilidad y tu objetivo, hemos creado el plan {plan} para ti\n" \
+                                + "\n" \
+                                f"{cliente.generarPlanEjercicio()}"
 
-            except excepciones.ErrorIdentificacion as e:
-                messagebox.showinfo("Error", str(e))
-            except excepciones.ErrorNombreCliente as e:
-                messagebox.showinfo("Error", str(e))
-            except excepciones.ErrorCamposIncompletos as e:
-                messagebox.showinfo("Error", str(e))
-            except excepciones.ErrorAplicacion as e:
-                messagebox.showinfo("Error", str(e))
-            except excepciones.ErrorAtributoNoExistente:
-                messagebox.showinfo("Error", "Cliente no existente")
-            except Exception as e:
-                messagebox.showinfo("Error", "Es posible que no haya ingresado un entero de identificación")
+                planCliente = tk.Text(funcionalidades_frame,
+                                      fg="black",
+                                      bg="#F0F0F0",
+                                      font=("Verdana", 12, "bold"),
+                                      cursor="arrow")
+
+                planCliente.insert(tk.END, textDisplayed, "justifying")
+                planCliente.config(state="disabled")
+
+                planCliente.pack(expand=True,
+                                 fill="both",
+                                 side="bottom")
+
+                planCliente.tag_configure('justifying',
+                                          justify='center')
+
+        aceptarButton.config(command=creaPlanEjercicio)
+
+        def clear_entries():
+            for entry in superFrame._valoresEntry.values():
+                entry.delete(0, 'end')
 
         clear_entries()
 
-        aceptarButton.config(command=creaPlanEjercicio)
         borrarButton.config(command=clear_entries)
 
         # Empaqueta los botones en el nuevo frame
@@ -176,27 +154,17 @@ def ventana_principal_usuario(root):
 
         # Crea y añade el FieldFrame al funcionalidades_frame
         superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
-                                ["Nombre",
-                                 "Calorías",
-                                 "Proteínas",
-                                 "Carbohidratos",
-                                 "Grasas",
-                                 "Alergeno"],
-                                "Datos",
-                                ["ManzanaNueva",
-                                 "52",
-                                 "0.3",
-                                 "14",
-                                 "0.2",
-                                 "NINGUNO"])
+                                ["Nombre", "Calorías", "Proteínas", "Carbohidratos", "Grasas", "Alergeno"], "Datos",
+                                ["ManzanaNueva", "52", "0.3", "14", "0.2", "NINGUNO"])
 
         superFrame.pack(padx=20,
                         pady=5,
                         expand=True)
-
         def clear_entries():
             for entry in superFrame._valoresEntry.values():
                 entry.delete(0, 'end')
+
+        clear_entries()
 
         def crear_alimento():
             nombre = superFrame.getValue("Nombre")
@@ -326,57 +294,41 @@ def ventana_principal_usuario(root):
                                  text="Borrar",
                                  font=("Verdana", 14))
 
-        def clear_entries():
-            for entry in superFrame._valoresEntry.values():
-                entry.delete(0, 'end')
-
         def buscarAlimento():
             maxCal = superFrame.getValue("Máximo de calorías")
             minProt = superFrame.getValue("Mínimo de proteínas")
             aler = superFrame.getValue("Alergeno")
 
-            try:
-                maxCal = float(maxCal)
-                minProt = float(minProt)
+            clear_entries()
 
-                if not maxCal or not minProt or not aler:
-                    raise excepciones.ErrorCamposIncompletos
+            alimentosAceptados = []
+            for alimento in alimentos:
+                if alimento.encontrarAlimentos(maxCal, minProt, aler) == True:
+                    alimentosAceptados.append(alimento._nombre)
 
-                if not excepciones.iserror(float, aler):
-                    raise excepciones.ErrorNombreAlergeno
 
-            except excepciones.ErrorCamposIncompletos as e:
-                messagebox.showinfo("Error", str(e))
+            for widget in funcionalidades_frame.winfo_children():
+                widget.destroy()
 
-            except excepciones.ErrorNombreAlergeno as e:
-                messagebox.showinfo("Error", str(e))
+            text = ""
+            for alimentoSelec in alimentosAceptados:
+                text += (f"{alimentoSelec}\n")
 
-            except Exception:
-                messagebox.showinfo("Error", "Se ingresó incorrectamente un campo")
 
-            else:
-                clear_entries()
+            listaResultados = Label(funcionalidades_frame,
+                                    text = text,
+                                    font=("Verdana", 16),
+                                    fg="black",
+                                    padx=20,
+                                    pady=5)
 
-                alimentosAceptados = []
-                for alimento in alimentos:
-                    if alimento.encontrarAlimentos(maxCal, minProt, aler) == True:
-                        alimentosAceptados.append(alimento._nombre)
+            listaResultados.pack(anchor = "c")
 
-                for widget in funcionalidades_frame.winfo_children():
-                    widget.destroy()
+        def clear_entries():
+            for entry in superFrame._valoresEntry.values():
+                entry.delete(0, 'end')
 
-                text = ""
-                for alimentoSelec in alimentosAceptados:
-                    text += (f"{alimentoSelec}\n")
-
-                listaResultados = Label(funcionalidades_frame,
-                                        text=text,
-                                        font=("Verdana", 16),
-                                        fg="black",
-                                        padx=20,
-                                        pady=5)
-
-                listaResultados.pack(anchor="c")
+        clear_entries()
 
         aceptarButton.config(command=buscarAlimento)
         borrarButton.config(command=clear_entries)
@@ -393,7 +345,6 @@ def ventana_principal_usuario(root):
 
  
     # Funciones de las funcionalidades
-        # Funciones de las funcionalidades
     def mostrar_funcionalidad4():
         # Encuentra todas las ciudades únicas en los datos de los gimnasios
         cities = list(set([gym.ciudad for gym in gimnasios]))
@@ -401,15 +352,16 @@ def ventana_principal_usuario(root):
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
+        # Crea las etiquetas de título y descripción
         titulo_proceso = tk.Label(funcionalidades_frame,
                                   text=2 * "\n" + "Buscar Gimnasio",
-                                  font=("Verdana", 16, "bold"),
+                                  font=("Verdana", 16, "bold"), 
                                   fg="dark blue",
                                   padx=20,
                                   pady=5)
         descripcion_detalle = tk.Label(funcionalidades_frame,
                                        text="Ingrese el nombre del gimnasio que "
-                                            "desea consultar y elija su respectiva sede.",
+                                            "desea consultar y elija su respectiva sede",
                                        font=("Verdana", 14),
                                        padx=20,
                                        pady=5)
@@ -421,7 +373,7 @@ def ventana_principal_usuario(root):
         # Crea y añade el FieldFrame al funcionalidades_frame
         superFrame = FieldFrame(funcionalidades_frame,
                                 "Requerimientos",
-                                ["Nombre de gimnasio"],
+                                ["Nombre gimnasio"],
                                 "Datos",
                                 ["nombre"])
         superFrame.pack(padx=20,
@@ -430,22 +382,23 @@ def ventana_principal_usuario(root):
 
         # Crea el Combobox de ciudades
         city_label = tk.Label(funcionalidades_frame,
-                              text="Ciudad",
-                              font=("Verdana", 16),
+                              text="Ciudad", 
+                              font=("Verdana", 14),
                               padx=20,
                               pady=5)
-        city_combobox = ttk.Combobox(funcionalidades_frame,
-                                     values=cities,
-                                     font=("Verdana", 16))
+
+        city_combobox = ttk.Combobox(funcionalidades_frame, 
+                                     values=cities, 
+                                     font=("Verdana", 14))
         city_label.pack()
-        city_combobox.pack()  # Espacio reducido antes del Combobox
+        city_combobox.pack()
 
         # Crea los botones "Aceptar" y "Borrar"
         buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
-        aceptarButton = tk.Button(buttons_frame,
-                                  text="Aceptar",
+        aceptarButton = tk.Button(buttons_frame, 
+                                  text="Aceptar", 
                                   font=("Verdana", 14))
-        borrarButton = tk.Button(buttons_frame,
+        borrarButton = tk.Button(buttons_frame, 
                                  text="Borrar",
                                  font=("Verdana", 14))
 
@@ -460,50 +413,33 @@ def ventana_principal_usuario(root):
         aceptarButton.pack(side='left', padx=5)
         borrarButton.pack(side='left', padx=5)
 
-        # Empaqueta el frame de botones debajo del FieldFrame con un espacio mayor
-        buttons_frame.pack(pady=100)
+        # Empaqueta el frame de botones debajo del FieldFrame
+        buttons_frame.pack(pady=10)
 
         def buscarGimnasio():
-            nombreGym = superFrame.getValue("Nombre de gimnasio")
+            nombreGym = superFrame.getValue("Nombre gimnasio")
             ciudadGym = city_combobox.get()  # Recupera la ciudad seleccionada del Combobox
 
-            try:
-                if not nombreGym:
-                    raise excepciones.ErrorCamposIncompletos()
+            gimnasiosAceptados = []
+            for gimnasio in gimnasios:
+                if gimnasio.nombre.lower() == nombreGym.lower() and gimnasio.ciudad.lower() == ciudadGym.lower():
+                    gimnasiosAceptados.append(gimnasio)
 
-                if not excepciones.iserror(float, nombreGym):
-                    raise excepciones.ErrorAplicacion("ValueError")
+            for widget in funcionalidades_frame.winfo_children():
+                widget.destroy()
 
-            except excepciones.ErrorAplicacion:
-                messagebox.showinfo("Error", "Se ingresó número como nombre de Gimnasio")
 
-            except excepciones.ErrorCamposIncompletos:
-                messagebox.showinfo("Error", "Hay campos imcompletos")
 
-            else:
-                gimnasiosAceptados = []
-                for gimnasio in gimnasios:
-                    if gimnasio.nombre.lower() == nombreGym.lower() and gimnasio.ciudad.lower() == ciudadGym.lower():
-                        gimnasiosAceptados.append(gimnasio)
+            Label(funcionalidades_frame, text=2 * "\n" + "Sedes " + (nombreGym).capitalize() + " " + (ciudadGym).capitalize(), font=("Verdana", 16, "bold"), fg="dark blue").pack(anchor="c")
+            Label(funcionalidades_frame, text="", font=("Verdana", 16)).pack(anchor="c")
 
-                for widget in funcionalidades_frame.winfo_children():
-                    widget.destroy()
-
-                Label(funcionalidades_frame,
-                      text=2 * "\n" + "Sedes " + (nombreGym).capitalize() + " " + (ciudadGym).capitalize(),
-                      font=("Verdana", 16, "bold"), fg="dark blue").pack(anchor="c")
-                Label(funcionalidades_frame, text="", font=("Verdana", 16)).pack(anchor="c")
-
-                for gimnasioSelec in gimnasiosAceptados:
-                    Label(funcionalidades_frame, text="\n" + gimnasioSelec.sede, font=("Verdana", 16)).pack(anchor="c")
-
+            for gimnasioSelec in gimnasiosAceptados:
+                Label(funcionalidades_frame, text="\n" + gimnasioSelec.sede, font=("Verdana", 16)).pack(anchor="c")
 
         aceptarButton.config(command=buscarGimnasio)
 
-        etiqueta = Label(funcionalidades_frame,
-                         text="")
+        etiqueta = Label(funcionalidades_frame, text="")
         etiqueta.pack()
-
 
 # Funciones de las funcionalidades
     def mostrar_funcionalidad5():
@@ -511,17 +447,9 @@ def ventana_principal_usuario(root):
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
-            # Crea el título
-        titulo = tk.Label(funcionalidades_frame, text="Marca los campos que necesites:", font=("Verdana", 16, "bold"))
-        titulo.pack(pady=10)  # Empaqueta el título con algo de espacio vertical (pady)
-
         # Crea las etiquetas de título para los checkboxes
-        label_nombre = tk.Label(funcionalidades_frame,
-                                text="Nombre",
-                                font=("Verdana", 14, "bold"))
-        label_ciudad = tk.Label(funcionalidades_frame,
-                                text="Ciudad",
-                                font=("Verdana", 14, "bold"))
+        label_nombre = tk.Label(funcionalidades_frame, text="Nombre", font=("Verdana", 14, "bold"))
+        label_ciudad = tk.Label(funcionalidades_frame, text="Ciudad", font=("Verdana", 14, "bold"))
 
         # Creación de la variable de control
         opcion_smartfit = tk.IntVar()
@@ -583,7 +511,7 @@ def ventana_principal_usuario(root):
                     gimnasios_filtrados.append(gimnasio)
                 if (ciudad_medellin and gimnasio.ciudad.lower() == "medellin"):
                     gimnasios_filtrados.append(gimnasio)
-            if (nombre_bodytech and gimnasio.nombre.lower() == "bodytech"):
+            if (nombre_gymbro and gimnasio.nombre.lower() == "gymbro"):
                 if (ciudad_bogota and gimnasio.ciudad.lower() == "bogota"):
                     gimnasios_filtrados.append(gimnasio)
                 if (ciudad_medellin and gimnasio.ciudad.lower() == "medellin"):
@@ -600,33 +528,17 @@ def ventana_principal_usuario(root):
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
-            # Crea y muestra la lista de máquinas disponibles
-        if gimnasios_filtrados:
+        # Crea y muestra la lista de máquinas disponibles
+        if maquinas_disponibles:
             titulo_maquinas = tk.Label(funcionalidades_frame, text="Máquinas Disponibles",
-                                       font=("Verdana",
-                                             16,
-                                             "bold"),
-                                       fg="dark blue",
-                                       padx=10,
-                                       pady=10)
+                                       font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
             titulo_maquinas.pack()
 
-            for gimnasio in gimnasios_filtrados:
-                titulo_sede = tk.Label(funcionalidades_frame, text=f"Sede {gimnasio.nombre} en {gimnasio.sede}",
-                                       font=("Verdana",
-                                             14,
-                                             "bold"),
-                                       fg="dark green",
-                                       padx=10,
-                                       pady=10)
-                titulo_sede.pack()
-
-                for maquina in gimnasio.listaMaquinas:
-                    label_maquina = tk.Label(funcionalidades_frame, text=maquina.nombre, font=("Verdana", 12))
-                    label_maquina.pack()
+            for maquina in maquinas_disponibles:
+                label_maquina = tk.Label(funcionalidades_frame, text=maquina.nombre)
+                label_maquina.pack()
         else:
-            mensaje_no_maquinas = tk.Label(funcionalidades_frame, text="No hay máquinas disponibles.",
-                                           font=("Verdana", 12, "bold"))
+            mensaje_no_maquinas = tk.Label(funcionalidades_frame, text="No hay máquinas disponibles.")
             mensaje_no_maquinas.pack()
 
 
@@ -850,7 +762,7 @@ def ventana_principal_usuario(root):
                                 pady=5)
 
         funcionalidad5_btn = ttk.Button(funcionalidades_frame,
-                                        text="Buscar Máquinas por Sede",
+                                        text="Buscar Entrenadores por Formación",
                                         style="Botones.TButton",
                                         width=25,
                                         command=mostrar_funcionalidad5)
@@ -948,76 +860,28 @@ def ventana_principal():
                     expand=True)
 
     # Frame título anidado en el main_frame
-    top_frame = tk.Frame(main_frame,
-                         bg="dark blue",
-                         borderwidth=3)
-    top_frame.place(relx=.05,
-                    rely=.005,
-                    relwidth=.9,
-                    relheight=.1,
-                    anchor="nw")
+    top_frame = tk.Frame(main_frame, bg="dark blue", borderwidth=3)
+    top_frame.place(relx=.05, rely=.005, relwidth=.9, relheight=.1, anchor="nw")
 
     # Frames anidados (arriba izquierda, arriba derecha) (abajo izaquierda, abajo derecha)
-    left_frame = tk.Frame(main_frame,
-                          bg="#6495ED",
-                          borderwidth=.5,
-                          relief="solid")
-    left_frame.place(relx=.045,
-                     rely=.55,
-                     relwidth=.45,
-                     relheight=.82,
-                     anchor="w")
+    left_frame = tk.Frame(main_frame, bg="#6495ED", borderwidth=.5, relief="solid")
+    left_frame.place(relx=.045, rely=.55, relwidth=.45, relheight=.82, anchor="w")
 
-    right_frame = tk.Frame(main_frame,
-                           bg="#6495ED",
-                           borderwidth=.5,
-                           relief="solid")
-    right_frame.place(relx=.965,
-                      rely=.55,
-                      relwidth=.45,
-                      relheight=.82,
-                      anchor="e")
+    right_frame = tk.Frame(main_frame, bg="#6495ED", borderwidth=.5, relief="solid")
+    right_frame.place(relx=.965, rely=.55, relwidth=.45, relheight=.82, anchor="e")
 
     # Frames anidados a left_frame y right_frame
-    upper_left_frame = tk.Frame(left_frame,
-                                bg="#F0F0F0",
-                                borderwidth=.5,
-                                relief="raised")
-    upper_left_frame.place(relx=0.5,
-                           rely=0.003,
-                           relwidth=0.995,
-                           relheight=0.38,
-                           anchor="n")
+    upper_left_frame = tk.Frame(left_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
+    upper_left_frame.place(relx=0.5, rely=0.003, relwidth=0.995, relheight=0.38, anchor="n")
 
-    bottom_left_frame = tk.Frame(left_frame,
-                                 bg="#F0F0F0",
-                                 borderwidth=.5,
-                                 relief="raised")
-    bottom_left_frame.place(relx=0.5,
-                            rely=0.997,
-                            relwidth=0.995,
-                            relheight=0.6,
-                            anchor="s")
+    bottom_left_frame = tk.Frame(left_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
+    bottom_left_frame.place(relx=0.5, rely=0.997, relwidth=0.995, relheight=0.6, anchor="s")
 
-    upper_right_frame = tk.Frame(right_frame,
-                                 bg="#F0F0F0",
-                                 borderwidth=.5,
-                                 relief="raised")
-    upper_right_frame.place(relx=0.5,
-                            rely=0.003,
-                            relwidth=0.995,
-                            relheight=0.38,
-                            anchor="n")
+    upper_right_frame = tk.Frame(right_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
+    upper_right_frame.place(relx=0.5, rely=0.003, relwidth=0.995, relheight=0.38, anchor="n")
 
-    bottom_right_frame = tk.Frame(right_frame,
-                                  bg="#F0F0F0",
-                                  borderwidth=.5,
-                                  relief="raised")
-    bottom_right_frame.place(relx=0.5,
-                             rely=0.997,
-                             relwidth=0.995,
-                             relheight=0.6,
-                             anchor="s")
+    bottom_right_frame = tk.Frame(right_frame, bg="#F0F0F0", borderwidth=.5, relief="raised")
+    bottom_right_frame.place(relx=0.5, rely=0.997, relwidth=0.995, relheight=0.6, anchor="s")
 
     # Definir método para mostrar imágenes que se cambian cuando pasa el cursor por encima
     def cambiar_imagen(event):
@@ -1030,11 +894,7 @@ def ventana_principal():
     # Definir un Label para las imágenes
     espacio_imagenes_bottom_left = Label(bottom_left_frame)
     i = 0  # Variable del índice de la imagen. Debe ser global para que sea posible correr el programa
-    imagenes_inicio = [im("buff.png"),
-                       im("diet.png"),
-                       im("buff2.png"),
-                       im("diet2.png"),
-                       im("buff3.png")]
+    imagenes_inicio = [im("buff.png"), im("diet.png"), im("buff2.png"), im("diet2.png"), im("buff3.png")]
     imagen_inicial = tk.PhotoImage(file=imagenes_inicio[i])
     espacio_imagenes_bottom_left.config(image=imagen_inicial)
     espacio_imagenes_bottom_left.bind("<Enter>", cambiar_imagen)  # Llamo al método cambiar imagen con el evento
@@ -1360,10 +1220,10 @@ def ventana_principal():
 
     pass
 
-
 def main():
+
     ventana_principal()
 
-
 if __name__ == "__main__":
+
     main()
