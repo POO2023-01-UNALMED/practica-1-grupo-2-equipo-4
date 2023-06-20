@@ -4,9 +4,11 @@ import os
 from src.guiMain.FieldFrame import FieldFrame
 from src.guiMain import deserealizador
 from src.guiMain import serializador
+
 from src.gestorAplicacion.clasesEnum.Alergeno import Alergeno
 from src.gestorAplicacion.clasesPrincipales.Alimento import Alimento
 from src.guiMain import excepciones
+
 
 
 
@@ -26,7 +28,7 @@ def ventana_principal_usuario(root):
     gimnasios, ejercicios, maquinas, comidas, alimentos, movimientos, clientes = deserealizador.deserializar()
 
     # Funciones de las funcionalidades
-    def mostrar_funcionalidad1():
+    def mostrar_funcionalidad5():
         # Borra los widgets existentes en el frame de funcionalidades
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
@@ -55,10 +57,12 @@ def ventana_principal_usuario(root):
             widget.destroy()
 
         # Crea las etiquetas de título y descripción
+
         titulo_proceso = tk.Label(funcionalidades_frame, text=2 * "\n" + "Añadir Alimento",
                                   font=("Verdana", 16, "bold"), fg="dark blue", padx=20, pady=5)
         descripcion_detalle = tk.Label(funcionalidades_frame,
                                        text="Añada un alimento con el cual podrá preparar una comida que se ajuste a su Plan de Alimentación y su objetivo.",
+
                                        font=("Verdana", 14), padx=20, pady=5)
 
         # Coloca las etiquetas de título y descripción en la parte superior del funcionalidades_frame
@@ -67,8 +71,10 @@ def ventana_principal_usuario(root):
 
         # Crea y añade el FieldFrame al funcionalidades_frame
         superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
+
                                 ["Nombre", "Calorías", "Proteínas", "Carbohidratos", "Grasas", "Alergeno"], "Datos",
                                 ["ManzanaNueva", "52", "0.3", "14", "0.2", "NINGUNO"])
+
         superFrame.pack(padx=20, pady=5, expand=True)
 
         def crear_alimento():
@@ -85,6 +91,7 @@ def ventana_principal_usuario(root):
                 carbohidratos = float(carbohidratos)
                 grasas = float(grasas)
 
+
                 if not excepciones.iserror(float, nombre):
                     raise excepciones.ErrorNombreAlimento()
 
@@ -100,13 +107,17 @@ def ventana_principal_usuario(root):
             except ValueError as e:
                 messagebox.showinfo("Error", "Por favor ingrese un número.")
 
+
             else:
                 alimento_nuevo = Alimento(nombre, calorias, proteinas, carbohidratos, grasas, alergeno)
 
+
                 alimentos.append(alimento_nuevo)
+
 
                 for widget in funcionalidades_frame.winfo_children():
                     widget.destroy()
+
 
                 titulo_proceso = tk.Label(funcionalidades_frame, text=5 * "\n" + "¡Alimento añadido exitosamente!",
                                           font=("Verdana", 18, "bold"), fg="dark blue", padx=20, pady=5)
@@ -116,6 +127,7 @@ def ventana_principal_usuario(root):
                                                font=("Verdana", 16), padx=20, pady=5)
                 titulo_proceso.pack()
                 descripcion_detalle.pack()
+
 
         # Crea los botones "Aceptar" y "Borrar"
         buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
@@ -165,13 +177,13 @@ def ventana_principal_usuario(root):
 
 
 
-    def mostrar_funcionalidad5():
+    def mostrar_funcionalidad1():
         # Borra los widgets existentes en el frame de funcionalidades
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
         # Crea las etiquetas de título y descripción
-        titulo_proceso = tk.Label(funcionalidades_frame, text="Nombre del proceso o consulta",
+        titulo_proceso = tk.Label(funcionalidades_frame, text="Creación de plan de ejercicio",
                                   font=("Verdana", 12, "bold"), fg="dark blue", padx=10, pady=10)
         descripcion_detalle = tk.Label(funcionalidades_frame,
                                        text="Descripcion del detalle del Proceso o la Consulta",
@@ -182,10 +194,71 @@ def ventana_principal_usuario(root):
         descripcion_detalle.pack()
 
         # Crea y añade el FieldFrame al funcionalidades_frame
-        superFrame = FieldFrame(funcionalidades_frame, "Requerimientos",
-                                ["Maximo de calorias", "Mínimo de proteinas", "Alergenos"], "Datos",
+        superFrame = FieldFrame(funcionalidades_frame, "Información",
+                                ["Tu nombre","Identicación","Nombre para el plan"], "Datos",
                                 ["algo", "hola", "djio"])
         superFrame.pack(padx=10, pady=10, expand=True)
+
+
+        # Crea los botones "Aceptar" y "Borrar"
+        buttons_frame = tk.Frame(funcionalidades_frame)  # Frame adicional para los botones
+        aceptarButton = tk.Button(buttons_frame, text="Aceptar", font=("Verdana", 14))
+        borrarButton = tk.Button(buttons_frame, text="Borrar", font=("Verdana", 14))
+
+        def clear_entries():
+            for entry in superFrame._valoresEntry.values():
+                entry.delete(0, 'end')
+
+        def creaPlanEjercicio():
+            nombre = superFrame.getValue("Tu nombre")
+            ident = superFrame.getValue("Identicación")
+            plan = superFrame.getValue("Nombre para el plan")
+
+            try:
+                if not (1<=int(ident)<=50):
+                    raise excepciones.ErrorIdentificacion()
+            except  excepciones.ErrorIdentificacion as e:
+                messagebox.showinfo("Error",str(e))
+
+            else:
+                for widget in funcionalidades_frame.winfo_children():
+                    widget.destroy()
+
+                for user in clientes:
+                    if user.identificacion == int(ident):
+                        cliente = user
+                        break
+
+                textDisplayed = f"{nombre}!! basandonos en tu nivel de habilidad y tu objetivo, hemos creado un plan para ti\n" \
+                                f"Nombre del plan de ejercicios: {plan}" \
+                                f"{cliente.generarPlanEjercicio()}"
+
+                planCliente = tk.Text(funcionalidades_frame, fg="black", bg="#F0F0F0", font=("Verdana", 12, "bold"),
+                                      cursor="arrow")
+                planCliente.insert(tk.END, textDisplayed, "justifying")
+                planCliente.config(state="disabled")
+                planCliente.pack(expand=True, fill="both", side="bottom")
+
+
+
+
+
+
+
+
+
+
+
+
+        aceptarButton.config(command=creaPlanEjercicio)
+        borrarButton.config(command=clear_entries)
+
+        # Empaqueta los botones en el nuevo frame
+        aceptarButton.pack(side='left', padx=5)
+        borrarButton.pack(side='left', padx=5)
+
+        # Empaqueta el frame de botones debajo del FieldFrame
+        buttons_frame.pack(pady=10)
 
     # Funciones de las nuevas funcionalidades
     def mostrar_aplicacion():

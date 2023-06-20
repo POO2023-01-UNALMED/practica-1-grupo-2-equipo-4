@@ -54,41 +54,8 @@ class ErrorCamposIncompletos(ErrorAlimento):
         super().__init__("Faltan campos por llenar")
 
 
-def metodoGestionErroresInventados(nombre, identificacion, caloriasTotales, proteina, grasas, carbohidratos):
-    # Este método se llama dentro de las consultas y creación de objetos.
-    # Se pasan en este orden:
-    # nombre del cliente, identificación del cliente
-    # calorias_totales, proteina, grasas, carbohidratos
 
-    try:
-        if not isinstance(nombre, str):
-            raise ErrorNombreCliente()
 
-        if not (1 <= identificacion <= 50):
-            raise ErrorIdentificacion()
-
-        if not isinstance(caloriasTotales, int):
-            raise ErrorValueTypeCalorias()
-
-        if (proteina*4 + grasas*9 + carbohidratos*4) != caloriasTotales:
-            raise ErrorCaloriasTotales()
-
-    # Manejo de excepciones llamando a los constructores de las clases
-    except ErrorValueTypeCalorias as e:
-        return str(e)
-    except ErrorCaloriasTotales as e:
-        return str(e)
-    except ErrorNombreCliente as e:
-        return str(e)
-    except ErrorIdentificacion as e:
-        return str(e)
-    except Exception as e:
-        return "Error desconocido:", str(e)
-
-    else:
-        return "No se encontraron errores."
-    finally:
-        return "Finalizando metodoGestionErrores."
 
 def iserror(func, *args, **kw):
     try:
@@ -97,23 +64,3 @@ def iserror(func, *args, **kw):
     except Exception:
         return True
 
-
-# def metodoGestionErroresSugeridos():
-#     try:
-#         if (condicion_Atributo_no_Existente):
-#             raise ErrorAtributoNoExistente()
-#
-#         if (condicion_campos_incompletos):
-#             raise ErrorCamposIncompletos()
-#
-#     except ErrorAtributoNoExistente as e:
-#         return str(e)
-#     except ErrorCamposIncompletos as e:
-#         return str(e)
-#     except Exception as e:
-#         return "Error desconocido:", str(e)
-#
-#     else:
-#         return "No se encontraron errores."
-#     finally:
-#         return "Finalizando metodoGestionErrores."

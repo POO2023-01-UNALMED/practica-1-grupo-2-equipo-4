@@ -1,5 +1,6 @@
 from src.gestorAplicacion.clasesEnum.TipoEjercicio import TipoEjercicio
 from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
+
 # Autores: Juan Manuel Rodríguez Sánchez, Jacobo Ochoa Ramirez.
 
 # Finalidad de la clase:
@@ -19,22 +20,24 @@ from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
 class Movimiento:
     listaMovimientos = []
 
-    def __init__(self, nombre, tipoEjercicio, maquina, dificultad: NivelCliente):
+    def __init__(self, nombre, tipoEjercicio, maquina, dificultad: NivelCliente, descripcion = None):
         self.nombre = nombre
         self.tipoEjercicio = tipoEjercicio
         self.maquina = maquina  # Asignación obligatoria de máquina
         self.dificultad = dificultad
-
+        self.descripcion = descripcion
         self.maquina.setMovimientoRealizado(self)
 
         Movimiento.listaMovimientos.append(self)
 
     @classmethod
     def filtrarMovimientosPorTipo(cls, tipoEjercicio: TipoEjercicio):
+        from src.guiMain.deserealizador import deserializarMovimientos
         # Se encarga de recibir un tipoEjercicio que ingresa el cliente
         # Por ejemplo TipoEjercicio.CALENTAMIENTO.
         # Luego filtra todos los movimientos dentro de mi lista que tienen este tipo
-        movimientosFiltrados = [movimiento for movimiento in cls.listaMovimientos if movimiento.tipoEjercicio == tipoEjercicio]
+        movimientosFiltrados = [movimiento for movimiento in deserializarMovimientos() if movimiento.tipoEjercicio == tipoEjercicio]
+
         return movimientosFiltrados
 
     @classmethod
