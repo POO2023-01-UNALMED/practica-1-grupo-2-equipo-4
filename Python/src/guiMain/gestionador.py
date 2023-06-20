@@ -440,6 +440,10 @@ def ventana_principal_usuario(root):
         for widget in funcionalidades_frame.winfo_children():
             widget.destroy()
 
+            # Crea el título
+        titulo = tk.Label(funcionalidades_frame, text="Marca los campos que necesites:", font=("Verdana", 16, "bold"))
+        titulo.pack(pady=10)  # Empaqueta el título con algo de espacio vertical (pady)
+        
         # Crea las etiquetas de título para los checkboxes
         label_nombre = tk.Label(funcionalidades_frame, text="Nombre", font=("Verdana", 14, "bold"))
         label_ciudad = tk.Label(funcionalidades_frame, text="Ciudad", font=("Verdana", 14, "bold"))
@@ -480,7 +484,6 @@ def ventana_principal_usuario(root):
         boton_aceptar = tk.Button(funcionalidades_frame, text="Aceptar", command=lambda: mostrar_maquinas_disponibles(
             opcion_smartfit, opcion_gymbro, opcion_bodytech, opcion_bogota, opcion_medellin), font=("Verdana", 14))
         boton_aceptar.pack(pady=10)
-        
 
     def mostrar_maquinas_disponibles( opcion_smartfit, opcion_gymbro, opcion_bodytech, opcion_bogota, opcion_medellin):
         # Obtiene los valores seleccionados de los checkboxes de nombre y ciudad
@@ -505,7 +508,7 @@ def ventana_principal_usuario(root):
                     gimnasios_filtrados.append(gimnasio)
                 if (ciudad_medellin and gimnasio.ciudad.lower() == "medellin"):
                     gimnasios_filtrados.append(gimnasio)
-            if (nombre_gymbro and gimnasio.nombre.lower() == "gymbro"):
+            if (nombre_bodytech and gimnasio.nombre.lower() == "bodytech"):
                 if (ciudad_bogota and gimnasio.ciudad.lower() == "bogota"):
                     gimnasios_filtrados.append(gimnasio)
                 if (ciudad_medellin and gimnasio.ciudad.lower() == "medellin"):
