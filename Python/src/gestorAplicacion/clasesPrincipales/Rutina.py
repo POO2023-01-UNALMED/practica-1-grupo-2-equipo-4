@@ -1,5 +1,7 @@
 import random
-from src.gestorAplicacion.clasesEnum import TipoEjercicio, NivelCliente, ObjetivoCliente
+from src.gestorAplicacion.clasesEnum.TipoEjercicio import TipoEjercicio
+from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
+from src.gestorAplicacion.clasesEnum.ObjetivoCliente import ObjetivoCliente
 from src.gestorAplicacion.clasesHerencia.Movimiento import Movimiento
 from src.gestorAplicacion.clasesPrincipales.Ejercicio import Ejercicio
 
@@ -10,16 +12,17 @@ from src.gestorAplicacion.clasesPrincipales.Ejercicio import Ejercicio
 class Rutina:
     NUMEJERCIOS = 7
 
-    def __init__(self, nombre=None, ejercicios=None, tipoEjercicio=None):
+    def __init__(self, ejercicios: list[Ejercicio]=None, tipoEjercicio: TipoEjercicio=None, nombre=None):
         self.nombre = nombre
-        self.ejercicios = ejercicios if ejercicios else []
+        self.ejercicios = ejercicios
         self.tipoEjercicio = tipoEjercicio
 
     # Componentes: atributos de nombre, TipoEjercicio y una constante con el máximo número de ejercicios en una rutina
     # Estructura de datos: Lista con todos los ejercicios que hacen parte de una rutina
 
-    @staticmethod
-    def generarRutina(tipoEjercicio: TipoEjercicio, objetivo: ObjetivoCliente, dificultad: NivelCliente):
+    @classmethod
+    def generarRutina(cls, tipoEjercicio: TipoEjercicio, objetivo: ObjetivoCliente, dificultad: NivelCliente):
+
         ejercicios = []
 
         # Filtra los movimientos por dificultad y por tipo de movimiento y los agrega a una lista
@@ -28,8 +31,8 @@ class Rutina:
 
         # Filtra los movimientos por tipo para obtener aquellos de tipo Calentamiento y Estiramiento
 
-        movCalentamiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.Enum.CALENTAMIENTO)
-        movEstiramiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.Enum.ESTIRAMIENTO)
+        movCalentamiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.CALENTAMIENTO)
+        movEstiramiento = Movimiento.filtrarMovimientosPorTipo(TipoEjercicio.ESTIRAMIENTO)
 
         # Convierte los movimientos en ejercicios
 
@@ -51,7 +54,9 @@ class Rutina:
 
     def __str__(self):
         # Muestra la rutina en pantalla
-        toString = str(self.tipoEjercicio) + "\n"
+        toString = self.tipoEjercicio.value + "\n"
         for ejercicio in self.ejercicios:
             toString += "{} = {} ---> {}x{}\n".format(ejercicio.nombre, ejercicio.maquina.nombre, ejercicio.repeticiones, ejercicio.series)
         return toString
+
+

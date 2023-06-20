@@ -47,13 +47,17 @@ class Alimento:
 
 
     def encontrarAlimentos(self, maxCal, minProt, aler ):
+
         if self._alergeno == aler:
             return False
         elif self.calorias > int(maxCal):
+
             return False
         elif self.proteinas < int(minProt):
+
             return False
         else:
+
             return True
 
 

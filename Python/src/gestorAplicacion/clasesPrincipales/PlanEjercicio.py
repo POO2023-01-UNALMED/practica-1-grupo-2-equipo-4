@@ -1,10 +1,13 @@
-from src.gestorAplicacion.clasesEnum import DiaSemana, TipoEjercicio, NivelCliente, ObjetivoCliente
+from src.gestorAplicacion.clasesEnum.DiaSemana import DiaSemana
+from src.gestorAplicacion.clasesEnum.TipoEjercicio import TipoEjercicio
+from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
+from src.gestorAplicacion.clasesEnum.ObjetivoCliente import ObjetivoCliente
 from src.gestorAplicacion.clasesHerencia import Plan
 from src.gestorAplicacion.clasesPrincipales import Rutina
 import random
 
 
-class PlanEjercicio(Plan):
+class PlanEjercicio():
 
     #  public PlanEjercicio(){} es necesario para el funcionamiento del codigo en Java. Qué hacer aquí?
 
@@ -14,20 +17,26 @@ class PlanEjercicio(Plan):
         self.planSemanalEjercicio = planSemanalEjercicio 
         
     def crearPlanSemanal(self, objetivo: ObjetivoCliente):
-        array = [TipoEjercicio.Enum.EMPUJAR,
-                 TipoEjercicio.Enum.EMPUJAR,
-                 TipoEjercicio.Enum.HALAR,
-                 TipoEjercicio.Enum.HALAR,
-                 TipoEjercicio.Enum.PIERNA,
-                 TipoEjercicio.Enum.PIERNA,
-                 TipoEjercicio.Enum.CARDIO]
+        from src.gestorAplicacion.clasesPrincipales.Rutina import Rutina
+        array = [TipoEjercicio.EMPUJAR,
+                 TipoEjercicio.EMPUJAR,
+                 TipoEjercicio.HALAR,
+                 TipoEjercicio.HALAR,
+                 TipoEjercicio.PIERNA,
+                 TipoEjercicio.PIERNA,
+                 TipoEjercicio.CARDIO]
         
         random.shuffle(array)
 
         planSemanalEjerciciosLocalFuncion = {}
 
-        for i, dia in enumerate(DiaSemana):
-            planSemanalEjerciciosLocalFuncion[dia] = Rutina.generarRutina(array[i], objetivo, self.dificultad)
+        count = 0
+        for  dia in DiaSemana:
+
+            rutina = Rutina().generarRutina(array[count], objetivo, self.dificultad)
+            planSemanalEjerciciosLocalFuncion[dia] = rutina
+            count += 1
+        count = 0
         
         return PlanEjercicio(planSemanalEjerciciosLocalFuncion)
 
@@ -41,8 +50,8 @@ class PlanEjercicio(Plan):
 
     def __str__(self):
         result = "\n----------------TU PLAN DE EJERCICIO----------------\n"
-        for dia in DiaSemana.Enum:
-            result += f"\n{dia.name}: {self.plan_semanal_ejercicio.get(dia)}"
+        for dia in DiaSemana:
+            result += f"\n{dia.name}: {self.planSemanalEjercicio.get(dia)}"
         return result
 
 

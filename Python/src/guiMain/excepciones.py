@@ -86,7 +86,7 @@ def metodoGestionErroresInventados(nombre, identificacion, caloriasTotales, prot
     finally:
         return "Finalizando metodoGestionErrores."
 
-
+"""
 def metodoGestionErroresSugeridos():
     try:
         if (#condicion_Atributo_no_Existente):
@@ -106,3 +106,4 @@ def metodoGestionErroresSugeridos():
         return "No se encontraron errores."
     finally:
         return "Finalizando metodoGestionErrores."
+"""
