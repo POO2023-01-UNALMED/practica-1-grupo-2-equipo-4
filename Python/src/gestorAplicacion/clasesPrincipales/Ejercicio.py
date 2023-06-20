@@ -1,5 +1,7 @@
 from src.gestorAplicacion.clasesHerencia.Movimiento import Movimiento
-from src.gestorAplicacion.clasesEnum import TipoEjercicio, NivelCliente, ObjetivoCliente
+from src.gestorAplicacion.clasesEnum.TipoEjercicio import TipoEjercicio
+from src.gestorAplicacion.clasesEnum.NivelCliente import NivelCliente
+from src.gestorAplicacion.clasesEnum.ObjetivoCliente import ObjetivoCliente
 from random import randint
 
 # Falta documentar Ejercicio
@@ -16,10 +18,10 @@ class Ejercicio(Movimiento):
         repeticiones = 0
         series = 0
 
-        if movimiento.tipo_ejercicio == TipoEjercicio.CALENTAMIENTO:
+        if movimiento.tipoEjercicio == TipoEjercicio.CALENTAMIENTO:
             repeticiones = 10 + randint(0, 4)
             series = 1
-            movimiento.descripcion += "	|Recuerda que los calentamientos están expresados en minutos"
+            #movimiento.descripcion += "	|Recuerda que los calentamientos están expresados en minutos"
         else:
             if objetivo == ObjetivoCliente.AUMENTAR:
                 repeticiones = 8 + randint(0, 3)
@@ -37,7 +39,7 @@ class Ejercicio(Movimiento):
                 repeticiones = 7 + randint(0, 2)
                 series = 4 + randint(0, 1)
 
-        return Ejercicio(movimiento.nombre, movimiento.tipo_ejercicio, movimiento.maquina, repeticiones, series,
+        return Ejercicio(movimiento.nombre, movimiento.tipoEjercicio, movimiento.maquina, repeticiones, series,
                          movimiento.dificultad)
 
 

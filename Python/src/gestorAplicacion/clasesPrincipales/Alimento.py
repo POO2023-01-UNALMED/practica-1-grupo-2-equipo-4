@@ -47,13 +47,26 @@ class Alimento:
 
 
     def encontrarAlimentos(self, maxCal, minProt, aler ):
+
         if self._alergeno == aler:
             return False
         elif self.calorias > int(maxCal):
+
             return False
         elif self.proteinas < int(minProt):
+
             return False
         else:
+
             return True
 
+    def __str__(self):
+        return "{}\n\nCalorías: {}\nProteínas: {}\nCarbohidratos: {}\nGrasas: {}\nAlergeno: {}".format(
+            self.nombre.upper(),
+            self.calorias,
+            self.proteinas,
+            self.carbohidratos,
+            self.grasas,
+            self._alergeno
+        )
 
